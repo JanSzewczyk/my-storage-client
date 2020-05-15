@@ -1,0 +1,78 @@
+@import "../../../assets/variables/variables.scss";
+
+.button {
+  min-width: 60px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  outline: 0;
+  font-size: $fontSizeMedium  ;
+  color: $whiteColor;
+  background-color: transparent;
+  border: 1px solid $whiteColor;
+  transition: 0.3s;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  &:hover:not(:disabled) {
+    color: $darkColor;
+    text-decoration: none;
+    background-color: $whiteColor;
+    border: 1px solid $whiteColor;
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled) {
+    color: $darkColor;
+    background-color: $whiteDarkColor;
+    border: 1px solid $whiteDarkColor;
+    transition: 0.3s;
+  }
+}
+
+.button--primary {
+  color: $whiteColor;
+  background-color: $blueColor;
+  border: 1px solid $blueColor;
+
+  &:hover:not(:disabled) {
+    color: $whiteColor;
+    background-color: $blueLightColor;
+    border: 1px solid $blueLightColor;
+  }
+
+  &:active:not(:disabled) {
+    color: $whiteColor;
+    background-color: $blueDarkColor;
+    border: 1px solid $blueDarkColor;
+    transition: 0.3s;
+  }
+}
+
+.button--warning {
+  color: $whiteColor;
+  background-color: $redColor;
+  border: 1px solid $redColor;
+
+  &:hover:not(:disabled) {
+    color: $whiteColor;
+    background-color: $redLightColor;
+    border: 1px solid $redLightColor;
+  }
+
+  &:active:not(:disabled) {
+    color: $whiteColor;
+    background-color: $redDarkColor;
+    border: 1px solid $redDarkColor;
+    transition: none;
+  }
+}
+
+.button ~ .button {
+  margin-left: 8px;
+}

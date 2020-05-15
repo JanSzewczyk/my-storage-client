@@ -1,0 +1,60 @@
+@import "../../../assets/variables/variables.scss";
+
+.label {
+  font-family: $font;
+  font-size: $fontSizeMedium;
+  width: calc(100% - 4px);
+  color: $whiteColor;
+  padding: 4px 0 0 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.input {
+  margin: 8px 0;
+  color: $whiteColor;
+  display: inline-block;
+  width: calc(100% - 18px);
+  font-size: $fontSizeMedium;
+  font-family: $font;
+  font-weight: 300;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $greyColor;
+  padding: 8px;
+  outline: 0;
+
+  &::placeholder {
+    color: rgba(242, 242, 242, 0.6);
+  }
+
+  &:hover:not([disabled]):not([readonly]) {
+    border-color: $greyLightColor;
+  }
+
+  &:focus:not([disabled]):not([readonly]) {
+    outline: 0;
+    border-color: $blueColor;
+  }
+
+  &:active {
+    outline: 0;
+    border-color: $blueColor;
+  }
+
+  &:invalid {
+    border: 1px solid #dc2d37;
+  }
+}
+
+.input--invalid {
+  border: 1px solid #dc2d37;
+}
+
+.error {
+  font-family: $font;
+  font-size: $fontSizeSmall;
+  margin-bottom: 4px;
+  color: $redColor;
+}

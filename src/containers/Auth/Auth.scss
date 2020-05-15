@@ -1,0 +1,11 @@
+@import "../../assets/variables/variables.scss";
+
+.auth {
+  color: $whiteColor;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $black;
+  justify-content: center;
+  align-items: center;
+}
