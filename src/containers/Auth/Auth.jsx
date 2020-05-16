@@ -19,7 +19,9 @@ const Auth = (props) => {
     [authLoading, error, onAuth]
   );
 
-  return <div className={"auth"}>{authenticated ? authForm : <Welcome />}</div>;
+  return (
+    <div className={"auth"}>{!authenticated ? authForm : <Welcome />}</div>
+  );
 };
 
 Auth.propTypes = {};

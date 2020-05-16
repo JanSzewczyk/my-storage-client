@@ -11,6 +11,7 @@ import "./index.scss";
 import { browserHistory } from "./shared/history";
 import * as serviceWorker from "./serviceWorker";
 
+import NotificationProvider from "./components/UI/Notification";
 import App from "./App";
 import authReducer from "./store/auth/authReducer";
 
@@ -24,12 +25,15 @@ const store = createStore(
   rootReducers,
   composeEnhancers(applyMiddleware(thunk))
 );
+
 const app = (
-  <Provider store={store}>
-    <Router history={browserHistory}>
-      <App />
-    </Router>
-  </Provider>
+  <NotificationProvider>
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <App />
+      </Router>
+    </Provider>
+  </NotificationProvider>
 );
 
 ReactDOM.render(

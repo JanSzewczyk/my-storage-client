@@ -13,6 +13,18 @@
   }
 
   .auth-form__input {
+    font-size: $fontSizeBig;
+  }
+
+  .auth-form__error-message {
+    color: $redColor;
     font-size: $fontSizeMedium;
+    margin-bottom: 8px;
+  }
+
+  .auth-form__button {
+    margin-top: 4px;
+    width: 60%;
+    text-align: center;
   }
 }

@@ -13,7 +13,7 @@ const App = (props) => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-  return true ? (
+  return true ? ( // TODO change
     <Switch>
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />

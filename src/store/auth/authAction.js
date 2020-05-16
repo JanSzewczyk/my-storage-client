@@ -1,6 +1,7 @@
 import axios, { setBasicToken, setBearerToken } from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import Cookies from "js-cookie";
+import { error } from "../../components/UI/Notification";
 
 const BASIC_TOKEN =
   "bXlzdG9yYWdlaWQ6MkpnWlJjc0FQdzBkYVlvZDk3S2FoRzZiWENsaHFHSDU=";
@@ -56,7 +57,7 @@ export const auth = (authData) => {
           dispatch(authFail("Invalid email or password."));
         } else {
           dispatch(authFail(null));
-          // TODO notification error: Server error
+          error("Server error");
         }
       });
   };

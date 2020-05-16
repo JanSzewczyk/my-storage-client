@@ -1,0 +1,29 @@
+@import "../../../../assets/variables/variables.scss";
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  color: $whiteColor;
+  background-color: $grey1Color;
+  border: 1px solid $grey2Color;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.3);
+  width: 380px;
+  margin-bottom: 8px;
+  font-size: $fontSizeMedium;
+
+  &:hover {
+    border-color: #fafafa;
+    cursor: pointer;
+  }
+}
+
+.notification--success {
+  background-color: $blueColor;
+  border: 1px solid $blueLightColor;
+}
+
+.notification--error {
+  background-color: $redColor;
+  border: 1px solid $redLightColor;
+}
