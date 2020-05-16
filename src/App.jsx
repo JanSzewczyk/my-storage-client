@@ -13,7 +13,7 @@ const App = (props) => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-  return isAuth ? (
+  return true ? (
     <Switch>
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />
@@ -27,7 +27,7 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.accessToken === null,
+    isAuth: state.auth.accessToken === null, // authenticated
   };
 };
 

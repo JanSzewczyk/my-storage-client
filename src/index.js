@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-import "./index.css";
+import "./index.scss";
 
 import { browserHistory } from "./shared/history";
 import * as serviceWorker from "./serviceWorker";
