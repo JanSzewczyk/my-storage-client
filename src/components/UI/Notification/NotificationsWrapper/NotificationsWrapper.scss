@@ -1,0 +1,9 @@
+.notifications-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse  ;
+  overflow-y: hidden;
+  top: 16px;
+  right: 16px;
+  max-height: calc(100vh - 32px);
+}

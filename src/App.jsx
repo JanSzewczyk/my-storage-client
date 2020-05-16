@@ -5,29 +5,31 @@ import { connect } from "react-redux";
 import * as action from "./store";
 
 import Auth from "./containers/Auth/Auth";
+import Dashboard from "./containers/Dashboard/Dashboard";
 
 const App = (props) => {
-  const { isAuth, onAuthCheck } = props;
+  const { authenticated, onAuthCheck } = props;
 
   useEffect(() => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-  return isAuth ? (
+  return !authenticated ? (
     <Switch>
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />
     </Switch>
   ) : (
     <Switch>
-      <Route path={"/"}>fdasdfasd </Route>
+      <Route path={"/"} component={Dashboard} />
     </Switch>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.accessToken === null,
+    authenticated:
+      state.auth.accessToken !== null && state.user.user && state.user.role, // authenticated
   };
 };
 

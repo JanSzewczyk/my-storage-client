@@ -12,7 +12,7 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 import "./AuthForm.scss";
 
 const AuthForm = (props) => {
-  const { onAuthSubmit, loading } = props;
+  const { onAuthSubmit, loading, error } = props;
 
   const { register, errors, handleSubmit } = useForm({
     mode: "onSubmit",
@@ -55,8 +55,13 @@ const AuthForm = (props) => {
           }}
           hasError={errors.password}
         />
-        <Button btnType={"primary"} clicked={handleSubmit(onAuthSubmit)}>
-          login
+        {error && <div className={"auth-form__error-message"}>{error}</div>}
+        <Button
+          btnType={"primary"}
+          clicked={handleSubmit(onAuthSubmit)}
+          btnClass={"auth-form__button"}
+        >
+          LOGIN
         </Button>
       </form>
     </Aux>

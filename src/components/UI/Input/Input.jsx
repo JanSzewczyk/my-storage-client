@@ -24,7 +24,7 @@ const Input = (props) => {
   hasError && inputClasses.push("input--invalid");
 
   labelClass && labelClasses.push(labelClass);
-  inputClass && inputClasses.push(inputClasses);
+  inputClass && inputClasses.push(inputClass);
   errorClass && errorClasses.push(errorClass);
 
   return (
