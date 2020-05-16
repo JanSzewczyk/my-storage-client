@@ -75,6 +75,7 @@ export const authCheck = () => {
       refresh_token &&
       new Date(expiration_date) > new Date()
     ) {
+      setBearerToken(access_token);
       dispatch(authSuccess(access_token, refresh_token));
       dispatch(
         checkAuthTimeout(
@@ -83,7 +84,7 @@ export const authCheck = () => {
         )
       );
     } else {
-      dispatch(logout());
+      dispatch(authLogout());
     }
   };
 };
@@ -96,7 +97,7 @@ export const checkAuthTimeout = (expirationTime, refreshToken) => {
   };
 };
 
-export const logout = () => {
+export const authLogout = () => {
   Cookies.remove("access_token");
   Cookies.remove("expiration_date");
   Cookies.remove("refresh_token");
@@ -131,8 +132,8 @@ export const refreshAuth = (refreshToken) => {
         dispatch(checkAuthTimeout(expires_in, refresh_token));
       })
       .catch((err) => {
-        dispatch(logout());
-        console.log(Boolean(err.response));
+        dispatch(authLogout());
+        error(err.response ? err.response.data.message : "Server error");
       });
   };
 };
