@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  background-color: #0c0c0c;
+  justify-content: space-between;
+  color: #fafafa;
+  height: 48px;
+  font-weight: 100;
+  user-select: none;
+  padding: 0 16px;
+
+  .header__left {
+    align-self: center;
+    display: flex;
+    align-items: center;
+
+    .header__logo {
+      margin-right: 16px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .header__line {
+      height: 20px;
+      border-right: 2px solid #f2f2f2;
+      border-radius: 1px;
+      opacity: 0.5;
+      margin-right: 8px;
+    }
+  }
+
+  .header__right {
+    align-self: center;
+    display: flex;
+    align-items: center;
+
+    .header__username {
+      margin-right: 16px;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

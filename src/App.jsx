@@ -6,6 +6,7 @@ import * as action from "./store";
 
 import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/Dashboard/Dashboard";
+import AppLayout from "./hoc/AppLayout/AppLayout";
 
 const App = (props) => {
   const { authenticated, onAuthCheck } = props;
@@ -14,15 +15,17 @@ const App = (props) => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-  return !authenticated ? (
+  return authenticated ? (
     <Switch>
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />
     </Switch>
   ) : (
-    <Switch>
-      <Route path={"/"} component={Dashboard} />
-    </Switch>
+    <AppLayout>
+      <Switch>
+        <Route path={"/"} component={Dashboard} />
+      </Switch>
+    </AppLayout>
   );
 };
 
