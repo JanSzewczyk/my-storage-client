@@ -29,6 +29,7 @@ const App = (props) => {
           <Aux>
             <Route path={"/storages"} component={Storages} />
             <Route exact path={"/"} component={Dashboard} />
+            {/* <Redirect to={"/"} /> */}
           </Aux>
         )}
         {/* {userRole === "EMPLOYEE" && (
