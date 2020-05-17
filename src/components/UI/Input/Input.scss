@@ -2,7 +2,7 @@
 
 .label {
   font-family: $font;
-  font-size: $fontSizeMedium;
+  font-size: $fontMD;
   width: calc(100% - 4px);
   color: $whiteColor;
   padding: 4px 0 0 4px;
@@ -17,7 +17,7 @@
   color: $whiteColor;
   display: inline-block;
   width: calc(100% - 18px);
-  font-size: $fontSizeMedium;
+  font-size: $fontMD;
   font-family: $font;
   font-weight: 300;
   background: rgba(0, 0, 0, 0.15);
@@ -54,7 +54,7 @@
 
 .error {
   font-family: $font;
-  font-size: $fontSizeSmall;
+  font-size: $fontSM;
   margin-bottom: 4px;
   color: $redColor;
 }

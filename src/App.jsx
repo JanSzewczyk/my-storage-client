@@ -15,7 +15,7 @@ const App = (props) => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-  return authenticated ? (
+  return !authenticated ? (
     <Switch>
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />

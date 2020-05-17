@@ -1,3 +1,5 @@
+@import "../../assets/variables/variables.scss";
+
 .header {
   display: flex;
   background-color: #0c0c0c;
@@ -16,7 +18,7 @@
     .header__logo {
       margin-right: 16px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: $fontXL;
     }
 
     .header__line {
@@ -36,7 +38,7 @@
     .header__username {
       margin-right: 16px;
       cursor: pointer;
-      font-size: 16px;
+      font-size: $fontLG;
 
       &:hover {
         opacity: 0.8;

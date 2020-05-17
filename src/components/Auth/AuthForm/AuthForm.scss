@@ -8,17 +8,18 @@
 
   h1 {
     font-family: $font;
+    font-size: $fontXXL;
     margin: 0 0 16px 0;
     color: $blueColor;
   }
 
   .auth-form__input {
-    font-size: $fontSizeBig;
+    font-size: $fontLG;
   }
 
   .auth-form__error-message {
     color: $redColor;
-    font-size: $fontSizeMedium;
+    font-size: $fontMD;
     margin-bottom: 8px;
   }
 
