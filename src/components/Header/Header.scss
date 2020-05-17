@@ -2,9 +2,9 @@
 
 .header {
   display: flex;
-  background-color: #0c0c0c;
+  background-color: $black;
   justify-content: space-between;
-  color: #fafafa;
+  color: $whiteColor;
   height: 48px;
   padding: 0 16px;
 
@@ -17,11 +17,13 @@
       margin-right: 16px;
       cursor: pointer;
       font-size: $fontXL;
+      color: $whiteColor;
+      text-decoration: none;
     }
 
     .header__line {
       height: 20px;
-      border-right: 2px solid #f2f2f2;
+      border-right: 2px solid $whiteColor;
       border-radius: 1px;
       opacity: 0.5;
       margin-right: 8px;

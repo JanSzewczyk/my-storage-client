@@ -12,12 +12,10 @@ const Header = (props) => {
   return (
     <header className={"header"}>
       <div className={"header__left"}>
-        {/* <div className={"header__logo"}> */}
         <Link to={"/"} className={"header__logo"}>
           Inbox MY STORAGE
         </Link>
-        {/* </div> */}
-        <div className={"header__line "} />
+        <div className={"header__line"} />
         <NavigationLinks userRole={userRole} />
       </div>
       <div className={"header__right"}>
