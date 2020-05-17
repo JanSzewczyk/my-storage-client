@@ -4,15 +4,16 @@ import PropTypes from "prop-types";
 import "./Tile.scss";
 
 const Tile = (props) => {
-  const { children, header, top, bottom, tileSize } = props;
-  console.log(tileSize);
+  const { children, tileClass, header, top, bottom, tileSize } = props;
+
   let tileClasses = ["tile"];
 
   tileClasses = tileClasses.concat(
     Object.keys(tileSize).map((key) => `tile--${tileSize[key]}`)
   );
 
-  console.log(tileClasses);
+  tileClass && tileClasses.push(tileClass);
+
   return (
     <div className={tileClasses.join(" ")}>
       {header && (
@@ -42,6 +43,7 @@ const Tile = (props) => {
 };
 
 Tile.propTypes = {
+  tileClass: PropTypes.string,
   tileSize: PropTypes.shape({
     sm: PropTypes.oneOf([
       "sm-1",
