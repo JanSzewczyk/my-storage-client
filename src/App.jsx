@@ -7,9 +7,11 @@ import * as action from "./store";
 import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
+import Aux from "./hoc/Auxiliary/Auxiliary";
+import Storages from "./containers/Storages/Storages";
 
 const App = (props) => {
-  const { authenticated, onAuthCheck } = props;
+  const { authenticated, onAuthCheck, userRole } = props;
 
   useEffect(() => {
     onAuthCheck();
@@ -23,7 +25,21 @@ const App = (props) => {
   ) : (
     <AppLayout>
       <Switch>
-        <Route path={"/"} component={Dashboard} />
+        {userRole === "OWNER" && (
+          <Aux>
+            <Route path={"/storages"} component={Storages} />
+            <Route exact path={"/"} component={Dashboard} />
+          </Aux>
+        )}
+        {/* {userRole === "EMPLOYEE" && (
+          <Aux>
+            <Route path={"/"} component={Dashboard} />
+            <Route path={"/"} component={Dashboard} />
+          </Aux>
+        )} */}
+        {/* 
+        <Route path={"/"} component={Dashboard} exact /> */}
+        <Redirect to={"/"} />
       </Switch>
     </AppLayout>
   );
@@ -32,7 +48,8 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     authenticated:
-      state.auth.accessToken !== null && state.user.user && state.user.role, // authenticated
+      state.auth.accessToken !== null && state.user.user && state.user.role,
+    userRole: state.user.role,
   };
 };
 
