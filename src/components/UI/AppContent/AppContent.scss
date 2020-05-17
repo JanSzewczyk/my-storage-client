@@ -1,0 +1,8 @@
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}

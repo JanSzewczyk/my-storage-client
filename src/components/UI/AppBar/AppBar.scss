@@ -1,0 +1,20 @@
+.app-bar {
+  width: 100%;
+  line-height: 48px;
+  height: 48px;
+  background: #181818;
+  color: #f2f2f2;
+  position: relative;
+
+  .app-bar__left {
+    float: left;
+    margin-left: 8px;
+    display: flex;
+  }
+
+  .app-bar__right {
+    float: right;
+    margin-right: 8px;
+    display: flex;
+  }
+}

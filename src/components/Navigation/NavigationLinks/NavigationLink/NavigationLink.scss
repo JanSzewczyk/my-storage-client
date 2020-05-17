@@ -1,0 +1,22 @@
+@import "../../../../assets/variables/variables.scss";
+
+.navigation-link {
+  margin: 0px 8px;
+
+  .navigation-link__nav-link {
+    color: $whiteColor;
+    font-family: $font;
+    text-decoration: none;
+    margin: 8px 0;
+    font-size: $fontLG;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .navigation-link__nav-link--active {
+    font-weight: 600;
+    // border-bottom: solid 2px $whiteColor;
+  }
+}

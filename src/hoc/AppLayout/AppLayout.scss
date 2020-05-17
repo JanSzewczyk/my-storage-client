@@ -1,0 +1,10 @@
+@import "../../assets/variables/variables.scss";
+
+.app-layout {
+  overflow: hidden;
+  height: calc(100vh - 48px);
+  background: $darkColor;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}

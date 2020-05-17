@@ -5,5 +5,5 @@ import NotificationProvider, {
 } from "./NotificationProvider";
 import useNotification from "./useNotification";
 
+export { useNotification, log, success, error };
 export default NotificationProvider;
-export { NotificationProvider, useNotification, log, success, error };
