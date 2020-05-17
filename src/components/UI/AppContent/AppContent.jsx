@@ -7,13 +7,7 @@ import "./AppContent.scss";
 
 const AppContent = (props) => {
   const { children } = props;
-  return (
-    <div className={"app-content"}>
-      {/* <div className={"app-content__container"}> */}
-      {children}
-      {/* </div> */}
-    </div>
-  );
+  return <div className={"app-content"}>{children}</div>;
 };
 
 AppContent.propTypes = {
