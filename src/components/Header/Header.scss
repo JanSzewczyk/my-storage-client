@@ -19,6 +19,11 @@
       font-size: $fontXL;
       color: $whiteColor;
       text-decoration: none;
+      display: flex;
+
+      svg {
+        margin-right: 8px;
+      }
     }
 
     .header__line {
@@ -36,9 +41,15 @@
     align-items: center;
 
     .header__username {
+      display: flex;
+      align-items: center;
       margin-right: 16px;
       cursor: pointer;
       font-size: $fontLG;
+
+      svg {
+        margin-right: 4px;
+      }
 
       &:hover {
         opacity: 0.8;
