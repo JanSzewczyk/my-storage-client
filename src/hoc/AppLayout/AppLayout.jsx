@@ -5,6 +5,8 @@ import Aux from "../Auxiliary/Auxiliary";
 
 import "./AppLayout.scss";
 import Header from "../../components/Header/Header";
+import AppBar from "../../components/UI/AppBar/AppBar";
+import AppContent from "../../components/UI/AppContent/AppContent";
 
 const AppLayout = (props) => {
   const { children } = props;
@@ -12,10 +14,8 @@ const AppLayout = (props) => {
     <Aux>
       <Header />
       <main className={"app-layout"}>
-        <div className={"appbar"}>elo</div>
-        <div className={"appbody"}>
-          <div className={"appcontent"}> {children}</div>
-        </div>
+        {/* <AppBar /> */}
+        <AppContent>{children}</AppContent>
       </main>
     </Aux>
   );
