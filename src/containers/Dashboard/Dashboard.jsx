@@ -13,7 +13,7 @@ const Dashboard = (props) => {
     <Aux>
       <AppBar />
       <AppContent>
-        {/* <Tile
+        <Tile
           tileSize={{
             sm: "sm-12",
             md: "md-6",
@@ -22,9 +22,9 @@ const Dashboard = (props) => {
           }}
           top={{}}
         >
-          Tile sad f sa ds asd asg sdg asdg asgd as dgasd asdg asd gasg
+          HOMEPAGE
         </Tile>
-        <Tile
+        {/* <Tile
           tileSize={{
             sm: "sm-12",
             md: "md-6",
