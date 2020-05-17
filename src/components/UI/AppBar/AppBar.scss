@@ -9,10 +9,12 @@
   .app-bar__left {
     float: left;
     margin-left: 8px;
+    display: flex;
   }
 
   .app-bar__right {
     float: right;
     margin-right: 8px;
+    display: flex;
   }
 }
