@@ -34,8 +34,8 @@ const Tile = (props) => {
       <div className={"tile__content"}>{children}</div>
       {bottom && (
         <div className={"tile__bottom"}>
-          <div className={"tile__left"}>BottomLeft</div>
-          <div className={"tile__right"}>BottomRight</div>
+          <div className={"tile__left"}>{bottom.left}</div>
+          <div className={"tile__right"}>{bottom.right}</div>
         </div>
       )}
     </div>
@@ -112,7 +112,7 @@ Tile.propTypes = {
     left: PropTypes.node,
     right: PropTypes.node,
   }),
-  botom: PropTypes.shape({
+  bottom: PropTypes.shape({
     left: PropTypes.node,
     right: PropTypes.node,
   }),

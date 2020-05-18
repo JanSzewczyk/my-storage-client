@@ -67,11 +67,15 @@
 
     .tile__left {
       flex: 1;
+      display: flex;
       text-align: left;
+      justify-content: flex-start;
     }
     .tile__right {
       flex: 1;
+      display: flex;
       text-align: right;
+      justify-content: flex-end;
     }
   }
 }
