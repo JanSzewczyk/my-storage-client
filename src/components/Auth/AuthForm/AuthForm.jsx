@@ -8,6 +8,7 @@ import Button from "../../UI/Button/Button";
 import Loading from "../../UI/Loading/Loading";
 import * as pattern from "../../../shared/patterns";
 import Backdrop from "../../UI/Backdrop/Backdrop";
+import InboxIcon from "@material-ui/icons/Inbox";
 
 import "./AuthForm.scss";
 
@@ -26,7 +27,9 @@ const AuthForm = (props) => {
         </Backdrop>
       )}
       <form className={"auth-form"}>
-        <h1>MY STORAGE</h1>
+        <div className={"auth-form__logo"}>
+          <InboxIcon /> MY STORAGE
+        </div>
         <Input
           inputClass={"auth-form__input"}
           label={"Email"}

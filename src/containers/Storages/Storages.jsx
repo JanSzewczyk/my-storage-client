@@ -19,7 +19,6 @@ const Storages = (props) => {
   return (
     <Aux>
       <AppBar
-        left={"asdfas"}
         right={
           <Button btnType={"primary"}>
             <AddIcon />

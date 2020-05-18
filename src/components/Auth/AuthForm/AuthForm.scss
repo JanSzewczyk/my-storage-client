@@ -6,11 +6,20 @@
   align-items: center;
   width: 300px;
 
-  h1 {
+  .auth-form__logo {
     font-family: $font;
     font-size: $fontXXL;
+    font-weight: bold;
     margin: 0 0 16px 0;
     color: $blueColor;
+    display: flex;
+    justify-content: center;
+
+    svg {
+      height: 36px;
+      width: 36px;
+      margin-right: 8px;
+    }
   }
 
   .auth-form__input {

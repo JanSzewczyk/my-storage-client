@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import InboxIcon from "@material-ui/icons/Inbox";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../UI/Button/Button";
@@ -25,7 +27,10 @@ const Header = (props) => {
           <PersonIcon height={16} />
           {`${user.firstName} ${user.lastName}`}
         </div>
-        <Button clicked={onLogout}>LOGOUT</Button>
+        <Button clicked={onLogout}>
+          <ExitToAppIcon />
+          LOGOUT
+        </Button>
       </div>
     </header>
   );
