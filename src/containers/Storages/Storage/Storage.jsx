@@ -15,7 +15,7 @@ const Storage = (props) => {
 
   return (
     <Aux>
-      <AppBar left={"left"} />
+      <AppBar left={"breadcrumbs"} />
       <AppContent>{storageDetails}</AppContent>
     </Aux>
   );

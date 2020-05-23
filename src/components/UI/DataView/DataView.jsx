@@ -15,7 +15,7 @@ const DataView = (props) => {
 
 DataView.propTypes = {
   label: PropTypes.string.isRequired,
-  data: PropTypes.string.isRequired,
+  data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default DataView;

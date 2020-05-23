@@ -1,7 +1,13 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error, success } from "../../components/UI/Notification";
 import { updateObject } from "../../shared/utility";
+
+const processStorage = (storage) =>
+  updateObject(storage, {
+    createdAt: new Date(storage.createdAt),
+    updatedAt: new Date(storage.updatedAt),
+  });
 
 export const storageListLoadStart = () => {
   return {
@@ -44,13 +50,9 @@ export const storageLoadStart = () => {
 };
 
 export const storageLoadSuccess = (storage) => {
-  const data = updateObject(storage, {
-    createdAt: new Date(storage.createdAt),
-    updatedAt: new Date(storage.updatedAt),
-  });
   return {
     type: actionTypes.STORAGE_LOAD_SUCCESS,
-    storage: data,
+    storage: processStorage(storage),
   };
 };
 
@@ -71,6 +73,41 @@ export const getStorege = (storageId) => {
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
         dispatch(storageLoadFail());
+      });
+  };
+};
+
+export const storageEditStart = () => {
+  return {
+    type: actionTypes.STORAGE_EDIT_START,
+  };
+};
+
+export const storageEditSuccess = (storage) => {
+  return {
+    type: actionTypes.STORAGE_EDIT_SUCCESS,
+    storage: processStorage(storage),
+  };
+};
+
+export const storageEditFail = () => {
+  return {
+    type: actionTypes.STORAGE_EDIT_FAIL,
+  };
+};
+
+export const editStorege = (storageId, updatedStorage) => {
+  return (dispatch) => {
+    dispatch(storageEditStart());
+    axios
+      .put(`storages/${storageId}`, updatedStorage)
+      .then((res) => {
+        success(`The ${res.data.name} storage has been updated`);
+        dispatch(storageEditSuccess(res.data));
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageEditFail());
       });
   };
 };

@@ -9,5 +9,9 @@ export const logout = () => {
 };
 
 export { auth, authCheck, authLogout } from "./auth/authAction";
-export { getStoregeList, getStorege } from "./storage/storageAction";
+export {
+  getStoregeList,
+  getStorege,
+  editStorege,
+} from "./storage/storageAction";
 export { getUserDetails } from "./user/userAction";

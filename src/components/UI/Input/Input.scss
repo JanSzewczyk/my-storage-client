@@ -58,3 +58,18 @@
   margin-bottom: 4px;
   color: $redColor;
 }
+
+.label--edit {
+  display: block; /* add this */
+  padding: 4px 0 4px 0;
+  // margin: 4px 0;
+  font-size: $fontSM;
+  opacity: 0.8;
+}
+
+.input--edit {
+  margin: 1px 0 5px 5px;
+  color: $blueColor;
+  font-size: $fontMD;
+  padding: 2px;
+}
