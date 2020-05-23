@@ -5,6 +5,7 @@ import AddBoxIcon from "@material-ui/icons/AddBox";
 import Tile from "../../../UI/Tile/Tile";
 
 import "./AddStorageTile.scss";
+import TileContent from "../../../UI/Tile/TileContent/TileContent";
 
 const AddStorageTile = (props) => {
   const { onAddStorage } = props;
@@ -17,10 +18,12 @@ const AddStorageTile = (props) => {
         xl: "xl-3",
       }}
     >
-      <div className={"add-storage-tile"} onClick={onAddStorage}>
-        <AddBoxIcon className={"add-storage-tile__icon"} />
-        <h1>Create Storage</h1>
-      </div>
+      <TileContent>
+        <div className={"add-storage-tile"} onClick={onAddStorage}>
+          <AddBoxIcon className={"add-storage-tile__icon"} />
+          <h1>Create Storage</h1>
+        </div>
+      </TileContent>
     </Tile>
   );
 };

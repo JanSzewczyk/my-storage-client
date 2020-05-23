@@ -1,0 +1,18 @@
+.tile-bottom {
+  display: flex;
+  margin-top: 16px;
+  flex: 0 0 auto;
+
+  .tile-bottom__left {
+    flex: 1;
+    display: flex;
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .tile-bottom__right {
+    flex: 1;
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+  }
+}

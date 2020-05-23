@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./Tile.scss";
 
 const Tile = (props) => {
-  const { children, tileClass, header, top, bottom, tileSize } = props;
+  const { children, tileClass, header, tileSize } = props;
 
   let tileClasses = ["tile"];
 
@@ -19,25 +19,13 @@ const Tile = (props) => {
       {header && (
         <div className={"tile__header"}>
           <div className={"tile__left"}>
-            <div className={"tile__title"}>Title</div>
-            <div className={"tile__subtitle"}>Subtitle</div>
+            <div className={"tile__title"}>{header.title}</div>
+            <div className={"tile__subtitle"}>{header.subtitle}</div>
           </div>
-          <div className={"tile__right"}>right</div>
+          <div className={"tile__right"}>{header.right}</div>
         </div>
       )}
-      {top && (
-        <div className={"tile__top"}>
-          <div className={"tile__left"}>TopLeft</div>
-          <div className={"tile__right"}>TopRight</div>
-        </div>
-      )}
-      <div className={"tile__content"}>{children}</div>
-      {bottom && (
-        <div className={"tile__bottom"}>
-          <div className={"tile__left"}>{bottom.left}</div>
-          <div className={"tile__right"}>{bottom.right}</div>
-        </div>
-      )}
+      {children}
     </div>
   );
 };
@@ -102,20 +90,12 @@ Tile.propTypes = {
       "xl-12",
     ]).isRequired,
   }).isRequired,
-  children: PropTypes.node,
   header: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,
     right: PropTypes.node,
   }),
-  top: PropTypes.shape({
-    left: PropTypes.node,
-    right: PropTypes.node,
-  }),
-  bottom: PropTypes.shape({
-    left: PropTypes.node,
-    right: PropTypes.node,
-  }),
+  children: PropTypes.node,
 };
 
 export default Tile;

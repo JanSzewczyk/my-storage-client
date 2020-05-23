@@ -4,6 +4,8 @@ import { updateObject } from "../../shared/utility";
 const initialState = {
   storageList: [],
   storageListLoading: true,
+  storage: null,
+  storageLoading: true,
 };
 
 const storageListLoadStart = (state, action) => {
@@ -23,6 +25,23 @@ const storageListLoadFail = (state, action) => {
   });
 };
 
+const storageLoadStart = (state, action) => {
+  return updateObject(state, { storage: null, storageLoading: true });
+};
+
+const storageLoadSuccess = (state, action) => {
+  return updateObject(state, {
+    storage: action.storage,
+    storageLoading: false,
+  });
+};
+
+const storageLoadFail = (state, action) => {
+  return updateObject(state, {
+    storageLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.STORAGE_LIST_LOAD_START:
@@ -31,6 +50,13 @@ const reducer = (state = initialState, action) => {
       return storageListLoadSuccess(state, action);
     case actionTypes.STORAGE_LIST_LOAD_FAIL:
       return storageListLoadFail(state, action);
+
+    case actionTypes.STORAGE_LOAD_START:
+      return storageLoadStart(state, action);
+    case actionTypes.STORAGE_LOAD_SUCCESS:
+      return storageLoadSuccess(state, action);
+    case actionTypes.STORAGE_LOAD_FAIL:
+      return storageLoadFail(state, action);
     default:
       return state;
   }
