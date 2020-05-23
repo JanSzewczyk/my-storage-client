@@ -7,6 +7,7 @@ import Tile from "../../../UI/Tile/Tile";
 import "./AddStorageTile.scss";
 
 const AddStorageTile = (props) => {
+  const { onAddStorage } = props;
   return (
     <Tile
       tileSize={{
@@ -16,14 +17,16 @@ const AddStorageTile = (props) => {
         xl: "xl-3",
       }}
     >
-      <div className={"add-storage-tile"}>
+      <div className={"add-storage-tile"} onClick={onAddStorage}>
         <AddBoxIcon className={"add-storage-tile__icon"} />
-        <h1>Add new Storage</h1>
+        <h1>Create Storage</h1>
       </div>
     </Tile>
   );
 };
 
-AddStorageTile.propTypes = {};
+AddStorageTile.propTypes = {
+  onAddStorage: PropTypes.func.isRequired,
+};
 
 export default AddStorageTile;

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from "react";
+import React, { useEffect, useMemo, useCallback, useState } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../store";
@@ -11,6 +11,8 @@ import AddStorageTile from "../../components/Storage/Storages/AddStorageTile/Add
 
 const Storages = (props) => {
   const { onGetStoregeList, storageList, storageListLoading } = props;
+
+  const [showAddStorage, setShowAddStorage] = useState(false);
 
   useEffect(() => {
     onGetStoregeList();
@@ -40,12 +42,13 @@ const Storages = (props) => {
 
   return (
     <AppContent>
+      {showAddStorage && console.log("show")}
       {storageListLoading ? (
         <Loading />
       ) : (
         <Aux>
           {storageItems}
-          <AddStorageTile />
+          <AddStorageTile onAddStorage={() => setShowAddStorage(true)} />
         </Aux>
       )}
     </AppContent>

@@ -2,36 +2,36 @@ import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import { error } from "../../components/UI/Notification";
 
-export const storageListStart = () => {
+export const storageListLoadStart = () => {
   return {
-    type: actionTypes.STORAGE_LIST_START,
+    type: actionTypes.STORAGE_LIST_LOAD_START,
   };
 };
 
-export const storageListSuccess = (storages) => {
+export const storageListLoadSuccess = (storages) => {
   return {
-    type: actionTypes.STORAGE_LIST_SUCCESS,
+    type: actionTypes.STORAGE_LIST_LOAD_SUCCESS,
     storages: storages,
   };
 };
 
-export const storageListFail = () => {
+export const storageListLoadFail = () => {
   return {
-    type: actionTypes.STORAGE_LIST_SUCCESS,
+    type: actionTypes.STORAGE_LIST_LOAD_FAIL,
   };
 };
 
 export const getStoregeList = () => {
   return (dispatch) => {
-    dispatch(storageListStart());
+    dispatch(storageListLoadStart());
     axios
       .get("storages")
       .then((res) => {
-        dispatch(storageListSuccess(res.data));
+        dispatch(storageListLoadSuccess(res.data));
       })
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
-        dispatch(storageListFail());
+        dispatch(storageListLoadFail());
       });
   };
 };

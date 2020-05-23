@@ -9,8 +9,7 @@ import "./StorageItem.scss";
 
 const StorageItem = (props) => {
   const { storage, onRedirectToStorege } = props;
-  console.log(storage);
-  // CropDin
+
   return (
     <Tile
       tileSize={{

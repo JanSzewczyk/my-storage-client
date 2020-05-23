@@ -7,8 +7,9 @@ import * as action from "./store";
 import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
-import Aux from "./hoc/Auxiliary/Auxiliary";
 import Storages from "./containers/Storages/Storages";
+import Storage from "./containers/Storages/Storage/Storage";
+import Logout from "./containers/Auth/Logout/Logout";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -25,12 +26,14 @@ const App = (props) => {
   ) : (
     <AppLayout>
       <Switch>
-        {userRole === "OWNER" && (
-          <Aux>
-            <Route path={"/storages"} component={Storages} />
-            <Route exact path={"/"} component={Dashboard} />
-            {/* <Redirect to={"/"} /> */}
-          </Aux>
+        {/* {userRole === "OWNER" && (
+          <Aux> */}
+        <Route path={"/storages/:storageId"} component={Storage} />
+        <Route path={"/storages"} component={Storages} />
+        <Route path={"/logout"} component={Logout} />
+        <Route exact path={"/"} component={Dashboard} />
+        {/* <Redirect to={"/"} /> */}
+        {/* </Aux>
         )}
         {/* {userRole === "EMPLOYEE" && (
           <Aux>
@@ -38,9 +41,9 @@ const App = (props) => {
             <Route path={"/"} component={Dashboard} />
           </Aux>
         )} */}
-        {/* 
+        {/*  */}
         <Route path={"/"} component={Dashboard} exact /> */}
-        <Redirect to={"/"} />
+        {/* <Redirect to={"/"} /> */}
       </Switch>
     </AppLayout>
   );
