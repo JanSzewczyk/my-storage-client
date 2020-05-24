@@ -1,0 +1,20 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.pagination-item {
+  margin: 0 4px;
+  font-size: $fontLG;
+
+  &:hover {
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+.pagination-item--active {
+  color: $blueColor;
+
+  &:hover {
+    font-weight: 700;
+    cursor: default;
+  }
+}

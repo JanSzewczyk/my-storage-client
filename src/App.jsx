@@ -8,7 +8,7 @@ import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/Storages/Storages";
-import Storage from "./containers/Storages/Storage/Storage";
+import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
 import Logout from "./containers/Auth/Logout/Logout";
 
 const App = (props) => {
@@ -28,7 +28,7 @@ const App = (props) => {
       <Switch>
         {/* {userRole === "OWNER" && (
           <Aux> */}
-        <Route path={"/storages/:storageId"} component={Storage} />
+        <Route path={"/storages/:storageId"} component={StorageOwner} />
         <Route path={"/storages"} component={Storages} />
         <Route path={"/logout"} component={Logout} />
         <Route exact path={"/"} component={Dashboard} />

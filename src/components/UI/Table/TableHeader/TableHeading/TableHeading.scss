@@ -1,0 +1,30 @@
+.table-heading {
+  border-bottom: 1px solid #4e4e4e;
+  padding: 16px;
+  font-weight: 400;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  z-index: 2;
+  background-color: #242424;
+
+  .table-heading__content {
+    display: flex;
+
+    .table-heading__sort-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      opacity: 0.3;
+    }
+  }
+
+  &:hover {
+    .table-heading__content {
+      .table-heading__sort-wrapper {
+        opacity: 1;
+      }
+    }
+  }
+}
