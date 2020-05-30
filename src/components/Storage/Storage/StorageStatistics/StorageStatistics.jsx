@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -6,9 +6,15 @@ import * as action from "../../../../store";
 
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
+import StorageStatisticChart from "./StorageStatisticChart/StorageStatisticChart";
 
 const StorageStatistics = React.memo((props) => {
-  const { storageId, onGetStorageStatistics } = props;
+  const {
+    storageId,
+    onGetStorageStatistics,
+    storageStatistics,
+    storageStatisticsLoading,
+  } = props;
 
   useEffect(() => {
     onGetStorageStatistics(storageId);
@@ -23,12 +29,15 @@ const StorageStatistics = React.memo((props) => {
         xl: "xl-6",
       }}
       header={{
-        title: "Items",
-        subtitle: "Items in stock",
+        title: "Statistics",
+        subtitle: "Item flow statistics",
       }}
     >
       <TileContent>
-        
+        <StorageStatisticChart
+          loading={storageStatisticsLoading}
+          statistics={storageStatistics}
+        />
       </TileContent>
     </Tile>
   );
