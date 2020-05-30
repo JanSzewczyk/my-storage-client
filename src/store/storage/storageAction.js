@@ -1,7 +1,7 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "../../components/UI/Notification";
-import { updateObject } from "../../shared/utility";
+import { updateObject } from "../../shared/utils/utility";
 
 const processStorage = (storage) =>
   updateObject(storage, {

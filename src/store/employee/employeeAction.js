@@ -1,7 +1,7 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "../../components/UI/Notification";
-import { createSearchQuery, updateObject } from "../../shared/utility";
+import { createSearchQuery, updateObject } from "../../shared/utils/utility";
 
 const processEmployeeList = (employees) =>
   employees.map((employee) =>
@@ -40,7 +40,6 @@ export const getStoregeEmployeesList = (storageId, queryData) => {
     axios
       .get(`employees/storage/${storageId}${query}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(
           employeeStorageListLoadSuccess(res.data.content, res.data.page)
         );

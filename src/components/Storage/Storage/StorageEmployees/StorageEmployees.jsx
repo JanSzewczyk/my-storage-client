@@ -7,11 +7,11 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import Table from "../../../UI/Table/Table";
-import { updateObject } from "../../../../shared/utility";
-
-import "./StorageEmployees.scss";
+import { updateObject } from "../../../../shared/utils/utility";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
+
+import "./StorageEmployees.scss";
 
 const config = {
   columns: [
@@ -57,7 +57,7 @@ const StorageEmployees = React.memo((props) => {
   const [query, setQuery] = useState({
     sort: [],
     page: 0,
-    size: 3,
+    size: 20,
   });
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const StorageEmployees = React.memo((props) => {
   };
 
   const onRowClick = useCallback((data) => {
-    console.log(data);
+    console.log("Redirect to employee");
   }, []);
 
   const table = useMemo(
