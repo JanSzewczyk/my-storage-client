@@ -6,10 +6,12 @@ import userReducer from "../store/user/userReducer";
 import employeeReducer from "../store/employee/employeeReducer";
 import storageReducer from "../store/storage/storageReducer";
 import itemReducer from "../store/item/itemReducer";
+import actionReducer from "../store/action/actionReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducers = combineReducers({
+  action: actionReducer,
   auth: authReducer,
   employee: employeeReducer,
   item: itemReducer,

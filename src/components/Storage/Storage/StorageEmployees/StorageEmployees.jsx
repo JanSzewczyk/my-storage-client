@@ -18,7 +18,6 @@ const config = {
     {
       field: "firstName",
       name: "First name",
-      // converter: (cellData, rowData) => `${cellData} chuj`,
     },
     {
       field: "lastName",
@@ -75,14 +74,16 @@ const StorageEmployees = React.memo((props) => {
     [query]
   );
 
-  const onPageChanged = (index) => {
-    setQuery(
-      updateObject(query, {
-        page: index,
-      })
-    );
-  };
-
+  const onPageChanged = useCallback(
+    (index) => {
+      setQuery(
+        updateObject(query, {
+          page: index,
+        })
+      );
+    },
+    [query]
+  );
   const onRowClick = useCallback((data) => {
     console.log("Redirect to employee");
   }, []);
@@ -101,6 +102,11 @@ const StorageEmployees = React.memo((props) => {
     [employeeList, employeeListLoading, onRowClick, onSortChanged, query.sort]
   );
 
+  const pagination = useMemo(
+    () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
+    [onPageChanged, pageInfo]
+  );
+
   return (
     <Tile
       tileSize={{
@@ -115,18 +121,9 @@ const StorageEmployees = React.memo((props) => {
       }}
     >
       <TileContent>
-        <div
-          style={{
-            height: "450px",
-            overflowY: "auto",
-          }}
-        >
-          {table}
-        </div>
+        <div className={"storage-imployees"}>{table}</div>
       </TileContent>
-      <TileBottom
-        right={<Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />}
-      />
+      <TileBottom right={pagination} />
     </Tile>
   );
 });

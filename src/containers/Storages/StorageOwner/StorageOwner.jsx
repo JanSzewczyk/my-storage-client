@@ -6,6 +6,7 @@ import AppContent from "../../../components/UI/AppContent/AppContent";
 import StorageDetails from "../../../components/Storage/Storage/StorageDetails/StorageDetails";
 import StorageEmployees from "../../../components/Storage/Storage/StorageEmployees/StorageEmployees";
 import StorageItems from "../../../components/Storage/Storage/StorageItems/StorageItems";
+import StorageActions from "../../../components/Storage/Storage/StorageActions/StorageActions";
 
 const StorageOwner = (props) => {
   const storageId = props.match.params.storageId;
@@ -23,6 +24,11 @@ const StorageOwner = (props) => {
     storageId,
   ]);
 
+  const storageActions = useMemo(
+    () => <StorageActions storageId={storageId} />,
+    [storageId]
+  );
+
   return (
     <Aux>
       <AppBar left={"breadcrumbs"} />
@@ -30,6 +36,7 @@ const StorageOwner = (props) => {
         {storageDetails}
         {employees}
         {storageItems}
+        {storageActions}
       </AppContent>
     </Aux>
   );
