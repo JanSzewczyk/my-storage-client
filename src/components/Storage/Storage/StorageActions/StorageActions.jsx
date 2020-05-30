@@ -7,9 +7,11 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import { updateObject, formatMoney } from "../../../../shared/utils/utility";
+import { updateObject } from "../../../../shared/utils/utility";
+import { formatMoney } from "../../../../shared/utils/currencyUtils";
 import Table from "../../../UI/Table/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
+import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 
 import "./StorageActions.scss";
 
@@ -18,7 +20,7 @@ const config = {
     {
       field: "createdAt",
       name: "Date",
-      converter: (cellData, rowData) => cellData.toLocaleDateString(),
+      converter: (cellData, rowData) => dateToDateTimeString(cellData),
     },
     {
       field: "action",

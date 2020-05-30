@@ -12,6 +12,7 @@ export { getStoregeActionsList } from "./action/actionAction";
 export { auth, authCheck, authLogout } from "./auth/authAction";
 export { getStoregeEmployeesList } from "./employee/employeeAction";
 export { getStoregeItemsList } from "./item/itemAction";
+export { getStorageStatistics } from "./statistic/statisticAction";
 export {
   getStoregeList,
   getStorege,

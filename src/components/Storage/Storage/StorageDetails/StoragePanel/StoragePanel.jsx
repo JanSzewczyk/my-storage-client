@@ -6,6 +6,7 @@ import TileContent from "../../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../../UI/Tile/TileBottom/TileBottom";
 import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
+import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
 
 const StoragePanel = React.memo((props) => {
   const { storage, onEdit } = props;
@@ -20,11 +21,11 @@ const StoragePanel = React.memo((props) => {
         <DataView label={"Country:"} data={storage.addressCountry} />
         <DataView
           label={"Created At:"}
-          data={storage.createdAt.toLocaleString()}
+          data={dateToDateTimeString(storage.createdAt)}
         />
         <DataView
           label={"Updated At:"}
-          data={storage.updatedAt.toLocaleString()}
+          data={dateToDateTimeString(storage.updatedAt)}
         />
       </TileContent>
       <TileBottom

@@ -7,6 +7,7 @@ import StorageDetails from "../../../components/Storage/Storage/StorageDetails/S
 import StorageEmployees from "../../../components/Storage/Storage/StorageEmployees/StorageEmployees";
 import StorageItems from "../../../components/Storage/Storage/StorageItems/StorageItems";
 import StorageActions from "../../../components/Storage/Storage/StorageActions/StorageActions";
+import StorageStatistics from "../../../components/Storage/Storage/StorageStatistics/StorageStatistics";
 
 const StorageOwner = (props) => {
   const storageId = props.match.params.storageId;
@@ -24,6 +25,11 @@ const StorageOwner = (props) => {
     storageId,
   ]);
 
+  const storageStatistics = useMemo(
+    () => <StorageStatistics storageId={storageId} />,
+    [storageId]
+  );
+
   const storageActions = useMemo(
     () => <StorageActions storageId={storageId} />,
     [storageId]
@@ -36,6 +42,7 @@ const StorageOwner = (props) => {
         {storageDetails}
         {employees}
         {storageItems}
+        {storageStatistics}
         {storageActions}
       </AppContent>
     </Aux>

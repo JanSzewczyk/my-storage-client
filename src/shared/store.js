@@ -7,6 +7,7 @@ import employeeReducer from "../store/employee/employeeReducer";
 import storageReducer from "../store/storage/storageReducer";
 import itemReducer from "../store/item/itemReducer";
 import actionReducer from "../store/action/actionReducer";
+import statisticReducer from "../store/statistic/statisticReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,6 +16,7 @@ const rootReducers = combineReducers({
   auth: authReducer,
   employee: employeeReducer,
   item: itemReducer,
+  statistic: statisticReducer,
   storage: storageReducer,
   user: userReducer,
 });
