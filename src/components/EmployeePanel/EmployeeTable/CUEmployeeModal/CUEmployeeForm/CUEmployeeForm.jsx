@@ -24,9 +24,12 @@ const CUEmployeeForm = (props) => {
     storageList,
     storageListLoading,
     onGetStoregeList,
+    editEmlpoyee,
+    onUpdateEmployee,
   } = props;
 
-  const { register, errors, handleSubmit, watch } = useForm({
+  const { register, errors, handleSubmit, watch, formState } = useForm({
+    defaultValues: editEmlpoyee ? editEmlpoyee : {},
     mode: "onSubmit",
   });
 
@@ -35,8 +38,11 @@ const CUEmployeeForm = (props) => {
   }, [onGetStoregeList]);
 
   const onSubmit = (formData) => {
-    console.log(formData);
-    onCreateEmployee(formData);
+    if (editEmlpoyee) {
+      onUpdateEmployee(editEmlpoyee.employeeId, formData);
+    } else {
+      onCreateEmployee(formData);
+    }
   };
 
   const validatePasswordMatch = () => {
@@ -71,7 +77,7 @@ const CUEmployeeForm = (props) => {
               name: "password",
             }}
             refInput={register({
-              required: true,
+              required: !editEmlpoyee,
               pattern: pattern.password,
             })}
             hasError={errors.password}
@@ -85,7 +91,7 @@ const CUEmployeeForm = (props) => {
               name: "repeatPassword",
             }}
             refInput={register({
-              required: true,
+              required: !editEmlpoyee,
               validate: validatePasswordMatch,
             })}
             hasError={errors.repeatPassword}
@@ -101,7 +107,7 @@ const CUEmployeeForm = (props) => {
               key: i.name,
               value: i.storageId,
             }))}
-            hasError={errors.repeatPassword}
+            hasError={errors.storageId}
           />
           <Input
             label={"First Name: "}
@@ -201,13 +207,16 @@ const CUEmployeeForm = (props) => {
             hasError={errors.addressCountry}
             errorMessage={"Min length is 3."}
           />
-          {/* wybór storage */}
         </form>
       </ModalBody>
       <ModalBottom>
         <Button clicked={onCloseModal}>close</Button>
-        <Button btnType={"primary"} clicked={handleSubmit(onSubmit)}>
-          create storage
+        <Button
+          btnType={"primary"}
+          clicked={handleSubmit(onSubmit)}
+          disabled={!formState.dirty}
+        >
+          {editEmlpoyee ? "update" : "add employee"}
         </Button>
       </ModalBottom>
     </Aux>
@@ -218,6 +227,8 @@ CUEmployeeForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   onCreateEmployee: PropTypes.func.isRequired,
+  onUpdateEmployee: PropTypes.func.isRequired,
+  editEmlpoyee: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

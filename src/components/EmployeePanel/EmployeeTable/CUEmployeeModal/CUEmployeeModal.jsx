@@ -9,14 +9,26 @@ import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
 import CUEmployeeForm from "./CUEmployeeForm/CUEmployeeForm";
 
 const CUEmployeeModal = React.memo((props) => {
-  const { onCloseModal, onCreateEmployee, employeeActionLoading } = props;
+  const {
+    onCloseModal,
+    onCreateEmployee,
+    employeeActionLoading,
+    editEmlpoyee,
+    onEditEmployee,
+  } = props;
+
   return (
     <Backdrop>
-      <ModalWrapper title={"Create Employee"} onClose={onCloseModal}>
+      <ModalWrapper
+        title={!editEmlpoyee ? "Create Employee" : "Edit Employee"}
+        onClose={onCloseModal}
+      >
         <CUEmployeeForm
           loading={employeeActionLoading}
           onCloseModal={onCloseModal}
           onCreateEmployee={onCreateEmployee}
+          onUpdateEmployee={onEditEmployee}
+          editEmlpoyee={editEmlpoyee}
         />
       </ModalWrapper>
     </Backdrop>
@@ -25,6 +37,7 @@ const CUEmployeeModal = React.memo((props) => {
 
 CUEmployeeModal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
+  editEmlpoyee: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
@@ -37,6 +50,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onCreateEmployee: (newEmployee) =>
       dispatch(action.createEmployee(newEmployee)),
+    onEditEmployee: (employeeId, updatedEmployee) =>
+      dispatch(action.editEmployee(employeeId, updatedEmployee)),
   };
 };
 

@@ -13,9 +13,9 @@ import Pagination from "../../UI/Pagination/Pagination";
 import TileTop from "../../UI/Tile/TileTop/TileTop";
 import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 import "./EmployeeTable.scss";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 const EmployeeTable = React.memo((props) => {
   const {
@@ -26,6 +26,8 @@ const EmployeeTable = React.memo((props) => {
   } = props;
 
   const [showModal, setShowModal] = useState(false);
+  const [edit, setEdit] = useState(null);
+
   const [query, setQuery] = useState({
     sort: [],
     page: 0,
@@ -62,7 +64,7 @@ const EmployeeTable = React.memo((props) => {
     columns: [
       {
         field: "firstName",
-        name: "First name",
+        name: "First Name",
       },
       {
         field: "lastName",
@@ -105,7 +107,11 @@ const EmployeeTable = React.memo((props) => {
       },
       {
         name: "edit",
-        action: (rowData) => console.log(`Edit ${rowData.first}`),
+        action: (rowData) => {
+          console.log(rowData);
+          setEdit(rowData);
+          setShowModal(true);
+        },
       },
     ],
   };
@@ -129,8 +135,16 @@ const EmployeeTable = React.memo((props) => {
   );
 
   const employeeModal = useMemo(
-    () => <CUEmployeeModal onCloseModal={() => setShowModal(false)} />,
-    []
+    () => (
+      <CUEmployeeModal
+        onCloseModal={() => {
+          setEdit(null);
+          setShowModal(false);
+        }}
+        editEmlpoyee={edit}
+      />
+    ),
+    [edit]
   );
 
   return (
