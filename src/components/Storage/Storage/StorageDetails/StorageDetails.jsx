@@ -17,6 +17,7 @@ const StorageDetails = React.memo((props) => {
     storageLoading,
     onEditStorage,
     storageEditLoading,
+    onRemoveStorage,
   } = props;
   const [edit, setEdit] = useState(false);
 
@@ -39,10 +40,11 @@ const StorageDetails = React.memo((props) => {
         defaultStorage={storage}
         onCloseEdit={() => setEdit(false)}
         onEditStorage={onEditStorage}
+        onRemoveStorage={onRemoveStorage}
         loading={storageEditLoading}
       />
     ),
-    [onEditStorage, storage, storageEditLoading]
+    [onEditStorage, onRemoveStorage, storage, storageEditLoading]
   );
 
   return (
@@ -80,6 +82,7 @@ const mapDispatchToProps = (dispatch) => {
     onGetStorege: (storageId) => dispatch(action.getStorege(storageId)),
     onEditStorage: (storageId, updatedStorage) =>
       dispatch(action.editStorege(storageId, updatedStorage)),
+    onRemoveStorage: (storageId) => dispatch(action.removeStorege(storageId)),
   };
 };
 

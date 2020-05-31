@@ -11,7 +11,13 @@ import Input from "../../../../UI/Input/Input";
 import Loading from "../../../../UI/Loading/Loading";
 
 const StorageEditPanel = React.memo((props) => {
-  const { defaultStorage, onCloseEdit, onEditStorage, loading } = props;
+  const {
+    defaultStorage,
+    onCloseEdit,
+    onEditStorage,
+    loading,
+    onRemoveStorage,
+  } = props;
 
   const { register, errors, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -26,8 +32,11 @@ const StorageEditPanel = React.memo((props) => {
   });
 
   const onSubmit = (formData) => {
-    console.log(formData);
     onEditStorage(defaultStorage.storageId, formData);
+  };
+
+  const onRemove = () => {
+    onRemoveStorage(defaultStorage.storageId);
   };
 
   return !loading ? (
@@ -128,6 +137,9 @@ const StorageEditPanel = React.memo((props) => {
         right={
           <Aux>
             <Button clicked={onCloseEdit}>back</Button>
+            <Button btnType={"warning"} clicked={handleSubmit(onRemove)}>
+              remove
+            </Button>
             <Button
               btnType={"primary"}
               clicked={handleSubmit(onSubmit)}
@@ -148,6 +160,7 @@ StorageEditPanel.propTypes = {
   defaultStorage: PropTypes.object,
   onCloseEdit: PropTypes.func.isRequired,
   onEditStorage: PropTypes.func.isRequired,
+  onRemoveStorage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
