@@ -20,7 +20,6 @@ const Dashboard = (props) => {
             lg: "lg-4",
             xl: "xl-3",
           }}
-          top={{}}
         >
           HOMEPAGE
         </Tile>

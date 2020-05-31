@@ -11,6 +11,44 @@ const processEmployeeList = (employees) =>
     })
   );
 
+export const employeeListLoadStart = () => {
+  return {
+    type: actionTypes.EMPLOYEE_LIST_LOAD_START,
+  };
+};
+
+export const employeeListLoadSuccess = (employees, pageInfo) => {
+  return {
+    type: actionTypes.EMPLOYEE_LIST_LOAD_SUCCESS,
+    employeeList: processEmployeeList(employees),
+    pageInfo: pageInfo,
+  };
+};
+
+export const employeeListLoadFail = () => {
+  return {
+    type: actionTypes.EMPLOYEE_LIST_LOAD_FAIL,
+  };
+};
+
+export const getEmployeesList = (queryData) => {
+  return (dispatch) => {
+    dispatch(employeeListLoadStart());
+
+    const query = createSearchQuery(queryData);
+
+    axios
+      .get(`employees${query}`)
+      .then((res) => {
+        dispatch(employeeListLoadSuccess(res.data.content, res.data.page));
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(employeeListLoadFail());
+      });
+  };
+};
+
 export const employeeStorageListLoadStart = () => {
   return {
     type: actionTypes.EMPLOYEE_STORAGE_LIST_LOAD_START,

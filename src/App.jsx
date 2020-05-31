@@ -10,6 +10,7 @@ import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/Storages/Storages";
 import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
 import Logout from "./containers/Auth/Logout/Logout";
+import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -30,6 +31,7 @@ const App = (props) => {
           <Aux> */}
         <Route path={"/storages/:storageId"} component={StorageOwner} />
         <Route path={"/storages"} component={Storages} />
+        <Route path={"/employees"} component={EmployeePanel} />
         <Route path={"/logout"} component={Logout} />
         <Route exact path={"/"} component={Dashboard} />
         {/* <Redirect to={"/"} /> */}
