@@ -13,6 +13,7 @@ export { auth, authCheck, authLogout } from "./auth/authAction";
 export {
   getEmployeesList,
   getStoregeEmployeesList,
+  createEmployee,
 } from "./employee/employeeAction";
 export { getStoregeItemsList } from "./item/itemAction";
 export { getStorageStatistics } from "./statistic/statisticAction";

@@ -2,6 +2,7 @@ import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "../../components/UI/Notification";
 import { createSearchQuery, updateObject } from "../../shared/utils/utility";
+import browserHistory from "../../shared/history";
 
 const processEmployeeList = (employees) =>
   employees.map((employee) =>
@@ -88,3 +89,111 @@ export const getStoregeEmployeesList = (storageId, queryData) => {
       });
   };
 };
+
+// export const employeeEditStart = () => {
+//   return {
+//     type: actionTypes.EMPLOYEE_EDIT_START,
+//   };
+// };
+
+// export const employeeEditSuccess = () => {
+//   return {
+//     type: actionTypes.EMPLOYEE_EDIT_SUCCESS,
+//   };
+// };
+
+// export const employeeEditFail = () => {
+//   return {
+//     type: actionTypes.EMPLOYEE_EDIT_FAIL,
+//   };
+// };
+
+// export const editEmployee = (employeeId, updatedEmployee) => {
+//   return (dispatch) => {
+//     dispatch(employeeEditStart());
+//     axios
+//       .put(`storages/${employeeId}`, updatedEmployee)
+//       .then((res) => {
+//         success(`The ${res.data.name} storage has been updated`);
+//         dispatch(employeeEditSuccess(res.data));
+//       })
+//       .catch((err) => {
+//         error(err.response ? err.response.data.message : "Server error");
+//         dispatch(employeeEditFail());
+//       });
+//   };
+// };
+
+export const employeeCreateStart = () => {
+  return {
+    type: actionTypes.EMPLOYEE_CREATE_START,
+  };
+};
+
+export const employeeCreateSuccess = () => {
+  return {
+    type: actionTypes.EMPLOYEE_CREATE_SUCCESS,
+  };
+};
+
+export const employeeCreateFail = () => {
+  return {
+    type: actionTypes.EMPLOYEE_CREATE_FAIL,
+  };
+};
+
+export const createEmployee = (employee) => {
+  return (dispatch) => {
+    dispatch(employeeCreateStart());
+    axios
+      .post(`employees`, employee)
+      .then((res) => {
+        const newEmployee = res.data;
+        success(
+          `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`
+        );
+        dispatch(employeeCreateSuccess());
+        browserHistory.push("/");
+        browserHistory.push("/employees");
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(employeeCreateFail());
+      });
+  };
+};
+
+// export const storageRemoveStart = () => {
+//   return {
+//     type: actionTypes.STORAGE_REMOVE_START,
+//   };
+// };
+
+// export const storageRemoveSuccess = () => {
+//   return {
+//     type: actionTypes.STORAGE_REMOVE_SUCCESS,
+//   };
+// };
+
+// export const storageRemoveFail = () => {
+//   return {
+//     type: actionTypes.STORAGE_REMOVE_FAIL,
+//   };
+// };
+
+// export const removeStorege = (storageId) => {
+//   return (dispatch) => {
+//     dispatch(storageRemoveStart());
+//     axios
+//       .delete(`storages/${storageId}`)
+//       .then((res) => {
+//         success(`The ${res.data.name} storage has been removed`);
+//         dispatch(storageRemoveSuccess());
+//         browserHistory.push(`/storages`);
+//       })
+//       .catch((err) => {
+//         error(err.response ? err.response.data.message : "Server error");
+//         dispatch(storageRemoveFail());
+//       });
+//   };
+// };

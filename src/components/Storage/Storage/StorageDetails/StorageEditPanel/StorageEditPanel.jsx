@@ -9,6 +9,7 @@ import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../../UI/Input/Input";
 import Loading from "../../../../UI/Loading/Loading";
+import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
 
 const StorageEditPanel = React.memo((props) => {
   const {
@@ -125,11 +126,11 @@ const StorageEditPanel = React.memo((props) => {
           />
           <DataView
             label={"Created At:"}
-            data={defaultStorage.createdAt.toLocaleString()}
+            data={dateToDateTimeString(defaultStorage.createdAt)}
           />
           <DataView
             label={"Updated At:"}
-            data={defaultStorage.updatedAt.toLocaleString()}
+            data={dateToDateTimeString(defaultStorage.updatedAt)}
           />
         </form>
       </TileContent>

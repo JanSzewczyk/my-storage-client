@@ -10,60 +10,12 @@ import { updateObject } from "../../../shared/utils/utility";
 import Table from "../../UI/Table/Table";
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import Pagination from "../../UI/Pagination/Pagination";
+import TileTop from "../../UI/Tile/TileTop/TileTop";
+import Button from "../../UI/Button/Button";
+import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 
 import "./EmployeeTable.scss";
-
-const config = {
-  columns: [
-    {
-      field: "firstName",
-      name: "First name",
-    },
-    {
-      field: "lastName",
-      name: "Last Name",
-    },
-    {
-      field: "phone",
-      name: "Phone Number",
-    },
-    {
-      field: "addressStreet",
-      name: "Street",
-    },
-    {
-      field: "addressZip",
-      name: "Zip",
-    },
-    {
-      field: "addressCity",
-      name: "City",
-    },
-    {
-      field: "addressCountry",
-      name: "Country",
-    },
-    {
-      field: "storageName",
-      name: "Storage",
-    },
-    {
-      field: "createdAt",
-      name: "Add date",
-      converter: (cellData) => dateToDateTimeString(cellData),
-    },
-  ],
-  actions: [
-    {
-      name: "delete",
-      action: (rowData) => console.log(`Delete ${rowData.first}`),
-    },
-    {
-      name: "edit",
-      action: (rowData) => console.log(`Edit ${rowData.first}`),
-    },
-  ],
-};
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 const EmployeeTable = React.memo((props) => {
   const {
@@ -73,6 +25,7 @@ const EmployeeTable = React.memo((props) => {
     pageInfo,
   } = props;
 
+  const [showModal, setShowModal] = useState(false);
   const [query, setQuery] = useState({
     sort: [],
     page: 0,
@@ -105,6 +58,58 @@ const EmployeeTable = React.memo((props) => {
     [query]
   );
 
+  const config = {
+    columns: [
+      {
+        field: "firstName",
+        name: "First name",
+      },
+      {
+        field: "lastName",
+        name: "Last Name",
+      },
+      {
+        field: "phone",
+        name: "Phone Number",
+      },
+      {
+        field: "addressStreet",
+        name: "Street",
+      },
+      {
+        field: "addressZip",
+        name: "Zip",
+      },
+      {
+        field: "addressCity",
+        name: "City",
+      },
+      {
+        field: "addressCountry",
+        name: "Country",
+      },
+      {
+        field: "storageName",
+        name: "Storage",
+      },
+      {
+        field: "createdAt",
+        name: "Add date",
+        converter: (cellData) => dateToDateTimeString(cellData),
+      },
+    ],
+    actions: [
+      {
+        name: "delete",
+        action: (rowData) => console.log(`Delete ${rowData.first}`),
+      },
+      {
+        name: "edit",
+        action: (rowData) => console.log(`Edit ${rowData.first}`),
+      },
+    ],
+  };
+
   const employeeTable = useMemo(
     () => (
       <Table
@@ -115,7 +120,7 @@ const EmployeeTable = React.memo((props) => {
         loading={employeeListLoading}
       />
     ),
-    [employeeList, employeeListLoading, onSortChanged, query.sort]
+    [config, employeeList, employeeListLoading, onSortChanged, query.sort]
   );
 
   const pagination = useMemo(
@@ -123,24 +128,39 @@ const EmployeeTable = React.memo((props) => {
     [onPageChanged, pageInfo]
   );
 
+  const employeeModal = useMemo(
+    () => <CUEmployeeModal onCloseModal={() => setShowModal(false)} />,
+    []
+  );
+
   return (
-    <Tile
-      tileSize={{
-        sm: "sm-12",
-        md: "md-12",
-        lg: "lg-12",
-        xl: "xl-12",
-      }}
-      header={{
-        title: "Employees",
-        subtitle: "Storage informations",
-      }}
-    >
-      <TileContent>
-        <div className={"employee-table"}>{employeeTable}</div>
-      </TileContent>
-      <TileBottom right={pagination} />
-    </Tile>
+    <Aux>
+      {showModal && employeeModal}
+      <Tile
+        tileSize={{
+          sm: "sm-12",
+          md: "md-12",
+          lg: "lg-12",
+          xl: "xl-12",
+        }}
+        header={{
+          title: "Employees",
+          subtitle: "Storage informations",
+        }}
+      >
+        <TileTop
+          right={
+            <Button btnType={"primary"} clicked={() => setShowModal(true)}>
+              add employee
+            </Button>
+          }
+        />
+        <TileContent>
+          <div className={"employee-table"}>{employeeTable}</div>
+        </TileContent>
+        <TileBottom right={pagination} />
+      </Tile>
+    </Aux>
   );
 });
 
