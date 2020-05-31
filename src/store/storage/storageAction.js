@@ -2,6 +2,7 @@ import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "../../components/UI/Notification";
 import { updateObject } from "../../shared/utils/utility";
+import browserHistory from "../../shared/history";
 
 const processStorage = (storage) =>
   updateObject(storage, {
@@ -108,6 +109,77 @@ export const editStorege = (storageId, updatedStorage) => {
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
         dispatch(storageEditFail());
+      });
+  };
+};
+
+export const storageCreateStart = () => {
+  return {
+    type: actionTypes.STORAGE_CREATE_START,
+  };
+};
+
+export const storageCreateSuccess = (storage) => {
+  return {
+    type: actionTypes.STORAGE_CREATE_SUCCESS,
+  };
+};
+
+export const storageCreateFail = () => {
+  return {
+    type: actionTypes.STORAGE_CREATE_FAIL,
+  };
+};
+
+export const createStorege = (storage) => {
+  return (dispatch) => {
+    dispatch(storageCreateStart());
+    axios
+      .post(`storages`, storage)
+      .then((res) => {
+        const newSrotage = res.data;
+        success(`The ${newSrotage.name} storage has been created`);
+        dispatch(storageCreateSuccess());
+        browserHistory.push(`/storages/${newSrotage.storageId}`);
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageCreateFail());
+      });
+  };
+};
+
+export const storageRemoveStart = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_START,
+  };
+};
+
+export const storageRemoveSuccess = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_SUCCESS,
+  };
+};
+
+export const storageRemoveFail = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_FAIL,
+  };
+};
+
+export const removeStorege = (storageId) => {
+  return (dispatch) => {
+    dispatch(storageRemoveStart());
+    axios
+      .delete(`storages/${storageId}`)
+      .then((res) => {
+        success(`The ${res.data.name} storage has been removed`);
+        dispatch(storageRemoveSuccess());
+        browserHistory.push(`/storages`);
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageRemoveFail());
       });
   };
 };

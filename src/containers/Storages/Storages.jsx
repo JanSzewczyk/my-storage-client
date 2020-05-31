@@ -8,6 +8,7 @@ import AppContent from "../../components/UI/AppContent/AppContent";
 import Loading from "../../components/UI/Loading/Loading";
 import StorageItem from "../../components/Storage/Storages/StorageItem/StorageItem";
 import AddStorageTile from "../../components/Storage/Storages/AddStorageTile/AddStorageTile";
+import CreateStorageModal from "../../components/Storage/Storages/CreateStorageModal/CreateStorageModal"
 
 const Storages = (props) => {
   const { onGetStoregeList, storageList, storageListLoading } = props;
@@ -42,7 +43,9 @@ const Storages = (props) => {
 
   return (
     <AppContent>
-      {showAddStorage && console.log("show")}
+      {showAddStorage && (
+        <CreateStorageModal onCloseModal={() => setShowAddStorage(false)} />
+      )}
       {storageListLoading ? (
         <Loading />
       ) : (

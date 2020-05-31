@@ -1,0 +1,9 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.modal-body {
+  font-size: $fontMD;
+  display: flex;
+  flex: 1 1;
+  padding: 8px 0;
+  overflow-y: auto;
+}

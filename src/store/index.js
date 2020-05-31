@@ -17,5 +17,7 @@ export {
   getStoregeList,
   getStorege,
   editStorege,
+  createStorege,
+  removeStorege,
 } from "./storage/storageAction";
 export { getUserDetails } from "./user/userAction";

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import Tile from "../../../UI/Tile/Tile";
+import TileContent from "../../../UI/Tile/TileContent/TileContent";
 
 import "./AddStorageTile.scss";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
 
 const AddStorageTile = (props) => {
   const { onAddStorage } = props;

@@ -60,6 +60,38 @@ const storageEditFail = (state, action) => {
   });
 };
 
+const storageCreateStart = (state, action) => {
+  return updateObject(state, { storageActionLoading: true });
+};
+
+const storageCreateSuccess = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageCreateFail = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageRemoveStart = (state, action) => {
+  return updateObject(state, { storageActionLoading: true });
+};
+
+const storageRemoveSuccess = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageRemoveFail = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.STORAGE_LIST_LOAD_START:
@@ -82,6 +114,21 @@ const reducer = (state = initialState, action) => {
       return storageEditSuccess(state, action);
     case actionTypes.STORAGE_EDIT_FAIL:
       return storageEditFail(state, action);
+
+    case actionTypes.STORAGE_CREATE_START:
+      return storageCreateStart(state, action);
+    case actionTypes.STORAGE_CREATE_SUCCESS:
+      return storageCreateSuccess(state, action);
+    case actionTypes.STORAGE_CREATE_FAIL:
+      return storageCreateFail(state, action);
+
+    case actionTypes.STORAGE_REMOVE_START:
+      return storageRemoveStart(state, action);
+    case actionTypes.STORAGE_REMOVE_SUCCESS:
+      return storageRemoveSuccess(state, action);
+    case actionTypes.STORAGE_REMOVE_FAIL:
+      return storageRemoveFail(state, action);
+      
     default:
       return state;
   }
