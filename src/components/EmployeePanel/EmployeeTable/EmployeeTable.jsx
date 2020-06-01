@@ -22,6 +22,7 @@ const EmployeeTable = React.memo((props) => {
     onGetEmployeesList,
     employeeList,
     employeeListLoading,
+    onRemoveEmployee,
     pageInfo,
   } = props;
 
@@ -103,12 +104,11 @@ const EmployeeTable = React.memo((props) => {
     actions: [
       {
         name: "delete",
-        action: (rowData) => console.log(`Delete ${rowData.first}`),
+        action: (rowData) => onRemoveEmployee(rowData.employeeId),
       },
       {
         name: "edit",
         action: (rowData) => {
-          console.log(rowData);
           setEdit(rowData);
           setShowModal(true);
         },
@@ -190,6 +190,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onGetEmployeesList: (queryData) =>
       dispatch(action.getEmployeesList(queryData)),
+    onRemoveEmployee: (employeeId) =>
+      dispatch(action.removeEmployee(employeeId)),
   };
 };
 

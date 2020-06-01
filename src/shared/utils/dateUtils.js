@@ -1,7 +1,7 @@
 import moment from "moment";
 
 export const DATE_PATTERN = "DD.MM.YY";
-export const DATE_TIME_PATTERN = "DD.MM.YY hh:mm";
+export const DATE_TIME_PATTERN = "DD.MM.YY HH:mm";
 
 export const dateToDateString = (dateObject) => {
   let date = moment(dateObject);

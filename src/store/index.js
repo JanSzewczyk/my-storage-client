@@ -15,6 +15,7 @@ export {
   getStoregeEmployeesList,
   createEmployee,
   editEmployee,
+  removeEmployee,
 } from "./employee/employeeAction";
 export { getStoregeItemsList } from "./item/itemAction";
 export { getStorageStatistics } from "./statistic/statisticAction";

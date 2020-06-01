@@ -168,37 +168,40 @@ export const createEmployee = (employee) => {
   };
 };
 
-// export const storageRemoveStart = () => {
+// export const employeeRemoveStart = () => {
 //   return {
 //     type: actionTypes.STORAGE_REMOVE_START,
 //   };
 // };
 
-// export const storageRemoveSuccess = () => {
+// export const employeeRemoveSuccess = () => {
 //   return {
 //     type: actionTypes.STORAGE_REMOVE_SUCCESS,
 //   };
 // };
 
-// export const storageRemoveFail = () => {
+// export const employeeRemoveFail = () => {
 //   return {
 //     type: actionTypes.STORAGE_REMOVE_FAIL,
 //   };
 // };
 
-// export const removeStorege = (storageId) => {
-//   return (dispatch) => {
-//     dispatch(storageRemoveStart());
-//     axios
-//       .delete(`storages/${storageId}`)
-//       .then((res) => {
-//         success(`The ${res.data.name} storage has been removed`);
-//         dispatch(storageRemoveSuccess());
-//         browserHistory.push(`/storages`);
-//       })
-//       .catch((err) => {
-//         error(err.response ? err.response.data.message : "Server error");
-//         dispatch(storageRemoveFail());
-//       });
-//   };
-// };
+export const removeEmployee = (employeeId) => {
+  return (dispatch) => {
+    axios
+      .delete(`employees/${employeeId}`)
+      .then((res) => {
+        success(`The ${res.data.name} storage has been removed`);
+        dispatch(
+          getEmployeesList({
+            sort: [],
+            page: 0,
+            size: 20,
+          })
+        );
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+      });
+  };
+};
