@@ -1,0 +1,16 @@
+.tile-top {
+  display: flex;
+  margin-bottom: 16px;
+  flex: 0 0 auto;
+
+  .tile-top__left {
+    flex: 1;
+    text-align: left;
+  }
+  .tile-top__right {
+    display: flex;
+    flex: 1;
+    text-align: right;
+    justify-content: flex-end;
+  }
+}

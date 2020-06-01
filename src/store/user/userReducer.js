@@ -1,23 +1,23 @@
 import * as actionTypes from "../actionTypes";
-import { updateObject } from "../../shared/utility";
+import { updateObject } from "../../shared/utils/utility";
 
 const initialState = {
   user: null,
   role: null,
 };
 
-const userStart = (state, action) => {
+const userLoadStart = (state, action) => {
   return updateObject(state, { user: null, role: null });
 };
 
-const userSuccess = (state, action) => {
+const userLoadSuccess = (state, action) => {
   return updateObject(state, {
     user: action.user,
     role: action.role,
   });
 };
 
-const userFail = (state, action) => {
+const userLoadFail = (state, action) => {
   return updateObject(state, {
     user: null,
     role: null,
@@ -33,12 +33,12 @@ const userLogout = (state, action) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.USER_START:
-      return userStart(state, action);
-    case actionTypes.USER_SUCCESS:
-      return userSuccess(state, action);
-    case actionTypes.USER_FAIL:
-      return userFail(state, action);
+    case actionTypes.USER_LOAD_START:
+      return userLoadStart(state, action);
+    case actionTypes.USER_LOAD_SUCCESS:
+      return userLoadSuccess(state, action);
+    case actionTypes.USER_LOAD_FAIL:
+      return userLoadFail(state, action);
     case actionTypes.USER_LOGOUT:
       return userLogout(state, action);
     default:

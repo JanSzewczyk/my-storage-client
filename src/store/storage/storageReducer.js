@@ -1,36 +1,134 @@
 import * as actionTypes from "../actionTypes";
-import { updateObject } from "../../shared/utility";
+import { updateObject } from "../../shared/utils/utility";
 
 const initialState = {
   storageList: [],
   storageListLoading: true,
+  storage: null,
+  storageLoading: true,
+  storageActionLoading: false,
 };
 
-const storageListStart = (state, action) => {
+const storageListLoadStart = (state, action) => {
   return updateObject(state, { storageList: [], storageListLoading: true });
 };
 
-const storageListSuccess = (state, action) => {
+const storageListLoadSuccess = (state, action) => {
   return updateObject(state, {
     storageList: action.storages,
     storageListLoading: false,
   });
 };
 
-const storageListFail = (state, action) => {
+const storageListLoadFail = (state, action) => {
   return updateObject(state, {
     storageListLoading: false,
   });
 };
 
+const storageLoadStart = (state, action) => {
+  return updateObject(state, { storage: null, storageLoading: true });
+};
+
+const storageLoadSuccess = (state, action) => {
+  return updateObject(state, {
+    storage: action.storage,
+    storageLoading: false,
+  });
+};
+
+const storageLoadFail = (state, action) => {
+  return updateObject(state, {
+    storageLoading: false,
+  });
+};
+
+const storageEditStart = (state, action) => {
+  return updateObject(state, { storageActionLoading: true });
+};
+
+const storageEditSuccess = (state, action) => {
+  return updateObject(state, {
+    storage: action.storage,
+    storageActionLoading: false,
+  });
+};
+
+const storageEditFail = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageCreateStart = (state, action) => {
+  return updateObject(state, { storageActionLoading: true });
+};
+
+const storageCreateSuccess = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageCreateFail = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageRemoveStart = (state, action) => {
+  return updateObject(state, { storageActionLoading: true });
+};
+
+const storageRemoveSuccess = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
+const storageRemoveFail = (state, action) => {
+  return updateObject(state, {
+    storageActionLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.STORAGE_LIST_START:
-      return storageListStart(state, action);
-    case actionTypes.STORAGE_LIST_SUCCESS:
-      return storageListSuccess(state, action);
-    case actionTypes.STORAGE_LIST_FAIL:
-      return storageListFail(state, action);
+    case actionTypes.STORAGE_LIST_LOAD_START:
+      return storageListLoadStart(state, action);
+    case actionTypes.STORAGE_LIST_LOAD_SUCCESS:
+      return storageListLoadSuccess(state, action);
+    case actionTypes.STORAGE_LIST_LOAD_FAIL:
+      return storageListLoadFail(state, action);
+
+    case actionTypes.STORAGE_LOAD_START:
+      return storageLoadStart(state, action);
+    case actionTypes.STORAGE_LOAD_SUCCESS:
+      return storageLoadSuccess(state, action);
+    case actionTypes.STORAGE_LOAD_FAIL:
+      return storageLoadFail(state, action);
+
+    case actionTypes.STORAGE_EDIT_START:
+      return storageEditStart(state, action);
+    case actionTypes.STORAGE_EDIT_SUCCESS:
+      return storageEditSuccess(state, action);
+    case actionTypes.STORAGE_EDIT_FAIL:
+      return storageEditFail(state, action);
+
+    case actionTypes.STORAGE_CREATE_START:
+      return storageCreateStart(state, action);
+    case actionTypes.STORAGE_CREATE_SUCCESS:
+      return storageCreateSuccess(state, action);
+    case actionTypes.STORAGE_CREATE_FAIL:
+      return storageCreateFail(state, action);
+
+    case actionTypes.STORAGE_REMOVE_START:
+      return storageRemoveStart(state, action);
+    case actionTypes.STORAGE_REMOVE_SUCCESS:
+      return storageRemoveSuccess(state, action);
+    case actionTypes.STORAGE_REMOVE_FAIL:
+      return storageRemoveFail(state, action);
+      
     default:
       return state;
   }

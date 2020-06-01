@@ -15,11 +15,15 @@ const Input = (props) => {
     errorClass,
     hasError,
     errorMessage,
+    inputType
   } = props;
 
   let labelClasses = ["label"];
   let inputClasses = ["input"];
   let errorClasses = ["error"];
+
+  inputType && labelClasses.push(`label--${inputType}`);
+  inputType && inputClasses.push(`input--${inputType}`)
 
   hasError && inputClasses.push("input--invalid");
 
@@ -51,6 +55,7 @@ Input.propTypes = {
   labelClass: PropTypes.string,
   label: PropTypes.string,
   inputClass: PropTypes.string,
+  inputType: PropTypes.oneOf(["edit"]),
   config: PropTypes.shape({
     placeholder: PropTypes.string,
     type: PropTypes.string.isRequired,

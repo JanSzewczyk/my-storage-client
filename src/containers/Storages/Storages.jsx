@@ -1,43 +1,67 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useCallback, useState } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../store";
 
-import Button from "../../components/UI/Button/Button";
-import AddIcon from "@material-ui/icons/Add";
 import Aux from "../../hoc/Auxiliary/Auxiliary";
-import AppBar from "../../components/UI/AppBar/AppBar";
 import AppContent from "../../components/UI/AppContent/AppContent";
 import Loading from "../../components/UI/Loading/Loading";
+import StorageItem from "../../components/Storage/Storages/StorageItem/StorageItem";
+import AddStorageTile from "../../components/Storage/Storages/AddStorageTile/AddStorageTile";
+import CreateStorageModal from "../../components/Storage/Storages/CreateStorageModal/CreateStorageModal"
 
 const Storages = (props) => {
-  const { onGetStoregeList } = props;
+  const { onGetStoregeList, storageList, storageListLoading } = props;
+
+  const [showAddStorage, setShowAddStorage] = useState(false);
+
   useEffect(() => {
     onGetStoregeList();
   }, [onGetStoregeList]);
 
+  const redirectToStorageHandler = useCallback(
+    (storage) => {
+      props.history.push(`storages/${storage.storageId}`);
+    },
+    [props.history]
+  );
+
+  const storageItems = useMemo(
+    () => (
+      <Aux>
+        {storageList.map((storage) => (
+          <StorageItem
+            key={storage.storageId}
+            storage={storage}
+            onRedirectToStorege={() => redirectToStorageHandler(storage)}
+          />
+        ))}
+      </Aux>
+    ),
+    [redirectToStorageHandler, storageList]
+  );
+
   return (
-    <Aux>
-      <AppBar
-        right={
-          <Button btnType={"primary"}>
-            <AddIcon />
-            create storage
-          </Button>
-        }
-      />
-      <AppContent>
+    <AppContent>
+      {showAddStorage && (
+        <CreateStorageModal onCloseModal={() => setShowAddStorage(false)} />
+      )}
+      {storageListLoading ? (
         <Loading />
-      </AppContent>
-    </Aux>
+      ) : (
+        <Aux>
+          {storageItems}
+          <AddStorageTile onAddStorage={() => setShowAddStorage(true)} />
+        </Aux>
+      )}
+    </AppContent>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    authenticated:
-      state.auth.accessToken !== null && state.user.user && state.user.role,
-    userRole: state.user.role,
+    storageList: state.storage.storageList,
+    storageListLoading: state.storage.storageListLoading,
   };
 };
 

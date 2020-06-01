@@ -7,8 +7,10 @@ import * as action from "./store";
 import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
-import Aux from "./hoc/Auxiliary/Auxiliary";
 import Storages from "./containers/Storages/Storages";
+import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
+import Logout from "./containers/Auth/Logout/Logout";
+import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -24,24 +26,22 @@ const App = (props) => {
     </Switch>
   ) : (
     <AppLayout>
-      <Switch>
-        {userRole === "OWNER" && (
-          <Aux>
-            <Route path={"/storages"} component={Storages} />
-            <Route exact path={"/"} component={Dashboard} />
-            {/* <Redirect to={"/"} /> */}
-          </Aux>
-        )}
-        {/* {userRole === "EMPLOYEE" && (
-          <Aux>
-            <Route path={"/"} component={Dashboard} />
-            <Route path={"/"} component={Dashboard} />
-          </Aux>
-        )} */}
-        {/* 
-        <Route path={"/"} component={Dashboard} exact /> */}
-        <Redirect to={"/"} />
-      </Switch>
+      {userRole === "OWNER" && (
+        <Switch>
+          <Route path={"/storages/:storageId"} component={StorageOwner} />
+          <Route path={"/storages"} component={Storages} />
+          <Route path={"/employees"} component={EmployeePanel} />
+          <Route path={"/logout"} component={Logout} />
+          <Route exact path={"/"} component={Dashboard} />
+          <Redirect to={"/"} />
+        </Switch>
+      )}
+      {userRole === "EMPLOYEE" && (
+        <Switch>
+          <Route path={"/logout"} component={Logout} />
+          <Route exact path={"/"} component={Dashboard} />
+        </Switch>
+      )}
     </AppLayout>
   );
 };

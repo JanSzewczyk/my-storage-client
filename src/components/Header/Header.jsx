@@ -11,7 +11,7 @@ import NavigationLinks from "../Navigation/NavigationLinks/NavigationLinks";
 import "./Header.scss";
 
 const Header = (props) => {
-  const { userRole, user, onLogout } = props;
+  const { userRole, user } = props;
   return (
     <header className={"header"}>
       <div className={"header__left"}>
@@ -27,10 +27,12 @@ const Header = (props) => {
           <PersonIcon height={16} />
           {`${user.firstName} ${user.lastName}`}
         </div>
-        <Button clicked={onLogout}>
-          <ExitToAppIcon />
-          LOGOUT
-        </Button>
+        <Link to={"/logout"}>
+          <Button>
+            <ExitToAppIcon />
+            LOGOUT
+          </Button>
+        </Link>
       </div>
     </header>
   );
@@ -39,7 +41,6 @@ const Header = (props) => {
 Header.propTypes = {
   userRole: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
-  onLogout: PropTypes.func.isRequired,
 };
 
 export default Header;

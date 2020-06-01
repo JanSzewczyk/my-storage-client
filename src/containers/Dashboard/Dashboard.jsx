@@ -20,52 +20,9 @@ const Dashboard = (props) => {
             lg: "lg-4",
             xl: "xl-3",
           }}
-          top={{}}
         >
           HOMEPAGE
         </Tile>
-        {/* <Tile
-          tileSize={{
-            sm: "sm-12",
-            md: "md-6",
-            lg: "lg-4",
-            xl: "xl-3",
-          }}
-          bottom={{}}
-        >
-          Tile asd gadgadgaidfasndf asdf asfj asdifas idjnf asjndfiaj sndija
-          snfjan sdifjans djfinasd ijgasijd gasjdinf{" "}
-        </Tile>
-        <Tile
-          tileSize={{
-            sm: "sm-12",
-            md: "md-6",
-            lg: "lg-4",
-            xl: "xl-3",
-          }}
-          header={{}}
-        ></Tile>
-        <Tile
-          tileSize={{
-            sm: "sm-12",
-            md: "md-6",
-            lg: "lg-4",
-            xl: "xl-3",
-          }}
-        >
-          Tile dfsg asg asdg asdg asdgasgsdgas das a sgdasag a dgsa agsdasdg ga
-          d gdg as haj jjr ajrajr yjrt aeae a aeradh dh{" "}
-        </Tile>
-        <Tile
-          tileSize={{
-            sm: "sm-12",
-            md: "md-6",
-            lg: "lg-4",
-            xl: "xl-3",
-          }}
-        >
-          Tile sgsdgas das a sgdasag a dgsa agsdasdg ga d gdg as{" "}
-        </Tile> */}
       </AppContent>
     </Aux>
   );

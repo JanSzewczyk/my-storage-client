@@ -1,37 +1,185 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error, success } from "../../components/UI/Notification";
+import { updateObject } from "../../shared/utils/utility";
+import browserHistory from "../../shared/history";
 
-export const storageListStart = () => {
+const processStorage = (storage) =>
+  updateObject(storage, {
+    createdAt: new Date(storage.createdAt),
+    updatedAt: new Date(storage.updatedAt),
+  });
+
+export const storageListLoadStart = () => {
   return {
-    type: actionTypes.STORAGE_LIST_START,
+    type: actionTypes.STORAGE_LIST_LOAD_START,
   };
 };
 
-export const storageListSuccess = (storages) => {
+export const storageListLoadSuccess = (storages) => {
   return {
-    type: actionTypes.STORAGE_LIST_SUCCESS,
+    type: actionTypes.STORAGE_LIST_LOAD_SUCCESS,
     storages: storages,
   };
 };
 
-export const storageListFail = () => {
+export const storageListLoadFail = () => {
   return {
-    type: actionTypes.STORAGE_LIST_SUCCESS,
+    type: actionTypes.STORAGE_LIST_LOAD_FAIL,
   };
 };
 
 export const getStoregeList = () => {
   return (dispatch) => {
-    dispatch(storageListStart());
+    dispatch(storageListLoadStart());
     axios
       .get("storages")
       .then((res) => {
-        dispatch(storageListSuccess(res.data));
+        dispatch(storageListLoadSuccess(res.data));
       })
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
-        dispatch(storageListFail());
+        dispatch(storageListLoadFail());
+      });
+  };
+};
+
+export const storageLoadStart = () => {
+  return {
+    type: actionTypes.STORAGE_LOAD_START,
+  };
+};
+
+export const storageLoadSuccess = (storage) => {
+  return {
+    type: actionTypes.STORAGE_LOAD_SUCCESS,
+    storage: processStorage(storage),
+  };
+};
+
+export const storageLoadFail = () => {
+  return {
+    type: actionTypes.STORAGE_LOAD_FAIL,
+  };
+};
+
+export const getStorege = (storageId) => {
+  return (dispatch) => {
+    dispatch(storageLoadStart());
+    axios
+      .get(`storages/${storageId}`)
+      .then((res) => {
+        dispatch(storageLoadSuccess(res.data));
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageLoadFail());
+      });
+  };
+};
+
+export const storageEditStart = () => {
+  return {
+    type: actionTypes.STORAGE_EDIT_START,
+  };
+};
+
+export const storageEditSuccess = (storage) => {
+  return {
+    type: actionTypes.STORAGE_EDIT_SUCCESS,
+    storage: processStorage(storage),
+  };
+};
+
+export const storageEditFail = () => {
+  return {
+    type: actionTypes.STORAGE_EDIT_FAIL,
+  };
+};
+
+export const editStorege = (storageId, updatedStorage) => {
+  return (dispatch) => {
+    dispatch(storageEditStart());
+    axios
+      .put(`storages/${storageId}`, updatedStorage)
+      .then((res) => {
+        success(`The ${res.data.name} storage has been updated`);
+        dispatch(storageEditSuccess(res.data));
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageEditFail());
+      });
+  };
+};
+
+export const storageCreateStart = () => {
+  return {
+    type: actionTypes.STORAGE_CREATE_START,
+  };
+};
+
+export const storageCreateSuccess = (storage) => {
+  return {
+    type: actionTypes.STORAGE_CREATE_SUCCESS,
+  };
+};
+
+export const storageCreateFail = () => {
+  return {
+    type: actionTypes.STORAGE_CREATE_FAIL,
+  };
+};
+
+export const createStorege = (storage) => {
+  return (dispatch) => {
+    dispatch(storageCreateStart());
+    axios
+      .post(`storages`, storage)
+      .then((res) => {
+        const newSrotage = res.data;
+        success(`The ${newSrotage.name} storage has been created`);
+        dispatch(storageCreateSuccess());
+        browserHistory.push(`/storages/${newSrotage.storageId}`);
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageCreateFail());
+      });
+  };
+};
+
+export const storageRemoveStart = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_START,
+  };
+};
+
+export const storageRemoveSuccess = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_SUCCESS,
+  };
+};
+
+export const storageRemoveFail = () => {
+  return {
+    type: actionTypes.STORAGE_REMOVE_FAIL,
+  };
+};
+
+export const removeStorege = (storageId) => {
+  return (dispatch) => {
+    dispatch(storageRemoveStart());
+    axios
+      .delete(`storages/${storageId}`)
+      .then((res) => {
+        success(`The ${res.data.name} storage has been removed`);
+        dispatch(storageRemoveSuccess());
+        browserHistory.push(`/storages`);
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(storageRemoveFail());
       });
   };
 };
