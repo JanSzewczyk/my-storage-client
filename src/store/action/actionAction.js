@@ -1,7 +1,8 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error, success } from "../../components/UI/Notification";
 import { updateObject, createSearchQuery } from "../../shared/utils/utility";
+import browserHistory from "../../shared/history";
 
 export const actionStorageListLoadStart = () => {
   return {
@@ -46,3 +47,56 @@ export const getStoregeActionsList = (storageId, queryData) => {
       });
   };
 };
+
+export const actionStart = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_START,
+  };
+};
+
+export const actionSuccess = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_SUCCESS,
+  };
+};
+
+export const actionFail = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_FAIL,
+  };
+};
+
+export const removeAction = (removedItems) => {
+  return (dispatch) => {
+    dispatch(actionStart());
+
+    axios
+      .post(`actions/remove`, removedItems)
+      .then((res) => {
+        dispatch(actionSuccess());
+        success("REMOVE action success");
+        browserHistory.push("/xxx");
+        browserHistory.push("/");
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(actionFail());
+      });
+  };
+};
+
+// export const storeAction = (storedItems) => {
+//   return (dispatch) => {
+//     dispatch(actionStart());
+
+//     axios
+//       .post(`actions/remove`, removedItems)
+//       .then((res) => {
+//         dispatch(actionSuccess());
+//       })
+//       .catch((err) => {
+//         error(err.response ? err.response.data.message : "Server error");
+//         dispatch(actionFail());
+//       });
+//   };
+// };

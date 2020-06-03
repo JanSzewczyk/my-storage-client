@@ -29,6 +29,26 @@ const itemStorageListLoadFail = (state, action) => {
   });
 };
 
+const itemStorageListEmployeeLoadStart = (state, action) => {
+  return updateObject(state, {
+    itemsList: [],
+    itemsListLoading: true,
+  });
+};
+
+const itemStorageListEmployeeLoadSuccess = (state, action) => {
+  return updateObject(state, {
+    itemsList: action.items,
+    itemsListLoading: false,
+  });
+};
+
+const itemStorageListEmployeeLoadFail = (state, action) => {
+  return updateObject(state, {
+    itemsListLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ITEM_STORAGE_LIST_LOAD_START:
@@ -37,6 +57,13 @@ const reducer = (state = initialState, action) => {
       return itemStorageListLoadSuccess(state, action);
     case actionTypes.ITEM_STORAGE_LIST_LOAD_FAIL:
       return itemStorageListLoadFail(state, action);
+
+    case actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_START:
+      return itemStorageListEmployeeLoadStart(state, action);
+    case actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_SUCCESS:
+      return itemStorageListEmployeeLoadSuccess(state, action);
+    case actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_FAIL:
+      return itemStorageListEmployeeLoadFail(state, action);
     default:
       return state;
   }
