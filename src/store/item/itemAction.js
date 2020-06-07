@@ -40,3 +40,38 @@ export const getStoregeItemsList = (storageId, queryData) => {
       });
   };
 };
+
+export const itemStorageListEmployeeLoadStart = () => {
+  return {
+    type: actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_START,
+  };
+};
+
+export const itemStorageListEmployeeLoadSuccess = (items) => {
+  return {
+    type: actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_SUCCESS,
+    items: items,
+  };
+};
+
+export const itemStorageListEmployeeLoadFail = () => {
+  return {
+    type: actionTypes.ITEM_STORAGE_EMPLOYEE_LIST_LOAD_FAIL,
+  };
+};
+
+export const getStoregeItemsEmployee = (storageId) => {
+  return (dispatch) => {
+    dispatch(itemStorageListEmployeeLoadStart());
+
+    axios
+      .get(`items/list/${storageId}`)
+      .then((res) => {
+        dispatch(itemStorageListEmployeeLoadSuccess(res.data));
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(itemStorageListEmployeeLoadFail());
+      });
+  };
+};

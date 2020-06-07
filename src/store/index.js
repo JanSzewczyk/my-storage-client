@@ -8,7 +8,11 @@ export const logout = () => {
   };
 };
 
-export { getStoregeActionsList } from "./action/actionAction";
+export {
+  getStoregeActionsList,
+  removeAction,
+  storeAction,
+} from "./action/actionAction";
 export { auth, authCheck, authLogout } from "./auth/authAction";
 export {
   getEmployeesList,
@@ -17,7 +21,11 @@ export {
   editEmployee,
   removeEmployee,
 } from "./employee/employeeAction";
-export { getStoregeItemsList } from "./item/itemAction";
+export {
+  getStoregeItemsList,
+  getStoregeItemsEmployee,
+} from "./item/itemAction";
+export { getProductsList } from "./product/productAction";
 export { getStorageStatistics } from "./statistic/statisticAction";
 export {
   getStoregeList,

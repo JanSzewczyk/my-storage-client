@@ -5,6 +5,7 @@ const initialState = {
   actionsList: [],
   pageInfo: null,
   actionsListLoading: true,
+  actionSRLoading: false,
 };
 
 const actionStorageListLoadStart = (state, action) => {
@@ -29,6 +30,24 @@ const actionStorageListLoadFail = (state, action) => {
   });
 };
 
+const actionOnStorageStart = (state, action) => {
+  return updateObject(state, {
+    actionSRLoading: true,
+  });
+};
+
+const actionOnStorageSuccess = (state, action) => {
+  return updateObject(state, {
+    actionSRLoading: false,
+  });
+};
+
+const actionOnStorageFail = (state, action) => {
+  return updateObject(state, {
+    actionSRLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ACTION_STORAGE_LIST_LOAD_START:
@@ -37,6 +56,20 @@ const reducer = (state = initialState, action) => {
       return actionStorageListLoadSuccess(state, action);
     case actionTypes.ACTION_STORAGE_LIST_LOAD_FAIL:
       return actionStorageListLoadFail(state, action);
+
+    case actionTypes.ACTION_REMOVE_START:
+      return actionOnStorageStart(state, action);
+    case actionTypes.ACTION_REMOVE_SUCCESS:
+      return actionOnStorageSuccess(state, action);
+    case actionTypes.ACTION_REMOVE_FAIL:
+      return actionOnStorageFail(state, action);
+
+    case actionTypes.ACTION_STORE_START:
+      return actionOnStorageStart(state, action);
+    case actionTypes.ACTION_STORE_SUCCESS:
+      return actionOnStorageSuccess(state, action);
+    case actionTypes.ACTION_STORE_FAIL:
+      return actionOnStorageFail(state, action);
     default:
       return state;
   }

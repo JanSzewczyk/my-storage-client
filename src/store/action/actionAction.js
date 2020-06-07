@@ -1,7 +1,8 @@
 import axios from "../../shared/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error, success } from "../../components/UI/Notification";
 import { updateObject, createSearchQuery } from "../../shared/utils/utility";
+import browserHistory from "../../shared/history";
 
 export const actionStorageListLoadStart = () => {
   return {
@@ -43,6 +44,80 @@ export const getStoregeActionsList = (storageId, queryData) => {
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
         dispatch(actionStorageListLoadFail());
+      });
+  };
+};
+
+export const actionRemoveStart = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_START,
+  };
+};
+
+export const actionRemoveSuccess = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_SUCCESS,
+  };
+};
+
+export const actionRemoveFail = () => {
+  return {
+    type: actionTypes.ACTION_REMOVE_FAIL,
+  };
+};
+
+export const removeAction = (removedItems) => {
+  return (dispatch) => {
+    dispatch(actionRemoveStart());
+
+    axios
+      .post(`actions/remove`, removedItems)
+      .then((res) => {
+        dispatch(actionRemoveSuccess());
+        success("REMOVE action success");
+        browserHistory.push("/xxx");
+        browserHistory.push("/");
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(actionRemoveFail());
+      });
+  };
+};
+
+export const actionStoreStart = () => {
+  return {
+    type: actionTypes.ACTION_STORE_START,
+  };
+};
+
+export const actionStoreSuccess = () => {
+  return {
+    type: actionTypes.ACTION_STORE_SUCCESS,
+  };
+};
+
+export const actionStoreFail = () => {
+  return {
+    type: actionTypes.ACTION_STORE_FAIL,
+  };
+};
+
+export const storeAction = (storedItems) => {
+  return (dispatch) => {
+    dispatch(actionStoreStart());
+
+    axios
+      .post(`actions/store`, storedItems)
+      .then((res) => {
+        dispatch(actionStoreSuccess());
+        success("STORE action success");
+        browserHistory.push("/xxx");
+        browserHistory.push("/");
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(actionStoreFail());
       });
   };
 };

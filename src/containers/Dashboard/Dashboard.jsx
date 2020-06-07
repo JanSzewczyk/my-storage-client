@@ -6,14 +6,14 @@ import * as action from "../../store";
 import AppBar from "../../components/UI/AppBar/AppBar";
 import AppContent from "../../components/UI/AppContent/AppContent";
 import Aux from "../../hoc/Auxiliary/Auxiliary";
-import Tile from "../../components/UI/Tile/Tile";
+// import Tile from "../../components/UI/Tile/Tile";
 
 const Dashboard = (props) => {
   return (
     <Aux>
       <AppBar />
       <AppContent>
-        <Tile
+        {/* <Tile
           tileSize={{
             sm: "sm-12",
             md: "md-6",
@@ -22,7 +22,7 @@ const Dashboard = (props) => {
           }}
         >
           HOMEPAGE
-        </Tile>
+        </Tile> */}
       </AppContent>
     </Aux>
   );

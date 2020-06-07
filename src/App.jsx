@@ -11,6 +11,7 @@ import Storages from "./containers/Storages/Storages";
 import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
 import Logout from "./containers/Auth/Logout/Logout";
 import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
+import EmployeeDashboard from "./containers/EmpoyeeDashboard/EmpoyeeDashboard";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -39,7 +40,7 @@ const App = (props) => {
       {userRole === "EMPLOYEE" && (
         <Switch>
           <Route path={"/logout"} component={Logout} />
-          <Route exact path={"/"} component={Dashboard} />
+          <Route exact path={"/"} component={EmployeeDashboard} />
         </Switch>
       )}
     </AppLayout>

@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import NavigationLink from "./NavigationLink/NavigationLink";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 import "./NavigationLinks.scss";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 const NavigationLinks = (props) => {
   const { userRole } = props;
@@ -17,10 +17,6 @@ const NavigationLinks = (props) => {
             <NavigationLink link={"/employees"} text={"Employee"} />
           </Aux>
         )}
-        {/* 
-        <NavigationLink link={"/aaa"} text={"home3"} />
-        <NavigationLink link={"/zzz"} text={"home4"} /> 
-        */}
       </ul>
     </nav>
   );

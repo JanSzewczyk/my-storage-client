@@ -1,0 +1,15 @@
+.remove-action {
+  display: flex;
+  flex-direction: row;
+
+  .remove-action__container {
+    width: calc(50% - 4px);
+    margin-right: 4px;
+
+    &:last-child {
+      margin-right: 0;
+      margin-left: 4px;
+      overflow-y: auto;
+    }
+  }
+}
