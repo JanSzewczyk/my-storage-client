@@ -1,7 +1,7 @@
 import axios from "../../shared/axios";
 import { logout } from "../";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error, log } from "../../components/UI/Notification";
 
 export const userLoadStart = () => {
   return {
@@ -31,6 +31,11 @@ export const getUserDetails = (authData) => {
       .get("users/details")
       .then((res) => {
         const { user, role } = res.data;
+
+        role === "EMPLOYEE" &&
+          !user.workPlace &&
+          log("You have not been assigned to any storage");
+
         dispatch(userLoadSuccess(user, role));
       })
       .catch((err) => {

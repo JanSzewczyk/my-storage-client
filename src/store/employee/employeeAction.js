@@ -191,7 +191,9 @@ export const removeEmployee = (employeeId) => {
     axios
       .delete(`employees/${employeeId}`)
       .then((res) => {
-        success(`The ${res.data.name} storage has been removed`);
+        // success(
+        //   `The ${res.data.firstName} ${res.data.lastName} has been removed`
+        // );
         dispatch(
           getEmployeesList({
             sort: [],

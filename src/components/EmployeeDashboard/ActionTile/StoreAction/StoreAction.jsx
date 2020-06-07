@@ -9,52 +9,53 @@ import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import Button from "../../../UI/Button/Button";
-import RemoveForm from "./RemoveForm/RemoveForm";
 import Loading from "../../../UI/Loading/Loading";
+import StoreForm from "./StoreForm/StoreForm";
 
-import "./RemoveAction.scss";
+import "./StoreAction.scss";
 
-const RemoveAction = React.memo((props) => {
+const StoreAction = React.memo((props) => {
   const {
-    storageId,
-    onGetStoregeItemsEmployee,
+    ownerId,
     onClose,
-    itemsList,
-    itemsListLoading,
+    productsListLoading,
+    onGetProductsList,
+    productsList,
     actionSRLoading,
-    onRemoveAction,
+    onStoreAction,
   } = props;
-  const [removeItems, setRemoveItems] = useState([]);
+
+  const [storeItems, setStoreItems] = useState([]);
 
   useEffect(() => {
-    onGetStoregeItemsEmployee(storageId);
-  }, [onGetStoregeItemsEmployee, storageId]);
+    onGetProductsList(ownerId);
+  }, [onGetProductsList, ownerId]);
 
-  const addToRemoveItems = (data) => {
-    setRemoveItems([...removeItems, data]);
+  const addToStoreItems = (data) => {
+    setStoreItems([...storeItems, data]);
   };
 
   return (
     <Aux>
       <TileContent>
         {!actionSRLoading ? (
-          <div className={"remove-action"}>
-            <div className={"remove-action__container"}>
-              {itemsListLoading ? (
+          <div className={"store-action"}>
+            <div className={"store-action__container"}>
+              {productsListLoading ? (
                 <Loading />
               ) : (
-                <RemoveForm addItem={addToRemoveItems} items={itemsList} />
+                <StoreForm addItem={addToStoreItems} products={productsList} />
               )}
             </div>
-            <div className={"remove-action__container"}>
+            <div className={"store-action__container"}>
               Items :
               <br />
-              {removeItems.map((i, index) => (
+              {storeItems.map((i, index) => (
                 <Aux>
                   <span key={index}>
                     {`* ${
-                      _.find(itemsList, (o) => i.productId === o.productId)
-                        .productName
+                      _.find(productsList, (o) => i.productId === o.productId)
+                        .name
                     } X${i.amount}`}
                   </span>
                   <br />
@@ -70,11 +71,11 @@ const RemoveAction = React.memo((props) => {
         left={<Button clicked={onClose}>close</Button>}
         right={
           <Button
-            clicked={() => onRemoveAction(removeItems)}
-            btnType={"warning"}
-            disabled={removeItems.length === 0}
+            clicked={() => onStoreAction(storeItems)}
+            btnType={"primary"}
+            disabled={storeItems.length === 0}
           >
-            remove
+            store
           </Button>
         }
       />
@@ -82,25 +83,24 @@ const RemoveAction = React.memo((props) => {
   );
 });
 
-RemoveAction.propTypes = {
+StoreAction.propTypes = {
   storageId: PropTypes.string.isRequired,
+  ownerId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    itemsList: state.item.itemsList,
-    itemsListLoading: state.item.itemsListLoading,
+    productsList: state.product.productsList,
+    productsListLoading: state.product.productsListLoading,
     actionSRLoading: state.action.actionSRLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeItemsEmployee: (storageId) =>
-      dispatch(action.getStoregeItemsEmployee(storageId)),
-    onRemoveAction: (items) => dispatch(action.removeAction(items)),
+    onGetProductsList: (ownerId) => dispatch(action.getProductsList(ownerId)),
+    onStoreAction: (items) => dispatch(action.storeAction(items)),
   };
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(RemoveAction);
+export default connect(mapStateToProps, mapDispatchToProps)(StoreAction);

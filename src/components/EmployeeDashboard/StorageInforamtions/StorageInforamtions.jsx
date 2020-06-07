@@ -58,7 +58,7 @@ const StorageInforamtions = React.memo((props) => {
 });
 
 StorageInforamtions.propTypes = {
-  storage: PropTypes.object.isRequired,
+  storage: PropTypes.object,
   onAction: PropTypes.func.isRequired,
 };
 

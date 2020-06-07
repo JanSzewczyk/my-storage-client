@@ -39,6 +39,7 @@ const EmpoyeeDashboard = (props) => {
           action={action}
           onClose={() => setAction(false)}
           storageId={user.workPlace.storageId}
+          ownerId={user.ownerId}
         />
       )}
     </AppContent>

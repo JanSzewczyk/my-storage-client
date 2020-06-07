@@ -63,6 +63,13 @@ const reducer = (state = initialState, action) => {
       return actionOnStorageSuccess(state, action);
     case actionTypes.ACTION_REMOVE_FAIL:
       return actionOnStorageFail(state, action);
+
+    case actionTypes.ACTION_STORE_START:
+      return actionOnStorageStart(state, action);
+    case actionTypes.ACTION_STORE_SUCCESS:
+      return actionOnStorageSuccess(state, action);
+    case actionTypes.ACTION_STORE_FAIL:
+      return actionOnStorageFail(state, action);
     default:
       return state;
   }

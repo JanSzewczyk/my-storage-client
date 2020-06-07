@@ -48,19 +48,19 @@ export const getStoregeActionsList = (storageId, queryData) => {
   };
 };
 
-export const actionStart = () => {
+export const actionRemoveStart = () => {
   return {
     type: actionTypes.ACTION_REMOVE_START,
   };
 };
 
-export const actionSuccess = () => {
+export const actionRemoveSuccess = () => {
   return {
     type: actionTypes.ACTION_REMOVE_SUCCESS,
   };
 };
 
-export const actionFail = () => {
+export const actionRemoveFail = () => {
   return {
     type: actionTypes.ACTION_REMOVE_FAIL,
   };
@@ -68,35 +68,56 @@ export const actionFail = () => {
 
 export const removeAction = (removedItems) => {
   return (dispatch) => {
-    dispatch(actionStart());
+    dispatch(actionRemoveStart());
 
     axios
       .post(`actions/remove`, removedItems)
       .then((res) => {
-        dispatch(actionSuccess());
+        dispatch(actionRemoveSuccess());
         success("REMOVE action success");
         browserHistory.push("/xxx");
         browserHistory.push("/");
       })
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
-        dispatch(actionFail());
+        dispatch(actionRemoveFail());
       });
   };
 };
 
-// export const storeAction = (storedItems) => {
-//   return (dispatch) => {
-//     dispatch(actionStart());
+export const actionStoreStart = () => {
+  return {
+    type: actionTypes.ACTION_STORE_START,
+  };
+};
 
-//     axios
-//       .post(`actions/remove`, removedItems)
-//       .then((res) => {
-//         dispatch(actionSuccess());
-//       })
-//       .catch((err) => {
-//         error(err.response ? err.response.data.message : "Server error");
-//         dispatch(actionFail());
-//       });
-//   };
-// };
+export const actionStoreSuccess = () => {
+  return {
+    type: actionTypes.ACTION_STORE_SUCCESS,
+  };
+};
+
+export const actionStoreFail = () => {
+  return {
+    type: actionTypes.ACTION_STORE_FAIL,
+  };
+};
+
+export const storeAction = (storedItems) => {
+  return (dispatch) => {
+    dispatch(actionStoreStart());
+
+    axios
+      .post(`actions/store`, storedItems)
+      .then((res) => {
+        dispatch(actionStoreSuccess());
+        success("STORE action success");
+        browserHistory.push("/xxx");
+        browserHistory.push("/");
+      })
+      .catch((err) => {
+        error(err.response ? err.response.data.message : "Server error");
+        dispatch(actionStoreFail());
+      });
+  };
+};

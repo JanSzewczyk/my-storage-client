@@ -13,7 +13,7 @@ const Notification = (props) => {
   type && notificationStyles.push(`notification--${type}`);
 
   useEffect(() => {
-    const duration = 10000;
+    const duration = 5000;
     const id = setTimeout(() => removeRef.current(), duration);
 
     return () => clearTimeout(id);
