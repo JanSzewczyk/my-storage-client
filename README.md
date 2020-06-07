@@ -13,10 +13,10 @@ This project is currently in development. Users can log in to create storage, hi
 
 ## Project Screen Shots
 
-###Login page
+### Login page
 ![alt text](./src/assets/screens/login-page.PNG)
 
-###Storage Page
+### Storage Page
 ![alt text](./src/assets/screens/storage-page.PNG)
 ![alt text](./src/assets/screens/storage-page-statistics.PNG)
 ![alt text](./src/assets/screens/storage-page-actions.PNG)
