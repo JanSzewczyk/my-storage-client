@@ -13,14 +13,14 @@ const CUEmployeeModal = React.memo((props) => {
     onCloseModal,
     onCreateEmployee,
     employeeActionLoading,
-    editEmlpoyee,
+    editEmployee,
     onEditEmployee,
   } = props;
 
   return (
     <Backdrop>
       <ModalWrapper
-        title={!editEmlpoyee ? "Create Employee" : "Edit Employee"}
+        title={!editEmployee ? "Create Employee" : "Edit Employee"}
         onClose={onCloseModal}
       >
         <CUEmployeeForm
@@ -28,7 +28,7 @@ const CUEmployeeModal = React.memo((props) => {
           onCloseModal={onCloseModal}
           onCreateEmployee={onCreateEmployee}
           onUpdateEmployee={onEditEmployee}
-          editEmlpoyee={editEmlpoyee}
+          editEmployee={editEmployee}
         />
       </ModalWrapper>
     </Backdrop>
@@ -37,7 +37,7 @@ const CUEmployeeModal = React.memo((props) => {
 
 CUEmployeeModal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
-  editEmlpoyee: PropTypes.object,
+  editEmployee: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

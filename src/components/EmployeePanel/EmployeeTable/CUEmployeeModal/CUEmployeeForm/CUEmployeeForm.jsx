@@ -24,12 +24,12 @@ const CUEmployeeForm = (props) => {
     storageList,
     storageListLoading,
     onGetStoregeList,
-    editEmlpoyee,
+    editEmployee,
     onUpdateEmployee,
   } = props;
 
   const { register, errors, handleSubmit, watch, formState } = useForm({
-    defaultValues: editEmlpoyee ? editEmlpoyee : {},
+    defaultValues: editEmployee ? editEmployee : {},
     mode: "onSubmit",
   });
 
@@ -38,8 +38,8 @@ const CUEmployeeForm = (props) => {
   }, [onGetStoregeList]);
 
   const onSubmit = (formData) => {
-    if (editEmlpoyee) {
-      onUpdateEmployee(editEmlpoyee.employeeId, formData);
+    if (editEmployee) {
+      onUpdateEmployee(editEmployee.employeeId, formData);
     } else {
       onCreateEmployee(formData);
     }
@@ -77,7 +77,7 @@ const CUEmployeeForm = (props) => {
               name: "password",
             }}
             refInput={register({
-              required: !editEmlpoyee,
+              required: !editEmployee,
               pattern: pattern.password,
             })}
             hasError={errors.password}
@@ -91,7 +91,7 @@ const CUEmployeeForm = (props) => {
               name: "repeatPassword",
             }}
             refInput={register({
-              required: !editEmlpoyee,
+              required: !editEmployee,
               validate: validatePasswordMatch,
             })}
             hasError={errors.repeatPassword}
@@ -216,7 +216,7 @@ const CUEmployeeForm = (props) => {
           clicked={handleSubmit(onSubmit)}
           disabled={!formState.dirty}
         >
-          {editEmlpoyee ? "update" : "add employee"}
+          {editEmployee ? "update" : "add employee"}
         </Button>
       </ModalBottom>
     </Aux>
@@ -228,7 +228,7 @@ CUEmployeeForm.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
   onCreateEmployee: PropTypes.func.isRequired,
   onUpdateEmployee: PropTypes.func.isRequired,
-  editEmlpoyee: PropTypes.object,
+  editEmployee: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {

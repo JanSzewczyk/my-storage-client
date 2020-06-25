@@ -1,0 +1,43 @@
+@import "../../../assets/variables/variables.scss";
+
+.drop-down {
+  position: relative;
+
+  .drop-down__icon {
+    height: 16px;
+    width: 16px;
+    margin: 0;
+  }
+  .drop-down__icon--left {
+    margin-right: 4px;
+  }
+  .drop-down__icon--right {
+    margin-left: 4px;
+  }
+
+  .drop-down__wrapper {
+    position: absolute;
+    z-index: 12444;
+    min-width: 64px;
+    background-color: $grey1Color;
+    border: 1px solid $greyColor;
+    border-radius: 4px;
+    padding: 8px;
+    overflow: hidden;
+    transition: height 500ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .drop-down__wrapper--left {
+    left: 0;
+  }
+  .drop-down__wrapper--right {
+    right: 0;
+  }
+  .drop-down__wrapper--top {
+    bottom: 40px;
+  }
+  .drop-down__wrapper--bottom {
+    top: 40px;
+  }
+}

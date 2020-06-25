@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useMemo   } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -6,7 +6,6 @@ import * as action from "../../../store";
 import Tile from "../../UI/Tile/Tile";
 import TileContent from "../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../UI/Tile/TileBottom/TileBottom";
-import { updateObject } from "../../../shared/utils/utility";
 import Table from "../../UI/Table/Table";
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import Pagination from "../../UI/Pagination/Pagination";
@@ -14,6 +13,7 @@ import TileTop from "../../UI/Tile/TileTop/TileTop";
 import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import useQuery from "../../UI/Table/useQuery/useQuery";
 
 import "./EmployeeTable.scss";
 
@@ -29,7 +29,7 @@ const EmployeeTable = React.memo((props) => {
   const [showModal, setShowModal] = useState(false);
   const [edit, setEdit] = useState(null);
 
-  const [query, setQuery] = useState({
+  const { query, onSortChanged, onPageChanged } = useQuery({
     sort: [],
     page: 0,
     size: 20,
@@ -38,28 +38,6 @@ const EmployeeTable = React.memo((props) => {
   useEffect(() => {
     onGetEmployeesList(query);
   }, [onGetEmployeesList, query]);
-
-  const onSortChanged = useCallback(
-    (sort) => {
-      setQuery(
-        updateObject(query, {
-          sort: sort,
-        })
-      );
-    },
-    [query]
-  );
-
-  const onPageChanged = useCallback(
-    (index) => {
-      setQuery(
-        updateObject(query, {
-          page: index,
-        })
-      );
-    },
-    [query]
-  );
 
   const config = {
     columns: [
@@ -141,7 +119,7 @@ const EmployeeTable = React.memo((props) => {
           setEdit(null);
           setShowModal(false);
         }}
-        editEmlpoyee={edit}
+        editEmployee={edit}
       />
     ),
     [edit]

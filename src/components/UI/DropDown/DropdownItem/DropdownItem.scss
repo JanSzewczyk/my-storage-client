@@ -1,0 +1,12 @@
+@import "../../../../assets/variables/variables.scss";
+
+.dropdown-item {
+  padding: 4px;
+  font-family: $font;
+  font-size: $fontMD;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
