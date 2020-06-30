@@ -5,26 +5,21 @@
   text-align: left;
   position: sticky;
   top: 0;
-  cursor: pointer;
   z-index: 2;
   background-color: #242424;
 
-  .table-heading__content {
+  &__content {
     display: flex;
-
-    .table-heading__sort-wrapper {
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-      opacity: 0.3;
-    }
   }
 
-  &:hover {
-    .table-heading__content {
-      .table-heading__sort-wrapper {
-        opacity: 1;
-      }
-    }
+  &__sort-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    opacity: 0.3;
+  }
+
+  &:hover > &__content &__sort-wrapper {
+    opacity: 1;
   }
 }

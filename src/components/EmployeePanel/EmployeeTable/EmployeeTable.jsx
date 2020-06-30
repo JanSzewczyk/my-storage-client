@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo   } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -6,14 +6,13 @@ import * as action from "../../../store";
 import Tile from "../../UI/Tile/Tile";
 import TileContent from "../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../UI/Tile/TileBottom/TileBottom";
-import Table from "../../UI/Table/Table";
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import Pagination from "../../UI/Pagination/Pagination";
 import TileTop from "../../UI/Tile/TileTop/TileTop";
 import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import useQuery from "../../UI/Table/useQuery/useQuery";
+import Table, { useQuery } from "../../UI/Table";
 
 import "./EmployeeTable.scss";
 
@@ -44,10 +43,12 @@ const EmployeeTable = React.memo((props) => {
       {
         field: "firstName",
         name: "First Name",
+        sorted: true,
       },
       {
         field: "lastName",
         name: "Last Name",
+        sorted: true,
       },
       {
         field: "phone",
@@ -60,22 +61,27 @@ const EmployeeTable = React.memo((props) => {
       {
         field: "addressZip",
         name: "Zip",
+        sorted: true,
       },
       {
         field: "addressCity",
         name: "City",
+        sorted: true,
       },
       {
         field: "addressCountry",
         name: "Country",
+        sorted: true,
       },
       {
         field: "storageName",
         name: "Storage",
+        sorted: true,
       },
       {
         field: "createdAt",
         name: "Add date",
+        sorted: true,
         converter: (cellData) => dateToDateTimeString(cellData),
       },
     ],
@@ -137,7 +143,7 @@ const EmployeeTable = React.memo((props) => {
         }}
         header={{
           title: "Employees",
-          subtitle: "Storage informations",
+          subtitle: "Storage information",
         }}
       >
         <TileTop

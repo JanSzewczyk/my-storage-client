@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import "./TableHeading.scss";
 
 const TableHeading = (props) => {
-  const { config, sortIndex, onSetSortQuery } = props;
+  const { config, sortIndex, onSetSortQuery, isSorted } = props;
 
   const state = ["", "desc", "asc"];
   const [sortState, setSortState] = useState(0);
@@ -20,7 +20,7 @@ const TableHeading = (props) => {
   };
 
   const changeHeadingSortHandler = () => {
-    if (onSetSortQuery) {
+    if (isSorted) {
       const newIndex = getNextState(sortState);
       setSortState(newIndex);
       onSetSortQuery(config.field, state[newIndex]);
@@ -43,13 +43,21 @@ const TableHeading = (props) => {
   }
 
   return (
-    <th onClick={changeHeadingSortHandler} className="table-heading">
+    <th
+      onClick={changeHeadingSortHandler}
+      className="table-heading"
+      style={{
+        cursor: isSorted && "pointer",
+      }}
+    >
       <div className="table-heading__content">
         {config.name}
-        <div className="table-heading__sort-wrapper">
-          {sortIndex && <span>{`${sortIndex}`}</span>}
-          {icon}
-        </div>
+        {isSorted && (
+          <div className="table-heading__sort-wrapper">
+            {sortIndex && <span>{`${sortIndex}`}</span>}
+            {icon}
+          </div>
+        )}
       </div>
     </th>
   );
@@ -59,8 +67,10 @@ TableHeading.propTypes = {
   config: PropTypes.shape({
     field: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    sorted: PropTypes.bool,
     converter: PropTypes.func,
   }).isRequired,
+  isSorted: PropTypes.bool.isRequired,
   sortIndex: PropTypes.number,
   onSetSortQuery: PropTypes.func,
 };

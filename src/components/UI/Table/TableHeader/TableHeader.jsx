@@ -34,13 +34,15 @@ const TableHeader = (props) => {
           <TableHeading
             key={index}
             config={conf}
+            isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
+            onSetSortQuery={onSortChanged && setSortQuery}
             sortIndex={getSortIndex(conf.field)}
-            onSetSortQuery={setSortQuery}
           />
         ))}
         {config.actions && (
           <TableHeading
             key={"actions"}
+            isSorted={false}
             config={{ name: "", field: "actions" }}
           />
         )}
@@ -55,6 +57,7 @@ TableHeader.propTypes = {
       PropTypes.shape({
         field: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
+        sorted: PropTypes.bool,
         converter: PropTypes.func,
       })
     ).isRequired,
@@ -71,7 +74,7 @@ TableHeader.propTypes = {
       type: PropTypes.string.isRequired,
     })
   ),
-  onSortChanged: PropTypes.func.isRequired,
+  onSortChanged: PropTypes.func,
 };
 
 export default TableHeader;
