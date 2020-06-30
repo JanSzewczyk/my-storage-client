@@ -9,6 +9,8 @@ import Aux from "../../hoc/Auxiliary/Auxiliary";
 import Tile from "../../components/UI/Tile/Tile";
 import DropDown from "../../components/UI/DropDown/DropDown";
 import DropdownItem from "../../components/UI/DropDown/DropdownItem/DropdownItem";
+import EllipsisWrapper from "../../components/UI/EllipsisWrapper/EllipsisWrapper";
+import Tooltip from "../../components/UI/Tooltip/Tooltip";
 
 const Dashboard = (props) => {
   return (
@@ -63,13 +65,34 @@ const Dashboard = (props) => {
               display: "flex",
             }}
           >
-            <DropDown btnType={"warning"} title={"dropdown"} >
+            <DropDown btnType={"warning"} title={"dropdown"}>
               <DropdownItem onClick={() => console.log("Elo jake")}>
                 elo
               </DropdownItem>
               <DropdownItem>elo1</DropdownItem>
             </DropDown>
             <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
+          </div>
+        </Tile>
+        <Tile
+          tileSize={{
+            sm: "sm-4",
+            md: "md-4",
+            lg: "lg-4",
+            xl: "xl-4",
+          }}
+        >
+          HOMEPAGE
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            
+              <EllipsisWrapper>
+                Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie
+                kto cię straci,
+              </EllipsisWrapper>
           </div>
         </Tile>
       </AppContent>
