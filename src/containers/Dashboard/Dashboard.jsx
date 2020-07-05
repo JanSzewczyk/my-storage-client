@@ -21,35 +21,41 @@ const Dashboard = (props) => {
           tileSize={{
             sm: "sm-12",
             md: "md-6",
-            lg: "lg-4",
-            xl: "xl-9",
+            lg: "lg-6",
+            xl: "xl-6",
+          }}
+          header={{
+            title: "TO DO",
+            subtitle: "Thinks to do",
           }}
         >
-          HOMEPAGE
-          <div
+          {/* <div
             style={{
               display: "flex",
             }}
           >
             <DropDown title={"dropdown"} top left></DropDown>
-          </div>
+          </div> */}
         </Tile>
         <Tile
           tileSize={{
             sm: "sm-12",
             md: "md-6",
-            lg: "lg-4",
-            xl: "xl-9",
+            lg: "lg-6",
+            xl: "xl-6",
+          }}
+          header={{
+            title: "DONE",
+            subtitle: "Thinks done",
           }}
         >
-          HOMEPAGE
-          <div
+          {/* <div
             style={{
               display: "flex",
             }}
           >
             <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
-          </div>
+          </div> */}
         </Tile>
         <Tile
           tileSize={{
@@ -71,7 +77,9 @@ const Dashboard = (props) => {
               </DropdownItem>
               <DropdownItem>elo1</DropdownItem>
             </DropDown>
-            <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
+            <Tooltip text={"ni chuja nie działa"}>
+              <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
+            </Tooltip>
           </div>
         </Tile>
         <Tile
@@ -88,11 +96,10 @@ const Dashboard = (props) => {
               display: "flex",
             }}
           >
-            
-              <EllipsisWrapper>
-                Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie
-                kto cię straci,
-              </EllipsisWrapper>
+            <EllipsisWrapper>
+              Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie kto
+              cię straci,
+            </EllipsisWrapper>
           </div>
         </Tile>
       </AppContent>

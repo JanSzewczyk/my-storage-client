@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -6,8 +6,7 @@ import * as action from "../../../../store";
 
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import Table from "../../../UI/Table/Table";
-import { updateObject } from "../../../../shared/utils/utility";
+import Table, { useQuery } from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 
@@ -18,30 +17,24 @@ const config = {
     {
       field: "firstName",
       name: "First name",
+      sorted: true,
     },
     {
       field: "lastName",
       name: "Last name",
+      sorted: true,
     },
     {
       field: "addressCity",
       name: "City",
+      sorted: true,
     },
     {
       field: "addressCountry",
       name: "Country",
+      sorted: true,
     },
   ],
-  // actions: [
-  //   {
-  //     name: "delete",
-  //     action: (rowData) => console.log(`Delete ${rowData.first}`),
-  //   },
-  //   {
-  //     name: "edit",
-  //     action: (rowData) => console.log(`Edit ${rowData.first}`),
-  //   },
-  // ],
 };
 
 const StorageEmployees = React.memo((props) => {
@@ -53,7 +46,7 @@ const StorageEmployees = React.memo((props) => {
     employeeListLoading,
   } = props;
 
-  const [query, setQuery] = useState({
+  const { query, onSortChanged, onPageChanged } = useQuery({
     sort: [],
     page: 0,
     size: 20,
@@ -63,27 +56,6 @@ const StorageEmployees = React.memo((props) => {
     onGetStoregeEmployeesList(storageId, query);
   }, [onGetStoregeEmployeesList, query, storageId]);
 
-  const onSortChanged = useCallback(
-    (sort) => {
-      setQuery(
-        updateObject(query, {
-          sort: sort,
-        })
-      );
-    },
-    [query]
-  );
-
-  const onPageChanged = useCallback(
-    (index) => {
-      setQuery(
-        updateObject(query, {
-          page: index,
-        })
-      );
-    },
-    [query]
-  );
   const onRowClick = useCallback((data) => {
     console.log("Redirect to employee");
   }, []);
@@ -121,7 +93,7 @@ const StorageEmployees = React.memo((props) => {
       }}
     >
       <TileContent>
-        <div className={"storage-imployees"}>{table}</div>
+        <div className={"storage-employees"}>{table}</div>
       </TileContent>
       <TileBottom right={pagination} />
     </Tile>

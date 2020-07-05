@@ -57,6 +57,7 @@ const EmployeeTable = React.memo((props) => {
       {
         field: "addressStreet",
         name: "Street",
+        sorted: true,
       },
       {
         field: "addressZip",

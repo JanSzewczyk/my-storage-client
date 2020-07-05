@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import Tooltip from "../Tooltip/Tooltip";
@@ -11,37 +11,40 @@ const EllipsisWrapper = React.memo((props) => {
   const divRef = useRef(null);
   const [allowTooltip, setAllowTooltip] = useState(false);
 
+  const setAllowTooltipHandler = useCallback(() => {
+    if (
+      !allowTooltip &&
+      divRef.current.scrollWidth > divRef.current.offsetWidth
+    ) {
+      setAllowTooltip(true);
+    }
+
+    if (
+      allowTooltip &&
+      divRef.current.scrollWidth <= divRef.current.offsetWidth
+    ) {
+      setAllowTooltip(false);
+    }
+  }, [allowTooltip, divRef]);
+
   useEffect(() => {
     console.log(divRef);
-    const setAllowTooltipHandler = () => {
-      if (
-        !allowTooltip &&
-        divRef.current.scrollWidth > divRef.current.offsetWidth
-      ) {
-        setAllowTooltip(true);
-      }
-
-      if (
-        allowTooltip &&
-        divRef.current.scrollWidth <= divRef.current.offsetWidth
-      ) {
-        setAllowTooltip(false);
-      }
-    };
+    setAllowTooltipHandler();
 
     window.addEventListener("resize", setAllowTooltipHandler);
 
     return () => {
       window.removeEventListener("resize", setAllowTooltipHandler);
     };
-  }, [allowTooltip, divRef]);
+  }, [allowTooltip, divRef, setAllowTooltipHandler]);
 
   if (allowTooltip) {
+    console.log("allow tooltip");
     return (
       <Tooltip text={children}>
-        <div className={"ellipsis-wrapper"} ref={divRef}>
+        <span className={"ellipsis-wrapper"} ref={divRef}>
           {children}
-        </div>
+        </span>
       </Tooltip>
     );
   }

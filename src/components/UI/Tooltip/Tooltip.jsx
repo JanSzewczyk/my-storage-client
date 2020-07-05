@@ -23,7 +23,12 @@ const Tooltip = React.memo((props) => {
       onMouseLeave={onMouseLeaveHandler}
     >
       {children}
-      {show && text}
+      {show && (
+        <div className={"tooltip__content"}>
+          <span className={"tooltip__arrow"}></span>
+          {text}
+        </div>
+      )}
     </div>
   );
 });

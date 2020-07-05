@@ -27,6 +27,16 @@ const TableHeader = (props) => {
     }
   };
 
+  const getSortState = (fieldName) => {
+    for (let i = 0; i < sort.length; i++) {
+      if (fieldName === sort[i].field) {
+        return sort[i].type;
+      }
+    }
+
+    return "";
+  };
+
   return (
     <thead>
       <tr>
@@ -37,12 +47,14 @@ const TableHeader = (props) => {
             isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
             onSetSortQuery={onSortChanged && setSortQuery}
             sortIndex={getSortIndex(conf.field)}
+            sortState={getSortState(conf.field)}
           />
         ))}
         {config.actions && (
           <TableHeading
             key={"actions"}
             isSorted={false}
+            sortState={""}
             config={{ name: "", field: "actions" }}
           />
         )}
