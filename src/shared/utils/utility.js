@@ -12,7 +12,7 @@ export const createSearchQuery = (query) => {
     searchQuery.push(`search=${encodeURIComponent(query.search)}`);
   }
 
-  if (query.sort.length > 0) {
+  if (query.sort && query.sort.length > 0) {
     query.sort.map((s) => searchQuery.push(`sort=${s.field},${s.type}`));
   }
 
@@ -32,4 +32,3 @@ export const createSearchQuery = (query) => {
 
   return searchQuery.length > 0 ? `?${searchQuery.join("&")}` : "";
 };
-
