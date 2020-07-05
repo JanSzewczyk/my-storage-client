@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -7,9 +7,8 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import { updateObject } from "../../../../shared/utils/utility";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
-import Table from "../../../UI/Table/Table";
+import Table, { useQuery } from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 
 import "./StorageItems.scss";
@@ -19,20 +18,25 @@ const config = {
     {
       field: "productName",
       name: "Name",
+      sorted: true,
     },
     {
       field: "amount",
       name: "Amount",
+      sorted: true,
     },
     {
-      field: "productValue",
+      field: "value",
       name: "Value",
-      converter: (cellData, rowData) => formatMoney(cellData, "PLN"),
+      sorted: true,
+      converter: (value, rowData) => formatMoney(value, rowData.currency),
     },
     {
       field: "totalValue",
       name: "Total Value",
-      converter: (cellData, rowData) => formatMoney(cellData, "PLN"),
+      sorted: true,
+      converter: (totalValue, rowData) =>
+        formatMoney(totalValue, rowData.currency),
     },
   ],
 };
@@ -46,7 +50,7 @@ const StorageItems = React.memo((props) => {
     itemsListLoading,
   } = props;
 
-  const [query, setQuery] = useState({
+  const { query, onSortChanged, onPageChanged } = useQuery({
     sort: [],
     page: 0,
     size: 20,
@@ -55,28 +59,6 @@ const StorageItems = React.memo((props) => {
   useEffect(() => {
     onGetStoregeItemsList(storageId, query);
   }, [onGetStoregeItemsList, query, storageId]);
-
-  const onSortChanged = useCallback(
-    (sort) => {
-      setQuery(
-        updateObject(query, {
-          sort: sort,
-        })
-      );
-    },
-    [query]
-  );
-
-  const onPageChanged = useCallback(
-    (index) => {
-      setQuery(
-        updateObject(query, {
-          page: index,
-        })
-      );
-    },
-    [query]
-  );
 
   const itemsTable = useMemo(
     () => (

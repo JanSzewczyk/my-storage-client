@@ -34,6 +34,7 @@ Table.propTypes = {
       PropTypes.shape({
         field: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
+        sorted: PropTypes.bool,
         converter: PropTypes.func,
       })
     ).isRequired,
@@ -50,7 +51,7 @@ Table.propTypes = {
       type: PropTypes.string.isRequired,
     })
   ).isRequired,
-  onSortChanged: PropTypes.func.isRequired,
+  onSortChanged: PropTypes.func,
   onRowClick: PropTypes.func,
   loading: PropTypes.bool,
   data: PropTypes.array.isRequired,
