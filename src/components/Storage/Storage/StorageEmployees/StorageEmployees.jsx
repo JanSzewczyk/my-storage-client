@@ -40,7 +40,7 @@ const config = {
 const StorageEmployees = React.memo((props) => {
   const {
     storageId,
-    onGetStoregeEmployeesList,
+    onGetStorageEmployeesList,
     employeeList,
     pageInfo,
     employeeListLoading,
@@ -53,8 +53,8 @@ const StorageEmployees = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStoregeEmployeesList(storageId, query);
-  }, [onGetStoregeEmployeesList, query, storageId]);
+    onGetStorageEmployeesList(storageId, query);
+  }, [onGetStorageEmployeesList, query, storageId]);
 
   const onRowClick = useCallback((data) => {
     console.log("Redirect to employee");
@@ -114,8 +114,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeEmployeesList: (storageId, queryData) =>
-      dispatch(action.getStoregeEmployeesList(storageId, queryData)),
+    onGetStorageEmployeesList: (storageId, queryData) =>
+      dispatch(action.getStorageEmployeesList(storageId, queryData)),
   };
 };
 

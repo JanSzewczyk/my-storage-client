@@ -11,7 +11,7 @@ import StorageEditPanel from "./StorageEditPanel/StorageEditPanel";
 
 const StorageDetails = React.memo((props) => {
   const {
-    onGetStorege,
+    onGetStorage,
     storageId,
     storage,
     storageLoading,
@@ -22,8 +22,8 @@ const StorageDetails = React.memo((props) => {
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    onGetStorege(storageId);
-  }, [onGetStorege, storageId]);
+    onGetStorage(storageId);
+  }, [onGetStorage, storageId]);
 
   useEffect(() => {
     setEdit(false);
@@ -79,10 +79,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStorege: (storageId) => dispatch(action.getStorege(storageId)),
+    onGetStorage: (storageId) => dispatch(action.getStorage(storageId)),
     onEditStorage: (storageId, updatedStorage) =>
-      dispatch(action.editStorege(storageId, updatedStorage)),
-    onRemoveStorage: (storageId) => dispatch(action.removeStorege(storageId)),
+      dispatch(action.editStorage(storageId, updatedStorage)),
+    onRemoveStorage: (storageId) => dispatch(action.removeStorage(storageId)),
   };
 };
 

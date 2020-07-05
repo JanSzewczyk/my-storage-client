@@ -30,7 +30,7 @@ export const actionStorageListLoadFail = () => {
   };
 };
 
-export const getStoregeActionsList = (storageId, queryData) => {
+export const getStorageActionsList = (storageId, queryData) => {
   return (dispatch) => {
     dispatch(actionStorageListLoadStart());
 

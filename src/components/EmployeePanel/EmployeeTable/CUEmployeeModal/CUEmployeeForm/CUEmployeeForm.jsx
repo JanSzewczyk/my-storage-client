@@ -23,7 +23,7 @@ const CUEmployeeForm = (props) => {
     onCreateEmployee,
     storageList,
     storageListLoading,
-    onGetStoregeList,
+    onGetStorageList,
     editEmployee,
     onUpdateEmployee,
   } = props;
@@ -34,8 +34,8 @@ const CUEmployeeForm = (props) => {
   });
 
   useEffect(() => {
-    onGetStoregeList();
-  }, [onGetStoregeList]);
+    onGetStorageList();
+  }, [onGetStorageList]);
 
   const onSubmit = (formData) => {
     if (editEmployee) {
@@ -240,7 +240,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeList: () => dispatch(action.getStoregeList()),
+    onGetStorageList: () => dispatch(action.getStorageList()),
   };
 };
 

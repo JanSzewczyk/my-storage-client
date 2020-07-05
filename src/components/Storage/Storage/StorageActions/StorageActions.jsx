@@ -58,7 +58,7 @@ const config = {
 const StorageActions = React.memo((props) => {
   const {
     storageId,
-    onGetStoregeActionsList,
+    onGetStorageActionsList,
     actionsList,
     pageInfo,
     actionsListLoading,
@@ -71,8 +71,8 @@ const StorageActions = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStoregeActionsList(storageId, query);
-  }, [onGetStoregeActionsList, query, storageId]);
+    onGetStorageActionsList(storageId, query);
+  }, [onGetStorageActionsList, query, storageId]);
 
   const onSortChanged = useCallback(
     (sort) => {
@@ -146,8 +146,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeActionsList: (storageId, queryData) =>
-      dispatch(action.getStoregeActionsList(storageId, queryData)),
+    onGetStorageActionsList: (storageId, queryData) =>
+      dispatch(action.getStorageActionsList(storageId, queryData)),
   };
 };
 

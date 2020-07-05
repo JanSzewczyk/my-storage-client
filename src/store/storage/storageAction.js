@@ -29,7 +29,7 @@ export const storageListLoadFail = () => {
   };
 };
 
-export const getStoregeList = () => {
+export const getStorageList = () => {
   return (dispatch) => {
     dispatch(storageListLoadStart());
     axios
@@ -63,7 +63,7 @@ export const storageLoadFail = () => {
   };
 };
 
-export const getStorege = (storageId) => {
+export const getStorage = (storageId) => {
   return (dispatch) => {
     dispatch(storageLoadStart());
     axios
@@ -97,7 +97,7 @@ export const storageEditFail = () => {
   };
 };
 
-export const editStorege = (storageId, updatedStorage) => {
+export const editStorage = (storageId, updatedStorage) => {
   return (dispatch) => {
     dispatch(storageEditStart());
     axios
@@ -131,16 +131,16 @@ export const storageCreateFail = () => {
   };
 };
 
-export const createStorege = (storage) => {
+export const createStorage = (storage) => {
   return (dispatch) => {
     dispatch(storageCreateStart());
     axios
       .post(`storages`, storage)
       .then((res) => {
-        const newSrotage = res.data;
-        success(`The ${newSrotage.name} storage has been created`);
+        const newStorage = res.data;
+        success(`The ${newStorage.name} storage has been created`);
         dispatch(storageCreateSuccess());
-        browserHistory.push(`/storages/${newSrotage.storageId}`);
+        browserHistory.push(`/storages/${newStorage.storageId}`);
       })
       .catch((err) => {
         error(err.response ? err.response.data.message : "Server error");
@@ -167,7 +167,7 @@ export const storageRemoveFail = () => {
   };
 };
 
-export const removeStorege = (storageId) => {
+export const removeStorage = (storageId) => {
   return (dispatch) => {
     dispatch(storageRemoveStart());
     axios

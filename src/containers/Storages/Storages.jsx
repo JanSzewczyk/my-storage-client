@@ -8,16 +8,16 @@ import AppContent from "../../components/UI/AppContent/AppContent";
 import Loading from "../../components/UI/Loading/Loading";
 import StorageItem from "../../components/Storage/Storages/StorageItem/StorageItem";
 import AddStorageTile from "../../components/Storage/Storages/AddStorageTile/AddStorageTile";
-import CreateStorageModal from "../../components/Storage/Storages/CreateStorageModal/CreateStorageModal"
+import CreateStorageModal from "../../components/Storage/Storages/CreateStorageModal/CreateStorageModal";
 
 const Storages = (props) => {
-  const { onGetStoregeList, storageList, storageListLoading } = props;
+  const { onGetStorageList, storageList, storageListLoading } = props;
 
   const [showAddStorage, setShowAddStorage] = useState(false);
 
   useEffect(() => {
-    onGetStoregeList();
-  }, [onGetStoregeList]);
+    onGetStorageList();
+  }, [onGetStorageList]);
 
   const redirectToStorageHandler = useCallback(
     (storage) => {
@@ -33,7 +33,7 @@ const Storages = (props) => {
           <StorageItem
             key={storage.storageId}
             storage={storage}
-            onRedirectToStorege={() => redirectToStorageHandler(storage)}
+            onRedirectToStorage={() => redirectToStorageHandler(storage)}
           />
         ))}
       </Aux>
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeList: () => dispatch(action.getStoregeList()),
+    onGetStorageList: () => dispatch(action.getStorageList()),
   };
 };
 

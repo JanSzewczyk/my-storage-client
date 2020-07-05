@@ -10,7 +10,7 @@ import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import "./StorageItem.scss";
 
 const StorageItem = (props) => {
-  const { storage, onRedirectToStorege } = props;
+  const { storage, onRedirectToStorage } = props;
 
   return (
     <Tile
@@ -47,7 +47,7 @@ const StorageItem = (props) => {
         </div>
       </TileContent>
       <TileBottom
-        right={<Button clicked={onRedirectToStorege}>show storage</Button>}
+        right={<Button clicked={onRedirectToStorage}>show storage</Button>}
       />
     </Tile>
   );
@@ -55,7 +55,7 @@ const StorageItem = (props) => {
 
 StorageItem.propTypes = {
   storage: PropTypes.object.isRequired,
-  onRedirectToStorege: PropTypes.func.isRequired,
+  onRedirectToStorage: PropTypes.func.isRequired,
 };
 
 export default StorageItem;

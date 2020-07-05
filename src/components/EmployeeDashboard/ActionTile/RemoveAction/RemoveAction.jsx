@@ -17,7 +17,7 @@ import "./RemoveAction.scss";
 const RemoveAction = React.memo((props) => {
   const {
     storageId,
-    onGetStoregeItemsEmployee,
+    onGetStorageItemsEmployee,
     onClose,
     itemsList,
     itemsListLoading,
@@ -27,8 +27,8 @@ const RemoveAction = React.memo((props) => {
   const [removeItems, setRemoveItems] = useState([]);
 
   useEffect(() => {
-    onGetStoregeItemsEmployee(storageId);
-  }, [onGetStoregeItemsEmployee, storageId]);
+    onGetStorageItemsEmployee(storageId);
+  }, [onGetStorageItemsEmployee, storageId]);
 
   const addToRemoveItems = (data) => {
     setRemoveItems([...removeItems, data]);
@@ -97,8 +97,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeItemsEmployee: (storageId) =>
-      dispatch(action.getStoregeItemsEmployee(storageId)),
+    onGetStorageItemsEmployee: (storageId) =>
+      dispatch(action.getStorageItemsEmployee(storageId)),
     onRemoveAction: (items) => dispatch(action.removeAction(items)),
   };
 };
