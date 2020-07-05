@@ -14,6 +14,7 @@ const StorageStatisticChart = (props) => {
 
   let content = <Loading />;
   if (!loading) {
+    
     let data = {
       labels: statistics.map((stat) => stat.date),
       datasets: [
@@ -106,7 +107,8 @@ const StorageStatisticChart = (props) => {
 
     content = <Bar data={data} options={options} />;
   }
-  return <div className={"storage-statistic-chart"}> {content}</div>;
+
+  return <div className={"storage-statistic-chart"}>{content}</div>;
 };
 
 StorageStatisticChart.propTypes = {

@@ -24,9 +24,9 @@ const StorageStatistics = React.memo((props) => {
     <Tile
       tileSize={{
         sm: "sm-12",
-        md: "md-6",
-        lg: "lg-6",
-        xl: "xl-6",
+        md: "md-12",
+        lg: "lg-12",
+        xl: "xl-12",
       }}
       header={{
         title: "Statistics",

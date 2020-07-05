@@ -25,13 +25,13 @@ const StorageOwner = (props) => {
     storageId,
   ]);
 
-  const storageStatistics = useMemo(
-    () => <StorageStatistics storageId={storageId} />,
+  const storageActions = useMemo(
+    () => <StorageActions storageId={storageId} />,
     [storageId]
   );
 
-  const storageActions = useMemo(
-    () => <StorageActions storageId={storageId} />,
+  const storageStatistics = useMemo(
+    () => <StorageStatistics storageId={storageId} />,
     [storageId]
   );
 
@@ -42,8 +42,8 @@ const StorageOwner = (props) => {
         {storageDetails}
         {employees}
         {storageItems}
-        {storageStatistics}
         {storageActions}
+        {storageStatistics}
       </AppContent>
     </Aux>
   );
