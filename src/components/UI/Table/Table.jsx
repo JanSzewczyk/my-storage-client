@@ -57,4 +57,9 @@ Table.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
+Table.defaultProps = {
+  data: [],
+  sort: [],
+};
+
 export default Table;

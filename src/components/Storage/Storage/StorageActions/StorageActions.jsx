@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useCallback } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
@@ -7,56 +7,15 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import { updateObject } from "../../../../shared/utils/utility";
-import { formatMoney } from "../../../../shared/utils/currencyUtils";
 import { useQuery } from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
-import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 
-import "./StorageActions.scss";
 import Loading from "../../../UI/Loading/Loading";
 import TimeLine from "../../../UI/TimeLine/TimeLine";
 import TimeLineItem from "../../../UI/TimeLine/TimeLineItem/TimeLineItem";
+import ActionTimeLineItem from "./ActionTimeLineItem/ActionTimeLineItem";
 
-// const config = {
-//   columns: [
-//     {
-//       field: "createdAt",
-//       name: "Date",
-//       converter: (cellData, rowData) => dateToDateTimeString(cellData),
-//     },
-//     {
-//       field: "action",
-//       name: "Action",
-//     },
-//     {
-//       field: "employeeFirstName",
-//       name: "Employee First Name",
-//     },
-//     {
-//       field: "employeeLastName",
-//       name: "Employee Last Name",
-//     },
-//     {
-//       field: "itemName",
-//       name: "Name",
-//     },
-//     {
-//       field: "itemAmount",
-//       name: "Amount",
-//     },
-//     {
-//       field: "itemValue",
-//       name: "Value",
-//       converter: (cellData, rowData) => formatMoney(cellData, "PLN"),
-//     },
-//     {
-//       field: "itemTotalValue",
-//       name: "Total Value",
-//       converter: (cellData, rowData) => formatMoney(cellData, "PLN"),
-//     },
-//   ],
-// };
+import "./StorageActions.scss";
 
 const StorageActions = React.memo((props) => {
   const {
@@ -68,6 +27,7 @@ const StorageActions = React.memo((props) => {
   } = props;
 
   const { query, onPageChanged } = useQuery({
+    sort: [{ field: "createdAt", type: "desc" }],
     page: 0,
     size: 30,
   });
@@ -76,30 +36,27 @@ const StorageActions = React.memo((props) => {
     onGetStorageActionsList(storageId, query);
   }, [onGetStorageActionsList, query, storageId]);
 
-  // const itemsTable = useMemo(
-  //   () => (
-  //     <Table
-  //       config={config}
-  //       data={actionsList}
-  //       sort={query.sort}
-  //       onSortChanged={onSortChanged}
-  //       loading={actionsListLoading}
-  //     />
-  //   ),
-  //   [actionsList, actionsListLoading, onSortChanged, query.sort]
-  // );
+  const [selected, setSelected] = useState(null);
 
   const actionTimeLine = useMemo(
     () => (
       <TimeLine>
         {actionsList.map((action, index) => (
           <TimeLineItem key={index} date={action.createdAt}>
-            asdasd
+            <ActionTimeLineItem
+              action={action}
+              selected={selected === action.id}
+              onSelect={
+                selected !== action.id
+                  ? () => setSelected(action.id)
+                  : () => setSelected(null)
+              }
+            />
           </TimeLineItem>
         ))}
       </TimeLine>
     ),
-    [actionsList]
+    [actionsList, selected]
   );
 
   const pagination = useMemo(

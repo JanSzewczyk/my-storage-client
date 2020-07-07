@@ -46,9 +46,11 @@
     opacity: 0.6;
     display: inline-block;
     font-size: $fontSM;
+    cursor: default;
   }
 
   &__content {
     display: flex;
+    padding-left: 8px;
   }
 }

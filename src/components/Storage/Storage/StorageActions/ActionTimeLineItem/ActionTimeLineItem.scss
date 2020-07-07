@@ -1,0 +1,48 @@
+.action-time-line-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  transition: height 2s;
+
+  &__header {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      text-align: center;
+      flex: 1;
+      align-items: center;
+
+      svg {
+        margin: 0;
+      }
+    }
+  }
+
+  &__show-button {
+    display: flex;
+    text-align: center;
+    margin: 0 8px;
+    align-items: center;
+    opacity: 0.6;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+      user-select: none;
+    }
+
+    svg {
+      margin: 0;
+    }
+  }
+
+  &__content {
+    margin: 8px 8px 0 0;
+    display: flex;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
