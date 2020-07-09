@@ -71,7 +71,7 @@ Table.propTypes = {
   onRowClick: PropTypes.func,
   loading: PropTypes.bool,
   data: PropTypes.array.isRequired,
-  tableLayout: PropTypes.objectOf(["auto", "fixed"]).isRequired,
+  tableLayout: PropTypes.oneOf(["auto", "fixed"]).isRequired,
   fontSize: PropTypes.number.isRequired,
 };
 
