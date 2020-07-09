@@ -3,7 +3,7 @@
 .navigation-link {
   margin: 0px 8px;
 
-  .navigation-link__nav-link {
+  &__nav-link {
     color: $whiteColor;
     font-family: $font;
     text-decoration: none;
@@ -15,7 +15,7 @@
     }
   }
 
-  .navigation-link__nav-link--active {
+  &__nav-link--active {
     font-weight: 600;
     // border-bottom: solid 2px $whiteColor;
   }
