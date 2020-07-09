@@ -3,8 +3,14 @@
   border-left: none;
   border-right: none;
   border-collapse: collapse;
+
+  // TODO change text-align in table configurations
   text-align: left;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   position: relative;
+
+  // TODO do change in configurations
   table-layout: fixed;
+
+  // TODO change fount size
 }

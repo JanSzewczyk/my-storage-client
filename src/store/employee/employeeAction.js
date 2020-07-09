@@ -70,7 +70,7 @@ export const employeeStorageListLoadFail = () => {
   };
 };
 
-export const getStoregeEmployeesList = (storageId, queryData) => {
+export const getStorageEmployeesList = (storageId, queryData) => {
   return (dispatch) => {
     dispatch(employeeStorageListLoadStart());
 

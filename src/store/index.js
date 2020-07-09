@@ -9,29 +9,29 @@ export const logout = () => {
 };
 
 export {
-  getStoregeActionsList,
+  getStorageActionsList,
   removeAction,
   storeAction,
 } from "./action/actionAction";
 export { auth, authCheck, authLogout } from "./auth/authAction";
 export {
   getEmployeesList,
-  getStoregeEmployeesList,
+  getStorageEmployeesList,
   createEmployee,
   editEmployee,
   removeEmployee,
 } from "./employee/employeeAction";
 export {
-  getStoregeItemsList,
-  getStoregeItemsEmployee,
+  getStorageItemsList,
+  getStorageItemsEmployee,
 } from "./item/itemAction";
 export { getProductsList } from "./product/productAction";
 export { getStorageStatistics } from "./statistic/statisticAction";
 export {
-  getStoregeList,
-  getStorege,
-  editStorege,
-  createStorege,
-  removeStorege,
+  getStorageList,
+  getStorage,
+  editStorage,
+  createStorage,
+  removeStorage,
 } from "./storage/storageAction";
 export { getUserDetails } from "./user/userAction";

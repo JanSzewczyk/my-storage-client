@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogout: (authData) => dispatch(action.logout()),
+    onLogout: () => dispatch(action.logout()),
   };
 };
 

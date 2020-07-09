@@ -36,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCreateStorage: (newStore) => dispatch(action.createStorege(newStore)),
+    onCreateStorage: (newStore) => dispatch(action.createStorage(newStore)),
   };
 };
 

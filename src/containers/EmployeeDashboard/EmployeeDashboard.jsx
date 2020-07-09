@@ -8,7 +8,7 @@ import Tile from "../../components/UI/Tile/Tile";
 import StorageInforamtions from "../../components/EmployeeDashboard/StorageInforamtions/StorageInforamtions";
 import ActionTile from "../../components/EmployeeDashboard/ActionTile/ActionTile";
 
-const EmpoyeeDashboard = (props) => {
+const EmployeeDashboard = (props) => {
   const { user } = props;
 
   const [action, setAction] = useState(null);
@@ -54,8 +54,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStoregeList: () => dispatch(action.getStoregeList()),
+    onGetStorageList: () => dispatch(action.getStorageList()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmpoyeeDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeDashboard);

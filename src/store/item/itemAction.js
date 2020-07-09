@@ -23,7 +23,7 @@ export const itemStorageListLoadFail = () => {
   };
 };
 
-export const getStoregeItemsList = (storageId, queryData) => {
+export const getStorageItemsList = (storageId, queryData) => {
   return (dispatch) => {
     dispatch(itemStorageListLoadStart());
 
@@ -60,7 +60,7 @@ export const itemStorageListEmployeeLoadFail = () => {
   };
 };
 
-export const getStoregeItemsEmployee = (storageId) => {
+export const getStorageItemsEmployee = (storageId) => {
   return (dispatch) => {
     dispatch(itemStorageListEmployeeLoadStart());
 

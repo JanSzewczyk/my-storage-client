@@ -7,6 +7,7 @@
   top: 0;
   z-index: 2;
   background-color: #242424;
+  user-select: none;
 
   &__content {
     display: flex;

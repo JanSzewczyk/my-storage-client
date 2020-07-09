@@ -11,7 +11,7 @@ import Storages from "./containers/Storages/Storages";
 import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
 import Logout from "./containers/Auth/Logout/Logout";
 import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
-import EmployeeDashboard from "./containers/EmpoyeeDashboard/EmpoyeeDashboard";
+import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
