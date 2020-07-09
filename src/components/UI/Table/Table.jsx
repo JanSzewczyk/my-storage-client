@@ -9,10 +9,26 @@ import Loading from "../Loading/Loading";
 import "./Table.scss";
 
 const Table = React.memo((props) => {
-  const { config, sort, onSortChanged, data, onRowClick, loading } = props;
+  const {
+    config,
+    sort,
+    onSortChanged,
+    data,
+    onRowClick,
+    loading,
+    tableLayout,
+    fontSize,
+  } = props;
+
   return (
     <Aux>
-      <table className={"table"}>
+      <table
+        className={"table"}
+        style={{
+          tableLayout: tableLayout,
+          fontSize: fontSize,
+        }}
+      >
         <TableHeader
           config={config}
           sort={sort}
@@ -55,11 +71,15 @@ Table.propTypes = {
   onRowClick: PropTypes.func,
   loading: PropTypes.bool,
   data: PropTypes.array.isRequired,
+  tableLayout: PropTypes.objectOf(["auto", "fixed"]).isRequired,
+  fontSize: PropTypes.number.isRequired,
 };
 
 Table.defaultProps = {
   data: [],
   sort: [],
+  tableLayout: "auto",
+  fontSize: 16,
 };
 
 export default Table;

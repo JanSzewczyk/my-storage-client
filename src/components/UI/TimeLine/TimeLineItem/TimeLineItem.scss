@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  color: #f4f4f4;
-  padding: 0 0 8px 32px;
+  color: $whiteColor;
+  padding: 0 0 16px 32px;
   font-family: $font;
   font-size: $fontMD;
 
@@ -25,7 +25,7 @@
 
   &:after {
     content: "";
-    border-left: 2px solid #20618b;
+    border-left: 2px solid $blueColor;
     height: 100%;
     position: absolute;
     top: 0;

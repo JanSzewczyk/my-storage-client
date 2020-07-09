@@ -8,14 +8,12 @@ import PersonIcon from "@material-ui/icons/Person";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { formatMoney } from "../../../../../shared/utils/currencyUtils";
+import Table from "../../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
-import Table from "../../../../UI/Table";
 
 const ActionTimeLineItem = (props) => {
   const { action, selected, onSelect } = props;
-
-  console.log(action);
 
   const config = {
     columns: [
@@ -30,10 +28,13 @@ const ActionTimeLineItem = (props) => {
       {
         field: "productValue",
         name: "Value",
+        converter: (value, rowData) => formatMoney(value, rowData.currency),
       },
       {
         field: "totalValue",
         name: "Total",
+        converter: (totalValue, rowData) =>
+          formatMoney(totalValue, rowData.currency),
       },
     ],
   };
@@ -63,7 +64,7 @@ const ActionTimeLineItem = (props) => {
       </div>
       {selected && (
         <div className={"action-time-line-item__content"}>
-          <Table config={config} data={action.items} />
+          <Table config={config} data={action.items} fontSize={14} />
         </div>
       )}
     </div>
