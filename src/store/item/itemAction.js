@@ -1,4 +1,4 @@
-import axios from "../../shared/axios";
+import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import { error } from "../../components/UI/Notification";
 import { createSearchQuery } from "../../shared/utils/utility";

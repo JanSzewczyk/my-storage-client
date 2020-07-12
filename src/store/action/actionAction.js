@@ -1,8 +1,8 @@
-import axios from "../../shared/axios";
+import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "../../components/UI/Notification";
 import { updateObject, createSearchQuery } from "../../shared/utils/utility";
-import browserHistory from "../../shared/history";
+import browserHistory from "../../shared/config/history";
 
 export const actionStorageListLoadStart = () => {
   return {

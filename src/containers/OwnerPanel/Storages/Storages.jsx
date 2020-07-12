@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useCallback, useState } from "react";
 
 import { connect } from "react-redux";
-import * as action from "../../store";
+import * as action from "../../../store";
 
-import Aux from "../../hoc/Auxiliary/Auxiliary";
-import AppContent from "../../components/UI/AppContent/AppContent";
-import Loading from "../../components/UI/Loading/Loading";
-import StorageItem from "../../components/Storage/Storages/StorageItem/StorageItem";
-import AddStorageTile from "../../components/Storage/Storages/AddStorageTile/AddStorageTile";
-import CreateStorageModal from "../../components/Storage/Storages/CreateStorageModal/CreateStorageModal";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import AppContent from "../../../components/UI/AppContent/AppContent";
+import Loading from "../../../components/UI/Loading/Loading";
+import StorageItem from "../../../components/OwnerPanel/Storages/StorageItem/StorageItem";
+import AddStorageTile from "../../../components/OwnerPanel/Storages/AddStorageTile/AddStorageTile";
+import CreateStorageModal from "../../../components/OwnerPanel/Storages/CreateStorageModal/CreateStorageModal";
 
 const Storages = (props) => {
   const { onGetStorageList, storageList, storageListLoading } = props;

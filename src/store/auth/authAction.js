@@ -1,4 +1,4 @@
-import axios, { setBasicToken, setBearerToken } from "../../shared/axios";
+import axios, { setBasicToken, setBearerToken } from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import Cookies from "js-cookie";
 import { error } from "../../components/UI/Notification";

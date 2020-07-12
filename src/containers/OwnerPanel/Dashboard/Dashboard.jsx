@@ -1,16 +1,16 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import * as action from "../../store";
+import * as action from "../../../store";
 
-import AppBar from "../../components/UI/AppBar/AppBar";
-import AppContent from "../../components/UI/AppContent/AppContent";
-import Aux from "../../hoc/Auxiliary/Auxiliary";
-import Tile from "../../components/UI/Tile/Tile";
-import DropDown from "../../components/UI/DropDown/DropDown";
-import DropdownItem from "../../components/UI/DropDown/DropdownItem/DropdownItem";
-import EllipsisWrapper from "../../components/UI/EllipsisWrapper/EllipsisWrapper";
-import Tooltip from "../../components/UI/Tooltip/Tooltip";
+import AppBar from "../../../components/UI/AppBar/AppBar";
+import AppContent from "../../../components/UI/AppContent/AppContent";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Tile from "../../../components/UI/Tile/Tile";
+import DropDown from "../../../components/UI/DropDown/DropDown";
+import DropdownItem from "../../../components/UI/DropDown/DropdownItem/DropdownItem";
+import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrapper";
+import Tooltip from "../../../components/UI/Tooltip/Tooltip";
 
 const Dashboard = (props) => {
   return (

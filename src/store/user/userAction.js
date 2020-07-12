@@ -1,4 +1,4 @@
-import axios from "../../shared/axios";
+import axios from "../../shared/config/axios";
 import { logout } from "../";
 import * as actionTypes from "../actionTypes";
 import { error, log } from "../../components/UI/Notification";

@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import browserHistory from "./shared/history";
-import store from "./shared/store";
+import browserHistory from "./shared/config/history";
+import store from "./shared/config/store";
 import * as serviceWorker from "./serviceWorker";
+import NotificationProvider from "./components/UI/Notification";
 
 import App from "./App";
-import NotificationProvider from "./components/UI/Notification";
 
 import "./index.scss";
 
