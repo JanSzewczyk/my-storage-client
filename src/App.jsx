@@ -13,6 +13,8 @@ import Logout from "./containers/Auth/Logout/Logout";
 import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
 
+import withNotificationProvider from "@hoc/withNotificationProvider";
+
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
 
@@ -61,4 +63,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNotificationProvider(App));
