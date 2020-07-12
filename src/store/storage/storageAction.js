@@ -1,8 +1,8 @@
-import axios from "../../shared/config/axios";
+import axios from "@config/axios";
 import * as actionTypes from "../actionTypes";
 import { error, success } from "@hoc/withNotificationProvider";
-import { updateObject } from "../../shared/utils/utility";
-import browserHistory from "../../shared/config/history";
+import { updateObject } from "@utils/utility";
+import browserHistory from "@config/history";
 
 const processStorage = (storage) =>
   updateObject(storage, {

@@ -1,7 +1,7 @@
-import axios from "../../shared/config/axios";
+import axios from "@config/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
-import { createSearchQuery } from "../../shared/utils/utility";
+import { error } from "@hoc/withNotificationProvider";
+import { createSearchQuery } from "@utils/utility";
 
 export const itemStorageListLoadStart = () => {
   return {

@@ -1,5 +1,5 @@
 import * as actionTypes from "../actionTypes";
-import { updateObject } from "../../shared/utils/utility";
+import { updateObject } from "@utils/utility";
 
 const initialState = {
   storageList: [],
@@ -128,7 +128,7 @@ const reducer = (state = initialState, action) => {
       return storageRemoveSuccess(state, action);
     case actionTypes.STORAGE_REMOVE_FAIL:
       return storageRemoveFail(state, action);
-      
+
     default:
       return state;
   }

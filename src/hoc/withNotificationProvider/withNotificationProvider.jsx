@@ -22,7 +22,7 @@ export const error = (msg) => {
   emitter.emit("error", msg);
 };
 
-const withNotificationProvider = (Component) => {
+const withNotificationProvider = (WrappedComponent) => {
   const WithNotificationProvider = (props) => {
     emitter.on("log", (msg) => {
       add(msg);
@@ -59,7 +59,7 @@ const withNotificationProvider = (Component) => {
 
     return (
       <NotificationContext.Provider value={providerValue}>
-        <Component {...props} />
+        <WrappedComponent {...props} />
         {createPortal(
           <NotificationsWrapper>
             {notifications.map((notification) => (

@@ -3,19 +3,21 @@
 .drop-down {
   position: relative;
 
-  .drop-down__icon {
+  &__icon {
     height: 16px;
     width: 16px;
     margin: 0;
   }
-  .drop-down__icon--left {
+
+  &__icon--left {
     margin-right: 4px;
   }
-  .drop-down__icon--right {
+
+  &__icon--right {
     margin-left: 4px;
   }
 
-  .drop-down__wrapper {
+  &__wrapper {
     position: absolute;
     z-index: 2;
     min-width: 64px;
@@ -28,16 +30,16 @@
     display: flex;
     flex-direction: column;
   }
-  .drop-down__wrapper--left {
+  &__wrapper--left {
     left: 0;
   }
-  .drop-down__wrapper--right {
+  &__wrapper--right {
     right: 0;
   }
-  .drop-down__wrapper--top {
+  &__wrapper--top {
     bottom: 40px;
   }
-  .drop-down__wrapper--bottom {
+  &__wrapper--bottom {
     top: 40px;
   }
 }

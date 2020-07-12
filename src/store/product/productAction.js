@@ -1,6 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../components/UI/Notification";
+import { error } from "@hoc/withNotificationProvider";
 
 export const productsListLoadStart = () => {
   return {

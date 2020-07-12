@@ -1,8 +1,8 @@
-import axios from "../../shared/config/axios";
+import axios from "@config/axios";
 import * as actionTypes from "../actionTypes";
-import { error, success } from "../../components/UI/Notification";
-import { updateObject, createSearchQuery } from "../../shared/utils/utility";
-import browserHistory from "../../shared/config/history";
+import { error, success } from "@hoc/withNotificationProvider";
+import { updateObject, createSearchQuery } from "@utils/utility";
+import browserHistory from "@config/history";
 
 export const actionStorageListLoadStart = () => {
   return {
@@ -75,6 +75,7 @@ export const removeAction = (removedItems) => {
       .then((res) => {
         dispatch(actionRemoveSuccess());
         success("REMOVE action success");
+        // TODO change logic
         browserHistory.push("/xxx");
         browserHistory.push("/");
       })
@@ -112,6 +113,7 @@ export const storeAction = (storedItems) => {
       .then((res) => {
         dispatch(actionStoreSuccess());
         success("STORE action success");
+        // TODO change logic
         browserHistory.push("/xxx");
         browserHistory.push("/");
       })

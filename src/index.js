@@ -6,20 +6,17 @@ import { Provider } from "react-redux";
 import browserHistory from "./shared/config/history";
 import store from "./shared/config/store";
 import * as serviceWorker from "./serviceWorker";
-// import NotificationProvider from "./components/UI/Notification";
 
 import App from "./App";
 
 import "./index.scss";
 
 const app = (
-  // <NotificationProvider>
   <Provider store={store}>
     <Router history={browserHistory}>
       <App />
     </Router>
   </Provider>
-  // </NotificationProvider>
 );
 
 ReactDOM.render(
