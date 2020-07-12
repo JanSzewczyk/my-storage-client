@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
+import _ from "lodash";
 
 import Loading from "../../../../UI/Loading/Loading";
 import { DATE_PATTERN } from "../../../../../shared/utils/dateUtils";
@@ -14,7 +15,8 @@ const StorageStatisticChart = (props) => {
 
   let content = <Loading />;
   if (!loading) {
-    
+    const currency = _.uniq(_.map(statistics, (s) => s.currency))[0];
+
     let data = {
       labels: statistics.map((stat) => stat.date),
       datasets: [
@@ -80,7 +82,7 @@ const StorageStatisticChart = (props) => {
             position: "left",
             ticks: {
               min: 0,
-              callback: (label) => formatMoney(label, "PLN"),
+              callback: (label) => formatMoney(label, currency),
             },
           },
           {
@@ -89,7 +91,7 @@ const StorageStatisticChart = (props) => {
             position: "right",
             ticks: {
               min: 0,
-              callback: (label) => formatMoney(label, "PLN"),
+              callback: (label) => formatMoney(label, currency),
             },
           },
         ],
@@ -99,7 +101,7 @@ const StorageStatisticChart = (props) => {
           label: (tooltipItem, object) =>
             `${object.datasets[tooltipItem.datasetIndex].label}: ${formatMoney(
               tooltipItem.value,
-              "PLN"
+              currency
             )}`,
         },
       },

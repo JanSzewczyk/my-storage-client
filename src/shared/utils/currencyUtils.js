@@ -1,23 +1,28 @@
-const cleanLocalization = (localization) => {
-  const authorized_local = ["pl", "en", "fr", "nl"];
+import _ from "lodash";
 
-  for (let authorized in authorized_local) {
-    if (localization.includes(authorized)) {
-      console.log(localization);
+const cleanLocalization = (localization) => {
+  // TODO add polish language
+  const authorized_local = ["en", "fr", "nl"];
+
+  for (let authorized of authorized_local) {
+    if (_.includes(localization, authorized)) {
       return localization;
     }
   }
+
   return "en-US";
 };
 
-export const formatMoney = (amount, currency) => {
+export const formatMoney = (amount, currency = "") => {
   const languageBrowser = navigator.language;
   const localization = cleanLocalization(languageBrowser);
+
+  if (currency === "") return amount;
 
   let formatter = new Intl.NumberFormat(localization, {
     style: "currency",
     currency: currency,
-    minimumFractionDigits: 2,
+    fractionDigits: 2,
   });
 
   let value = formatter.format(amount);

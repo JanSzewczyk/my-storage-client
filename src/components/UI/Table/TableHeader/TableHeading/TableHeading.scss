@@ -18,6 +18,7 @@
     align-items: center;
     margin-left: auto;
     opacity: 0.3;
+    transition: 0.3s;
   }
 
   &:hover > &__content &__sort-wrapper {
