@@ -5,10 +5,17 @@ const useQuery = (initial) => {
   const [query, setQuery] = useState(initial);
 
   const onSortChanged = useCallback(
-    (sort) => {
+    (field, type) => {
+      let sortData = query.sort;
+      sortData = sortData.filter((s) => s.field !== field);
+      if (type !== "") {
+        sortData.push({ field, type });
+      }
+      // onSortChanged(sortData);
+
       setQuery(
         updateObject(query, {
-          sort: sort,
+          sort: sortData,
         })
       );
     },
