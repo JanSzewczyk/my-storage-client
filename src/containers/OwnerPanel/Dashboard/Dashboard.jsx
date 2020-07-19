@@ -52,16 +52,23 @@ const Dashboard = (props) => {
             subtitle: "Thinks done",
           }}
         >
-          <Tooltip
-            text={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
-            }
-            type={"dotted"}
-            // position={"top-end"}
+          <div
+            style={{
+              textAlign: "justify",
+              textJustify: "inter-word",
+            }}
           >
-            Lorem Ipsum is simply dummy text
-          </Tooltip>
-          fs asdf asdfsadf
+            sdfasd <span>fasdfsdfsd asdf s</span>
+            <Tooltip
+              text={
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+              }
+              type={"dotted"}
+            >
+              Lorem Ipsum is simply dummy text
+            </Tooltip>
+            fs asdf asdfsadfdsdfsdfsdfsd
+          </div>
         </Tile>
         <Tile
           tileSize={{
@@ -107,6 +114,23 @@ const Dashboard = (props) => {
               cię straci,
             </EllipsisWrapper>
             <Button clicked={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button>
+          </div>
+        </Tile>
+        <Tile
+          tileSize={{
+            sm: "sm-12",
+            md: "md-12",
+            lg: "lg-12",
+            xl: "xl-12",
+          }}
+        >
+          HOMEPAGE
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            
           </div>
         </Tile>
       </AppContent>

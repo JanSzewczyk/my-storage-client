@@ -1,8 +1,5 @@
 .tooltip {
-  max-width: 100%;
   position: relative;
-  display: inline-flex;
-  // user-select: none;
   cursor: pointer;
 
   &--dotted {
@@ -10,22 +7,6 @@
   }
 
   &__message {
-    // color: #ffffff;
-    // position: absolute;
-    // z-index: 10;
-    // padding: 12px;
-    // font-size: 12px;
-    // cursor: default;
-    // border-radius: 3px;
-    // white-space: nowrap;
-    // font-family: monospace;
-    // background-color: #ffffff;
-    // box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.16);
-    // animation: fadeIn ease-in-out 0.65s;
-    // top: 50%;
-    // transform: translateY(-50%);
-    // left: calc(100% + 18px);
-
     display: block;
     background: #fafafa;
     color: #242424;
@@ -37,19 +18,44 @@
     z-index: 100;
     pointer-events: none;
 
+    &--white {
+      background-color: #eee;
+      color: #242424;
+    }
+
+    &--blue {
+      background-color: #0082f0;
+      color: #fafafa;
+    }
+
+    &--black {
+      background-color: #333;
+      color: #f2f2f2;
+    }
+
     &--top {
       bottom: 100%;
       left: 0;
       margin-bottom: 8px;
 
       &::after {
-        content: " ";
+        content: "";
         position: absolute;
         top: 100%;
         left: 0;
         margin-left: 14px;
         border: 5px solid transparent;
         border-top-color: #fafafa;
+      }
+
+      &-white::after {
+        border-color: #eee transparent transparent;
+      }
+      &-blue::after {
+        border-color: #0082f0 transparent transparent transparent;
+      }
+      &-black::after {
+        border-color: #333 transparent transparent;
       }
     }
 
@@ -67,6 +73,16 @@
         border: 5px solid transparent;
         border-top-color: #fafafa;
       }
+
+      &-white::after {
+        border-color: #eee transparent transparent;
+      }
+      &-blue::after {
+        border-color: #0082f0 transparent transparent transparent;
+      }
+      &-black::after {
+        border-color: #333 transparent transparent;
+      }
     }
 
     &--bottom {
@@ -82,6 +98,16 @@
         margin-top: -10px;
         border: 5px solid transparent;
         border-bottom-color: #fafafa;
+      }
+
+      &-white::after {
+        border-color: transparent transparent #eee;
+      }
+      &-blue::after {
+        border-color: transparent transparent #0082f0 transparent;
+      }
+      &-black::after {
+        border-color: transparent transparent #333;
       }
     }
 
@@ -99,6 +125,16 @@
         border: 5px solid transparent;
         border-bottom-color: #fafafa;
       }
+
+      &-white::after {
+        border-color: transparent transparent #eee;
+      }
+      &-blue::after {
+        border-color: transparent transparent #0082f0 transparent;
+      }
+      &-black::after {
+        border-color: transparent transparent #333;
+      }
     }
 
     &--right {
@@ -115,6 +151,16 @@
         border: 5px solid transparent;
         border-right-color: #fafafa;
       }
+
+      &-white::after {
+        border-color: transparent #eee transparent transparent;
+      }
+      &-blue::after {
+        border-color: transparent #0082f0 transparent transparent;
+      }
+      &-black::after {
+        border-color: transparent #333 transparent transparent;
+      }
     }
 
     &--left {
@@ -130,6 +176,16 @@
         margin-top: 1em;
         border: 5px solid transparent;
         border-left-color: #fafafa;
+      }
+
+      &-white::after {
+        border-color: transparent transparent transparent #eee;
+      }
+      &-blue::after {
+        border-color: transparent transparent transparent #0082f0;
+      }
+      &-black::after {
+        border-color: transparent transparent transparent #333;
       }
     }
   }

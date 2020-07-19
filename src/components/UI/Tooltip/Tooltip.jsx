@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 import "./Tooltip.scss";
 
 const Tooltip = React.memo((props) => {
-  const { children, text, type, position, color } = props;
-  const [show, setShow] = useState(true);
+  const { children, text, type, position, className, color } = props;
+
+  const [show, setShow] = useState(false);
 
   const onMouseOverHandler = () => {
     setShow(true);
@@ -17,19 +18,22 @@ const Tooltip = React.memo((props) => {
 
   let tooltipClasses = ["tooltip"];
   type && tooltipClasses.push(`tooltip--${type}`);
+  className && tooltipClasses.push(className);
 
   let TMClasses = ["tooltip__message"];
   position && TMClasses.push(`tooltip__message--${position}`);
+  color && TMClasses.push(`tooltip__message--${color}`);
+  color && TMClasses.push(`tooltip__message--${position}-${color}`);
 
   return (
-    <div
+    <span
       className={tooltipClasses.join(" ")}
       onMouseOver={onMouseOverHandler}
       onMouseLeave={onMouseLeaveHandler}
     >
       {children}
       {show && <div className={TMClasses.join(" ")}>{text}</div>}
-    </div>
+    </span>
   );
 });
 
@@ -46,6 +50,7 @@ Tooltip.propTypes = {
     "left",
   ]).isRequired,
   color: PropTypes.oneOf(["white", "blue", "black"]).isRequired,
+  className: PropTypes.string,
 };
 
 Tooltip.defaultProps = {
