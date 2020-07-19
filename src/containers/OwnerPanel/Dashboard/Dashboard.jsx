@@ -32,13 +32,13 @@ const Dashboard = (props) => {
             subtitle: "Thinks to do",
           }}
         >
-          {/* <div
-            style={{
-              display: "flex",
-            }}
+          <Tooltip
+            text={"Lorem Ipesetting industry. Lorem Ipsum"}
+            type={"dotted"}
+            position={"top-end"}
           >
-            <DropDown title={"dropdown"} top left></DropDown>
-          </div> */}
+            Lorem Ipsum is simply dummy text
+          </Tooltip>
         </Tile>
         <Tile
           tileSize={{
@@ -52,13 +52,16 @@ const Dashboard = (props) => {
             subtitle: "Thinks done",
           }}
         >
-          {/* <div
-            style={{
-              display: "flex",
-            }}
+          <Tooltip
+            text={
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+            }
+            type={"dotted"}
+            // position={"top-end"}
           >
-            <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
-          </div> */}
+            Lorem Ipsum is simply dummy text
+          </Tooltip>
+          fs asdf asdfsadf
         </Tile>
         <Tile
           tileSize={{
