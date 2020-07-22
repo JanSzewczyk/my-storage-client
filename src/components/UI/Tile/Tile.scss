@@ -10,6 +10,12 @@
   margin: 0 8px 8px 0;
   border-radius: 8px;
 
+  &--full-screen {
+    height: calc(100vh - 104px);
+    max-width: 100% !important;
+    order: -1;
+  }
+
   .tile__header {
     flex: 0 0 auto;
     margin-top: 0;

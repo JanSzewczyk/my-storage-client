@@ -15,7 +15,26 @@ import Button from "@UI/Button/Button";
 
 import { log } from "@hoc/withNotificationProvider";
 
+import "./Dashboard.scss";
+
+import useAxios from "@hooks/useAxios/useAxios";
+
 const Dashboard = (props) => {
+  const { response, loading, error, sendRequest } = useAxios({
+    url: `storages`,
+    method: "GET",
+    // options: {
+    //   params: { gender },
+    // },
+    // trigger: null,
+    // // // or
+    // // // trigger: { gender }
+    // forceDispatchEffect: () => false, // AUTO RUN only if gender is set
+  });
+
+  console.log(response);
+  console.log(loading);
+
   return (
     <Aux>
       <AppBar />
@@ -88,7 +107,7 @@ const Dashboard = (props) => {
               <DropdownItem onClick={() => console.log("Elo jake")}>
                 elo
               </DropdownItem>
-              <DropdownItem>elo1</DropdownItem>
+              <DropdownItem onClick={sendRequest}>elo1</DropdownItem>
             </DropDown>
             <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
@@ -125,12 +144,14 @@ const Dashboard = (props) => {
           }}
         >
           HOMEPAGE
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            
+          <div className={"tabs"}>
+            <div className={"tabs__titles"}>
+              <div className={"tabs__title tabs__title--disabled"}>Title 1</div>
+              <div className={"tabs__title tabs__title--selected"}>Title 2</div>
+              <div className={"tabs__title"}>Title 3</div>
+              <div className={"tabs__title"}>Title 4</div>
+            </div>
+            <div className={"tabs__contents"}>dfasdfas</div>
           </div>
         </Tile>
       </AppContent>
