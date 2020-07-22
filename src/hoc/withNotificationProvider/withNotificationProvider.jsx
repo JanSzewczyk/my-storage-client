@@ -5,8 +5,8 @@ import ee from "event-emitter";
 import PropTypes from "prop-types";
 
 import NotificationContext from "./notification-context";
-import NotificationsWrapper from "@UI/Notification/NotificationsWrapper/NotificationsWrapper";
-import Notification from "@UI/Notification/Notification/Notification";
+import NotificationsWrapper from "../../components/UI/Notification/NotificationsWrapper/NotificationsWrapper";
+import Notification from "../../components/UI/Notification/Notification/Notification";
 
 const emitter = ee();
 

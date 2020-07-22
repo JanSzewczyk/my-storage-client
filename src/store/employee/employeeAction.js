@@ -1,6 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error, success } from "@hoc/withNotificationProvider";
+import { error, success } from "../../hoc/withNotificationProvider";
 import { createSearchQuery, updateObject } from "../../shared/utils/utility";
 import browserHistory from "../../shared/config/history";
 

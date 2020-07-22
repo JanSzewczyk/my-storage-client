@@ -1,7 +1,7 @@
-import axios from "@config/axios";
-import { logout } from "@store";
+import axios from "../../shared/config/axios";
+import { logout } from "../";
 import * as actionTypes from "../actionTypes";
-import { error, log } from "@hoc/withNotificationProvider";
+import { error, log } from "../../hoc/withNotificationProvider";
 
 export const userLoadStart = () => {
   return {

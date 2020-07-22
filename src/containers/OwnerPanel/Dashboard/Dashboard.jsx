@@ -11,13 +11,13 @@ import DropDown from "../../../components/UI/DropDown/DropDown";
 import DropdownItem from "../../../components/UI/DropDown/DropdownItem/DropdownItem";
 import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrapper";
 import Tooltip from "../../../components/UI/Tooltip/Tooltip";
-import Button from "@UI/Button/Button";
+import Button from "../../../components/UI/Button/Button";
 
-import { log } from "@hoc/withNotificationProvider";
+import { log } from "../../../hoc/withNotificationProvider";
 
 import "./Dashboard.scss";
 
-import useAxios from "@hooks/useAxios/useAxios";
+import useAxios from "../../../hooks/useAxios/useAxios";
 
 const Dashboard = (props) => {
   const { response, loading, error, sendRequest } = useAxios({

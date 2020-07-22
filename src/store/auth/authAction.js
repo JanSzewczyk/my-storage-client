@@ -1,7 +1,10 @@
-import axios, { setBasicToken, setBearerToken } from "../../shared/config/axios";
+import axios, {
+  setBasicToken,
+  setBearerToken,
+} from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import Cookies from "js-cookie";
-import { error } from "@hoc/withNotificationProvider";
+import { error } from "../../hoc/withNotificationProvider";
 
 const BASIC_TOKEN =
   "bXlzdG9yYWdlaWQ6MkpnWlJjc0FQdzBkYVlvZDk3S2FoRzZiWENsaHFHSDU=";
