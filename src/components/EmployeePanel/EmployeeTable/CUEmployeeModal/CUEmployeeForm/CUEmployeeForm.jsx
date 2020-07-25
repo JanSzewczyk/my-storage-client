@@ -210,10 +210,10 @@ const CUEmployeeForm = (props) => {
         </form>
       </ModalBody>
       <ModalBottom>
-        <Button clicked={onCloseModal}>close</Button>
+        <Button onClick={onCloseModal}>close</Button>
         <Button
           btnType={"primary"}
-          clicked={handleSubmit(onSubmit)}
+          onClick={handleSubmit(onSubmit)}
           disabled={!formState.dirty}
         >
           {editEmployee ? "update" : "add employee"}

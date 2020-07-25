@@ -128,7 +128,7 @@ const reducer = (state = initialState, action) => {
       return storageRemoveSuccess(state, action);
     case actionTypes.STORAGE_REMOVE_FAIL:
       return storageRemoveFail(state, action);
-      
+
     default:
       return state;
   }

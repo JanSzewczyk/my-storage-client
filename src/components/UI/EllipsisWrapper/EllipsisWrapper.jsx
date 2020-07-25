@@ -28,7 +28,6 @@ const EllipsisWrapper = React.memo((props) => {
   }, [allowTooltip, divRef]);
 
   useEffect(() => {
-    console.log(divRef);
     setAllowTooltipHandler();
 
     window.addEventListener("resize", setAllowTooltipHandler);
@@ -39,9 +38,8 @@ const EllipsisWrapper = React.memo((props) => {
   }, [allowTooltip, divRef, setAllowTooltipHandler]);
 
   if (allowTooltip) {
-    console.log("allow tooltip");
     return (
-      <Tooltip text={children}>
+      <Tooltip text={children} className={"ellipsis-wrapper__tooltip"}>
         <span className={"ellipsis-wrapper"} ref={divRef}>
           {children}
         </span>

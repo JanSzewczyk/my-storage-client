@@ -56,7 +56,7 @@ const RemoveForm = (props) => {
         hasError={errors.amount}
         errorMessage={`Amount value from 1 to ${setMaxAmount()}.`}
       />
-      <Button clicked={handleSubmit(onSubmit)} disabled={items.length === 0}>
+      <Button onClick={handleSubmit(onSubmit)} disabled={items.length === 0}>
         add
       </Button>
     </form>

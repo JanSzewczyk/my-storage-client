@@ -6,15 +6,6 @@ import TableHeading from "./TableHeading/TableHeading";
 const TableHeader = (props) => {
   const { config, sort, onSortChanged } = props;
 
-  const setSortQuery = (field, type) => {
-    let sortData = sort;
-    sortData = sortData.filter((s) => s.field !== field);
-    if (type !== "") {
-      sortData.push({ field, type });
-    }
-    onSortChanged(sortData);
-  };
-
   const getSortIndex = (fieldName) => {
     if (sort.length > 1) {
       for (let i = 0; i < sort.length; i++) {
@@ -45,7 +36,7 @@ const TableHeader = (props) => {
             key={index}
             config={conf}
             isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
-            onSetSortQuery={onSortChanged && setSortQuery}
+            onSetSortQuery={onSortChanged && onSortChanged}
             sortIndex={getSortIndex(conf.field)}
             sortState={getSortState(conf.field)}
           />

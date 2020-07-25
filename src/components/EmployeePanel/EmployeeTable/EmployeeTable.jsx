@@ -12,7 +12,8 @@ import TileTop from "../../UI/Tile/TileTop/TileTop";
 import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Table, { useQuery } from "../../UI/Table";
+import Table from "../../UI/Table";
+import useQuery from "../../../hooks/useQuery";
 
 import "./EmployeeTable.scss";
 
@@ -149,7 +150,7 @@ const EmployeeTable = React.memo((props) => {
       >
         <TileTop
           right={
-            <Button btnType={"primary"} clicked={() => setShowModal(true)}>
+            <Button btnType={"primary"} onClick={() => setShowModal(true)}>
               add employee
             </Button>
           }

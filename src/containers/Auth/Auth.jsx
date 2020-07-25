@@ -7,6 +7,7 @@ import AuthForm from "../../components/Auth/AuthForm/AuthForm";
 import Welcome from "../../components/Auth/Welcome/Welcome";
 
 import "./Auth.scss";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const Auth = (props) => {
   const { authLoading, error, onAuth, authenticated } = props;
@@ -23,8 +24,6 @@ const Auth = (props) => {
   );
 };
 
-Auth.propTypes = {};
-
 const mapStateToProps = (state) => {
   return {
     authLoading: state.auth.authLoading,
@@ -39,4 +38,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Auth));

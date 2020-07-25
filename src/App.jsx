@@ -5,13 +5,15 @@ import { connect } from "react-redux";
 import * as action from "./store";
 
 import Auth from "./containers/Auth/Auth";
-import Dashboard from "./containers/Dashboard/Dashboard";
+import Dashboard from "./containers/OwnerPanel/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
-import Storages from "./containers/Storages/Storages";
-import StorageOwner from "./containers/Storages/StorageOwner/StorageOwner";
+import Storages from "./containers/OwnerPanel/Storages/Storages";
+import StorageOwner from "./containers/OwnerPanel/Storages/StorageOwner/StorageOwner";
 import Logout from "./containers/Auth/Logout/Logout";
 import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
+
+import withNotificationProvider from "./hoc/withNotificationProvider";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -61,4 +63,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNotificationProvider(App));

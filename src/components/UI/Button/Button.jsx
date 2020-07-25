@@ -4,17 +4,14 @@ import PropTypes from "prop-types";
 
 import "./Button.scss";
 
-const Button = (props) => {
-  const { clicked, disabled, children, btnType, btnClass } = props;
+const Button = ({ onClick, disabled, children, btnType, className }) => {
   let buttonClasses = ["button"];
-
   btnType && buttonClasses.push(`button--${btnType}`);
-
-  btnClass && buttonClasses.push(btnClass);
+  className && buttonClasses.push(className);
 
   return (
     <button
-      onClick={clicked}
+      onClick={onClick}
       disabled={disabled}
       className={buttonClasses.join(" ")}
     >
@@ -25,8 +22,8 @@ const Button = (props) => {
 
 Button.propTypes = {
   btnType: PropTypes.oneOf(["primary", "warning"]),
-  btnClass: PropTypes.any,
-  clicked: PropTypes.func,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
 };
 
