@@ -30,7 +30,7 @@ const StoragePanel = React.memo((props) => {
       </TileContent>
       <TileBottom
         right={
-          <Button btnType={"primary"} clicked={onEdit}>
+          <Button btnType={"primary"} onClick={onEdit}>
             edit
           </Button>
         }

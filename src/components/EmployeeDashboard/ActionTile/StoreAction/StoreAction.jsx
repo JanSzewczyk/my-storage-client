@@ -68,10 +68,10 @@ const StoreAction = React.memo((props) => {
         )}
       </TileContent>
       <TileBottom
-        left={<Button clicked={onClose}>close</Button>}
+        left={<Button onClick={onClose}>close</Button>}
         right={
           <Button
-            clicked={() => onStoreAction(storeItems)}
+            onClick={() => onStoreAction(storeItems)}
             btnType={"primary"}
             disabled={storeItems.length === 0}
           >

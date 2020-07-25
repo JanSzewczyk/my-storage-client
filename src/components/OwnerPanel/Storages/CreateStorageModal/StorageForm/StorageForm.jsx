@@ -19,7 +19,6 @@ const StorageForm = (props) => {
   });
 
   const onSubmit = (formData) => {
-    console.log(formData);
     onCreateStorage(formData);
   };
 
@@ -117,8 +116,8 @@ const StorageForm = (props) => {
         </form>
       </ModalBody>
       <ModalBottom>
-        <Button clicked={onCloseModal}>close</Button>
-        <Button btnType={"primary"} clicked={handleSubmit(onSubmit)}>
+        <Button onClick={onCloseModal}>close</Button>
+        <Button btnType={"primary"} onClick={handleSubmit(onSubmit)}>
           create storage
         </Button>
       </ModalBottom>

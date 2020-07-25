@@ -67,10 +67,10 @@ const RemoveAction = React.memo((props) => {
         )}
       </TileContent>
       <TileBottom
-        left={<Button clicked={onClose}>close</Button>}
+        left={<Button onClick={onClose}>close</Button>}
         right={
           <Button
-            clicked={() => onRemoveAction(removeItems)}
+          onClick={() => onRemoveAction(removeItems)}
             btnType={"warning"}
             disabled={removeItems.length === 0}
           >

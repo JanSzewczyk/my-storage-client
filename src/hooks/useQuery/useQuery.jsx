@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { updateObject } from "../../../../shared/utils/utility";
+import { updateObject } from "../../shared/utils/utility";
 
 const useQuery = (initial) => {
   const [query, setQuery] = useState(initial);
@@ -11,7 +11,6 @@ const useQuery = (initial) => {
       if (type !== "") {
         sortData.push({ field, type });
       }
-      // onSortChanged(sortData);
 
       setQuery(
         updateObject(query, {

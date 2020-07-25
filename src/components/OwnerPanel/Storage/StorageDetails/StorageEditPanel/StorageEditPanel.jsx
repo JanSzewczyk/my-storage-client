@@ -137,13 +137,13 @@ const StorageEditPanel = React.memo((props) => {
       <TileBottom
         right={
           <Aux>
-            <Button clicked={onCloseEdit}>back</Button>
-            <Button btnType={"warning"} clicked={handleSubmit(onRemove)}>
+            <Button onClick={onCloseEdit}>back</Button>
+            <Button btnType={"warning"} onClick={handleSubmit(onRemove)}>
               remove
             </Button>
             <Button
               btnType={"primary"}
-              clicked={handleSubmit(onSubmit)}
+              onClick={handleSubmit(onSubmit)}
               disabled={!formState.dirty}
             >
               update

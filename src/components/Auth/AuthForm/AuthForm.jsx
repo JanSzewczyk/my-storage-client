@@ -61,8 +61,8 @@ const AuthForm = (props) => {
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
           btnType={"primary"}
-          clicked={handleSubmit(onAuthSubmit)}
-          btnClass={"auth-form__button"}
+          onClick={handleSubmit(onAuthSubmit)}
+          className={"auth-form__button"}
         >
           LOGIN
         </Button>

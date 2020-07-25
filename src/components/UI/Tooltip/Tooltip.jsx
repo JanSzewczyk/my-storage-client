@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 
 import "./Tooltip.scss";
 
-const Tooltip = React.memo((props) => {
-  const { children, text, type, position, className, color } = props;
-
+const Tooltip = React.memo(({ children, text, type, position, className, color } ) => {
+  
   const [show, setShow] = useState(false);
 
   const onMouseOverHandler = () => {

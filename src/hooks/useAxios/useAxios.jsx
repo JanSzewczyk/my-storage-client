@@ -1,10 +1,13 @@
-import { useEffect, useReducer, useCallback } from "react";
+import { useReducer, useCallback } from "react";
 
 import { reducer, initialState, actions } from "./use-axios-reducer";
+
 import axios from "../../shared/config/axios";
 
 // import * as defaultAxios from "axios";
 // const CancelToken = axios.CancelToken;
+
+// TODO refactor this hook !!!
 
 const useAxios = ({
   url,
@@ -78,23 +81,19 @@ const useAxios = ({
       .then((response) => {
         dispatch({ type: actions.success, payload: response });
       })
-
       .catch((error) => {
         dispatch({ type: actions.fail, payload: error });
       });
   }, [method, options, url]);
 
-  return {
-    sendRequest,
-    ...results,
-    // @deprecated
-    // query: () => {
-    //   setInnerTrigger(+new Date());
-    // },
-    // reFetch: () => {
-    //   setInnerTrigger(+new Date());
-    // },
-  };
+  return [sendRequest, { ...results }];
+  // @deprecated
+  // query: () => {
+  //   setInnerTrigger(+new Date());
+  // },
+  // reFetch: () => {
+  //   setInnerTrigger(+new Date());
+  // },
 };
 
 export default useAxios;

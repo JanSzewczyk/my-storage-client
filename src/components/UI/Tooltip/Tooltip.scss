@@ -7,14 +7,15 @@
   }
 
   &__message {
-    display: block;
+    position: absolute;
+    // display: block;
+
     background: #fafafa;
     color: #242424;
     font-size: 12px;
     padding: 8px;
     line-height: 16px;
     white-space: nowrap;
-    position: absolute;
     z-index: 100;
     pointer-events: none;
 

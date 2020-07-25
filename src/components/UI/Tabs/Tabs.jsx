@@ -5,22 +5,16 @@ import TabTitle from "./TabTitle/TabTitle";
 
 import "./Tabs.scss";
 
-const Tabs = React.memo((props) => {
-  const { children } = props;
-
+const Tabs = React.memo(({ children, className }) => {
   const setFirstActiveTab = () => {
-    if (children.length !== 0) {
-      for (const index in children) {
+    if (children.length !== 0)
+      for (const index in children)
         if (!children[index].props.disabled) return Number(index);
-      }
-    }
 
     return null;
   };
 
   const [activeTab, setActiveTab] = useState(setFirstActiveTab());
-
-  console.log("test", setFirstActiveTab());
 
   const titles = useMemo(
     () =>
@@ -48,6 +42,7 @@ const Tabs = React.memo((props) => {
 
 Tabs.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default Tabs;

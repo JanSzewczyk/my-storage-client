@@ -103,7 +103,7 @@ const StoreForm = React.memo((props) => {
             hasError={errors.productId}
             errorMessage={"Select required."}
           />
-          <Button clicked={() => setAddNewProduct(true)}>
+          <Button onClick={() => setAddNewProduct(true)}>
             add new product
           </Button>
         </Aux>
@@ -123,7 +123,7 @@ const StoreForm = React.memo((props) => {
         hasError={errors.amount}
         errorMessage={`Min value is 1.`}
       />
-      <Button clicked={handleSubmit(onSubmit)} disabled={products.length === 0}>
+      <Button onClick={handleSubmit(onSubmit)} disabled={products.length === 0}>
         add
       </Button>
     </form>

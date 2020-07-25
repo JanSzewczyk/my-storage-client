@@ -28,7 +28,7 @@ export default create({
   // Form colors
   inputBg: "white",
   inputBorder: "silver",
-  inputTextColor: "#f2f2f2",
+  inputTextColor: "#181818",
   inputBorderRadius: 4,
 
   brandTitle: "My Storage UI Storybook",

@@ -8,8 +8,9 @@ import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
-import Table, { useQuery } from "../../../UI/Table";
+import Table from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
+import useQuery from "../../../../hooks/useQuery";
 
 import "./StorageItems.scss";
 

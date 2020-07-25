@@ -7,7 +7,7 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import { useQuery } from "../../../UI/Table";
+import useQuery from "../../../../hooks/useQuery";
 import Pagination from "../../../UI/Pagination/Pagination";
 
 import Loading from "../../../UI/Loading/Loading";

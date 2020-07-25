@@ -6,9 +6,10 @@ import * as action from "../../../../store";
 
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import Table, { useQuery } from "../../../UI/Table";
+import Table from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
+import useQuery from "../../../../hooks/useQuery";
 
 import "./StorageEmployees.scss";
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
 import Button from "./Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
@@ -8,12 +9,15 @@ export default {
   title: "Button",
   component: Button,
   componentSubtitle: "Buttons and types",
+  decorators: [withKnobs],
 };
 
 export const Default = () => (
   <Aux>
-    <Button clicked={action("clicked")}>Default</Button>
-    <Button clicked={action("clicked")} disabled>
+    <Button onClick={action("onClick")} disabled={boolean("disabled", false)}>
+      {text("text", "Default")}
+    </Button>
+    <Button onClick={action("onClick")} disabled>
       Disable Default
     </Button>
   </Aux>
@@ -21,10 +25,14 @@ export const Default = () => (
 
 export const Primary = () => (
   <Aux>
-    <Button clicked={action("clicked")} btnType={"primary"}>
-      Primary
+    <Button
+      onClick={action("onClick")}
+      btnType={"primary"}
+      disabled={boolean("disabled", false)}
+    >
+      {text("text", "Primary")}
     </Button>
-    <Button clicked={action("clicked")} btnType={"primary"} disabled>
+    <Button onClick={action("onClick")} btnType={"primary"} disabled>
       Disable Primary
     </Button>
   </Aux>
@@ -32,10 +40,14 @@ export const Primary = () => (
 
 export const Warning = () => (
   <Aux>
-    <Button clicked={action("clicked")} btnType={"warning"}>
-      Warning
+    <Button
+      onClick={action("onClick")}
+      btnType={"warning"}
+      disabled={boolean("disabled", false)}
+    >
+      {text("text", "Warning")}
     </Button>
-    <Button clicked={action("clicked")} btnType={"warning"} disabled>
+    <Button onClick={action("onClick")} btnType={"warning"} disabled>
       Disable Warning
     </Button>
   </Aux>

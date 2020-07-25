@@ -17,23 +17,23 @@ import { log } from "../../../hoc/withNotificationProvider";
 
 import "./Dashboard.scss";
 
-import useAxios from "../../../hooks/useAxios/useAxios";
+// import useAxios from "../../../hooks/useAxios/useAxios";
 
 const Dashboard = (props) => {
-  const { response, loading, error, sendRequest } = useAxios({
-    url: `storages`,
-    method: "GET",
-    // options: {
-    //   params: { gender },
-    // },
-    // trigger: null,
-    // // // or
-    // // // trigger: { gender }
-    // forceDispatchEffect: () => false, // AUTO RUN only if gender is set
-  });
+  // const { response, loading, error, sendRequest } = useAxios({
+  //   url: `storages`,
+  //   method: "GET",
+  //   // options: {
+  //   //   params: { gender },
+  //   // },
+  //   // trigger: null,
+  //   // // // or
+  //   // // // trigger: { gender }
+  //   // forceDispatchEffect: () => false, // AUTO RUN only if gender is set
+  // });
 
-  console.log(response);
-  console.log(loading);
+  // console.log(response);
+  // console.log(loading);
 
   return (
     <Aux>
@@ -107,7 +107,7 @@ const Dashboard = (props) => {
               <DropdownItem onClick={() => console.log("Elo jake")}>
                 elo
               </DropdownItem>
-              <DropdownItem onClick={sendRequest}>elo1</DropdownItem>
+              {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
             </DropDown>
             <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
@@ -132,7 +132,7 @@ const Dashboard = (props) => {
               Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie kto
               cię straci,
             </EllipsisWrapper>
-            <Button clicked={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button>
+            <Button onClick={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button>
           </div>
         </Tile>
         <Tile
