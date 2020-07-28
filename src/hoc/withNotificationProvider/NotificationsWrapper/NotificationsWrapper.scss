@@ -1,4 +1,4 @@
-@import "../../../../assets/variables/variables.scss";
+@import "../../../assets/variables/variables.scss";
 
 .notifications-wrapper {
   z-index: $notificationZIndex;
@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column-reverse;
   overflow-y: hidden;
-  top: 16px;
-  right: 16px;
-  max-height: calc(100vh - 32px);
+  top: 8px;
+  right: 8px;
+  max-height: calc(100vh - 16px);
+  width: 600px;
 }

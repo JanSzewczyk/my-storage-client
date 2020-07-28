@@ -1,19 +1,24 @@
-@import "../../../../assets/variables/variables.scss";
+@import "../../../assets/variables/variables.scss";
 
 .notification {
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  padding: 8px;
   color: $whiteColor;
-  background-color: $grey1Color;
-  border: 1px solid $grey2Color;
-  width: 380px;
   margin-bottom: 8px;
   font-size: $fontMD;
 
   &:hover {
-    border-color: $whiteColor;
     cursor: pointer;
+  }
+
+  &--info {
+    background-color: $grey1Color;
+    border: 1px solid $grey2Color;
+
+    &:hover {
+      border-color: $whiteColor;
+    }
   }
 
   &--success {
