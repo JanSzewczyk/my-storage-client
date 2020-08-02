@@ -1,6 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../hoc/withNotificationProvider";
+// import { error } from "../../hoc/withNotificationProvider";
 import { createSearchQuery } from "../../shared/utils/utility";
 
 export const itemStorageListLoadStart = () => {
@@ -35,7 +35,7 @@ export const getStorageItemsList = (storageId, queryData) => {
         dispatch(itemStorageListLoadSuccess(res.data));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(itemStorageListLoadFail());
       });
   };
@@ -70,7 +70,7 @@ export const getStorageItemsEmployee = (storageId) => {
         dispatch(itemStorageListEmployeeLoadSuccess(res.data));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(itemStorageListEmployeeLoadFail());
       });
   };

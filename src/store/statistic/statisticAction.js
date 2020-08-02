@@ -1,6 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../hoc/withNotificationProvider";
+// import { error } from "../../hoc/withNotificationProvider";
 import { updateObject } from "../../shared/utils/utility";
 
 export const statisticStorageLoadStart = () => {
@@ -38,7 +38,7 @@ export const getStorageStatistics = (storageId) => {
         dispatch(statisticStorageLoadSuccess(res.data));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(statisticStorageLoadFail());
       });
   };

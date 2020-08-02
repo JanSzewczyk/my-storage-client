@@ -1,6 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error } from "../../hoc/withNotificationProvider";
+// import { error } from "../../hoc/withNotificationProvider";
 
 export const productsListLoadStart = () => {
   return {
@@ -31,7 +31,7 @@ export const getProductsList = (ownerId) => {
         dispatch(productsListLoadSuccess(res.data));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(productsListLoadFail());
       });
   };

@@ -10,7 +10,7 @@ import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
 
 const StoragePanel = React.memo((props) => {
   const { storage, onEdit } = props;
-  return (
+  return storage ? (
     <Aux>
       <TileContent>
         <DataView label={"Name:"} data={storage.name} />
@@ -36,6 +36,8 @@ const StoragePanel = React.memo((props) => {
         }
       />
     </Aux>
+  ) : (
+    <> No Data </>
   );
 });
 

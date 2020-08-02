@@ -1,8 +1,4 @@
-import withNotificationProvider, {
-  log,
-  success,
-  error,
-} from "./withNotificationProvider";
+import withNotificationProvider from "./withNotificationProvider";
 import {
   reducer,
   initialState,
@@ -12,9 +8,6 @@ import {
 import NotificationContext from "./notification-context/notification-context";
 
 export {
-  log,
-  success,
-  error,
   reducer,
   initialState,
   NOTIFICATION_ADD,

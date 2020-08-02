@@ -1,24 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 
 import _ from "lodash";
 
-import useNotification from "../../hooks/useNotification/useNotification";
+import useNotification from "../../hooks/useNotification";
 import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
 
 import axios from "../../shared/config/axios";
 
 const withErrorHandler = (Component, ignoreStatus = []) => {
+  
   const WithErrorHandler = (props) => {
     const notification = useNotification();
 
-    useEffect(() => {
-      console.log("useEffect");
-      const responseInterceptor = axios.interceptors.response.use(
-        (response) => {
-          return response;
-        },
+    useLayoutEffect(() => {
+      const xxx = axios.interceptors.response.use(
+        (response) => response,
         (error) => {
-          console.log("elloo");
           if (error.response) {
             if (!_.includes(ignoreStatus, Number(error.response.status))) {
               const responseData = error.response.data;
@@ -26,19 +23,23 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
               const errorMessage = (
                 <ApiErrorMessage
                   url={error.config.url}
-                  message={responseData.message}
+                  message={
+                    responseData.message
+                      ? responseData.message
+                      : responseData.title
+                  }
                   status={responseData.status}
-                  error={getErrorMessage(responseData.error)}
+                  error={
+                    responseData.error && getErrorMessage(responseData.error)
+                  }
                 />
               );
-
               notification.add(errorMessage, "error", null);
             }
           } else {
             const errorMessage = (
               <ApiErrorMessage url={error.config.url} message={error.message} />
             );
-
             notification.add(errorMessage, "error", null);
           }
 
@@ -46,7 +47,10 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
         }
       );
 
-      return () => axios.interceptors.response.eject(responseInterceptor);
+      return () => {
+        axios.interceptors.response.eject(xxx);
+        console.log("useEffect return()");
+      };
     }, [notification]);
 
     const getErrorMessage = (errorMessage) => {

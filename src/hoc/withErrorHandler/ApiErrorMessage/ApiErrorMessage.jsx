@@ -7,7 +7,9 @@ const ApiErrorMessage = ({ message, url, status, error }) => {
   return (
     <div className={"api-error-message"}>
       <span className={"api-error-message__url"}>{url}</span>
-      <span className={"api-error-message__message"}>{message}</span>
+      {message && (
+        <span className={"api-error-message__message"}>{message}</span>
+      )}
       {status && (
         <span className={"api-error-message__status"}>Status {status}</span>
       )}
@@ -17,11 +19,10 @@ const ApiErrorMessage = ({ message, url, status, error }) => {
 };
 
 ApiErrorMessage.propTypes = {
-    url: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    status: PropTypes.number,
-    error: PropTypes.string,
-}
-
+  url: PropTypes.string.isRequired,
+  message: PropTypes.string,
+  status: PropTypes.number,
+  error: PropTypes.string,
+};
 
 export default ApiErrorMessage;

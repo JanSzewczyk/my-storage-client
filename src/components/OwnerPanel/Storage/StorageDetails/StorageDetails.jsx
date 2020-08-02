@@ -57,7 +57,7 @@ const StorageDetails = React.memo((props) => {
       }}
       header={{
         title: "Storage",
-        subtitle: "Storage informations",
+        subtitle: "Storage information",
       }}
     >
       {storageLoading ? <Loading /> : !edit ? storagePanel : storageEditPanel}

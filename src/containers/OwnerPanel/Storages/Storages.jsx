@@ -9,6 +9,7 @@ import Loading from "../../../components/UI/Loading/Loading";
 import StorageItem from "../../../components/OwnerPanel/Storages/StorageItem/StorageItem";
 import AddStorageTile from "../../../components/OwnerPanel/Storages/AddStorageTile/AddStorageTile";
 import CreateStorageModal from "../../../components/OwnerPanel/Storages/CreateStorageModal/CreateStorageModal";
+import withErrorHandler from "../../../hoc/withErrorHandler";
 
 const Storages = (props) => {
   const { onGetStorageList, storageList, storageListLoading } = props;
@@ -16,6 +17,7 @@ const Storages = (props) => {
   const [showAddStorage, setShowAddStorage] = useState(false);
 
   useEffect(() => {
+    console.log("useEffect Storages");
     onGetStorageList();
   }, [onGetStorageList]);
 
@@ -41,11 +43,14 @@ const Storages = (props) => {
     [redirectToStorageHandler, storageList]
   );
 
+  const createStorageModal = useMemo(
+    () => <CreateStorageModal onCloseModal={() => setShowAddStorage(false)} />,
+    []
+  );
+
   return (
     <AppContent>
-      {showAddStorage && (
-        <CreateStorageModal onCloseModal={() => setShowAddStorage(false)} />
-      )}
+      {showAddStorage && createStorageModal}
       {storageListLoading ? (
         <Loading />
       ) : (
@@ -71,4 +76,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Storages);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Storages));

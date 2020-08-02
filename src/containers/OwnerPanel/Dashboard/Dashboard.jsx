@@ -11,9 +11,6 @@ import DropDown from "../../../components/UI/DropDown/DropDown";
 import DropdownItem from "../../../components/UI/DropDown/DropdownItem/DropdownItem";
 import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrapper";
 import Tooltip from "../../../components/UI/Tooltip/Tooltip";
-import Button from "../../../components/UI/Button/Button";
-
-import { log } from "../../../hoc/withNotificationProvider";
 
 import "./Dashboard.scss";
 
@@ -132,7 +129,7 @@ const Dashboard = (props) => {
               Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie kto
               cię straci,
             </EllipsisWrapper>
-            <Button onClick={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button>
+            {/* <Button onClick={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button> */}
           </div>
         </Tile>
         <Tile

@@ -1,6 +1,5 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error, success } from "../../hoc/withNotificationProvider";
 import { createSearchQuery, updateObject } from "../../shared/utils/utility";
 import browserHistory from "../../shared/config/history";
 
@@ -44,7 +43,7 @@ export const getEmployeesList = (queryData) => {
         dispatch(employeeListLoadSuccess(res.data.content, res.data.page));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeListLoadFail());
       });
   };
@@ -84,7 +83,7 @@ export const getStorageEmployeesList = (storageId, queryData) => {
         );
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeStorageListLoadFail());
       });
   };
@@ -114,16 +113,15 @@ export const editEmployee = (employeeId, updatedEmployee) => {
     axios
       .put(`employees/${employeeId}`, updatedEmployee)
       .then((res) => {
-        const newEmployee = res.data;
-        success(
-          `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been updated`
-        );
+        // const newEmployee = res.data;
+        // success(/
+          // `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been updated`
+        // );
         dispatch(employeeEditSuccess());
         browserHistory.push("/");
         browserHistory.push("/employees");
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeEditFail());
       });
   };
@@ -153,16 +151,16 @@ export const createEmployee = (employee) => {
     axios
       .post(`employees`, employee)
       .then((res) => {
-        const newEmployee = res.data;
-        success(
-          `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`
-        );
+        // const newEmployee = res.data;
+        // success(
+        //   `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`
+        // );
         dispatch(employeeCreateSuccess());
         browserHistory.push("/");
         browserHistory.push("/employees");
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeCreateFail());
       });
   };
@@ -203,7 +201,7 @@ export const removeEmployee = (employeeId) => {
         );
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
       });
   };
 };
