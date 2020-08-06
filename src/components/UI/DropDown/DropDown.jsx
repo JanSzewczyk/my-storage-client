@@ -6,9 +6,9 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 import "./DropDown.scss";
+import DropdownWrapper from "./DropdownWrapper/DropdownWrapper";
 
-const DropDown = (props) => {
-  const { title, btnType, children, top, left } = props;
+const DropDown = ({ type, title, icon, btnType, children, top, left }) => {
   const [active, setActive] = useState(false);
 
   const onShow = () => {
@@ -38,33 +38,47 @@ const DropDown = (props) => {
     <ArrowDropDownIcon className={arrowClasses.join(" ")} />
   );
 
-  const wrapperClasses = ["drop-down__wrapper"];
-  left
-    ? wrapperClasses.push("drop-down__wrapper--left")
-    : wrapperClasses.push("drop-down__wrapper--right");
-  top
-    ? wrapperClasses.push("drop-down__wrapper--top")
-    : wrapperClasses.push("drop-down__wrapper--bottom");
+  const IBClasses = ["drop-down__icon-button"];
+  active && IBClasses.push("drop-down__icon-button--active");
 
   return (
     <div className={"drop-down"}>
-      <Button clicked={active ? onClose : onShow} btnType={btnType}>
-        {left && arrowIcon}
-        {title}
-        {!left && arrowIcon}
-      </Button>
-
-      {active && <div className={wrapperClasses.join(" ")}>{children}</div>}
+      {type === "button" && (
+        <Button onClick={active ? onClose : onShow} btnType={btnType}>
+          {left && arrowIcon}
+          {title}
+          {!left && arrowIcon}
+        </Button>
+      )}
+      {type === "icon" && (
+        <div
+          className={IBClasses.join(" ")}
+          onClick={active ? onClose : onShow}
+        >
+          {icon}
+        </div>
+      )}
+      {active && (
+        <DropdownWrapper top={top} left={left}>
+          {children}
+        </DropdownWrapper>
+      )}
     </div>
   );
 };
 
 DropDown.propTypes = {
-  title: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["button", "icon"]),
+  icon: PropTypes.node,
+  title: PropTypes.string,
   top: PropTypes.bool,
   left: PropTypes.bool,
   btnType: PropTypes.oneOf(["primary", "warning"]),
   children: PropTypes.node,
+};
+
+DropDown.defaultProps = {
+  type: "button",
 };
 
 export default DropDown;

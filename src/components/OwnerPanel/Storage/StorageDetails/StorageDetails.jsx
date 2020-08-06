@@ -8,6 +8,11 @@ import Tile from "../../../UI/Tile/Tile";
 import Loading from "../../../UI/Loading/Loading";
 import StoragePanel from "./StoragePanel/StoragePanel";
 import StorageEditPanel from "./StorageEditPanel/StorageEditPanel";
+import DropDown from "../../../UI/DropDown/DropDown";
+import DropdownItem from "../../../UI/DropDown/DropdownItem/DropdownItem";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const StorageDetails = React.memo((props) => {
   const {
@@ -19,6 +24,7 @@ const StorageDetails = React.memo((props) => {
     storageEditLoading,
     onRemoveStorage,
   } = props;
+
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
@@ -58,6 +64,16 @@ const StorageDetails = React.memo((props) => {
       header={{
         title: "Storage",
         subtitle: "Storage information",
+        right: !edit && (
+          <DropDown type={"icon"} icon={<MoreHorizIcon />}>
+            <DropdownItem
+              text={"edit"}
+              icon={<EditIcon />}
+              onClick={() => setEdit(true)}
+            />
+            <DropdownItem text={"remove"} icon={<DeleteIcon />} />
+          </DropDown>
+        ),
       }}
     >
       {storageLoading ? <Loading /> : !edit ? storagePanel : storageEditPanel}

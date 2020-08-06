@@ -1,12 +1,29 @@
 @import "../../../../assets/variables/variables.scss";
 
 .dropdown-item {
-  padding: 4px;
-  font-family: $font;
-  font-size: $fontMD;
+  height: 28px;
+  display: flex;
+  align-items: center;
 
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  &__icon {
+    margin: 0;
+    padding: 0 4px 0 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  span {
+    font-family: $font;
+    font-size: $fontMD;
+  }
+
+  &--clickable {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
   }
 }

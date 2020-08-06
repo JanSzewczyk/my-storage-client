@@ -8,12 +8,11 @@ import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
 import axios from "../../shared/config/axios";
 
 const withErrorHandler = (Component, ignoreStatus = []) => {
-  
   const WithErrorHandler = (props) => {
     const notification = useNotification();
 
     useLayoutEffect(() => {
-      const xxx = axios.interceptors.response.use(
+      const responseInterceptor = axios.interceptors.response.use(
         (response) => response,
         (error) => {
           if (error.response) {
@@ -34,13 +33,23 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
                   }
                 />
               );
-              notification.add(errorMessage, "error", null);
+
+              notification.add({
+                content: errorMessage,
+                type: "error",
+                duration: null,
+              });
             }
           } else {
             const errorMessage = (
               <ApiErrorMessage url={error.config.url} message={error.message} />
             );
-            notification.add(errorMessage, "error", null);
+            
+            notification.add({
+              content: errorMessage,
+              type: "error",
+              duration: null,
+            });
           }
 
           return Promise.reject(error);
@@ -48,8 +57,7 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
       );
 
       return () => {
-        axios.interceptors.response.eject(xxx);
-        console.log("useEffect return()");
+        axios.interceptors.response.eject(responseInterceptor);
       };
     }, [notification]);
 

@@ -17,10 +17,8 @@ const withNotificationProvider = (Component) => {
   const WithNotificationProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const add = useCallback((content, type = "info", duration = 10000) => {
+    const add = useCallback(({ content, type = "info", duration = 10000 }) => {
       const id = uuidv4();
-
-      console.log("elo ", { id, content, type, duration });
 
       dispatch({
         type: NOTIFICATION_ADD,

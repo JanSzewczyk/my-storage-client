@@ -10,6 +10,7 @@ import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
 
 const StoragePanel = React.memo((props) => {
   const { storage, onEdit } = props;
+  
   return storage ? (
     <Aux>
       <TileContent>
