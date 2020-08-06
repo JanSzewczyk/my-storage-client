@@ -20,7 +20,7 @@ const DropdownWrapper = ({ children, style, top, left }) => {
 };
 
 DropdownWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   style: PropTypes.object,
   top: PropTypes.bool,
   left: PropTypes.bool,
