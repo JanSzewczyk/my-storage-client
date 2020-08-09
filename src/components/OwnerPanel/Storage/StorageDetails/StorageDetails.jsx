@@ -64,14 +64,15 @@ const StorageDetails = React.memo((props) => {
       header={{
         title: "Storage",
         subtitle: "Storage information",
-        right: !edit && (
+        right: (
           <DropDown type={"icon"} icon={<MoreHorizIcon />}>
             <DropdownItem
               text={"edit"}
               icon={<EditIcon />}
               onClick={() => setEdit(true)}
+              disabled={edit}
             />
-            <DropdownItem text={"remove"} icon={<DeleteIcon />} />
+            <DropdownItem text={"remove"} icon={<DeleteIcon />} disabled />
           </DropDown>
         ),
       }}
