@@ -1,6 +1,8 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { error, success } from "../../hoc/withNotificationProvider";
+
+// import { error, success } from "../../hoc/withNotificationProvider";/
+
 import { updateObject, createSearchQuery } from "../../shared/utils/utility";
 import browserHistory from "../../shared/config/history";
 
@@ -42,7 +44,7 @@ export const getStorageActionsList = (storageId, queryData) => {
         dispatch(actionStorageListLoadSuccess(res.data));
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(actionStorageListLoadFail());
       });
   };
@@ -74,13 +76,13 @@ export const removeAction = (removedItems) => {
       .post(`actions/remove`, removedItems)
       .then((res) => {
         dispatch(actionRemoveSuccess());
-        success("REMOVE action success");
+        // success("REMOVE action success");
         // TODO change logic
         browserHistory.push("/xxx");
         browserHistory.push("/");
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(actionRemoveFail());
       });
   };
@@ -112,13 +114,13 @@ export const storeAction = (storedItems) => {
       .post(`actions/store`, storedItems)
       .then((res) => {
         dispatch(actionStoreSuccess());
-        success("STORE action success");
+        // success("STORE action success");
         // TODO change logic
         browserHistory.push("/xxx");
         browserHistory.push("/");
       })
       .catch((err) => {
-        error(err.response ? err.response.data.message : "Server error");
+        // error(err.response ? err.response.data.message : "Server error");
         dispatch(actionStoreFail());
       });
   };

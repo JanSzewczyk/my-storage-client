@@ -47,7 +47,7 @@ const StorageItem = (props) => {
         </div>
       </TileContent>
       <TileBottom
-        right={<Button clicked={onRedirectToStorage}>show storage</Button>}
+        right={<Button onClick={onRedirectToStorage}>show storage</Button>}
       />
     </Tile>
   );

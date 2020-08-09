@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Notification.scss";
 
-const Notification = (props) => {
-  const { children, type, onRemove } = props;
-
+const Notification = ({ children, type, duration, onRemove }) => {
   const removeRef = useRef();
   removeRef.current = onRemove;
 
@@ -13,11 +11,14 @@ const Notification = (props) => {
   type && notificationStyles.push(`notification--${type}`);
 
   useEffect(() => {
-    const duration = 5000;
-    const id = setTimeout(() => removeRef.current(), duration);
+    let id = null;
+    
+    if (duration) {
+      id = setTimeout(() => removeRef.current(), duration);
+    }
 
-    return () => clearTimeout(id);
-  }, []);
+    return () => duration && id && clearTimeout(id);
+  }, [duration]);
 
   return (
     <div className={notificationStyles.join(" ")} onClick={onRemove}>
@@ -27,9 +28,15 @@ const Notification = (props) => {
 };
 
 Notification.propTypes = {
-  children: PropTypes.any,
-  type: PropTypes.oneOf(["success", "error", undefined]),
+  children: PropTypes.node.isRequired,
+  type: PropTypes.oneOf(["info", "success", "error"]),
   onRemove: PropTypes.func.isRequired,
+  duration: PropTypes.number,
+};
+
+Notification.defaultValues = {
+  type: "info",
+  duration: 10 * 1000,
 };
 
 export default Notification;

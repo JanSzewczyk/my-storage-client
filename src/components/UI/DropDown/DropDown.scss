@@ -3,6 +3,27 @@
 .drop-down {
   position: relative;
 
+  &__icon-button {
+    color: $whiteColor;
+    opacity: 0.6;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
   &__icon {
     height: 16px;
     width: 16px;
@@ -15,31 +36,5 @@
 
   &__icon--right {
     margin-left: 4px;
-  }
-
-  &__wrapper {
-    position: absolute;
-    z-index: 2;
-    min-width: 64px;
-    background-color: $grey1Color;
-    border: 1px solid $greyColor;
-    border-radius: 4px;
-    padding: 8px;
-    overflow: hidden;
-    transition: height 500ms ease;
-    display: flex;
-    flex-direction: column;
-  }
-  &__wrapper--left {
-    left: 0;
-  }
-  &__wrapper--right {
-    right: 0;
-  }
-  &__wrapper--top {
-    bottom: 40px;
-  }
-  &__wrapper--bottom {
-    top: 40px;
   }
 }

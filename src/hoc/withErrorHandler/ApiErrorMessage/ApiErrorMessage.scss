@@ -1,0 +1,26 @@
+.api-error-message {
+    display: flex;
+    flex-direction: column;
+  
+    &__url {
+      font-size: 14px;
+    }
+  
+    &__message {
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  
+    &__status {
+      opacity: 0.8;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  
+    &__error {
+      opacity: 0.8;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+  

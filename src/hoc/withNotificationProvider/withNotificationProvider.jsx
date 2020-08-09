@@ -1,57 +1,37 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useReducer } from "react";
 import { createPortal } from "react-dom";
 import { v4 as uuidv4 } from "uuid";
-import ee from "event-emitter";
-import PropTypes from "prop-types";
 
-import NotificationContext from "./notification-context";
-import NotificationsWrapper from "../../components/UI/Notification/NotificationsWrapper/NotificationsWrapper";
-import Notification from "../../components/UI/Notification/Notification/Notification";
+import NotificationsWrapper from "./NotificationsWrapper/NotificationsWrapper";
+import Notification from "../../components/UI/Notification/Notification";
 
-const emitter = ee();
-
-export const log = (msg) => {
-  emitter.emit("log", msg);
-};
-
-export const success = (msg) => {
-  emitter.emit("success", msg);
-};
-
-export const error = (msg) => {
-  emitter.emit("error", msg);
-};
+import {
+  reducer,
+  initialState,
+  NOTIFICATION_ADD,
+  NOTIFICATION_REMOVE,
+  NotificationContext,
+} from "./";
 
 const withNotificationProvider = (Component) => {
   const WithNotificationProvider = (props) => {
-    emitter.on("log", (msg) => {
-      add(msg);
-    });
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    emitter.on("success", (msg) => {
-      add(msg, "success");
-    });
+    const add = useCallback(({ content, type = "info", duration = 10000 }) => {
+      const id = uuidv4();
 
-    emitter.on("error", (msg) => {
-      add(msg, "error");
-    });
+      dispatch({
+        type: NOTIFICATION_ADD,
+        newNotification: { id, content, type, duration },
+      });
+    }, []);
 
-    const [notifications, setNotifications] = useState([]);
-
-    const add = useCallback(
-      (content, type) => {
-        const id = uuidv4();
-        setNotifications([...notifications, { id, content, type }]);
-      },
-      [notifications]
-    );
-
-    const remove = useCallback(
-      (id) => {
-        setNotifications(notifications.filter((t) => t.id !== id));
-      },
-      [notifications]
-    );
+    const remove = useCallback((id) => {
+      dispatch({
+        type: NOTIFICATION_REMOVE,
+        id: id,
+      });
+    }, []);
 
     const providerValue = useMemo(() => {
       return { add, remove };
@@ -62,10 +42,11 @@ const withNotificationProvider = (Component) => {
         <Component {...props} />
         {createPortal(
           <NotificationsWrapper>
-            {notifications.map((notification) => (
+            {state.notifications.map((notification) => (
               <Notification
                 key={notification.id}
                 type={notification.type}
+                duration={notification.duration}
                 onRemove={() => remove(notification.id)}
               >
                 {notification.content}
@@ -79,10 +60,6 @@ const withNotificationProvider = (Component) => {
   };
 
   return WithNotificationProvider;
-};
-
-withNotificationProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default withNotificationProvider;

@@ -1,42 +1,81 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 
-import { useNotification } from "../withNotificationProvider";
+import _ from "lodash";
+
+import useNotification from "../../hooks/useNotification";
+import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
 
 import axios from "../../shared/config/axios";
 
-const withErrorHandler = (Component) => {
+const withErrorHandler = (Component, ignoreStatus = []) => {
   const WithErrorHandler = (props) => {
     const notification = useNotification();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const responseInterceptor = axios.interceptors.response.use(
-        (response) => {
-        //   console.log(response.data);
-        //   console.log(response.status);
-        //   console.log(response.statusText);
-        //   console.log(response.headers);
-        //   console.log(response.config);
-
-          return response;
-        },
+        (response) => response,
         (error) => {
-          //   console.error("Error response::", error.response);
-          //   console.error("Error config::", error.config);
-          //   console.error("Error Message::", error.message);
-          //   console.error("Error name::", error.name);
-          //   console.error("Error statusCode::", error.status);
-          //   console.error("Error errno::", error.errno);
-          //   console.error("Error syscall::", error.syscall);
-          //   console.error("Error stack::", error.stack);
-          //   console.error("Error request::", error.request);
-          notification.add(error.message, "error");
-          // Do something with response error
+          if (error.response) {
+            if (!_.includes(ignoreStatus, Number(error.response.status))) {
+              const responseData = error.response.data;
+
+              const errorMessage = (
+                <ApiErrorMessage
+                  url={error.config.url}
+                  message={
+                    responseData.message
+                      ? responseData.message
+                      : responseData.title
+                  }
+                  status={responseData.status}
+                  error={
+                    responseData.error && getErrorMessage(responseData.error)
+                  }
+                />
+              );
+
+              notification.add({
+                content: errorMessage,
+                type: "error",
+                duration: null,
+              });
+            }
+          } else {
+            const errorMessage = (
+              <ApiErrorMessage url={error.config.url} message={error.message} />
+            );
+            
+            notification.add({
+              content: errorMessage,
+              type: "error",
+              duration: null,
+            });
+          }
+
           return Promise.reject(error);
         }
       );
 
-      return () => axios.interceptors.response.eject(responseInterceptor);
+      return () => {
+        axios.interceptors.response.eject(responseInterceptor);
+      };
     }, [notification]);
+
+    const getErrorMessage = (errorMessage) => {
+      let message = "";
+
+      if (
+        errorMessage &&
+        errorMessage.length > 0 &&
+        Array.isArray(errorMessage)
+      ) {
+        message = errorMessage.join("\n");
+      } else {
+        message = `${errorMessage}`;
+      }
+
+      return message;
+    };
 
     return <Component {...props} />;
   };

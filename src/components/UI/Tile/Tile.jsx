@@ -98,4 +98,13 @@ Tile.propTypes = {
   children: PropTypes.node,
 };
 
+Tile.defaultProps = {
+  tileSize: {
+    sm: "sm-12",
+    md: "md-12",
+    lg: "lg-12",
+    xl: "xl-12",
+  },
+};
+
 export default Tile;

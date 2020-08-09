@@ -3,38 +3,39 @@ import PropTypes from "prop-types";
 
 import "./Tooltip.scss";
 
-const Tooltip = React.memo(({ children, text, type, position, className, color } ) => {
-  
-  const [show, setShow] = useState(false);
+const Tooltip = React.memo(
+  ({ children, text, type, position, className, color }) => {
+    const [show, setShow] = useState(false);
 
-  const onMouseOverHandler = () => {
-    setShow(true);
-  };
+    const onMouseOverHandler = () => {
+      setShow(true);
+    };
 
-  const onMouseLeaveHandler = () => {
-    setShow(false);
-  };
+    const onMouseLeaveHandler = () => {
+      setShow(false);
+    };
 
-  let tooltipClasses = ["tooltip"];
-  type && tooltipClasses.push(`tooltip--${type}`);
-  className && tooltipClasses.push(className);
+    let tooltipClasses = ["tooltip"];
+    type && tooltipClasses.push(`tooltip--${type}`);
+    className && tooltipClasses.push(className);
 
-  let TMClasses = ["tooltip__message"];
-  position && TMClasses.push(`tooltip__message--${position}`);
-  color && TMClasses.push(`tooltip__message--${color}`);
-  color && TMClasses.push(`tooltip__message--${position}-${color}`);
+    let TMClasses = ["tooltip__message"];
+    position && TMClasses.push(`tooltip__message--${position}`);
+    color && TMClasses.push(`tooltip__message--${color}`);
+    color && TMClasses.push(`tooltip__message--${position}-${color}`);
 
-  return (
-    <span
-      className={tooltipClasses.join(" ")}
-      onMouseOver={onMouseOverHandler}
-      onMouseLeave={onMouseLeaveHandler}
-    >
-      {children}
-      {show && <div className={TMClasses.join(" ")}>{text}</div>}
-    </span>
-  );
-});
+    return (
+      <span
+        className={tooltipClasses.join(" ")}
+        onMouseOver={onMouseOverHandler}
+        onMouseLeave={onMouseLeaveHandler}
+      >
+        {children}
+        {show && <div className={TMClasses.join(" ")}>{text}</div>}
+      </span>
+    );
+  }
+);
 
 Tooltip.propTypes = {
   children: PropTypes.node,

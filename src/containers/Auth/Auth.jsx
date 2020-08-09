@@ -5,9 +5,9 @@ import * as action from "../../store";
 
 import AuthForm from "../../components/Auth/AuthForm/AuthForm";
 import Welcome from "../../components/Auth/Welcome/Welcome";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import "./Auth.scss";
-import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const Auth = (props) => {
   const { authLoading, error, onAuth, authenticated } = props;
@@ -41,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(Auth));
+)(withErrorHandler(Auth, [401, 400]));

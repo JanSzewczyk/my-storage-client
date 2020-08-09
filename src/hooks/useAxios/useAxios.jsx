@@ -1,6 +1,6 @@
 import { useReducer, useCallback } from "react";
 
-import { reducer, initialState, actions } from "./use-axios-reducer";
+import { reducer, initialState, actions } from "./axios-store/axios-reducer";
 
 import axios from "../../shared/config/axios";
 

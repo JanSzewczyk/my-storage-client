@@ -3,18 +3,29 @@ import PropTypes from "prop-types";
 
 import "./DropdownItem.scss";
 
-const DropdownItem = (props) => {
-  const { children, onClick } = props;
+const DropdownItem = ({ text, icon, onClick, style, disabled }) => {
+  const DIClasses = ["dropdown-item"];
+  !disabled && onClick && DIClasses.push("dropdown-item--clickable");
+  disabled && DIClasses.push("dropdown-item--disabled");
+
   return (
-    <div className={"dropdown-item"} onClick={onClick}>
-      {children}
-    </div>
+    <li
+      className={DIClasses.join(" ")}
+      onClick={!disabled && onClick && onClick}
+      style={style}
+    >
+      {icon && <div className={"dropdown-item__icon"}>{icon}</div>}
+      <span>{text}</span>
+    </li>
   );
 };
 
 DropdownItem.propTypes = {
-  children: PropTypes.node,
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.node,
   onClick: PropTypes.func,
+  style: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default DropdownItem;

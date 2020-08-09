@@ -4,7 +4,6 @@ import axios, {
 } from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import Cookies from "js-cookie";
-import { error } from "../../hoc/withNotificationProvider";
 
 const BASIC_TOKEN =
   "bXlzdG9yYWdlaWQ6MkpnWlJjc0FQdzBkYVlvZDk3S2FoRzZiWENsaHFHSDU=";
@@ -60,7 +59,6 @@ export const auth = (authData) => {
           dispatch(authFail("Invalid email or password."));
         } else {
           dispatch(authFail(null));
-          error("Server error");
         }
       });
   };
@@ -136,7 +134,6 @@ export const refreshAuth = (refreshToken) => {
       })
       .catch((err) => {
         dispatch(authLogout());
-        error(err.response ? err.response.data.message : "Server error");
       });
   };
 };

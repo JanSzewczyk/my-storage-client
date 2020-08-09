@@ -8,6 +8,7 @@ import StorageEmployees from "../../../../components/OwnerPanel/Storage/StorageE
 import StorageItems from "../../../../components/OwnerPanel/Storage/StorageItems/StorageItems";
 import StorageActions from "../../../../components/OwnerPanel/Storage/StorageActions/StorageActions";
 import StorageStatistics from "../../../../components/OwnerPanel/Storage/StorageStatistics/StorageStatistics";
+import withErrorHandler from "../../../../hoc/withErrorHandler/withErrorHandler";
 
 const StorageOwner = (props) => {
   const storageId = props.match.params.storageId;
@@ -49,4 +50,4 @@ const StorageOwner = (props) => {
   );
 };
 
-export default StorageOwner;
+export default withErrorHandler(StorageOwner);

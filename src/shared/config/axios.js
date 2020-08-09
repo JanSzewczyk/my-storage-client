@@ -4,9 +4,6 @@ const instance = axios.create({
   baseURL: "http://localhost:8080/",
 });
 
-instance.CancelToken = axios.CancelToken;
-instance.isCancel = axios.isCancel;
-
 export const setBasicToken = (token) => {
   instance.defaults.headers.common["Authorization"] = `Basic ${token}`;
 };
