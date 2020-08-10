@@ -8,12 +8,14 @@ import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/OwnerPanel/Dashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/OwnerPanel/Storages/Storages";
-import StorageOwner from "./containers/OwnerPanel/Storages/StorageOwner/StorageOwner";
+import Storage from "./containers/OwnerPanel/Storage/Storage";
 import Logout from "./containers/Auth/Logout/Logout";
 import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
+import { USER_ROLES } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
+import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -29,9 +31,10 @@ const App = (props) => {
     </Switch>
   ) : (
     <AppLayout>
-      {userRole === "OWNER" && (
+      {userRole === USER_ROLES.OWNER && (
         <Switch>
-          <Route path={"/storages/:storageId"} component={StorageOwner} />
+          <Route path={"/storages/:storageId/employee/:employeeId"} component={StorageEmployee} />
+          <Route path={"/storages/:storageId"} component={Storage} />
           <Route path={"/storages"} component={Storages} />
           <Route path={"/employees"} component={EmployeePanel} />
           <Route path={"/logout"} component={Logout} />
@@ -39,7 +42,7 @@ const App = (props) => {
           <Redirect to={"/"} />
         </Switch>
       )}
-      {userRole === "EMPLOYEE" && (
+      {userRole === USER_ROLES.EMPLOYEE && (
         <Switch>
           <Route path={"/logout"} component={Logout} />
           <Route exact path={"/"} component={EmployeeDashboard} />

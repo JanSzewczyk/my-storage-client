@@ -1,0 +1,17 @@
+@import "../../../../assets/variables/variables.scss";
+
+.breadcrumb-item {
+  text-decoration: none;
+  color: $greyLightColor;
+  opacity: 0.8;
+  transition: 0.5s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--active {
+    color: $blueColor;
+    opacity: 1;
+  }
+}

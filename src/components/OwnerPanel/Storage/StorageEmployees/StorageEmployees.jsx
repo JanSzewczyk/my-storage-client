@@ -12,6 +12,7 @@ import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery from "../../../../hooks/useQuery";
 
 import "./StorageEmployees.scss";
+import browserHistory from "../../../../shared/config/history";
 
 const config = {
   columns: [
@@ -57,9 +58,9 @@ const StorageEmployees = React.memo((props) => {
     onGetStorageEmployeesList(storageId, query);
   }, [onGetStorageEmployeesList, query, storageId]);
 
-  const onRowClick = useCallback((data) => {
-    console.log("Redirect to employee");
-  }, []);
+  const redirectToEmployee = useCallback((employee) => {
+    browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
+  }, [storageId]);
 
   const table = useMemo(
     () => (
@@ -68,11 +69,17 @@ const StorageEmployees = React.memo((props) => {
         data={employeeList}
         sort={query.sort}
         onSortChanged={onSortChanged}
-        onRowClick={onRowClick}
+        onRowClick={redirectToEmployee}
         loading={employeeListLoading}
       />
     ),
-    [employeeList, employeeListLoading, onRowClick, onSortChanged, query.sort]
+    [
+      employeeList,
+      employeeListLoading,
+      onSortChanged,
+      query.sort,
+      redirectToEmployee,
+    ]
   );
 
   const pagination = useMemo(
