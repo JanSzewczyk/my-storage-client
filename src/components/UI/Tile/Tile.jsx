@@ -95,7 +95,7 @@ Tile.propTypes = {
     subtitle: PropTypes.string,
     right: PropTypes.node,
   }),
-  children: PropTypes.node,
+  children: PropTypes.any,
 };
 
 Tile.defaultProps = {

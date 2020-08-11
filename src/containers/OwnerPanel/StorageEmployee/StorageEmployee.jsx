@@ -8,6 +8,7 @@ import Breadcrumbs, {
 } from "../../../components/UI/Breadcrumbs";
 import EmployeeDetails from "../../../components/Employee/EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
 
 const StorageEmployee = (props) => {
   const { match } = props;
@@ -32,10 +33,20 @@ const StorageEmployee = (props) => {
     [employeeId]
   );
 
+  const employeeStorageDetails = useMemo(
+    () => (
+      <EmployeeStorageDetails employeeId={employeeId} storageId={storageId} />
+    ),
+    [employeeId, storageId]
+  );
+
   return (
     <Aux>
       <AppBar left={breadcrumbs} />
-      <AppContent>{employeeDetails}</AppContent>
+      <AppContent>
+        {employeeDetails}
+        {employeeStorageDetails}
+      </AppContent>
     </Aux>
   );
 };
