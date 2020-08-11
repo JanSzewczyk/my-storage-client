@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useAxios } from "../../../../hooks";
+
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import { TileContent, TileBottom } from "../../../UI/Tile";
 import Button from "../../../UI/Button";
 
 const AssignStorageToEmployee = React.memo((props) => {
   const { employeeId, onClose } = props;
+
+  const [getStorages, { response, loading }] = useAxios({
+    url: "storages",
+  });
+
+  useEffect(() => {
+    getStorages();
+  }, [getStorages]);
+
+  console.log(response);
 
   return (
     <Aux>

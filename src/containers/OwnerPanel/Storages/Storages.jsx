@@ -17,7 +17,6 @@ const Storages = (props) => {
   const [showAddStorage, setShowAddStorage] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect Storages");
     onGetStorageList();
   }, [onGetStorageList]);
 
