@@ -11,18 +11,18 @@
   align-items: center;
 
   &__left {
-    margin-left: 8px;
+    margin-left: 16px;
     display: flex;
   }
 
-  // TODO 
+  // TODO
   &__center {
-    margin-left: 8px;
+    margin-left: 16px;
     display: flex;
   }
 
   &__right {
-    margin-right: 8px;
+    margin-right: 16px;
     display: flex;
   }
 }

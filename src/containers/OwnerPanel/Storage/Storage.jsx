@@ -9,9 +9,21 @@ import StorageItems from "../../../components/OwnerPanel/Storage/StorageItems/St
 import StorageActions from "../../../components/OwnerPanel/Storage/StorageActions/StorageActions";
 import StorageStatistics from "../../../components/OwnerPanel/Storage/StorageStatistics/StorageStatistics";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import Breadcrumbs, {
+  BreadcrumbItem,
+} from "../../../components/UI/Breadcrumbs";
 
 const Storage = (props) => {
-  const storageId = props.match.params.storageId;
+  const { match } = props;
+
+  const storageId = match.params.storageId;
+
+  const breadcrumbs = (
+    <Breadcrumbs>
+      <BreadcrumbItem text={"Storages"} path={`/storages`} />
+      <BreadcrumbItem text={"Storage"} path={`/storages/${storageId}`} active />
+    </Breadcrumbs>
+  );
 
   const storageDetails = useMemo(
     () => <StorageDetails storageId={storageId} />,
@@ -39,7 +51,7 @@ const Storage = (props) => {
 
   return (
     <Aux>
-      <AppBar left={"breadcrumbs"} />
+      <AppBar left={breadcrumbs} />
       <AppContent>
         {storageDetails}
         {storageEmployees}

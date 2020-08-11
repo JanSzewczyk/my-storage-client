@@ -15,11 +15,13 @@ export {
 } from "./action/actionAction";
 export { auth, authCheck, authLogout } from "./auth/authAction";
 export {
+  employeeStoreClear,
   getEmployeesList,
   getStorageEmployeesList,
   createEmployee,
   editEmployee,
   removeEmployee,
+  getEmployee,
 } from "./employee/employeeAction";
 export {
   getStorageItemsList,

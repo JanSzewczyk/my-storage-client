@@ -6,6 +6,12 @@ const initialState = {
   pageInfo: null,
   employeeListLoading: true,
   employeeActionLoading: false,
+  employee: null,
+  employeeLoading: true,
+};
+
+const employeeStoreClear = (state, action) => {
+  return state;
 };
 
 const employeeListLoadStart = (state, action) => {
@@ -88,8 +94,32 @@ const employeeEditFail = (state, action) => {
   });
 };
 
+// GET EMPLOYEE
+const employeeLoadStart = (state, action) => {
+  return updateObject(state, {
+    employee: null,
+    employeeLoading: true,
+  });
+};
+
+const employeeLoadSuccess = (state, action) => {
+  return updateObject(state, {
+    employee: action.employee,
+    employeeLoading: false,
+  });
+};
+
+const employeeLoadFail = (state, action) => {
+  return updateObject(state, {
+    employeeLoading: false,
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.EMPLOYEE_STORE_CLEAR:
+      return employeeStoreClear(state, action);
+
     case actionTypes.EMPLOYEE_LIST_LOAD_START:
       return employeeListLoadStart(state, action);
     case actionTypes.EMPLOYEE_LIST_LOAD_SUCCESS:
@@ -117,6 +147,13 @@ const reducer = (state = initialState, action) => {
       return employeeEditSuccess(state, action);
     case actionTypes.EMPLOYEE_EDIT_FAIL:
       return employeeEditFail(state, action);
+
+    case actionTypes.EMPLOYEE_LOAD_START:
+      return employeeLoadStart(state, action);
+    case actionTypes.EMPLOYEE_LOAD_SUCCESS:
+      return employeeLoadSuccess(state, action);
+    case actionTypes.EMPLOYEE_LOAD_FAIL:
+      return employeeLoadFail(state, action);
     default:
       return state;
   }

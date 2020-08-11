@@ -1,11 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useMemo } from "react";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import AppBar from "../../../components/UI/AppBar";
 import AppContent from "../../../components/UI/AppContent";
-import Breadcrumbs from "../../../components/UI/Breadcrumbs/Breadcrumbs";
-import BreadcrumbItem from "../../../components/UI/Breadcrumbs/BreadcrumbItem/BreadcrumbItem";
+import Breadcrumbs, {
+  BreadcrumbItem,
+} from "../../../components/UI/Breadcrumbs";
+import EmployeeDetails from "../../../components/Employee/EmployeeDetails/EmployeeDetails";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
 const StorageEmployee = (props) => {
   const { match } = props;
@@ -25,14 +27,17 @@ const StorageEmployee = (props) => {
     </Breadcrumbs>
   );
 
+  const employeeDetails = useMemo(
+    () => <EmployeeDetails employeeId={employeeId} />,
+    [employeeId]
+  );
+
   return (
     <Aux>
       <AppBar left={breadcrumbs} />
-      <AppContent>StorageEmployee</AppContent>
+      <AppContent>{employeeDetails}</AppContent>
     </Aux>
   );
 };
 
-StorageEmployee.propTypes = {};
-
-export default StorageEmployee;
+export default withErrorHandler(StorageEmployee);
