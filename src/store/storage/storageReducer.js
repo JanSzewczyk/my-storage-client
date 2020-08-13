@@ -53,22 +53,22 @@ const storageLoadFail = (state, action) => {
   });
 };
 
-const storageEditStart = (state, action) => {
-  return updateObject(state, { storageActionLoading: true });
-};
+// const storageEditStart = (state, action) => {
+//   return updateObject(state, { storageActionLoading: true });
+// };
 
-const storageEditSuccess = (state, action) => {
-  return updateObject(state, {
-    storage: action.storage,
-    storageActionLoading: false,
-  });
-};
+// const storageEditSuccess = (state, action) => {
+//   return updateObject(state, {
+//     storage: action.storage,
+//     storageActionLoading: false,
+//   });
+// };
 
-const storageEditFail = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
+// const storageEditFail = (state, action) => {
+//   return updateObject(state, {
+//     storageActionLoading: false,
+//   });
+// };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -91,12 +91,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.STORAGE_LOAD_FAIL:
       return storageLoadFail(state, action);
 
-    case actionTypes.STORAGE_EDIT_START:
-      return storageEditStart(state, action);
-    case actionTypes.STORAGE_EDIT_SUCCESS:
-      return storageEditSuccess(state, action);
-    case actionTypes.STORAGE_EDIT_FAIL:
-      return storageEditFail(state, action);
+    // case actionTypes.STORAGE_EDIT_START:
+    //   return storageEditStart(state, action);
+    // case actionTypes.STORAGE_EDIT_SUCCESS:
+    //   return storageEditSuccess(state, action);
+    // case actionTypes.STORAGE_EDIT_FAIL:
+    //   return storageEditFail(state, action);
 
     default:
       return state;

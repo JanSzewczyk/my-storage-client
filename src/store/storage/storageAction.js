@@ -1,12 +1,9 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { updateObject } from "../../shared/utils/utility";
-
-const processStorage = (storage) =>
-  updateObject(storage, {
-    createdAt: new Date(storage.createdAt),
-    updatedAt: new Date(storage.updatedAt),
-  });
+import {
+  mapStorageDtoToStorage,
+  mapStorageViewDtoToStorageView,
+} from "../../shared/dataUtils/storageUtils";
 
 export const clearStorageStore = () => {
   return {
@@ -30,7 +27,7 @@ export const storageListLoadStart = () => {
 export const storageListLoadSuccess = (storages) => {
   return {
     type: actionTypes.STORAGE_LIST_LOAD_SUCCESS,
-    storages: storages,
+    storages: storages.map(mapStorageViewDtoToStorageView),
   };
 };
 
@@ -63,7 +60,7 @@ export const storageLoadStart = () => {
 export const storageLoadSuccess = (storage) => {
   return {
     type: actionTypes.STORAGE_LOAD_SUCCESS,
-    storage: processStorage(storage),
+    storage: mapStorageDtoToStorage(storage),
   };
 };
 
@@ -83,41 +80,6 @@ export const getStorage = (storageId) => {
       })
       .catch((err) => {
         dispatch(storageLoadFail());
-      });
-  };
-};
-
-export const storageEditStart = () => {
-  return {
-    type: actionTypes.STORAGE_EDIT_START,
-  };
-};
-
-export const storageEditSuccess = (storage) => {
-  return {
-    type: actionTypes.STORAGE_EDIT_SUCCESS,
-    storage: processStorage(storage),
-  };
-};
-
-export const storageEditFail = () => {
-  return {
-    type: actionTypes.STORAGE_EDIT_FAIL,
-  };
-};
-
-export const editStorage = (storageId, updatedStorage) => {
-  return (dispatch) => {
-    dispatch(storageEditStart());
-    axios
-      .put(`storages/${storageId}`, updatedStorage)
-      .then((res) => {
-        // success(`The ${res.data.name} storage has been updated`);
-        dispatch(storageEditSuccess(res.data));
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
-        dispatch(storageEditFail());
       });
   };
 };

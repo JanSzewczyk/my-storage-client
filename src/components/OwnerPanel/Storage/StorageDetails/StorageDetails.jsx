@@ -23,8 +23,7 @@ const StorageDetails = React.memo((props) => {
     storageId,
     storage,
     storageLoading,
-    onEditStorage,
-    storageEditLoading,
+    onSetStorage,
   } = props;
 
   const notification = useNotification();
@@ -59,12 +58,11 @@ const StorageDetails = React.memo((props) => {
       <StorageEditPanel
         defaultStorage={storage}
         onCloseEdit={() => setEdit(false)}
-        onEditStorage={onEditStorage}
-        loading={storageEditLoading}
+        onSetStorage={onSetStorage}
         onRemoveStorage={() => onRemoveStorage(storage.id)}
       />
     ),
-    [onEditStorage, onRemoveStorage, storage, storageEditLoading]
+    [onRemoveStorage, onSetStorage, storage]
   );
 
   return (
@@ -116,8 +114,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onGetStorage: (storageId) => dispatch(action.getStorage(storageId)),
-    onEditStorage: (storageId, updatedStorage) =>
-      dispatch(action.editStorage(storageId, updatedStorage)),
+    onSetStorage: (storage) => dispatch(action.setStorage(storage)),
   };
 };
 
