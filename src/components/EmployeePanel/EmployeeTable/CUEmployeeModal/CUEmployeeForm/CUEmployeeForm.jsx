@@ -39,7 +39,7 @@ const CUEmployeeForm = (props) => {
 
   const onSubmit = (formData) => {
     if (editEmployee) {
-      onUpdateEmployee(editEmployee.employeeId, formData);
+      onUpdateEmployee(editEmployee.id, formData);
     } else {
       onCreateEmployee(formData);
     }
@@ -105,7 +105,7 @@ const CUEmployeeForm = (props) => {
             refSelect={register}
             options={storageList.map((i) => ({
               key: i.name,
-              value: i.storageId,
+              value: i.id,
             }))}
             hasError={errors.storageId}
           />
@@ -214,7 +214,7 @@ const CUEmployeeForm = (props) => {
         <Button
           btnType={"primary"}
           onClick={handleSubmit(onSubmit)}
-          disabled={!formState.dirty}
+          disabled={!formState.isDirty}
         >
           {editEmployee ? "update" : "add employee"}
         </Button>

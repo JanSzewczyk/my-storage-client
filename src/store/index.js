@@ -22,6 +22,7 @@ export {
   editEmployee,
   removeEmployee,
   getEmployee,
+  setEmployee,
 } from "./employee/employeeAction";
 export {
   getStorageItemsList,

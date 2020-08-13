@@ -11,7 +11,13 @@ const initialState = {
 };
 
 const employeeStoreClear = (state, action) => {
-  return state;
+  return updateObject(state, initialState);
+};
+
+const setEmployee = (state, action) => {
+  return updateObject(state, {
+    employee: action.employee,
+  });
 };
 
 const employeeListLoadStart = (state, action) => {
@@ -119,6 +125,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.EMPLOYEE_STORE_CLEAR:
       return employeeStoreClear(state, action);
+    case actionTypes.EMPLOYEE_SET_EMPLOYEE:
+      return setEmployee(state, action);
 
     case actionTypes.EMPLOYEE_LIST_LOAD_START:
       return employeeListLoadStart(state, action);

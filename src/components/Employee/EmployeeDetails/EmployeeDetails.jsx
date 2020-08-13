@@ -15,8 +15,6 @@ const EmployeeDetails = React.memo((props) => {
     onGetEmployee(employeeId);
   }, [employeeId, onGetEmployee]);
 
-  console.log(employee);
-
   return (
     <Tile
       tileSize={{

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useReducer, useCallback } from "react";
 
 import { reducer, initialState, actions } from "./axios-store/axios-reducer";
@@ -13,13 +14,14 @@ const useAxios = ({
   url,
   method = "get",
   options = {},
+  storyState = initialState,
   // trigger,
   // // @deprecated
   // filter,
   // forceDispatchEffect,
   // customHandler,
 }) => {
-  const [results, dispatch] = useReducer(reducer, initialState);
+  const [results, dispatch] = useReducer(reducer, storyState);
   // const [innerTrigger, setInnerTrigger] = useState(0);
 
   // let outerTrigger = trigger;
@@ -71,29 +73,21 @@ const useAxios = ({
   // }, [innerTrigger, method, options, outerTrigger, url]);
 
   const sendRequest = useCallback(() => {
-    dispatch({ type: actions.init });
-
+    dispatch({ type: actions.init, initResponse: storyState.response });
     axios({
       url,
       method,
       ...options,
     })
       .then((response) => {
-        dispatch({ type: actions.success, payload: response });
+        dispatch({ type: actions.success, payload: response.data });
       })
       .catch((error) => {
         dispatch({ type: actions.fail, payload: error });
       });
-  }, [method, options, url]);
+  }, []);
 
   return [sendRequest, { ...results }];
-  // @deprecated
-  // query: () => {
-  //   setInnerTrigger(+new Date());
-  // },
-  // reFetch: () => {
-  //   setInnerTrigger(+new Date());
-  // },
 };
 
 export default useAxios;

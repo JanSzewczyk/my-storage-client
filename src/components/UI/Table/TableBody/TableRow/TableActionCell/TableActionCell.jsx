@@ -11,13 +11,13 @@ const TableActionCell = (props) => {
   return (
     <td className="table-action-cell">
       <div className={"table-action-cell__buttons"}>
-      {actions.map((action, index) => {
-        return (
-          <Button key={index} clicked={() => action.action(rowData)}>
-            {action.name}
-          </Button>
-        );
-      })}
+        {actions.map((action, index) => {
+          return (
+            <Button key={index} onClick={() => action.action(rowData)}>
+              {action.name}
+            </Button>
+          );
+        })}
       </div>
     </td>
   );

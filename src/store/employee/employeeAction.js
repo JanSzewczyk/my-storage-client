@@ -13,6 +13,13 @@ export const employeeStoreClear = () => {
   };
 };
 
+export const setEmployee = (employee) => {
+  return {
+    type: actionTypes.EMPLOYEE_SET_EMPLOYEE,
+    employee: employee,
+  };
+};
+
 export const employeeListLoadStart = () => {
   return {
     type: actionTypes.EMPLOYEE_LIST_LOAD_START,

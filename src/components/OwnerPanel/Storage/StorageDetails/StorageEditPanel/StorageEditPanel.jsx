@@ -33,11 +33,11 @@ const StorageEditPanel = React.memo((props) => {
   });
 
   const onSubmit = (formData) => {
-    onEditStorage(defaultStorage.storageId, formData);
+    onEditStorage(defaultStorage.id, formData);
   };
 
   const onRemove = () => {
-    onRemoveStorage(defaultStorage.storageId);
+    onRemoveStorage(defaultStorage.id);
   };
 
   return !loading ? (
@@ -137,16 +137,16 @@ const StorageEditPanel = React.memo((props) => {
       <TileBottom
         right={
           <Aux>
-            <Button onClick={onCloseEdit}>back</Button>
+            <Button onClick={onCloseEdit}>Cancel</Button>
             <Button btnType={"warning"} onClick={handleSubmit(onRemove)}>
-              remove
+              Remove
             </Button>
             <Button
               btnType={"primary"}
               onClick={handleSubmit(onSubmit)}
-              disabled={!formState.dirty}
+              disabled={!formState.isDirty}
             >
-              update
+              Update
             </Button>
           </Aux>
         }

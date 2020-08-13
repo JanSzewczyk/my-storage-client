@@ -12,36 +12,19 @@ import Button from "../../UI/Button";
 import AssignStorageToEmployee from "./AssignStorageToEmployee/AssignStorageToEmployee";
 
 const EmployeeStorageDetails = React.memo((props) => {
-  const { employeeId, employee, employeeLoading } = props;
+  const {
+    employeeId,
+    storageId,
+    employee,
+    employeeLoading,
+    onSetEmployee,
+  } = props;
 
   const [assignStorage, setAssignStorage] = useState(false);
 
-  const assignStorageToEmployee = useMemo(
-    () => (
-      <AssignStorageToEmployee
-        employeeId={employeeId}
-        onClose={() => setAssignStorage(false)}
-      />
-    ),
-    [employeeId]
-  );
-
-  return (
-    <Tile
-      tileSize={{
-        sm: "sm-12",
-        md: "md-6",
-        lg: "lg-4",
-        xl: "xl-3",
-      }}
-      header={{
-        title: "Workplace",
-        subtitle: "Employee Workplace",
-      }}
-    >
-      {employeeLoading ? (
-        <Loading />
-      ) : employee && employee.workPlace ? (
+  const employeeDetails = useMemo(
+    () =>
+      employee && employee.workPlace ? (
         !assignStorage ? (
           <Aux>
             <EmployeeStorageData storage={employee.workPlace} />
@@ -57,11 +40,34 @@ const EmployeeStorageDetails = React.memo((props) => {
             />
           </Aux>
         ) : (
-          assignStorageToEmployee
+          <AssignStorageToEmployee
+            employeeId={employeeId}
+            storageId={storageId}
+            storage={employee.workPlace}
+            onClose={() => setAssignStorage(false)}
+            onSetEmployee={onSetEmployee}
+          />
         )
       ) : (
-        <div>safsd</div>
-      )}
+        <div>No data</div>
+      ),
+    [assignStorage, employee, employeeId, onSetEmployee, storageId]
+  );
+
+  return (
+    <Tile
+      tileSize={{
+        sm: "sm-12",
+        md: "md-6",
+        lg: "lg-4",
+        xl: "xl-3",
+      }}
+      header={{
+        title: "Workplace",
+        subtitle: "Employee Workplace",
+      }}
+    >
+      {employeeLoading ? <Loading /> : employeeDetails}
     </Tile>
   );
 });
@@ -80,7 +86,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onGetEmployee: (employeeId) => dispatch(action.getEmployee(employeeId)),
+    onSetEmployee: (employee) => dispatch(action.setEmployee(employee)),
   };
 };
 
