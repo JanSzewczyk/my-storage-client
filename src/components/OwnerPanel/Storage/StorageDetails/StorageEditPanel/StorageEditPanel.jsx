@@ -36,10 +36,6 @@ const StorageEditPanel = React.memo((props) => {
     onEditStorage(defaultStorage.id, formData);
   };
 
-  const onRemove = () => {
-    onRemoveStorage(defaultStorage.id);
-  };
-
   return !loading ? (
     <Aux>
       <TileContent>
@@ -138,7 +134,7 @@ const StorageEditPanel = React.memo((props) => {
         right={
           <Aux>
             <Button onClick={onCloseEdit}>Cancel</Button>
-            <Button btnType={"warning"} onClick={handleSubmit(onRemove)}>
+            <Button btnType={"warning"} onClick={onRemoveStorage}>
               Remove
             </Button>
             <Button

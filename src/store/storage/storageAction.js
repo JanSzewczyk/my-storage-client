@@ -1,14 +1,25 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-// import { error, success } from "../../hoc/withNotificationProvider";
 import { updateObject } from "../../shared/utils/utility";
-import browserHistory from "../../shared/config/history";
 
 const processStorage = (storage) =>
   updateObject(storage, {
     createdAt: new Date(storage.createdAt),
     updatedAt: new Date(storage.updatedAt),
   });
+
+export const clearStorageStore = () => {
+  return {
+    type: actionTypes.STORAGE_STORE_CLEAR,
+  };
+};
+
+export const setStorage = (storage) => {
+  return {
+    type: actionTypes.STORAGE_SET_STORE,
+    storage: storage,
+  };
+};
 
 export const storageListLoadStart = () => {
   return {
@@ -71,7 +82,6 @@ export const getStorage = (storageId) => {
         dispatch(storageLoadSuccess(res.data));
       })
       .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
         dispatch(storageLoadFail());
       });
   };
@@ -108,77 +118,6 @@ export const editStorage = (storageId, updatedStorage) => {
       .catch((err) => {
         // error(err.response ? err.response.data.message : "Server error");
         dispatch(storageEditFail());
-      });
-  };
-};
-
-export const storageCreateStart = () => {
-  return {
-    type: actionTypes.STORAGE_CREATE_START,
-  };
-};
-
-export const storageCreateSuccess = (storage) => {
-  return {
-    type: actionTypes.STORAGE_CREATE_SUCCESS,
-  };
-};
-
-export const storageCreateFail = () => {
-  return {
-    type: actionTypes.STORAGE_CREATE_FAIL,
-  };
-};
-
-export const createStorage = (storage) => {
-  return (dispatch) => {
-    dispatch(storageCreateStart());
-    axios
-      .post(`stor3ages`, storage)
-      .then((res) => {
-        const newStorage = res.data;
-        // success(`The ${newStorage.name} storage has been created`);
-        dispatch(storageCreateSuccess());
-        browserHistory.push(`/storages/${newStorage.storageId}`);
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
-        dispatch(storageCreateFail());
-      });
-  };
-};
-
-export const storageRemoveStart = () => {
-  return {
-    type: actionTypes.STORAGE_REMOVE_START,
-  };
-};
-
-export const storageRemoveSuccess = () => {
-  return {
-    type: actionTypes.STORAGE_REMOVE_SUCCESS,
-  };
-};
-
-export const storageRemoveFail = () => {
-  return {
-    type: actionTypes.STORAGE_REMOVE_FAIL,
-  };
-};
-
-export const removeStorage = (storageId) => {
-  return (dispatch) => {
-    dispatch(storageRemoveStart());
-    axios
-      .delete(`storages/${storageId}`)
-      .then((res) => {
-        // success(`The ${res.data.name} storage has been removed`);
-        dispatch(storageRemoveSuccess());
-        browserHistory.push(`/storages`);
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
-        dispatch(storageRemoveFail());
       });
   };
 };

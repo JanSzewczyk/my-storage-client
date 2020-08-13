@@ -6,25 +6,18 @@ import ModalBody from "../../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
 import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
-import Loading from "../../../../UI/Loading/Loading";
 import Input from "../../../../UI/Input/Input";
 
 import "./StorageForm.scss";
 
 const StorageForm = (props) => {
-  const { onCloseModal, loading, onCreateStorage } = props;
+  const { onCloseModal, onCreateStorage } = props;
 
   const { register, errors, handleSubmit } = useForm({
     mode: "onSubmit",
   });
 
-  const onSubmit = (formData) => {
-    onCreateStorage(formData);
-  };
-
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <Aux>
       <ModalBody>
         <form className={"storage-form"}>
@@ -116,9 +109,9 @@ const StorageForm = (props) => {
         </form>
       </ModalBody>
       <ModalBottom>
-        <Button onClick={onCloseModal}>close</Button>
-        <Button btnType={"primary"} onClick={handleSubmit(onSubmit)}>
-          create storage
+        <Button onClick={onCloseModal}>Cancel</Button>
+        <Button btnType={"primary"} onClick={handleSubmit(onCreateStorage)}>
+          Create Storage
         </Button>
       </ModalBottom>
     </Aux>
@@ -126,7 +119,6 @@ const StorageForm = (props) => {
 };
 
 StorageForm.propTypes = {
-  loading: PropTypes.bool.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   onCreateStorage: PropTypes.func.isRequired,
 };

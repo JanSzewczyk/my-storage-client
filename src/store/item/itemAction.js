@@ -35,7 +35,6 @@ export const getStorageItemsList = (storageId, queryData) => {
         dispatch(itemStorageListLoadSuccess(res.data));
       })
       .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
         dispatch(itemStorageListLoadFail());
       });
   };

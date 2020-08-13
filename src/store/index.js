@@ -31,10 +31,10 @@ export {
 export { getProductsList } from "./product/productAction";
 export { getStorageStatistics } from "./statistic/statisticAction";
 export {
+  clearStorageStore,
+  setStorage,
   getStorageList,
   getStorage,
   editStorage,
-  createStorage,
-  removeStorage,
 } from "./storage/storageAction";
 export { getUserDetails } from "./user/userAction";
