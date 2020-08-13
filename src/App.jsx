@@ -16,6 +16,7 @@ import { USER_ROLES } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
 import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
+import Employee from "./containers/OwnerPanel/Employee/Employee";
 
 const App = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
@@ -33,9 +34,13 @@ const App = (props) => {
     <AppLayout>
       {userRole === USER_ROLES.OWNER && (
         <Switch>
-          <Route path={"/storages/:storageId/employee/:employeeId"} component={StorageEmployee} />
+          <Route
+            path={"/storages/:storageId/employee/:employeeId"}
+            component={StorageEmployee}
+          />
           <Route path={"/storages/:storageId"} component={Storage} />
           <Route path={"/storages"} component={Storages} />
+          <Route path={"/employees/:employeeId"} component={Employee} />
           <Route path={"/employees"} component={EmployeePanel} />
           <Route path={"/logout"} component={Logout} />
           <Route exact path={"/"} component={Dashboard} />

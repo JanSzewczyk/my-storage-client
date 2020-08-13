@@ -39,8 +39,9 @@ const AssignStorageToEmployee = React.memo((props) => {
         storageId: !_.isEmpty(formData.storageId) ? formData.storageId : null,
       })
       .then((res) => {
-        onClose();
         const employee = res.data;
+
+        onClose();
         notification.add({
           content: `Employee id=${employee.id} changed the workplace`,
           type: "success",

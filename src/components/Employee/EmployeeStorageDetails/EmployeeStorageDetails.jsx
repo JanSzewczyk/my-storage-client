@@ -24,8 +24,8 @@ const EmployeeStorageDetails = React.memo((props) => {
 
   const employeeDetails = useMemo(
     () =>
-      employee && employee.workPlace ? (
-        !assignStorage ? (
+      !assignStorage ? (
+        employee && employee.workPlace ? (
           <Aux>
             <EmployeeStorageData storage={employee.workPlace} />
             <TileBottom
@@ -40,16 +40,22 @@ const EmployeeStorageDetails = React.memo((props) => {
             />
           </Aux>
         ) : (
-          <AssignStorageToEmployee
-            employeeId={employeeId}
-            storageId={storageId}
-            storage={employee.workPlace}
-            onClose={() => setAssignStorage(false)}
-            onSetEmployee={onSetEmployee}
-          />
+          <div>
+            <h4>This employee is not assigned to any warehouse :(</h4>
+            <h6>You can do this by clicking the button below</h6>
+            <Button btnType={"primary"} onClick={() => setAssignStorage(true)}>
+              Assign to Workplace
+            </Button>
+          </div>
         )
       ) : (
-        <div>No data</div>
+        <AssignStorageToEmployee
+          employeeId={employeeId}
+          storageId={storageId}
+          storage={employee.workPlace}
+          onClose={() => setAssignStorage(false)}
+          onSetEmployee={onSetEmployee}
+        />
       ),
     [assignStorage, employee, employeeId, onSetEmployee, storageId]
   );

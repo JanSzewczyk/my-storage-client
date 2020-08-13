@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -16,6 +16,7 @@ import Table from "../../UI/Table";
 import useQuery from "../../../hooks/useQuery";
 
 import "./EmployeeTable.scss";
+import browserHistory from "../../../shared/config/history";
 
 const EmployeeTable = React.memo((props) => {
   const {
@@ -102,6 +103,10 @@ const EmployeeTable = React.memo((props) => {
     ],
   };
 
+  const redirectToEmployee = useCallback((employee) => {
+    browserHistory.push(`/employees/${employee.id}`);
+  }, []);
+
   const employeeTable = useMemo(
     () => (
       <Table
@@ -110,9 +115,17 @@ const EmployeeTable = React.memo((props) => {
         sort={query.sort}
         onSortChanged={onSortChanged}
         loading={employeeListLoading}
+        onRowClick={redirectToEmployee}
       />
     ),
-    [config, employeeList, employeeListLoading, onSortChanged, query.sort]
+    [
+      config,
+      employeeList,
+      employeeListLoading,
+      onSortChanged,
+      query.sort,
+      redirectToEmployee,
+    ]
   );
 
   const pagination = useMemo(
