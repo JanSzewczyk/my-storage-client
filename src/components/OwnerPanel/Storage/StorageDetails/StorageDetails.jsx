@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useNotification } from "../../../../hooks";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
@@ -12,9 +15,7 @@ import StoragePanel from "./StoragePanel/StoragePanel";
 import StorageEditPanel from "./StorageEditPanel/StorageEditPanel";
 import DropDown from "../../../UI/DropDown/DropDown";
 import DropdownItem from "../../../UI/DropDown/DropdownItem/DropdownItem";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+
 import browserHistory from "../../../../shared/config/history";
 
 const StorageDetails = React.memo((props) => {

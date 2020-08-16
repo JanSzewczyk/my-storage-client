@@ -9,8 +9,9 @@ import Mailto from "../../../UI/Mailto/Mailto";
 const EmployeeDetailsData = (props) => {
   const { employee } = props;
 
-  return (
+  return employee ? (
     <TileContent>
+      <DataView label={"Employee ID:"} data={employee.shortId} />
       <DataView label={"First Name:"} data={employee.firstName} />
       <DataView label={"Last Name:"} data={employee.lastName} />
       <DataView
@@ -27,6 +28,8 @@ const EmployeeDetailsData = (props) => {
         data={dateToDateTimeString(employee.createdAt)}
       />
     </TileContent>
+  ) : (
+    <>No data</>
   );
 };
 

@@ -12,6 +12,7 @@ import Select from "../../../UI/Select";
 import axios from "../../../../shared/config/axios";
 import browserHistory from "../../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/dataUtils/employeeUtils";
+import { createStoragesSelectList } from "../../../../shared/dataUtils/storageUtils";
 
 const AssignStorageToEmployee = React.memo((props) => {
   const { employeeId, storageId, onClose, storage, onSetEmployee } = props;
@@ -62,15 +63,6 @@ const AssignStorageToEmployee = React.memo((props) => {
       });
   };
 
-  const getStoragesList = () => {
-    const sl = response.map((i) => ({
-      key: i.name,
-      value: i.id,
-    }));
-
-    return [{ key: "None", value: "" }, ...sl];
-  };
-
   const chooseWorkplaceForm = (
     <form>
       <Select
@@ -79,7 +71,7 @@ const AssignStorageToEmployee = React.memo((props) => {
           name: "storageId",
         }}
         refSelect={register}
-        options={getStoragesList()}
+        options={createStoragesSelectList(response)}
       />
     </form>
   );

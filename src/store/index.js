@@ -19,7 +19,7 @@ export {
   getEmployeesList,
   getStorageEmployeesList,
   createEmployee,
-  editEmployee,
+  // editEmployee,
   removeEmployee,
   getEmployee,
   setEmployee,

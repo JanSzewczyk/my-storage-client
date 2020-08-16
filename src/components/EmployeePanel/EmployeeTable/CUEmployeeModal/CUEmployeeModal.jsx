@@ -1,9 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import { connect } from "react-redux";
-import * as action from "../../../../store";
-
 import Backdrop from "../../../UI/Backdrop/Backdrop";
 import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
 import CUEmployeeForm from "./CUEmployeeForm/CUEmployeeForm";
@@ -38,21 +34,8 @@ const CUEmployeeModal = React.memo((props) => {
 CUEmployeeModal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
   editEmployee: PropTypes.object,
+  onEditEmployee: PropTypes.func,
+  onCreateEmployee: PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    employeeActionLoading: state.employee.employeeActionLoading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onCreateEmployee: (newEmployee) =>
-      dispatch(action.createEmployee(newEmployee)),
-    onEditEmployee: (employeeId, updatedEmployee) =>
-      dispatch(action.editEmployee(employeeId, updatedEmployee)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CUEmployeeModal);
+export default CUEmployeeModal

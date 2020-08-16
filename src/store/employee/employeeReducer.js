@@ -82,24 +82,6 @@ const employeeCreateFail = (state, action) => {
   });
 };
 
-const employeeEditStart = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: true,
-  });
-};
-
-const employeeEditSuccess = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: false,
-  });
-};
-
-const employeeEditFail = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: false,
-  });
-};
-
 // GET EMPLOYEE
 const employeeLoadStart = (state, action) => {
   return updateObject(state, {
@@ -148,13 +130,6 @@ const reducer = (state = initialState, action) => {
       return employeeCreateSuccess(state, action);
     case actionTypes.EMPLOYEE_CREATE_FAIL:
       return employeeCreateFail(state, action);
-
-    case actionTypes.EMPLOYEE_EDIT_START:
-      return employeeEditStart(state, action);
-    case actionTypes.EMPLOYEE_EDIT_SUCCESS:
-      return employeeEditSuccess(state, action);
-    case actionTypes.EMPLOYEE_EDIT_FAIL:
-      return employeeEditFail(state, action);
 
     case actionTypes.EMPLOYEE_LOAD_START:
       return employeeLoadStart(state, action);

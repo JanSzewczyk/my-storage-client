@@ -29,8 +29,8 @@ const StorageEmployee = (props) => {
   );
 
   const employeeDetails = useMemo(
-    () => <EmployeeDetails employeeId={employeeId} />,
-    [employeeId]
+    () => <EmployeeDetails employeeId={employeeId} storageId={storageId} />,
+    [employeeId, storageId]
   );
 
   const employeeStorageDetails = useMemo(

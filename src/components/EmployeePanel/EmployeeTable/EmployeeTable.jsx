@@ -43,6 +43,11 @@ const EmployeeTable = React.memo((props) => {
   const config = {
     columns: [
       {
+        field: "shortId",
+        name: "Employee ID",
+        sorted: true,
+      },
+      {
         field: "firstName",
         name: "First Name",
         sorted: true,
@@ -50,20 +55,6 @@ const EmployeeTable = React.memo((props) => {
       {
         field: "lastName",
         name: "Last Name",
-        sorted: true,
-      },
-      {
-        field: "phone",
-        name: "Phone Number",
-      },
-      {
-        field: "addressStreet",
-        name: "Street",
-        sorted: true,
-      },
-      {
-        field: "addressZip",
-        name: "Zip",
         sorted: true,
       },
       {
@@ -78,12 +69,12 @@ const EmployeeTable = React.memo((props) => {
       },
       {
         field: "storageName",
-        name: "Storage",
+        name: "Workplace",
         sorted: true,
       },
       {
         field: "createdAt",
-        name: "Add date",
+        name: "Created date",
         sorted: true,
         converter: (cellData) => dateToDateTimeString(cellData),
       },

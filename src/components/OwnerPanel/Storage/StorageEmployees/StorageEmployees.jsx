@@ -10,12 +10,17 @@ import Table from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery from "../../../../hooks/useQuery";
+import browserHistory from "../../../../shared/config/history";
 
 import "./StorageEmployees.scss";
-import browserHistory from "../../../../shared/config/history";
 
 const config = {
   columns: [
+    {
+      field: "shortId",
+      name: "Employee ID",
+      sorted: true,
+    },
     {
       field: "firstName",
       name: "First name",
@@ -58,9 +63,12 @@ const StorageEmployees = React.memo((props) => {
     onGetStorageEmployeesList(storageId, query);
   }, [onGetStorageEmployeesList, query, storageId]);
 
-  const redirectToEmployee = useCallback((employee) => {
-    browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
-  }, [storageId]);
+  const redirectToEmployee = useCallback(
+    (employee) => {
+      browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
+    },
+    [storageId]
+  );
 
   const table = useMemo(
     () => (

@@ -100,44 +100,6 @@ export const getStorageEmployeesList = (storageId, queryData) => {
   };
 };
 
-export const employeeEditStart = () => {
-  return {
-    type: actionTypes.EMPLOYEE_EDIT_START,
-  };
-};
-
-export const employeeEditSuccess = () => {
-  return {
-    type: actionTypes.EMPLOYEE_EDIT_SUCCESS,
-  };
-};
-
-export const employeeEditFail = () => {
-  return {
-    type: actionTypes.EMPLOYEE_EDIT_FAIL,
-  };
-};
-
-export const editEmployee = (employeeId, updatedEmployee) => {
-  return (dispatch) => {
-    dispatch(employeeEditStart());
-    axios
-      .put(`employees/${employeeId}`, updatedEmployee)
-      .then((res) => {
-        // const newEmployee = res.data;
-        // success(/
-        // `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been updated`
-        // );
-        dispatch(employeeEditSuccess());
-        browserHistory.push("/");
-        browserHistory.push("/employees");
-      })
-      .catch((err) => {
-        dispatch(employeeEditFail());
-      });
-  };
-};
-
 export const employeeCreateStart = () => {
   return {
     type: actionTypes.EMPLOYEE_CREATE_START,

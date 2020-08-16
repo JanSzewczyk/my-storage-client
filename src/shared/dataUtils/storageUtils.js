@@ -11,3 +11,12 @@ export const mapStorageDtoToStorage = (storage) =>
     createdAt: new Date(storage.createdAt),
     updatedAt: new Date(storage.updatedAt),
   });
+
+export const createStoragesSelectList = (storageList) => {
+  const sl = storageList.map((i) => ({
+    key: i.name,
+    value: i.id,
+  }));
+
+  return [{ key: "None", value: "" }, ...sl];
+};

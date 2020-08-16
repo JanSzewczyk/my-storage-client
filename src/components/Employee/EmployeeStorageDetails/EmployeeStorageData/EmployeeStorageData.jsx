@@ -9,9 +9,10 @@ const EmployeeStorageData = (props) => {
 
   return (
       <TileContent>
+        <DataView label={"Storage ID:"} data={<Link to={`/storages/${storage.id}`}>{storage.shortId}</Link>} />
         <DataView
           label={"Name:"}
-          data={<Link to={`/storages/${storage.id}`}>{storage.name}</Link>}
+          data={storage.name}
         />
         <DataView label={"Surface:"} data={storage.surface} />
         <DataView label={"Address Street:"} data={storage.addressStreet} />

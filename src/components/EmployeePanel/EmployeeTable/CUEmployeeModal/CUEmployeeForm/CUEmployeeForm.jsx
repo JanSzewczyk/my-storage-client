@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-
-import { connect } from "react-redux";
-import * as action from "../../../../../store";
+import { useAxios } from "../../../../../hooks";
 
 import ModalBody from "../../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
@@ -13,29 +11,36 @@ import Loading from "../../../../UI/Loading/Loading";
 import Input from "../../../../UI/Input/Input";
 import * as pattern from "../../../../../shared/patterns";
 import Select from "../../../../UI/Select/Select";
+import { createStoragesSelectList } from "../../../../../shared/dataUtils/storageUtils";
 
 import "./CUEmployeeForm.scss";
 
 const CUEmployeeForm = (props) => {
   const {
     onCloseModal,
-    loading,
     onCreateEmployee,
-    storageList,
-    storageListLoading,
-    onGetStorageList,
     editEmployee,
     onUpdateEmployee,
   } = props;
 
+  const [getStorages, { response, loading }] = useAxios({
+    url: "storages",
+    storyState: { response: [], error: null, loading: true },
+  });
+
   const { register, errors, handleSubmit, watch, formState } = useForm({
-    defaultValues: editEmployee ? editEmployee : {},
+    defaultValues: editEmployee
+      ? {
+          ...editEmployee,
+          storageId: editEmployee.workPlace ? editEmployee.workPlace.id : null,
+        }
+      : {},
     mode: "onSubmit",
   });
 
   useEffect(() => {
-    onGetStorageList();
-  }, [onGetStorageList]);
+    getStorages();
+  }, [getStorages]);
 
   const onSubmit = (formData) => {
     if (editEmployee) {
@@ -49,7 +54,7 @@ const CUEmployeeForm = (props) => {
     return watch("repeatPassword") === watch("password");
   };
 
-  return loading || storageListLoading ? (
+  return loading ? (
     <Loading />
   ) : (
     <Aux>
@@ -103,10 +108,7 @@ const CUEmployeeForm = (props) => {
               name: "storageId",
             }}
             refSelect={register}
-            options={storageList.map((i) => ({
-              key: i.name,
-              value: i.id,
-            }))}
+            options={createStoragesSelectList(response)}
             hasError={errors.storageId}
           />
           <Input
@@ -210,13 +212,13 @@ const CUEmployeeForm = (props) => {
         </form>
       </ModalBody>
       <ModalBottom>
-        <Button onClick={onCloseModal}>close</Button>
+        <Button onClick={onCloseModal}>Cancel</Button>
         <Button
           btnType={"primary"}
           onClick={handleSubmit(onSubmit)}
           disabled={!formState.isDirty}
         >
-          {editEmployee ? "update" : "add employee"}
+          {editEmployee ? "Update" : "Add Employee"}
         </Button>
       </ModalBottom>
     </Aux>
@@ -224,24 +226,10 @@ const CUEmployeeForm = (props) => {
 };
 
 CUEmployeeForm.propTypes = {
-  loading: PropTypes.bool.isRequired,
   onCloseModal: PropTypes.func.isRequired,
-  onCreateEmployee: PropTypes.func.isRequired,
-  onUpdateEmployee: PropTypes.func.isRequired,
+  onCreateEmployee: PropTypes.func,
+  onUpdateEmployee: PropTypes.func,
   editEmployee: PropTypes.object,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    storageList: state.storage.storageList,
-    storageListLoading: state.storage.storageListLoading,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onGetStorageList: () => dispatch(action.getStorageList()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CUEmployeeForm);
+export default CUEmployeeForm;
