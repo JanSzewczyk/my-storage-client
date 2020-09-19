@@ -5,7 +5,6 @@ const initialState = {
   employeeList: [],
   pageInfo: null,
   employeeListLoading: true,
-  employeeActionLoading: false,
   employee: null,
   employeeLoading: true,
 };
@@ -64,24 +63,6 @@ const employeeStorageListLoadFail = (state, action) => {
   });
 };
 
-const employeeCreateStart = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: true,
-  });
-};
-
-const employeeCreateSuccess = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: false,
-  });
-};
-
-const employeeCreateFail = (state, action) => {
-  return updateObject(state, {
-    employeeActionLoading: false,
-  });
-};
-
 // GET EMPLOYEE
 const employeeLoadStart = (state, action) => {
   return updateObject(state, {
@@ -123,13 +104,6 @@ const reducer = (state = initialState, action) => {
       return employeeStorageListLoadSuccess(state, action);
     case actionTypes.EMPLOYEE_STORAGE_LIST_LOAD_FAIL:
       return employeeStorageListLoadFail(state, action);
-
-    case actionTypes.EMPLOYEE_CREATE_START:
-      return employeeCreateStart(state, action);
-    case actionTypes.EMPLOYEE_CREATE_SUCCESS:
-      return employeeCreateSuccess(state, action);
-    case actionTypes.EMPLOYEE_CREATE_FAIL:
-      return employeeCreateFail(state, action);
 
     case actionTypes.EMPLOYEE_LOAD_START:
       return employeeLoadStart(state, action);

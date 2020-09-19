@@ -56,8 +56,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.STORAGE_STORE_CLEAR:
       return clearStorageStore(state, action);
-    case actionTypes.STORAGE_SET_STORE:
-      return setStorage(state, action);
 
     case actionTypes.STORAGE_LIST_LOAD_START:
       return storageListLoadStart(state, action);
@@ -66,6 +64,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.STORAGE_LIST_LOAD_FAIL:
       return storageListLoadFail(state, action);
 
+    case actionTypes.STORAGE_SET_STORAGE:
+      return setStorage(state, action);
     case actionTypes.STORAGE_LOAD_START:
       return storageLoadStart(state, action);
     case actionTypes.STORAGE_LOAD_SUCCESS:

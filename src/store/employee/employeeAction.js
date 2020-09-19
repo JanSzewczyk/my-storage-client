@@ -1,7 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import { createSearchQuery } from "../../shared/utils/utility";
-import browserHistory from "../../shared/config/history";
 import {
   mapEmployeeDtoToEmployee,
   mapEmployeeViewDtoToEmployeeView,
@@ -29,9 +28,7 @@ export const employeeListLoadStart = () => {
 export const employeeListLoadSuccess = (employees, pageInfo) => {
   return {
     type: actionTypes.EMPLOYEE_LIST_LOAD_SUCCESS,
-    employeeList: employees.map((employee) =>
-      mapEmployeeViewDtoToEmployeeView(employee)
-    ),
+    employeeList: employees.map(mapEmployeeViewDtoToEmployeeView),
     pageInfo: pageInfo,
   };
 };
@@ -97,62 +94,6 @@ export const getStorageEmployeesList = (storageId, queryData) => {
       .catch((err) => {
         dispatch(employeeStorageListLoadFail());
       });
-  };
-};
-
-export const employeeCreateStart = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_START,
-  };
-};
-
-export const employeeCreateSuccess = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_SUCCESS,
-  };
-};
-
-export const employeeCreateFail = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_FAIL,
-  };
-};
-
-export const createEmployee = (employee) => {
-  return (dispatch) => {
-    dispatch(employeeCreateStart());
-    axios
-      .post(`employees`, employee)
-      .then((res) => {
-        // const newEmployee = res.data;
-        // success(
-        //   `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`
-        // );
-        dispatch(employeeCreateSuccess());
-        browserHistory.push("/");
-        browserHistory.push("/employees");
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
-        dispatch(employeeCreateFail());
-      });
-  };
-};
-
-export const removeEmployee = (employeeId) => {
-  return (dispatch) => {
-    axios
-      .delete(`employees/${employeeId}`)
-      .then((res) => {
-        dispatch(
-          getEmployeesList({
-            sort: [],
-            page: 0,
-            size: 20,
-          })
-        );
-      })
-      .catch((err) => {});
   };
 };
 

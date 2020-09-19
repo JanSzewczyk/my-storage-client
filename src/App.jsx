@@ -10,7 +10,7 @@ import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/OwnerPanel/Storages/Storages";
 import Storage from "./containers/OwnerPanel/Storage/Storage";
 import Logout from "./containers/Auth/Logout/Logout";
-import EmployeePanel from "./containers/EmployeePanel/EmployeePanel";
+import Employees from "./containers/OwnerPanel/Employees/Employees";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
 import { USER_ROLES } from "./shared/constants";
 
@@ -41,7 +41,7 @@ const App = (props) => {
           <Route path={"/storages/:storageId"} component={Storage} />
           <Route path={"/storages"} component={Storages} />
           <Route path={"/employees/:employeeId"} component={Employee} />
-          <Route path={"/employees"} component={EmployeePanel} />
+          <Route path={"/employees"} component={Employees} />
           <Route path={"/logout"} component={Logout} />
           <Route exact path={"/"} component={Dashboard} />
           <Redirect to={"/"} />

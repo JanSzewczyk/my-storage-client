@@ -18,6 +18,7 @@ import CUEmployeeModal from "../../EmployeePanel/EmployeeTable/CUEmployeeModal/C
 import browserHistory from "../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../shared/dataUtils/employeeUtils";
 import { useNotification } from "../../../hooks";
+import { useHistory } from "react-router-dom";
 
 const EmployeeDetails = React.memo((props) => {
   const {
@@ -30,6 +31,7 @@ const EmployeeDetails = React.memo((props) => {
   } = props;
 
   const notification = useNotification();
+  const history = useHistory();
   const [showEdit, setShowEdit] = useState(false);
 
   useEffect(() => {
@@ -65,6 +67,16 @@ const EmployeeDetails = React.memo((props) => {
     });
   };
 
+  const removeEmployee = (employeeId) => {
+    axios.delete(`employees/${employeeId}`).then((res) => {
+      notification.add({
+        content: `Successful remove employee, ID=${employeeId}`,
+        type: "error",
+      });
+      history.push("/employees");
+    });
+  };
+
   const optionsDropdown = (
     <DropDown type={"icon"} icon={<MoreHorizIcon />}>
       <DropdownItem
@@ -73,12 +85,12 @@ const EmployeeDetails = React.memo((props) => {
         onClick={() => setShowEdit(true)}
         disabled={!employee}
       />
-      {/* <DropdownItem
-    text={"Remove"}
-    icon={<DeleteIcon />}
-
-    // onClick={() => onRemoveStorage(storage.id)}
-  /> */}
+      <DropdownItem
+        text={"Remove"}
+        icon={<DeleteIcon />}
+        disabled={!employee}
+        onClick={() => removeEmployee(employeeId)}
+      />
     </DropDown>
   );
 

@@ -13,7 +13,7 @@ export const clearStorageStore = () => {
 
 export const setStorage = (storage) => {
   return {
-    type: actionTypes.STORAGE_SET_STORE,
+    type: actionTypes.STORAGE_SET_STORAGE,
     storage: storage,
   };
 };

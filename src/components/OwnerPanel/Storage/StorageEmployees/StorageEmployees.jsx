@@ -11,6 +11,7 @@ import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery from "../../../../hooks/useQuery";
 import browserHistory from "../../../../shared/config/history";
+import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 
 import "./StorageEmployees.scss";
 
@@ -22,13 +23,8 @@ const config = {
       sorted: true,
     },
     {
-      field: "firstName",
-      name: "First name",
-      sorted: true,
-    },
-    {
-      field: "lastName",
-      name: "Last name",
+      field: "name",
+      name: "Name",
       sorted: true,
     },
     {
@@ -40,6 +36,12 @@ const config = {
       field: "addressCountry",
       name: "Country",
       sorted: true,
+    },
+    {
+      field: "createdAt",
+      name: "Created",
+      sorted: true,
+      converter: (cellData) => dateToDateTimeString(cellData),
     },
   ],
 };

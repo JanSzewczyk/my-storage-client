@@ -13,27 +13,31 @@ export {
   removeAction,
   storeAction,
 } from "./action/actionAction";
+
 export { auth, authCheck, authLogout } from "./auth/authAction";
+
 export {
   employeeStoreClear,
   getEmployeesList,
   getStorageEmployeesList,
-  createEmployee,
-  // editEmployee,
-  removeEmployee,
   getEmployee,
   setEmployee,
 } from "./employee/employeeAction";
+
 export {
   getStorageItemsList,
   getStorageItemsEmployee,
 } from "./item/itemAction";
+
 export { getProductsList } from "./product/productAction";
+
 export { getStorageStatistics } from "./statistic/statisticAction";
+
 export {
   clearStorageStore,
   setStorage,
   getStorageList,
   getStorage,
 } from "./storage/storageAction";
+
 export { getUserDetails } from "./user/userAction";

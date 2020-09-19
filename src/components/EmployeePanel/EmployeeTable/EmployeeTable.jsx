@@ -17,20 +17,23 @@ import useQuery from "../../../hooks/useQuery";
 
 import "./EmployeeTable.scss";
 import browserHistory from "../../../shared/config/history";
+import Search from "../../UI/Search/Search";
+import { useHistory } from "react-router-dom";
+import { useNotification } from "../../../hooks";
+import axios from "../../../shared/config/axios";
 
 const EmployeeTable = React.memo((props) => {
   const {
     onGetEmployeesList,
     employeeList,
     employeeListLoading,
-    onRemoveEmployee,
     pageInfo,
   } = props;
 
   const [showModal, setShowModal] = useState(false);
-  const [edit, setEdit] = useState(null);
 
-  const { query, onSortChanged, onPageChanged } = useQuery({
+  const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery({
+    search: "",
     sort: [],
     page: 0,
     size: 20,
@@ -48,13 +51,13 @@ const EmployeeTable = React.memo((props) => {
         sorted: true,
       },
       {
-        field: "firstName",
-        name: "First Name",
+        field: "name",
+        name: "Name",
         sorted: true,
       },
       {
-        field: "lastName",
-        name: "Last Name",
+        field: "email",
+        name: "Email",
         sorted: true,
       },
       {
@@ -79,20 +82,14 @@ const EmployeeTable = React.memo((props) => {
         converter: (cellData) => dateToDateTimeString(cellData),
       },
     ],
-    actions: [
-      {
-        name: "delete",
-        action: (rowData) => onRemoveEmployee(rowData.employeeId),
-      },
-      {
-        name: "edit",
-        action: (rowData) => {
-          setEdit(rowData);
-          setShowModal(true);
-        },
-      },
-    ],
   };
+
+  const search = useMemo(
+    () => (
+      <Search onSearchChanged={onSearchChanged} searchString={query.search} />
+    ),
+    [onSearchChanged, query.search]
+  );
 
   const redirectToEmployee = useCallback((employee) => {
     browserHistory.push(`/employees/${employee.id}`);
@@ -124,17 +121,33 @@ const EmployeeTable = React.memo((props) => {
     [onPageChanged, pageInfo]
   );
 
+  const history = useHistory();
+  const notification = useNotification();
+
+  const createEmployee = useCallback(
+    (employee) => {
+      axios.post(`employees`, employee).then((res) => {
+        const newEmployee = res.data;
+
+        notification.add({
+          content: `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`,
+          type: "success",
+        });
+
+        history.push(`/employees/${newEmployee.id}`);
+      });
+    },
+    [history, notification]
+  );
+
   const employeeModal = useMemo(
     () => (
       <CUEmployeeModal
-        onCloseModal={() => {
-          setEdit(null);
-          setShowModal(false);
-        }}
-        editEmployee={edit}
+        onCloseModal={() => setShowModal(false)}
+        onCreateEmployee={createEmployee}
       />
     ),
-    [edit]
+    [createEmployee]
   );
 
   return (
@@ -153,6 +166,7 @@ const EmployeeTable = React.memo((props) => {
         }}
       >
         <TileTop
+          left={search}
           right={
             <Button btnType={"primary"} onClick={() => setShowModal(true)}>
               add employee
@@ -180,8 +194,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onGetEmployeesList: (queryData) =>
       dispatch(action.getEmployeesList(queryData)),
-    onRemoveEmployee: (employeeId) =>
-      dispatch(action.removeEmployee(employeeId)),
   };
 };
 

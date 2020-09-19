@@ -23,6 +23,8 @@ const rootReducers = combineReducers({
   user: userReducer,
 });
 
+// export type AppDispatch = typeof store.dispatch;
+
 const store = createStore(
   rootReducers,
   composeEnhancers(applyMiddleware(thunk))
