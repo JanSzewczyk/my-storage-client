@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-import authReducer from "../../store/auth/authReducer";
+import authReducer from "../../store/auth/auth.reducer";
 import userReducer from "../../store/user/userReducer";
 import employeeReducer from "../../store/employee/employeeReducer";
 import storageReducer from "../../store/storage/storageReducer";
@@ -12,9 +12,10 @@ import productReducer from "../../store/product/productReducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+// TODO add type
 const rootReducers = combineReducers({
   action: actionReducer,
-  auth: authReducer,
+  authStore: authReducer,
   employee: employeeReducer,
   item: itemReducer,
   product: productReducer,
@@ -22,8 +23,6 @@ const rootReducers = combineReducers({
   storage: storageReducer,
   user: userReducer,
 });
-
-// export type AppDispatch = typeof store.dispatch;
 
 const store = createStore(
   rootReducers,

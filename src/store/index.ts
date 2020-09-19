@@ -1,11 +1,10 @@
-import { authLogout } from "./auth/authAction";
+import StoreDispatch from "../shared/types/store/StoreDispatch";
+import { authLogout } from "./auth/auth.action";
 import { userLogout } from "./user/userAction";
 
-export const logout = () => {
-  return (dispatch) => {
-    dispatch(userLogout());
-    dispatch(authLogout());
-  };
+export const logout = () => (dispatch: StoreDispatch) => {
+  dispatch(userLogout());
+  dispatch(authLogout());
 };
 
 export {
@@ -14,7 +13,7 @@ export {
   storeAction,
 } from "./action/actionAction";
 
-export { auth, authCheck, authLogout } from "./auth/authAction";
+export { auth, authCheck, authLogout } from "./auth/auth.action";
 
 export {
   employeeStoreClear,

@@ -1,8 +1,6 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 
-// import { error, success } from "../../hoc/withNotificationProvider";/
-
 import { updateObject, createSearchQuery } from "../../shared/utils/utility";
 import browserHistory from "../../shared/config/history";
 
@@ -44,7 +42,6 @@ export const getStorageActionsList = (storageId, queryData) => {
         dispatch(actionStorageListLoadSuccess(res.data));
       })
       .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
         dispatch(actionStorageListLoadFail());
       });
   };

@@ -26,9 +26,9 @@ const Auth = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    authLoading: state.auth.authLoading,
-    error: state.auth.error,
-    authenticated: Boolean(state.auth.accessToken),
+    authLoading: state.authStore.authLoading,
+    error: state.authStore.error,
+    authenticated: Boolean(state.authStore.accessToken),
   };
 };
 

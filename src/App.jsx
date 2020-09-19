@@ -60,7 +60,7 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     authenticated:
-      state.auth.accessToken !== null && state.user.user && state.user.role,
+      state.authStore.accessToken !== null && state.user.user && state.user.role,
     userRole: state.user.role,
   };
 };

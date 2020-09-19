@@ -1,4 +1,4 @@
-import reducer from "./authReducer";
+import reducer from "./auth.reducer";
 import * as actionTypes from "../actionTypes";
 
 describe("auth reducer", () => {
