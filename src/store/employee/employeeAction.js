@@ -1,15 +1,23 @@
 import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
-import { createSearchQuery, updateObject } from "../../shared/utils/utility";
-import browserHistory from "../../shared/config/history";
+import { createSearchQuery } from "../../shared/utils/utility";
+import {
+  mapEmployeeDtoToEmployee,
+  mapEmployeeViewDtoToEmployeeView,
+} from "../../shared/dataUtils/employeeUtils";
 
-const processEmployeeList = (employees) =>
-  employees.map((employee) =>
-    updateObject(employee, {
-      createdAt: new Date(employee.createdAt),
-      updatedAt: new Date(employee.updatedAt),
-    })
-  );
+export const employeeStoreClear = () => {
+  return {
+    type: actionTypes.EMPLOYEE_STORE_CLEAR,
+  };
+};
+
+export const setEmployee = (employee) => {
+  return {
+    type: actionTypes.EMPLOYEE_SET_EMPLOYEE,
+    employee: employee,
+  };
+};
 
 export const employeeListLoadStart = () => {
   return {
@@ -20,7 +28,7 @@ export const employeeListLoadStart = () => {
 export const employeeListLoadSuccess = (employees, pageInfo) => {
   return {
     type: actionTypes.EMPLOYEE_LIST_LOAD_SUCCESS,
-    employeeList: processEmployeeList(employees),
+    employeeList: employees.map(mapEmployeeViewDtoToEmployeeView),
     pageInfo: pageInfo,
   };
 };
@@ -43,7 +51,6 @@ export const getEmployeesList = (queryData) => {
         dispatch(employeeListLoadSuccess(res.data.content, res.data.page));
       })
       .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeListLoadFail());
       });
   };
@@ -58,7 +65,9 @@ export const employeeStorageListLoadStart = () => {
 export const employeeStorageListLoadSuccess = (employees, pageInfo) => {
   return {
     type: actionTypes.EMPLOYEE_STORAGE_LIST_LOAD_SUCCESS,
-    employeeList: processEmployeeList(employees),
+    employeeList: employees.map((employee) =>
+      mapEmployeeViewDtoToEmployeeView(employee)
+    ),
     pageInfo: pageInfo,
   };
 };
@@ -83,125 +92,41 @@ export const getStorageEmployeesList = (storageId, queryData) => {
         );
       })
       .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
         dispatch(employeeStorageListLoadFail());
       });
   };
 };
 
-export const employeeEditStart = () => {
+export const employeeLoadStart = () => {
   return {
-    type: actionTypes.EMPLOYEE_EDIT_START,
+    type: actionTypes.EMPLOYEE_LOAD_START,
   };
 };
 
-export const employeeEditSuccess = () => {
+export const employeeLoadSuccess = (employeeData) => {
   return {
-    type: actionTypes.EMPLOYEE_EDIT_SUCCESS,
+    type: actionTypes.EMPLOYEE_LOAD_SUCCESS,
+    employee: mapEmployeeDtoToEmployee(employeeData),
   };
 };
 
-export const employeeEditFail = () => {
+export const employeeLoadFail = () => {
   return {
-    type: actionTypes.EMPLOYEE_EDIT_FAIL,
+    type: actionTypes.EMPLOYEE_LOAD_FAIL,
   };
 };
 
-export const editEmployee = (employeeId, updatedEmployee) => {
+export const getEmployee = (employeeId) => {
   return (dispatch) => {
-    dispatch(employeeEditStart());
+    dispatch(employeeLoadStart());
+
     axios
-      .put(`employees/${employeeId}`, updatedEmployee)
+      .get(`employees/${employeeId}`)
       .then((res) => {
-        // const newEmployee = res.data;
-        // success(/
-          // `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been updated`
-        // );
-        dispatch(employeeEditSuccess());
-        browserHistory.push("/");
-        browserHistory.push("/employees");
+        dispatch(employeeLoadSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(employeeEditFail());
-      });
-  };
-};
-
-export const employeeCreateStart = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_START,
-  };
-};
-
-export const employeeCreateSuccess = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_SUCCESS,
-  };
-};
-
-export const employeeCreateFail = () => {
-  return {
-    type: actionTypes.EMPLOYEE_CREATE_FAIL,
-  };
-};
-
-export const createEmployee = (employee) => {
-  return (dispatch) => {
-    dispatch(employeeCreateStart());
-    axios
-      .post(`employees`, employee)
-      .then((res) => {
-        // const newEmployee = res.data;
-        // success(
-        //   `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`
-        // );
-        dispatch(employeeCreateSuccess());
-        browserHistory.push("/");
-        browserHistory.push("/employees");
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
-        dispatch(employeeCreateFail());
-      });
-  };
-};
-
-// export const employeeRemoveStart = () => {
-//   return {
-//     type: actionTypes.STORAGE_REMOVE_START,
-//   };
-// };
-
-// export const employeeRemoveSuccess = () => {
-//   return {
-//     type: actionTypes.STORAGE_REMOVE_SUCCESS,
-//   };
-// };
-
-// export const employeeRemoveFail = () => {
-//   return {
-//     type: actionTypes.STORAGE_REMOVE_FAIL,
-//   };
-// };
-
-export const removeEmployee = (employeeId) => {
-  return (dispatch) => {
-    axios
-      .delete(`employees/${employeeId}`)
-      .then((res) => {
-        // success(
-        //   `The ${res.data.firstName} ${res.data.lastName} has been removed`
-        // );
-        dispatch(
-          getEmployeesList({
-            sort: [],
-            page: 0,
-            size: 20,
-          })
-        );
-      })
-      .catch((err) => {
-        // error(err.response ? err.response.data.message : "Server error");
+        dispatch(employeeLoadFail());
       });
   };
 };

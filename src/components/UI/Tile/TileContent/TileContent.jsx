@@ -15,7 +15,7 @@ const TileContent = ({ children, className, style }) => {
 };
 
 TileContent.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.object,
 };

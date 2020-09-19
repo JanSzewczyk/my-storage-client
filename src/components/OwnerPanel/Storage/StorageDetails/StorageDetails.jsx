@@ -1,18 +1,22 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useNotification } from "../../../../hooks";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
 
+import axios from "../../../../shared/config/axios";
 import Tile from "../../../UI/Tile/Tile";
 import Loading from "../../../UI/Loading/Loading";
 import StoragePanel from "./StoragePanel/StoragePanel";
 import StorageEditPanel from "./StorageEditPanel/StorageEditPanel";
 import DropDown from "../../../UI/DropDown/DropDown";
 import DropdownItem from "../../../UI/DropDown/DropdownItem/DropdownItem";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+
+import browserHistory from "../../../../shared/config/history";
 
 const StorageDetails = React.memo((props) => {
   const {
@@ -20,10 +24,10 @@ const StorageDetails = React.memo((props) => {
     storageId,
     storage,
     storageLoading,
-    onEditStorage,
-    storageEditLoading,
-    onRemoveStorage,
+    onSetStorage,
   } = props;
+
+  const notification = useNotification();
 
   const [edit, setEdit] = useState(false);
 
@@ -31,9 +35,19 @@ const StorageDetails = React.memo((props) => {
     onGetStorage(storageId);
   }, [onGetStorage, storageId]);
 
-  useEffect(() => {
-    setEdit(false);
-  }, [storage]);
+  const onRemoveStorage = useCallback(
+    (storageId) => {
+      axios.delete(`storages/${storageId}`).then((res) => {
+        const storage = res.data;
+
+        notification.add({
+          content: `The storage id=${storage.id} has been removed`,
+        });
+        browserHistory.replace(`/storages`);
+      });
+    },
+    [notification]
+  );
 
   const storagePanel = useMemo(
     () => <StoragePanel storage={storage} onEdit={() => setEdit(true)} />,
@@ -45,12 +59,11 @@ const StorageDetails = React.memo((props) => {
       <StorageEditPanel
         defaultStorage={storage}
         onCloseEdit={() => setEdit(false)}
-        onEditStorage={onEditStorage}
-        onRemoveStorage={onRemoveStorage}
-        loading={storageEditLoading}
+        onSetStorage={onSetStorage}
+        onRemoveStorage={() => onRemoveStorage(storage.id)}
       />
     ),
-    [onEditStorage, onRemoveStorage, storage, storageEditLoading]
+    [onRemoveStorage, onSetStorage, storage]
   );
 
   return (
@@ -67,12 +80,17 @@ const StorageDetails = React.memo((props) => {
         right: (
           <DropDown type={"icon"} icon={<MoreHorizIcon />}>
             <DropdownItem
-              text={"edit"}
+              text={"Edit"}
               icon={<EditIcon />}
               onClick={() => setEdit(true)}
               disabled={edit}
             />
-            <DropdownItem text={"remove"} icon={<DeleteIcon />} disabled />
+            <DropdownItem
+              text={"Remove"}
+              icon={<DeleteIcon />}
+              disabled={!storage}
+              onClick={() => onRemoveStorage(storage.id)}
+            />
           </DropDown>
         ),
       }}
@@ -97,9 +115,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onGetStorage: (storageId) => dispatch(action.getStorage(storageId)),
-    onEditStorage: (storageId, updatedStorage) =>
-      dispatch(action.editStorage(storageId, updatedStorage)),
-    onRemoveStorage: (storageId) => dispatch(action.removeStorage(storageId)),
+    onSetStorage: (storage) => dispatch(action.setStorage(storage)),
   };
 };
 

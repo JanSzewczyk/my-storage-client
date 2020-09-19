@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import axios from "../../../../../shared/config/axios";
 
 import DataView from "../../../../UI/DataView/DataView";
 import TileContent from "../../../../UI/Tile/TileContent/TileContent";
@@ -8,17 +9,14 @@ import TileBottom from "../../../../UI/Tile/TileBottom/TileBottom";
 import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../../UI/Input/Input";
-import Loading from "../../../../UI/Loading/Loading";
 import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
+import { useNotification } from "../../../../../hooks";
+import { mapStorageDtoToStorage } from "../../../../../shared/dataUtils/storageUtils";
 
 const StorageEditPanel = React.memo((props) => {
-  const {
-    defaultStorage,
-    onCloseEdit,
-    onEditStorage,
-    loading,
-    onRemoveStorage,
-  } = props;
+  const { defaultStorage, onCloseEdit, onSetStorage, onRemoveStorage } = props;
+
+  const notification = useNotification();
 
   const { register, errors, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -33,14 +31,23 @@ const StorageEditPanel = React.memo((props) => {
   });
 
   const onSubmit = (formData) => {
-    onEditStorage(defaultStorage.storageId, formData);
+    onEditStorage(defaultStorage.id, formData);
   };
 
-  const onRemove = () => {
-    onRemoveStorage(defaultStorage.storageId);
+  const onEditStorage = (storageId, updatedStorage) => {
+    axios.put(`storages/${storageId}`, updatedStorage).then((res) => {
+      const storage = res.data;
+
+      notification.add({
+        content: `The ${storage.name} storage has been updated`,
+        type: "success",
+      });
+      onSetStorage(mapStorageDtoToStorage(storage));
+      onCloseEdit();
+    });
   };
 
-  return !loading ? (
+  return (
     <Aux>
       <TileContent>
         <form>
@@ -137,32 +144,29 @@ const StorageEditPanel = React.memo((props) => {
       <TileBottom
         right={
           <Aux>
-            <Button onClick={onCloseEdit}>back</Button>
-            <Button btnType={"warning"} onClick={handleSubmit(onRemove)}>
-              remove
+            <Button onClick={onCloseEdit}>Cancel</Button>
+            <Button btnType={"warning"} onClick={onRemoveStorage}>
+              Remove
             </Button>
             <Button
               btnType={"primary"}
               onClick={handleSubmit(onSubmit)}
-              disabled={!formState.dirty}
+              disabled={!formState.isDirty}
             >
-              update
+              Update
             </Button>
           </Aux>
         }
       />
     </Aux>
-  ) : (
-    <Loading />
   );
 });
 
 StorageEditPanel.propTypes = {
   defaultStorage: PropTypes.object,
   onCloseEdit: PropTypes.func.isRequired,
-  onEditStorage: PropTypes.func.isRequired,
+  onSetStorage: PropTypes.func.isRequired,
   onRemoveStorage: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
 export default StorageEditPanel;

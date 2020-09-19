@@ -43,7 +43,25 @@ const useQuery = (initial) => {
     [query]
   );
 
-  return { query, setQuery, onSortChanged, onPageChanged, onSizeChange };
+  const onSearchChanged = useCallback(
+    (searchString) => {
+      setQuery(
+        updateObject(query, {
+          search: searchString,
+        })
+      );
+    },
+    [query]
+  );
+
+  return {
+    query,
+    setQuery,
+    onSortChanged,
+    onPageChanged,
+    onSizeChange,
+    onSearchChanged,
+  };
 };
 
 export default useQuery;

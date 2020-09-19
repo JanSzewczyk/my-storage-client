@@ -10,19 +10,21 @@ import Table from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery from "../../../../hooks/useQuery";
+import browserHistory from "../../../../shared/config/history";
+import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 
 import "./StorageEmployees.scss";
 
 const config = {
   columns: [
     {
-      field: "firstName",
-      name: "First name",
+      field: "shortId",
+      name: "Employee ID",
       sorted: true,
     },
     {
-      field: "lastName",
-      name: "Last name",
+      field: "name",
+      name: "Name",
       sorted: true,
     },
     {
@@ -34,6 +36,12 @@ const config = {
       field: "addressCountry",
       name: "Country",
       sorted: true,
+    },
+    {
+      field: "createdAt",
+      name: "Created",
+      sorted: true,
+      converter: (cellData) => dateToDateTimeString(cellData),
     },
   ],
 };
@@ -57,9 +65,12 @@ const StorageEmployees = React.memo((props) => {
     onGetStorageEmployeesList(storageId, query);
   }, [onGetStorageEmployeesList, query, storageId]);
 
-  const onRowClick = useCallback((data) => {
-    console.log("Redirect to employee");
-  }, []);
+  const redirectToEmployee = useCallback(
+    (employee) => {
+      browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
+    },
+    [storageId]
+  );
 
   const table = useMemo(
     () => (
@@ -68,11 +79,17 @@ const StorageEmployees = React.memo((props) => {
         data={employeeList}
         sort={query.sort}
         onSortChanged={onSortChanged}
-        onRowClick={onRowClick}
+        onRowClick={redirectToEmployee}
         loading={employeeListLoading}
       />
     ),
-    [employeeList, employeeListLoading, onRowClick, onSortChanged, query.sort]
+    [
+      employeeList,
+      employeeListLoading,
+      onSortChanged,
+      query.sort,
+      redirectToEmployee,
+    ]
   );
 
   const pagination = useMemo(

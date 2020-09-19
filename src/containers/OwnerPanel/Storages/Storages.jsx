@@ -17,13 +17,12 @@ const Storages = (props) => {
   const [showAddStorage, setShowAddStorage] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect Storages");
     onGetStorageList();
   }, [onGetStorageList]);
 
   const redirectToStorageHandler = useCallback(
     (storage) => {
-      props.history.push(`storages/${storage.storageId}`);
+      props.history.push(`storages/${storage.id}`);
     },
     [props.history]
   );
@@ -31,9 +30,9 @@ const Storages = (props) => {
   const storageItems = useMemo(
     () => (
       <Aux>
-        {storageList.map((storage) => (
+        {storageList.map((storage, index) => (
           <StorageItem
-            key={storage.storageId}
+            key={index}
             storage={storage}
             onRedirectToStorage={() => redirectToStorageHandler(storage)}
           />

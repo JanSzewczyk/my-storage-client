@@ -10,13 +10,19 @@
   justify-content: space-between;
   align-items: center;
 
-  .app-bar__left {
-    margin-left: 8px;
+  &__left {
+    margin-left: 16px;
     display: flex;
   }
 
-  .app-bar__right {
-    margin-right: 8px;
+  // TODO
+  &__center {
+    margin-left: 16px;
+    display: flex;
+  }
+
+  &__right {
+    margin-right: 16px;
     display: flex;
   }
 }

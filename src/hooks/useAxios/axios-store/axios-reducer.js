@@ -9,7 +9,7 @@ export const initialState = { response: null, error: null, loading: false };
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.init:
-      return { response: null, error: null, loading: true };
+      return { response: action.initResponse, error: null, loading: true };
     case actions.success:
       return { response: action.payload, error: null, loading: false };
     case actions.failure:

@@ -6,7 +6,16 @@ const initialState = {
   storageListLoading: true,
   storage: null,
   storageLoading: true,
-  storageActionLoading: false,
+};
+
+const clearStorageStore = (state, action) => {
+  return updateObject(state, initialState);
+};
+
+const setStorage = (state, action) => {
+  return updateObject(state, {
+    storage: action.storage,
+  });
 };
 
 const storageListLoadStart = (state, action) => {
@@ -43,57 +52,11 @@ const storageLoadFail = (state, action) => {
   });
 };
 
-const storageEditStart = (state, action) => {
-  return updateObject(state, { storageActionLoading: true });
-};
-
-const storageEditSuccess = (state, action) => {
-  return updateObject(state, {
-    storage: action.storage,
-    storageActionLoading: false,
-  });
-};
-
-const storageEditFail = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
-
-const storageCreateStart = (state, action) => {
-  return updateObject(state, { storageActionLoading: true });
-};
-
-const storageCreateSuccess = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
-
-const storageCreateFail = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
-
-const storageRemoveStart = (state, action) => {
-  return updateObject(state, { storageActionLoading: true });
-};
-
-const storageRemoveSuccess = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
-
-const storageRemoveFail = (state, action) => {
-  return updateObject(state, {
-    storageActionLoading: false,
-  });
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.STORAGE_STORE_CLEAR:
+      return clearStorageStore(state, action);
+
     case actionTypes.STORAGE_LIST_LOAD_START:
       return storageListLoadStart(state, action);
     case actionTypes.STORAGE_LIST_LOAD_SUCCESS:
@@ -101,33 +64,14 @@ const reducer = (state = initialState, action) => {
     case actionTypes.STORAGE_LIST_LOAD_FAIL:
       return storageListLoadFail(state, action);
 
+    case actionTypes.STORAGE_SET_STORAGE:
+      return setStorage(state, action);
     case actionTypes.STORAGE_LOAD_START:
       return storageLoadStart(state, action);
     case actionTypes.STORAGE_LOAD_SUCCESS:
       return storageLoadSuccess(state, action);
     case actionTypes.STORAGE_LOAD_FAIL:
       return storageLoadFail(state, action);
-
-    case actionTypes.STORAGE_EDIT_START:
-      return storageEditStart(state, action);
-    case actionTypes.STORAGE_EDIT_SUCCESS:
-      return storageEditSuccess(state, action);
-    case actionTypes.STORAGE_EDIT_FAIL:
-      return storageEditFail(state, action);
-
-    case actionTypes.STORAGE_CREATE_START:
-      return storageCreateStart(state, action);
-    case actionTypes.STORAGE_CREATE_SUCCESS:
-      return storageCreateSuccess(state, action);
-    case actionTypes.STORAGE_CREATE_FAIL:
-      return storageCreateFail(state, action);
-
-    case actionTypes.STORAGE_REMOVE_START:
-      return storageRemoveStart(state, action);
-    case actionTypes.STORAGE_REMOVE_SUCCESS:
-      return storageRemoveSuccess(state, action);
-    case actionTypes.STORAGE_REMOVE_FAIL:
-      return storageRemoveFail(state, action);
 
     default:
       return state;

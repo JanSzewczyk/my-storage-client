@@ -11,7 +11,7 @@ const DropdownItem = ({ text, icon, onClick, style, disabled }) => {
   return (
     <li
       className={DIClasses.join(" ")}
-      onClick={!disabled && onClick && onClick}
+      onClick={!disabled && onClick ? onClick : undefined}
       style={style}
     >
       {icon && <div className={"dropdown-item__icon"}>{icon}</div>}
