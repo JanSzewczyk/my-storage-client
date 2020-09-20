@@ -11,8 +11,8 @@ import Loading from "../../../UI/Loading/Loading";
 import Select from "../../../UI/Select";
 import axios from "../../../../shared/config/axios";
 import browserHistory from "../../../../shared/config/history";
-import { mapEmployeeDtoToEmployee } from "../../../../shared/dataUtils/employeeUtils";
-import { createStoragesSelectList } from "../../../../shared/dataUtils/storageUtils";
+import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
+import { createStoragesSelectList } from "../../../../shared/data-utils/storageUtils";
 
 const AssignStorageToEmployee = React.memo((props) => {
   const { employeeId, storageId, onClose, storage, onSetEmployee } = props;

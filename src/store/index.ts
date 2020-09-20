@@ -21,7 +21,7 @@ export {
   getStorageEmployeesList,
   getEmployee,
   setEmployee,
-} from "./employee/employeeAction";
+} from "./employee/employee.action";
 
 export {
   getStorageItemsList,

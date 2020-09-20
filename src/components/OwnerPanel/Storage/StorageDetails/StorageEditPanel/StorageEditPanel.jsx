@@ -11,7 +11,7 @@ import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../../UI/Input/Input";
 import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
 import { useNotification } from "../../../../../hooks";
-import { mapStorageDtoToStorage } from "../../../../../shared/dataUtils/storageUtils";
+import { mapStorageDtoToStorage } from "../../../../../shared/data-utils/storageUtils";
 
 const StorageEditPanel = React.memo((props) => {
   const { defaultStorage, onCloseEdit, onSetStorage, onRemoveStorage } = props;

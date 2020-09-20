@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthCheck: (authData) => dispatch(action.authCheck()),
+    onAuthCheck: () => dispatch(action.authCheck()),
   };
 };
 

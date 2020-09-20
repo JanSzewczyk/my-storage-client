@@ -3,7 +3,7 @@ import * as actionTypes from "../actionTypes";
 import {
   mapStorageDtoToStorage,
   mapStorageViewDtoToStorageView,
-} from "../../shared/dataUtils/storageUtils";
+} from "../../shared/data-utils/storageUtils";
 
 export const clearStorageStore = () => {
   return {

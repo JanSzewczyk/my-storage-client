@@ -85,8 +85,8 @@ EmployeeStorageDetails.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    employee: state.employee.employee,
-    employeeLoading: state.employee.employeeLoading,
+    employee: state.employeeStore.employee,
+    employeeLoading: state.employeeStore.employeeLoading,
   };
 };
 

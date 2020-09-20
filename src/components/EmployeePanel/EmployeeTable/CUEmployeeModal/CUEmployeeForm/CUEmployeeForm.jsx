@@ -11,7 +11,7 @@ import Loading from "../../../../UI/Loading/Loading";
 import Input from "../../../../UI/Input/Input";
 import * as pattern from "../../../../../shared/patterns";
 import Select from "../../../../UI/Select/Select";
-import { createStoragesSelectList } from "../../../../../shared/dataUtils/storageUtils";
+import { createStoragesSelectList } from "../../../../../shared/data-utils/storageUtils";
 
 import "./CUEmployeeForm.scss";
 

@@ -1,8 +1,9 @@
 import { AuthState } from "../../../store/auth/types";
+import { EmployeeState } from "../../../store/employee/types";
 
 export default interface StoreState {
   authStore: AuthState;
-  // attributeStore: AttributeState;
+  employeeStore: EmployeeState;
   // authStore: AuthState;
   // balanceStore: BalanceState;
   // merchantStore: MerchantState;

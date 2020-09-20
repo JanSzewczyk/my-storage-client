@@ -124,9 +124,9 @@ StorageEmployees.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    employeeList: state.employee.employeeList,
-    pageInfo: state.employee.pageInfo,
-    employeeListLoading: state.employee.employeeListLoading,
+    employeeList: state.employeeStore.employeeViewList,
+    pageInfo: state.employeeStore.pageInfo,
+    employeeListLoading: state.employeeStore.employeeViewListLoading,
   };
 };
 

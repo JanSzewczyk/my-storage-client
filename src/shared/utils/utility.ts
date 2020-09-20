@@ -1,11 +1,11 @@
-export const updateObject = (oldObject, updatedProperties) => {
+export const updateObject = (oldObject: any, updatedProperties: any): any => {
   return {
     ...oldObject,
     ...updatedProperties,
   };
 };
 
-export const createSearchQuery = (query) => {
+export const createSearchQuery = (query: any): string => {
   let searchQuery = [];
 
   if (query.search && query.search !== "") {
@@ -13,7 +13,7 @@ export const createSearchQuery = (query) => {
   }
 
   if (query.sort && query.sort.length > 0) {
-    query.sort.map((s) => searchQuery.push(`sort=${s.field},${s.type}`));
+    query.sort.map((s: any) => searchQuery.push(`sort=${s.field},${s.type}`));
   }
 
   if (query.states && query.states.length > 0) {

@@ -1,3 +1,4 @@
 export default interface Link {
-  [link: string]: string;
+  href: string;
+  rel: string;
 }

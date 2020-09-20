@@ -16,7 +16,7 @@ import DropdownItem from "../../UI/DropDown/DropdownItem/DropdownItem";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import CUEmployeeModal from "../../EmployeePanel/EmployeeTable/CUEmployeeModal/CUEmployeeModal";
 import browserHistory from "../../../shared/config/history";
-import { mapEmployeeDtoToEmployee } from "../../../shared/dataUtils/employeeUtils";
+import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
 import { useNotification } from "../../../hooks";
 import { useHistory } from "react-router-dom";
 
@@ -133,8 +133,8 @@ EmployeeDetails.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    employee: state.employee.employee,
-    employeeLoading: state.employee.employeeLoading,
+    employee: state.employeeStore.employee,
+    employeeLoading: state.employeeStore.employeeLoading,
   };
 };
 

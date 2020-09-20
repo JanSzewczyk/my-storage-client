@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 
 import authReducer from "../../store/auth/auth.reducer";
 import userReducer from "../../store/user/userReducer";
-import employeeReducer from "../../store/employee/employeeReducer";
+import employeeReducer from "../../store/employee/employee.reducer";
 import storageReducer from "../../store/storage/storageReducer";
 import itemReducer from "../../store/item/itemReducer";
 import actionReducer from "../../store/action/actionReducer";
@@ -16,7 +16,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducers = combineReducers({
   action: actionReducer,
   authStore: authReducer,
-  employee: employeeReducer,
+  employeeStore: employeeReducer,
   item: itemReducer,
   product: productReducer,
   statistic: statisticReducer,
