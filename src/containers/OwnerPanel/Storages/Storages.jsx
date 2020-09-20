@@ -64,8 +64,8 @@ const Storages = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    storageList: state.storage.storageList,
-    storageListLoading: state.storage.storageListLoading,
+    storageList: state.storageStore.storageViewList,
+    storageListLoading: state.storageStore.storageViewListLoading,
   };
 };
 

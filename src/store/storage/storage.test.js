@@ -1,4 +1,4 @@
-import reducer from "./storageReducer";
+import reducer from "./storage.reducer";
 import * as actionTypes from "../actionTypes";
 
 describe("storage reducer", () => {

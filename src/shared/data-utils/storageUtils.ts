@@ -2,13 +2,15 @@ import { FixMeLater } from "../types/common/FixMeLater";
 import StorageDto from "../types/storage/StorageDto";
 import { updateObject } from "../utils/utility";
 import Storage from "../types/storage/Storage";
+import StorageViewDto from "../types/storage/StorageViewDto";
+import StorageView from "../types/storage/StorageView";
 
 export const mapStorageViewDtoToStorageView = (
-  storageView: FixMeLater
-): FixMeLater =>
-  updateObject(storageView, {
-    createdAt: new Date(storageView.createdAt),
-    updatedAt: new Date(storageView.updatedAt),
+  storageViewDto: StorageViewDto
+): StorageView =>
+  updateObject(storageViewDto, {
+    createdAt: new Date(storageViewDto.createdAt),
+    updatedAt: new Date(storageViewDto.updatedAt),
   });
 
 export const mapStorageDtoToStorage = (storage: StorageDto): Storage =>

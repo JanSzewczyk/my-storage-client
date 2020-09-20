@@ -34,6 +34,6 @@ export {
   setStorage,
   getStorageList,
   getStorage,
-} from "./storage/storageAction";
+} from "./storage/storage.action";
 
 export { getUserDetails } from "./user/userAction";

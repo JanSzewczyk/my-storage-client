@@ -106,9 +106,8 @@ StorageDetails.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    storage: state.storage.storage,
-    storageLoading: state.storage.storageLoading,
-    storageEditLoading: state.storage.storageActionLoading,
+    storage: state.storageStore.storage,
+    storageLoading: state.storageStore.storageLoading,
   };
 };
 
