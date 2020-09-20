@@ -23,10 +23,7 @@ export {
   setEmployee,
 } from "./employee/employee.action";
 
-export {
-  getStorageItemsList,
-  getStorageItemsEmployee,
-} from "./item/itemAction";
+export { getStorageItemViewList, getStorageItemList } from "./item/item.action";
 
 export { getProductsList } from "./product/productAction";
 

@@ -17,7 +17,7 @@ import "./RemoveAction.scss";
 const RemoveAction = React.memo((props) => {
   const {
     storageId,
-    onGetStorageItemsEmployee,
+    onGetStorageItemList,
     onClose,
     itemsList,
     itemsListLoading,
@@ -27,8 +27,8 @@ const RemoveAction = React.memo((props) => {
   const [removeItems, setRemoveItems] = useState([]);
 
   useEffect(() => {
-    onGetStorageItemsEmployee(storageId);
-  }, [onGetStorageItemsEmployee, storageId]);
+    onGetStorageItemList(storageId);
+  }, [onGetStorageItemList, storageId]);
 
   const addToRemoveItems = (data) => {
     setRemoveItems([...removeItems, data]);
@@ -70,7 +70,7 @@ const RemoveAction = React.memo((props) => {
         left={<Button onClick={onClose}>close</Button>}
         right={
           <Button
-          onClick={() => onRemoveAction(removeItems)}
+            onClick={() => onRemoveAction(removeItems)}
             btnType={"warning"}
             disabled={removeItems.length === 0}
           >
@@ -89,16 +89,16 @@ RemoveAction.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    itemsList: state.item.itemsList,
-    itemsListLoading: state.item.itemsListLoading,
+    itemsList: state.itemStore.itemsList,
+    itemsListLoading: state.itemStore.itemListLoading,
     actionSRLoading: state.action.actionSRLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStorageItemsEmployee: (storageId) =>
-      dispatch(action.getStorageItemsEmployee(storageId)),
+    onGetStorageItemList: (storageId) =>
+      dispatch(action.getStorageItemList(storageId)),
     onRemoveAction: (items) => dispatch(action.removeAction(items)),
   };
 };

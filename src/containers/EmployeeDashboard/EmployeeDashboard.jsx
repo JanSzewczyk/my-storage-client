@@ -38,7 +38,7 @@ const EmployeeDashboard = (props) => {
         <ActionTile
           action={action}
           onClose={() => setAction(false)}
-          storageId={user.workPlace.storageId}
+          storageId={user.workPlace.id}
           ownerId={user.ownerId}
         />
       )}

@@ -44,10 +44,10 @@ const StorageInforamtions = React.memo((props) => {
       <TileBottom
         right={
           <Aux>
-            <Button btnType={"primary"} clicked={() => onAction("STORE")}>
+            <Button btnType={"primary"} onClick={() => onAction("STORE")}>
               STORE
             </Button>
-            <Button btnType={"warning"} clicked={() => onAction("REMOVE")}>
+            <Button btnType={"warning"} onClick={() => onAction("REMOVE")}>
               REMOVE
             </Button>
           </Aux>

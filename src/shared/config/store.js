@@ -5,7 +5,7 @@ import authReducer from "../../store/auth/auth.reducer";
 import userReducer from "../../store/user/userReducer";
 import employeeReducer from "../../store/employee/employee.reducer";
 import storageReducer from "../../store/storage/storageReducer";
-import itemReducer from "../../store/item/itemReducer";
+import itemReducer from "../../store/item/item.reducer";
 import actionReducer from "../../store/action/actionReducer";
 import statisticReducer from "../../store/statistic/statisticReducer";
 import productReducer from "../../store/product/productReducer";
@@ -17,7 +17,7 @@ const rootReducers = combineReducers({
   action: actionReducer,
   authStore: authReducer,
   employeeStore: employeeReducer,
-  item: itemReducer,
+  itemStore: itemReducer,
   product: productReducer,
   statistic: statisticReducer,
   storage: storageReducer,

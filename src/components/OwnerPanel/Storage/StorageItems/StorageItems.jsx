@@ -45,7 +45,7 @@ const config = {
 const StorageItems = React.memo((props) => {
   const {
     storageId,
-    onGetStorageItemsList,
+    onGetStorageItemViewList,
     itemsList,
     pageInfo,
     itemsListLoading,
@@ -58,8 +58,8 @@ const StorageItems = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStorageItemsList(storageId, query);
-  }, [onGetStorageItemsList, query, storageId]);
+    onGetStorageItemViewList(storageId, query);
+  }, [onGetStorageItemViewList, query, storageId]);
 
   const itemsTable = useMemo(
     () => (
@@ -106,16 +106,16 @@ StorageItems.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    itemsList: state.item.itemsList,
-    pageInfo: state.item.pageInfo,
-    itemsListLoading: state.item.itemsListLoading,
+    itemsList: state.itemStore.itemViewList,
+    pageInfo: state.itemStore.pageInfo,
+    itemsListLoading: state.itemStore.itemViewListLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onGetStorageItemsList: (storageId, queryData) =>
-      dispatch(action.getStorageItemsList(storageId, queryData)),
+    onGetStorageItemViewList: (storageId, queryData) =>
+      dispatch(action.getStorageItemViewList(storageId, queryData)),
   };
 };
 
