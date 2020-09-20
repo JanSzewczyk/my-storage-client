@@ -91,8 +91,8 @@ StoreAction.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    productsList: state.product.productsList,
-    productsListLoading: state.product.productsListLoading,
+    productsList: state.productStore.productList,
+    productsListLoading: state.productStore.productListLoading,
     actionSRLoading: state.action.actionSRLoading,
   };
 };

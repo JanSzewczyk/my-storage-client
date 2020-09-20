@@ -8,7 +8,7 @@ import storageReducer from "../../store/storage/storageReducer";
 import itemReducer from "../../store/item/item.reducer";
 import actionReducer from "../../store/action/actionReducer";
 import statisticReducer from "../../store/statistic/statisticReducer";
-import productReducer from "../../store/product/productReducer";
+import productReducer from "../../store/product/product.reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,7 +18,7 @@ const rootReducers = combineReducers({
   authStore: authReducer,
   employeeStore: employeeReducer,
   itemStore: itemReducer,
-  product: productReducer,
+  productStore: productReducer,
   statistic: statisticReducer,
   storage: storageReducer,
   user: userReducer,
