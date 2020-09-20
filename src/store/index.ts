@@ -27,7 +27,7 @@ export { getStorageItemViewList, getStorageItemList } from "./item/item.action";
 
 export { getProductsList } from "./product/product.action";
 
-export { getStorageStatistics } from "./statistic/statisticAction";
+export { getStorageStatistics } from "./statistic/statistic.action";
 
 export {
   clearStorageStore,

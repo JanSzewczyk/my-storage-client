@@ -49,8 +49,8 @@ StorageStatistics.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    storageStatistics: state.statistic.storageStatistics,
-    storageStatisticsLoading: state.statistic.storageStatisticsLoading,
+    storageStatistics: state.statisticStore.storageStatistics,
+    storageStatisticsLoading: state.statisticStore.storageStatisticsLoading,
   };
 };
 
