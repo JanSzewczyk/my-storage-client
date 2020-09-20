@@ -90,9 +90,9 @@ StorageActions.propTypes = { storageId: PropTypes.string.isRequired };
 
 const mapStateToProps = (state) => {
   return {
-    actionsList: state.action.actionsList,
-    pageInfo: state.action.pageInfo,
-    actionsListLoading: state.action.actionsListLoading,
+    actionsList: state.actionStore.actionsList,
+    pageInfo: state.actionStore.pageInfo,
+    actionsListLoading: state.actionStore.actionsListLoading,
   };
 };
 

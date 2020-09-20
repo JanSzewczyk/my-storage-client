@@ -13,7 +13,7 @@ import productReducer from "../../store/product/product.reducer";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const rootReducers = combineReducers({
-  action: actionReducer,
+  actionStore: actionReducer,
   authStore: authReducer,
   employeeStore: employeeReducer,
   itemStore: itemReducer,

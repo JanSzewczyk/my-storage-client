@@ -3,4 +3,7 @@ export enum UserRole {
   EMPLOYEE = "EMPLOYEE",
 }
 
-export const ACTION_STATES = {};
+export enum ActionType {
+  STORE = "STORE",
+  REMOVE = "REMOVE",
+}

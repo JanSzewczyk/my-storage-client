@@ -26,17 +26,13 @@ export const userLoadSuccess = (
   userDto: UserDto,
   role: UserRole
 ): UserLoadSuccessAction => {
-  let userData = null;
-
-  if (role === UserRole.EMPLOYEE)
-    userData = mapEmployeeDtoToEmployee(userDto as EmployeeDto);
-
-  if (role === UserRole.OWNER)
-    userData = mapOwnerDtoToOwner(userDto as OwnerDto);
 
   return {
     type: actionTypes.USER_LOAD_SUCCESS,
-    user: userData,
+    user:
+      role === UserRole.EMPLOYEE
+        ? mapEmployeeDtoToEmployee(userDto as EmployeeDto)
+        : mapOwnerDtoToOwner(userDto as OwnerDto),
     role: role,
   };
 };

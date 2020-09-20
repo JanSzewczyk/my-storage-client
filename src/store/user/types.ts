@@ -1,9 +1,10 @@
 import { UserRole } from "../../shared/constants";
-import { FixMeLater } from "../../shared/types/common/FixMeLater";
+
+import User from "../../shared/types/user/User";
 import * as actionTypes from "../actionTypes";
 
 export interface UserState {
-  user: FixMeLater | null;
+  user: User | null;
   role: UserRole | null;
 }
 
@@ -13,7 +14,7 @@ export interface UserLoadStartAction {
 
 export interface UserLoadSuccessAction {
   type: typeof actionTypes.USER_LOAD_SUCCESS;
-  user: FixMeLater;
+  user: User;
   role: UserRole;
 }
 

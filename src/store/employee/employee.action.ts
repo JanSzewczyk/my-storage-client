@@ -5,7 +5,6 @@ import {
   mapEmployeeDtoToEmployee,
   mapEmployeeViewDtoToEmployeeView,
 } from "../../shared/data-utils/employeeUtils";
-import { FixMeLater } from "../../shared/types/common/FixMeLater";
 import PageInfo from "../../shared/types/common/PageInfo";
 import {
   EmployeeLoadFailureAction,
@@ -24,6 +23,7 @@ import EmployeeDto from "../../shared/types/employee/EmployeeDto";
 import EmployeeViewDto from "../../shared/types/employee/EmployeeViewDto";
 import Query from "../../shared/types/query/Query";
 import SearchQuery from "../../shared/types/query/SearchQuery";
+import Employee from "../../shared/types/employee/Employee";
 
 export const employeeStoreClear = (): EmployeeStoreClearAction => {
   return {
@@ -89,7 +89,7 @@ export const getStorageEmployeesList = (
     });
 };
 
-export const setEmployee = (employee: FixMeLater): SetEmployeeAction => {
+export const setEmployee = (employee: Employee): SetEmployeeAction => {
   return {
     type: actionTypes.EMPLOYEE_SET_EMPLOYEE,
     employee: employee,
