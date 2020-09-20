@@ -2,11 +2,11 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
 import authReducer from "../../store/auth/auth.reducer";
-import userReducer from "../../store/user/userReducer";
+import userReducer from "../../store/user/user.reducer";
 import employeeReducer from "../../store/employee/employee.reducer";
 import storageReducer from "../../store/storage/storage.reducer";
 import itemReducer from "../../store/item/item.reducer";
-import actionReducer from "../../store/action/actionReducer";
+import actionReducer from "../../store/action/action.reducer";
 import statisticReducer from "../../store/statistic/statistic.reducer";
 import productReducer from "../../store/product/product.reducer";
 
@@ -20,7 +20,7 @@ export const rootReducers = combineReducers({
   productStore: productReducer,
   statisticStore: statisticReducer,
   storageStore: storageReducer,
-  user: userReducer,
+  userStore: userReducer,
 });
 
 const store = createStore(

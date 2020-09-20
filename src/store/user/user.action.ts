@@ -1,0 +1,70 @@
+import axios from "../../shared/config/axios";
+import { logout } from "..";
+import * as actionTypes from "../actionTypes";
+import {
+  UserLoadStartAction,
+  UserLoadSuccessAction,
+  UserLogoutAction,
+} from "./types";
+import { UserRole } from "../../shared/constants";
+import StoreDispatch from "../../shared/types/store/StoreDispatch";
+import { AxiosResponse } from "axios";
+import UserDetails from "../../shared/types/apiResponse/UserDetails";
+import UserDto from "../../shared/types/user/UserDto";
+import { mapEmployeeDtoToEmployee } from "../../shared/data-utils/employeeUtils";
+import EmployeeDto from "../../shared/types/employee/EmployeeDto";
+import OwnerDto from "../../shared/types/owner/OwnerDto";
+import { mapOwnerDtoToOwner } from "../../shared/data-utils/ownerUtils";
+
+export const userLoadStart = (): UserLoadStartAction => {
+  return {
+    type: actionTypes.USER_LOAD_START,
+  };
+};
+
+export const userLoadSuccess = (
+  userDto: UserDto,
+  role: UserRole
+): UserLoadSuccessAction => {
+  let userData = null;
+
+  if (role === UserRole.EMPLOYEE)
+    userData = mapEmployeeDtoToEmployee(userDto as EmployeeDto);
+
+  if (role === UserRole.OWNER)
+    userData = mapOwnerDtoToOwner(userDto as OwnerDto);
+
+  return {
+    type: actionTypes.USER_LOAD_SUCCESS,
+    user: userData,
+    role: role,
+  };
+};
+
+export const userLoadFailure = () => {
+  return {
+    type: actionTypes.USER_LOAD_FAILURE,
+  };
+};
+
+export const getUserDetails = (): any => (dispatch: StoreDispatch): any => {
+  dispatch(userLoadStart());
+
+  axios
+    .get("users/details")
+    .then((res: AxiosResponse<UserDetails>) => {
+      const { user, role } = res.data;
+
+      dispatch(userLoadSuccess(user, role));
+    })
+    .catch((err) => {
+      dispatch(logout());
+      dispatch(userLoadFailure());
+    });
+};
+
+export const userLogout = (): UserLogoutAction => {
+  return {
+    type: actionTypes.USER_LOGOUT,
+  };
+};

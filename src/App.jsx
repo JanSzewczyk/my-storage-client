@@ -12,7 +12,7 @@ import Storage from "./containers/OwnerPanel/Storage/Storage";
 import Logout from "./containers/Auth/Logout/Logout";
 import Employees from "./containers/OwnerPanel/Employees/Employees";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
-import { USER_ROLES } from "./shared/constants";
+import { UserRole } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
 import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
@@ -32,7 +32,7 @@ const App = (props) => {
     </Switch>
   ) : (
     <AppLayout>
-      {userRole === USER_ROLES.OWNER && (
+      {userRole === UserRole.OWNER && (
         <Switch>
           <Route
             path={"/storages/:storageId/employee/:employeeId"}
@@ -47,7 +47,7 @@ const App = (props) => {
           <Redirect to={"/"} />
         </Switch>
       )}
-      {userRole === USER_ROLES.EMPLOYEE && (
+      {userRole === UserRole.EMPLOYEE && (
         <Switch>
           <Route path={"/logout"} component={Logout} />
           <Route exact path={"/"} component={EmployeeDashboard} />
@@ -60,8 +60,10 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     authenticated:
-      state.authStore.accessToken !== null && state.user.user && state.user.role,
-    userRole: state.user.role,
+      state.authStore.accessToken !== null &&
+      state.userStore.user &&
+      state.userStore.role,
+    userRole: state.userStore.role,
   };
 };
 

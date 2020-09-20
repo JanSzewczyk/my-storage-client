@@ -25,8 +25,8 @@ AppLayout.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user.user,
-    userRole: state.user.role,
+    user: state.userStore.user,
+    userRole: state.userStore.role,
   };
 };
 

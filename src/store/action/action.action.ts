@@ -47,32 +47,32 @@ export const getStorageActionsList = (storageId, queryData) => {
   };
 };
 
-export const actionRemoveStart = () => {
-  return {
-    type: actionTypes.ACTION_REMOVE_START,
-  };
-};
+// export const actionRemoveStart = () => {
+//   return {
+//     type: actionTypes.ACTION_REMOVE_START,
+//   };
+// };
 
-export const actionRemoveSuccess = () => {
-  return {
-    type: actionTypes.ACTION_REMOVE_SUCCESS,
-  };
-};
+// export const actionRemoveSuccess = () => {
+//   return {
+//     type: actionTypes.ACTION_REMOVE_SUCCESS,
+//   };
+// };
 
-export const actionRemoveFail = () => {
-  return {
-    type: actionTypes.ACTION_REMOVE_FAIL,
-  };
-};
+// export const actionRemoveFail = () => {
+//   return {
+//     type: actionTypes.ACTION_REMOVE_FAIL,
+//   };
+// };
 
 export const removeAction = (removedItems) => {
   return (dispatch) => {
-    dispatch(actionRemoveStart());
+    // dispatch(actionRemoveStart());
 
     axios
       .post(`actions/remove`, removedItems)
       .then((res) => {
-        dispatch(actionRemoveSuccess());
+        // dispatch(actionRemoveSuccess());
         // success("REMOVE action success");
         // TODO change logic
         browserHistory.push("/xxx");
@@ -80,37 +80,37 @@ export const removeAction = (removedItems) => {
       })
       .catch((err) => {
         // error(err.response ? err.response.data.message : "Server error");
-        dispatch(actionRemoveFail());
+        // dispatch(actionRemoveFail());
       });
   };
 };
 
-export const actionStoreStart = () => {
-  return {
-    type: actionTypes.ACTION_STORE_START,
-  };
-};
+// export const actionStoreStart = () => {
+//   return {
+//     type: actionTypes.ACTION_STORE_START,
+//   };
+// };
 
-export const actionStoreSuccess = () => {
-  return {
-    type: actionTypes.ACTION_STORE_SUCCESS,
-  };
-};
+// export const actionStoreSuccess = () => {
+//   return {
+//     type: actionTypes.ACTION_STORE_SUCCESS,
+//   };
+// };
 
-export const actionStoreFail = () => {
-  return {
-    type: actionTypes.ACTION_STORE_FAIL,
-  };
-};
+// export const actionStoreFail = () => {
+//   return {
+//     type: actionTypes.ACTION_STORE_FAIL,
+//   };
+// };
 
 export const storeAction = (storedItems) => {
   return (dispatch) => {
-    dispatch(actionStoreStart());
+    // dispatch(actionStoreStart());
 
     axios
       .post(`actions/store`, storedItems)
       .then((res) => {
-        dispatch(actionStoreSuccess());
+        // dispatch(actionStoreSuccess());
         // success("STORE action success");
         // TODO change logic
         browserHistory.push("/xxx");
@@ -118,7 +118,7 @@ export const storeAction = (storedItems) => {
       })
       .catch((err) => {
         // error(err.response ? err.response.data.message : "Server error");
-        dispatch(actionStoreFail());
+        // dispatch(actionStoreFail());
       });
   };
 };

@@ -1,6 +1,6 @@
 import StoreDispatch from "../shared/types/store/StoreDispatch";
 import { authLogout } from "./auth/auth.action";
-import { userLogout } from "./user/userAction";
+import { userLogout } from "./user/user.action";
 
 export const logout = () => (dispatch: StoreDispatch) => {
   dispatch(userLogout());
@@ -11,7 +11,7 @@ export {
   getStorageActionsList,
   removeAction,
   storeAction,
-} from "./action/actionAction";
+} from "./action/action.action";
 
 export { auth, authCheck, authLogout } from "./auth/auth.action";
 
@@ -36,4 +36,4 @@ export {
   getStorage,
 } from "./storage/storage.action";
 
-export { getUserDetails } from "./user/userAction";
+export { getUserDetails } from "./user/user.action";

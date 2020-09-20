@@ -1,6 +1,7 @@
 import Storage from "../storage/Storage";
+import User from "../user/User";
 
-export default interface Employee {
+export default interface Employee extends User {
   addressCity: string;
   addressCountry: string;
   addressStreet: string;
