@@ -1,5 +1,4 @@
 import { UserRole } from "../../shared/constants";
-
 import User from "../../shared/types/user/User";
 import * as actionTypes from "../actionTypes";
 

@@ -1,7 +1,6 @@
 import Link from "../common/Link";
-import User from "../user/User";
 
-export default interface Owner extends User {
+export default interface Owner {
   createdAt: Date;
   currency: string;
   email: string;

@@ -1,7 +1,6 @@
 import StorageDto from "../storage/StorageDto";
-import UserDto from "../user/UserDto";
 
-export default interface EmployeeDto extends UserDto {
+export default interface EmployeeDto {
   addressCity: string;
   addressCountry: string;
   addressStreet: string;

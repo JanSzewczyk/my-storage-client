@@ -11,6 +11,7 @@ import {
   StorageLoadStartAction,
   StorageLoadSuccessAction,
   StorageViewListLoadFailureAction,
+  StorageViewListLoadStartAction,
   StorageViewListLoadSuccessAction,
 } from "./types";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
@@ -25,7 +26,7 @@ export const clearStorageStore = (): ClearStorageStoreAction => {
   };
 };
 
-export const storageViewListLoadStart = () => {
+export const storageViewListLoadStart = (): StorageViewListLoadStartAction => {
   return {
     type: actionTypes.STORAGE_VIEW_LIST_LOAD_START,
   };

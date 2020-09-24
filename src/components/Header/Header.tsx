@@ -1,6 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+
+import User from "../../shared/types/user/User";
+import { UserRole } from "../../shared/constants";
 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import InboxIcon from "@material-ui/icons/Inbox";
@@ -10,23 +12,37 @@ import NavigationLinks from "../Navigation/NavigationLinks/NavigationLinks";
 
 import "./Header.scss";
 
-const Header = (props) => {
+interface HeaderProps {
+  user: User | null;
+  userRole: UserRole | null;
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
   const { userRole, user } = props;
+
+  const logo = (
+    <Link to={"/"} className={"header__logo"}>
+      <InboxIcon />
+      MY STORAGE
+    </Link>
+  );
+
   return (
     <header className={"header"}>
       <div className={"header__left"}>
-        <Link to={"/"} className={"header__logo"}>
-          <InboxIcon />
-          MY STORAGE
-        </Link>
+        {logo}
+        
         <div className={"header__line"} />
-        <NavigationLinks userRole={userRole} />
+
+        {userRole && <NavigationLinks userRole={userRole} />}
       </div>
       <div className={"header__right"}>
-        <div className={"header__username"}>
-          <PersonIcon height={16} />
-          {`${user.firstName} ${user.lastName}`}
-        </div>
+        {user && (
+          <div className={"header__username"}>
+            <PersonIcon height={16} />
+            {`${user.firstName} ${user.lastName}`}
+          </div>
+        )}
         <Link to={"/logout"}>
           <Button>
             <ExitToAppIcon />
@@ -36,11 +52,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  userRole: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
 };
 
 export default Header;

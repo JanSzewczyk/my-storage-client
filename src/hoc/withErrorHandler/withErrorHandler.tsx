@@ -3,12 +3,16 @@ import React, { useLayoutEffect } from "react";
 import _ from "lodash";
 
 import useNotification from "../../hooks/useNotification";
-import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
-
 import axios from "../../shared/config/axios";
 
-const withErrorHandler = (Component, ignoreStatus = []) => {
-  const WithErrorHandler = (props) => {
+import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
+import { FixMeLater } from "../../shared/types/common/FixMeLater";
+
+const withErrorHandler = <E extends object = FixMeLater>(
+  Component: React.ComponentType<E>,
+  ignoreStatus: number[] = []
+) => {
+  const WithErrorHandler = (props: E) => {
     const notification = useNotification();
 
     useLayoutEffect(() => {
@@ -44,7 +48,7 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
             const errorMessage = (
               <ApiErrorMessage url={error.config.url} message={error.message} />
             );
-            
+
             notification.add({
               content: errorMessage,
               type: "error",
@@ -61,8 +65,8 @@ const withErrorHandler = (Component, ignoreStatus = []) => {
       };
     }, [notification]);
 
-    const getErrorMessage = (errorMessage) => {
-      let message = "";
+    const getErrorMessage = (errorMessage: string) => {
+      let message: string = "";
 
       if (
         errorMessage &&

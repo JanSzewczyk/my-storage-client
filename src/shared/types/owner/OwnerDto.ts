@@ -1,7 +1,6 @@
 import Link from "../common/Link";
-import UserDto from "../user/UserDto";
 
-export default interface OwnerDto extends UserDto {
+export default interface OwnerDto {
   createdAt: string;
   currency: string;
   email: string;

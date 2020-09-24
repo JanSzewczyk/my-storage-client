@@ -17,8 +17,16 @@ import { UserRole } from "./shared/constants";
 import withNotificationProvider from "./hoc/withNotificationProvider";
 import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
 import Employee from "./containers/OwnerPanel/Employee/Employee";
+import StoreDispatch from "./shared/types/store/StoreDispatch";
+import StoreState from "./shared/types/store/StoreState";
 
-const App = (props) => {
+interface AppProps {
+  authenticated: boolean;
+  userRole: UserRole | null;
+  onAuthCheck: () => void;
+}
+
+const App: React.FC<AppProps> = (props) => {
   const { authenticated, onAuthCheck, userRole } = props;
 
   useEffect(() => {
@@ -32,7 +40,7 @@ const App = (props) => {
     </Switch>
   ) : (
     <AppLayout>
-      {userRole === UserRole.OWNER && (
+      {userRole && userRole === UserRole.OWNER && (
         <Switch>
           <Route
             path={"/storages/:storageId/employee/:employeeId"}
@@ -47,7 +55,7 @@ const App = (props) => {
           <Redirect to={"/"} />
         </Switch>
       )}
-      {userRole === UserRole.EMPLOYEE && (
+      {userRole && userRole === UserRole.EMPLOYEE && (
         <Switch>
           <Route path={"/logout"} component={Logout} />
           <Route exact path={"/"} component={EmployeeDashboard} />
@@ -57,17 +65,17 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     authenticated:
       state.authStore.accessToken !== null &&
-      state.userStore.user &&
-      state.userStore.role,
+      state.userStore.user !== null &&
+      state.userStore.role !== null,
     userRole: state.userStore.role,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     onAuthCheck: () => dispatch(action.authCheck()),
   };
@@ -76,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withNotificationProvider(App));
+)(withNotificationProvider<AppProps>(App));

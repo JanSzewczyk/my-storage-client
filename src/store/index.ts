@@ -2,7 +2,7 @@ import StoreDispatch from "../shared/types/store/StoreDispatch";
 import { authLogout } from "./auth/auth.action";
 import { userLogout } from "./user/user.action";
 
-export const logout = () => (dispatch: StoreDispatch) => {
+export const logout = (): any => (dispatch: StoreDispatch) => {
   dispatch(userLogout());
   dispatch(authLogout());
 };

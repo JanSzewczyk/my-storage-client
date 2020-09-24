@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: process.env.REACT_APP_API_ADDRESS,
 });
 
-export const setBasicToken = (token) => {
+export const setBasicToken = (token: string) => {
   instance.defaults.headers.common["Authorization"] = `Basic ${token}`;
 };
 
@@ -12,7 +12,7 @@ export const removeBasicToken = () => {
   delete instance.defaults.headers.common["Authorization"];
 };
 
-export const setBearerToken = (token) => {
+export const setBearerToken = (token: string) => {
   instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 

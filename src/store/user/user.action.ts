@@ -2,6 +2,7 @@ import axios from "../../shared/config/axios";
 import { logout } from "..";
 import * as actionTypes from "../actionTypes";
 import {
+  UserLoadFailureAction,
   UserLoadStartAction,
   UserLoadSuccessAction,
   UserLogoutAction,
@@ -26,7 +27,6 @@ export const userLoadSuccess = (
   userDto: UserDto,
   role: UserRole
 ): UserLoadSuccessAction => {
-
   return {
     type: actionTypes.USER_LOAD_SUCCESS,
     user:
@@ -37,7 +37,7 @@ export const userLoadSuccess = (
   };
 };
 
-export const userLoadFailure = () => {
+export const userLoadFailure = (): UserLoadFailureAction => {
   return {
     type: actionTypes.USER_LOAD_FAILURE,
   };
