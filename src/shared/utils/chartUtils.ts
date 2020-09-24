@@ -1,4 +1,4 @@
-export const setTimeUnitDate = (array) => {
+export const setTimeUnitDate = (array: any[]): string => {
   const arrayLength = array.length;
 
   let timeFrequency = "day";
