@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-const cleanLocalization = (localization) => {
+const cleanLocalization = (localization: string): string => {
   // TODO add polish language
   const authorized_local = ["en", "fr", "nl"];
 
@@ -13,16 +13,16 @@ const cleanLocalization = (localization) => {
   return "en-US";
 };
 
-export const formatMoney = (amount, currency = "") => {
+export const formatMoney = (amount: number, currency: string): string => {
   const languageBrowser = navigator.language;
   const localization = cleanLocalization(languageBrowser);
 
-  if (currency === "") return amount;
+  if (_.isEmpty(currency)) return `${amount}`;
 
   let formatter = new Intl.NumberFormat(localization, {
     style: "currency",
     currency: currency,
-    fractionDigits: 2,
+    maximumSignificantDigits: 2,
   });
 
   let value = formatter.format(amount);
