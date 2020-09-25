@@ -1,16 +1,34 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
+import { UseNotificationMethods, NotificationMethodArguments } from ".";
 import NotificationContext from "../../hoc/withNotificationProvider/notification-context/notification-context";
-import AddNotification from "../../hoc/withNotificationProvider/types/AddNotification";
+import { NotificationContextValue } from "../../hoc/withNotificationProvider/types";
 
-interface ReturnUseNotification {
-  add: ({ content, type, duration }: AddNotification) => void;
-  remove: (id: string) => void;
-}
 
-const useNotification = (): ReturnUseNotification => {
-  const context: any = useContext(NotificationContext);
+const useNotification = (): UseNotificationMethods => {
+  const context: NotificationContextValue = useContext(NotificationContext);
 
-  return { add: context.add, remove: context.remove };
+  const info = useCallback(
+    ({ content, duration }: NotificationMethodArguments) => {
+      context.add({ content, duration, type: "info" });
+    },
+    [context]
+  );
+
+  const success = useCallback(
+    ({ content, duration }: NotificationMethodArguments) => {
+      context.add({ content, duration, type: "success" });
+    },
+    [context]
+  );
+
+  const error = useCallback(
+    ({ content, duration }: NotificationMethodArguments) => {
+      context.add({ content, duration, type: "error" });
+    },
+    [context]
+  );
+
+  return { add: context.add, remove: context.remove, info, success, error };
 };
 
 export default useNotification;

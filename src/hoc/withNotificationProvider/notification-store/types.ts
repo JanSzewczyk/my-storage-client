@@ -1,4 +1,4 @@
-import NotificationInfo from "../types/NotificationInfo";
+import { NotificationInfo } from "../types";
 import {
   NOTIFICATION_ADD,
   NOTIFICATION_REMOVE,

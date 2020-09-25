@@ -2,8 +2,6 @@ import React, { useMemo, useCallback, useReducer } from "react";
 import { createPortal } from "react-dom";
 import { v4 as uuidv4 } from "uuid";
 
-import { FixMeLater } from "../../shared/types/common/FixMeLater";
-import NotificationInfo from "./types/NotificationInfo";
 import {
   initialState,
   reducer,
@@ -16,7 +14,7 @@ import {
 import NotificationListWrapper from "./NotificationListWrapper/NotificationListWrapper";
 import NotificationWrapper from "../../components/UI/NotificationWrapper/NotificationWrapper";
 import NotificationContext from "./notification-context/notification-context";
-import AddNotification from "./types/AddNotification";
+import { AddNotification, NotificationContextValue, NotificationInfo } from "./types";
 
 const withNotificationProvider = <T extends object>(
   Component: React.ComponentType<T>
@@ -49,7 +47,7 @@ const withNotificationProvider = <T extends object>(
       });
     }, []);
 
-    const providerValue: FixMeLater = useMemo(() => {
+    const providerValue: NotificationContextValue = useMemo(() => {
       return { add, remove };
     }, [add, remove]);
 

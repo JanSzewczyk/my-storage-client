@@ -10,7 +10,7 @@ import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../../UI/Input/Input";
 import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
-import { useNotification } from "../../../../../hooks";
+import useNotification from "../../../../../hooks/useNotification";
 import { mapStorageDtoToStorage } from "../../../../../shared/data-utils/storageUtils";
 
 const StorageEditPanel = React.memo((props) => {

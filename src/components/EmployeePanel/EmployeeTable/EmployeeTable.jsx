@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -15,12 +16,12 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Table from "../../UI/Table";
 import useQuery from "../../../hooks/useQuery";
 
-import "./EmployeeTable.scss";
 import browserHistory from "../../../shared/config/history";
 import Search from "../../UI/Search/Search";
-import { useHistory } from "react-router-dom";
-import { useNotification } from "../../../hooks";
+import useNotification from "../../../hooks/useNotification";
 import axios from "../../../shared/config/axios";
+
+import "./EmployeeTable.scss";
 
 const EmployeeTable = React.memo((props) => {
   const {

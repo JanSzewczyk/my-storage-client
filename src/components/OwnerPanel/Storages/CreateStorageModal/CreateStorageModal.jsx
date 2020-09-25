@@ -5,7 +5,7 @@ import axios from "../../../../shared/config/axios";
 import Backdrop from "../../../UI/Backdrop/Backdrop";
 import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
 import StorageForm from "./StorageForm/StorageForm";
-import { useNotification } from "../../../../hooks";
+import useNotification from "../../../../hooks/useNotification";
 import browserHistory from "../../../../shared/config/history";
 
 const CreateStorageModal = (props) => {

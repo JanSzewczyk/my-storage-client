@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { useAxios } from "../../../../../hooks";
+import useAxios from "../../../../../hooks/useAxios";
 
 import ModalBody from "../../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -17,8 +18,7 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import CUEmployeeModal from "../../EmployeePanel/EmployeeTable/CUEmployeeModal/CUEmployeeModal";
 import browserHistory from "../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
-import { useNotification } from "../../../hooks";
-import { useHistory } from "react-router-dom";
+import useNotification from "../../../hooks/useNotification";
 
 const EmployeeDetails = React.memo((props) => {
   const {

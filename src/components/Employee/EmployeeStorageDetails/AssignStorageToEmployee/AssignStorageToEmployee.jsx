@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { useAxios, useNotification } from "../../../../hooks";
 import { useForm } from "react-hook-form";
+
+import useAxios from "../../../../hooks/useAxios";
+import useNotification from "../../../../hooks/useNotification";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import { TileContent, TileBottom } from "../../../UI/Tile";
