@@ -1,5 +1,5 @@
 import React from "react";
-import NotificationContextValue from "../types/NotificationContextValue";
+import { NotificationContextValue } from "..";
 
 const NotificationContext = React.createContext({} as NotificationContextValue);
 

@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useRef } from "react";
 
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
+import { NotificationType } from "../../../hoc/withNotificationProvider";
 
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
-import NotificationType from "../../../hoc/withNotificationProvider/types/NotificationType";
 
 import "./NotificationWrapper.scss";
 
