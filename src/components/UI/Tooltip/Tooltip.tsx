@@ -1,9 +1,20 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+
+import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import { TooltipColor, TooltipPosition, TooltipType } from "./types";
 
 import "./Tooltip.scss";
 
-const Tooltip = React.memo(
+interface TooltipProps extends PropsWithChildren {
+  text: string;
+  type?: TooltipType;
+  position?: TooltipPosition;
+  className?: string;
+  color?: TooltipColor;
+}
+
+// TODO Add show whent mouse over message
+const Tooltip: React.FC<TooltipProps> = React.memo(
   ({ children, text, type, position, className, color }) => {
     const [show, setShow] = useState(false);
 
@@ -15,11 +26,11 @@ const Tooltip = React.memo(
       setShow(false);
     };
 
-    let tooltipClasses = ["tooltip"];
+    let tooltipClasses: string[] = ["tooltip"];
     type && tooltipClasses.push(`tooltip--${type}`);
     className && tooltipClasses.push(className);
 
-    let TMClasses = ["tooltip__message"];
+    let TMClasses: string[] = ["tooltip__message"];
     position && TMClasses.push(`tooltip__message--${position}`);
     color && TMClasses.push(`tooltip__message--${color}`);
     color && TMClasses.push(`tooltip__message--${position}-${color}`);
@@ -36,22 +47,6 @@ const Tooltip = React.memo(
     );
   }
 );
-
-Tooltip.propTypes = {
-  children: PropTypes.node,
-  text: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["dotted"]),
-  position: PropTypes.oneOf([
-    "top",
-    "top-end",
-    "bottom",
-    "bottom-end",
-    "right",
-    "left",
-  ]).isRequired,
-  color: PropTypes.oneOf(["white", "blue", "black"]).isRequired,
-  className: PropTypes.string,
-};
 
 Tooltip.defaultProps = {
   position: "top",
