@@ -3,7 +3,6 @@ import { UseNotificationMethods, NotificationMethodArguments } from ".";
 import NotificationContext from "../../hoc/withNotificationProvider/notification-context/notification-context";
 import { NotificationContextValue } from "../../hoc/withNotificationProvider/types";
 
-
 const useNotification = (): UseNotificationMethods => {
   const context: NotificationContextValue = useContext(NotificationContext);
 
