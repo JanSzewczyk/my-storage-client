@@ -3,11 +3,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../store";
 
+import StoreDispatch from "../../../shared/types/store/StoreDispatch";
+
 import Loading from "../../UI/Loading/Loading";
 
 import "./Welcome.scss";
 
-const Welcome = (props) => {
+interface WelcomeProps {
+  onGetUserDetails: () => void;
+}
+
+const Welcome: React.FC<WelcomeProps> = (props) => {
   const { onGetUserDetails } = props;
 
   useEffect(() => {
@@ -22,7 +28,7 @@ const Welcome = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     onGetUserDetails: () => dispatch(action.getUserDetails()),
   };

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
@@ -11,11 +10,18 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 import InboxIcon from "@material-ui/icons/Inbox";
 
 import "./AuthForm.scss";
+import AuthData from "../../../shared/types/auth/AuthData";
 
-const AuthForm = (props) => {
+interface AuthFormProps {
+  onAuthSubmit: (authData: AuthData) => void;
+  loading: boolean;
+  error: string | null;
+}
+
+const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
   const { onAuthSubmit, loading, error } = props;
 
-  const { register, errors, handleSubmit } = useForm({
+  const { register, errors, handleSubmit } = useForm<AuthData>({
     mode: "onSubmit",
   });
 
@@ -69,12 +75,6 @@ const AuthForm = (props) => {
       </form>
     </Aux>
   );
-};
-
-AuthForm.propTypes = {
-  onAuthSubmit: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-};
+});
 
 export default AuthForm;

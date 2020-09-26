@@ -3,8 +3,13 @@ import { Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
+import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 
-const Logout = (props) => {
+interface LogoutProps {
+  onLogout: () => void;
+}
+
+const Logout: React.FC<LogoutProps> = (props) => {
   const { onLogout } = props;
 
   useEffect(() => {
@@ -14,9 +19,9 @@ const Logout = (props) => {
   return <Redirect to="/" />;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onLogout: (authData) => dispatch(action.logout()),
+    onLogout: () => dispatch(action.logout()),
   };
 };
 
