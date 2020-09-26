@@ -1,15 +1,35 @@
-import React, { useState, useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useCallback, ReactNode } from "react";
+
+import DropdownWrapper from "./DropdownWrapper/DropdownWrapper";
+import { DropdownType } from "./types";
+import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import { ButtonType } from "../Button";
 
 import Button from "../Button/Button";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 import "./DropDown.scss";
-import DropdownWrapper from "./DropdownWrapper/DropdownWrapper";
 
-const DropDown = ({ type, title, icon, btnType, children, top, left }) => {
-  const [active, setActive] = useState(false);
+interface DropdownProps extends PropsWithChildren {
+  type: DropdownType;
+  title?: string;
+  icon?: ReactNode;
+  btnType?: ButtonType;
+  top?: boolean;
+  left?: boolean;
+}
+
+const DropDown: React.FC<DropdownProps> = ({
+  type,
+  title,
+  icon,
+  btnType,
+  children,
+  top,
+  left,
+}) => {
+  const [active, setActive] = useState<boolean>(false);
 
   const onShow = () => {
     setActive(true);
@@ -27,7 +47,7 @@ const DropDown = ({ type, title, icon, btnType, children, top, left }) => {
     };
   }, [onClose]);
 
-  const arrowClasses = ["drop-down__icon "];
+  const arrowClasses: string[] = ["drop-down__icon "];
   left
     ? arrowClasses.push("drop-down__icon--left")
     : arrowClasses.push("drop-down__icon--right");
@@ -38,7 +58,7 @@ const DropDown = ({ type, title, icon, btnType, children, top, left }) => {
     <ArrowDropDownIcon className={arrowClasses.join(" ")} />
   );
 
-  const IBClasses = ["drop-down__icon-button"];
+  const IBClasses: string[] = ["drop-down__icon-button"];
   active && IBClasses.push("drop-down__icon-button--active");
 
   return (
@@ -65,16 +85,6 @@ const DropDown = ({ type, title, icon, btnType, children, top, left }) => {
       )}
     </div>
   );
-};
-
-DropDown.propTypes = {
-  type: PropTypes.oneOf(["button", "icon"]),
-  icon: PropTypes.node,
-  title: PropTypes.string,
-  top: PropTypes.bool,
-  left: PropTypes.bool,
-  btnType: PropTypes.oneOf(["primary", "warning"]),
-  children: PropTypes.node,
 };
 
 DropDown.defaultProps = {
