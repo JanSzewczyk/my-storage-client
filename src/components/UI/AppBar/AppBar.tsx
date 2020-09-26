@@ -1,9 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
 
 import "./AppBar.scss";
 
-const AppBar = (props) => {
+interface AppBarProps {
+  left?: ReactNode;
+  right?: ReactNode;
+}
+
+const AppBar: React.FC<AppBarProps> = (props) => {
   const { left, right } = props;
   return (
     <div className={"app-bar"}>
@@ -11,11 +15,6 @@ const AppBar = (props) => {
       <div className={"app-bar__right"}>{right}</div>
     </div>
   );
-};
-
-AppBar.propTypes = {
-  left: PropTypes.node,
-  right: PropTypes.node,
 };
 
 export default AppBar;
