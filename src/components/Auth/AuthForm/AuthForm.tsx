@@ -1,16 +1,17 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import AuthData from "../../../shared/types/auth/AuthData";
+import * as pattern from "../../../shared/patterns";
+
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import Loading from "../../UI/Loading/Loading";
-import * as pattern from "../../../shared/patterns";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import InboxIcon from "@material-ui/icons/Inbox";
 
 import "./AuthForm.scss";
-import AuthData from "../../../shared/types/auth/AuthData";
 
 interface AuthFormProps {
   onAuthSubmit: (authData: AuthData) => void;

@@ -1,17 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { UserRole } from "../../../shared/constants";
 
 import NavigationLink from "./NavigationLink/NavigationLink";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 import "./NavigationLinks.scss";
 
-const NavigationLinks = (props) => {
+interface NavigationLinksProps {
+  userRole: UserRole | null;
+}
+
+const NavigationLinks: React.FC<NavigationLinksProps> = (props) => {
   const { userRole } = props;
+
   return (
     <nav className={"navigation-links"}>
       <ul className={"navigation-links__items"}>
-        {userRole === "OWNER" && (
+        {userRole === UserRole.OWNER && (
           <Aux>
             <NavigationLink link={"/storages"} text={"Storage"} />
             <NavigationLink link={"/employees"} text={"Employee"} />
@@ -20,10 +26,6 @@ const NavigationLinks = (props) => {
       </ul>
     </nav>
   );
-};
-
-NavigationLinks.propTypes = {
-  userRole: PropTypes.string.isRequired,
 };
 
 export default NavigationLinks;
