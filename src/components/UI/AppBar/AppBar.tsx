@@ -7,8 +7,7 @@ interface AppBarProps {
   right?: ReactNode;
 }
 
-const AppBar: React.FC<AppBarProps> = (props) => {
-  const { left, right } = props;
+const AppBar: React.FC<AppBarProps> = ({ left, right }) => {
   return (
     <div className={"app-bar"}>
       <div className={"app-bar__left"}>{left}</div>
