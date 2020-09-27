@@ -1,16 +1,24 @@
 import React from "react";
-import PropTypes from "prop-types";
-
 import {
   dateToDateTimeString,
   dateToDateString,
 } from "../../../../shared/utils/dateUtils";
 
+import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
+import { TimeLineDateType } from "../types";
+
 import "./TimeLineItem.scss";
 
-const TimeLineItem = (props) => {
-  const { date, dateType, children } = props;
+interface TimeLineItemProps extends PropsWithChildren {
+  date: Date;
+  dateType?: TimeLineDateType;
+}
 
+const TimeLineItem: React.FC<TimeLineItemProps> = ({
+  children,
+  date,
+  dateType = "date-time",
+}) => {
   return (
     <li className={"time-line-item"}>
       <span className={"time-line-item__date"}>
@@ -20,16 +28,6 @@ const TimeLineItem = (props) => {
       <div className={"time-line-item__content"}>{children}</div>
     </li>
   );
-};
-
-TimeLineItem.propTypes = {
-  children: PropTypes.node,
-  dateType: PropTypes.oneOf(["date-time", "date"]).isRequired,
-  date: PropTypes.objectOf(Date).isRequired,
-};
-
-TimeLineItem.defaultProps = {
-  dateType: "date-time",
 };
 
 export default TimeLineItem;
