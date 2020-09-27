@@ -1,21 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
 
 import "./TileTop.scss";
 
-const TileTop = (props) => {
-  const { left, right } = props;
+interface TileTopProps {
+  left?: ReactNode;
+  right?: ReactNode;
+}
+
+const TileTop: React.FC<TileTopProps> = ({ left, right }) => {
   return (
     <div className={"tile-top"}>
       <div className={"tile-top__left"}>{left}</div>
       <div className={"tile-top__right"}>{right}</div>
     </div>
   );
-};
-
-TileTop.propTypes = {
-  left: PropTypes.node,
-  right: PropTypes.node,
 };
 
 export default TileTop;

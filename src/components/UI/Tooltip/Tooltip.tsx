@@ -15,7 +15,7 @@ interface TooltipProps extends PropsWithChildren {
 
 // TODO Add show whent mouse over message
 const Tooltip: React.FC<TooltipProps> = React.memo(
-  ({ children, text, type, position, className, color }) => {
+  ({ children, text, type, position = "top", className, color = "white" }) => {
     const [show, setShow] = useState(false);
 
     const onMouseOverHandler = () => {
@@ -47,10 +47,5 @@ const Tooltip: React.FC<TooltipProps> = React.memo(
     );
   }
 );
-
-Tooltip.defaultProps = {
-  position: "top",
-  color: "white",
-};
 
 export default Tooltip;
