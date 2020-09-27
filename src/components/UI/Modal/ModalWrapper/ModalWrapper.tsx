@@ -1,11 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
+
+import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
+
 import CloseIcon from "@material-ui/icons/Close";
 
 import "./ModalWrapper.scss";
 
-const ModalWrapper = (props) => {
-  const { children, onClose, title } = props;
+interface ModalWrapperProps extends PropsWithChildren<ReactNode> {
+  onClose?: () => void;
+  title: ReactNode;
+}
+
+const ModalWrapper: React.FC<ModalWrapperProps> = ({
+  children,
+  onClose,
+  title,
+}) => {
   return (
     <div className={"modal-wrapper"}>
       <div className={"modal-wrapper__top"}>
@@ -19,12 +29,6 @@ const ModalWrapper = (props) => {
       {children}
     </div>
   );
-};
-
-ModalWrapper.propTypes = {
-  children: PropTypes.node.isRequired,
-  onClose: PropTypes.func,
-  title: PropTypes.node.isRequired,
 };
 
 export default ModalWrapper;
