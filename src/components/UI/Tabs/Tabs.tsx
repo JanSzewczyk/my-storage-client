@@ -1,12 +1,18 @@
 import React, { useState, useMemo } from "react";
-import PropTypes from "prop-types";
+
+import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import { FixMeLater } from "../../../shared/types/common/FixMeLater";
 
 import TabTitle from "./TabTitle/TabTitle";
 
 import "./Tabs.scss";
 
-const Tabs = React.memo(({ children, className }) => {
-  const setFirstActiveTab = () => {
+interface TabsProps extends PropsWithChildren {
+  className?: string;
+}
+
+const Tabs: React.FC<TabsProps> = React.memo(({ children, className }) => {
+  const setFirstActiveTab = (): number | null => {
     if (children.length !== 0)
       for (const index in children)
         if (!children[index].props.disabled) return Number(index);
@@ -14,11 +20,13 @@ const Tabs = React.memo(({ children, className }) => {
     return null;
   };
 
-  const [activeTab, setActiveTab] = useState(setFirstActiveTab());
+  const [activeTab, setActiveTab] = useState<number | null>(
+    setFirstActiveTab()
+  );
 
   const titles = useMemo(
     () =>
-      children.map((child, index) => (
+      children.map((child: FixMeLater, index: number) => (
         <TabTitle
           key={index}
           title={child.props.title}
@@ -39,10 +47,5 @@ const Tabs = React.memo(({ children, className }) => {
     </div>
   );
 });
-
-Tabs.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
 
 export default Tabs;
