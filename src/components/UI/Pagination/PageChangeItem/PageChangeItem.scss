@@ -9,14 +9,14 @@
     margin: 0;
     padding: 0;
   }
-}
 
-.page-change-item--active {
-  color: $whiteColor;
-  cursor: pointer;
-  opacity: 1;
+  &--active {
+    color: $whiteColor;
+    cursor: pointer;
+    opacity: 1;
 
-  &:hover {
-    color: $blueColor;
+    &:hover {
+      color: $blueColor;
+    }
   }
 }
