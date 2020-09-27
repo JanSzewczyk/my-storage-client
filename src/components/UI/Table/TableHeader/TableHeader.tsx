@@ -1,24 +1,33 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { TableColumnConfig, TableConfig } from "../types";
+import { SortInfo, SortType } from "../../../../hooks/useQuery";
 
 import TableHeading from "./TableHeading/TableHeading";
 
-const TableHeader = (props) => {
-  const { config, sort, onSortChanged } = props;
+interface TableHeaderProps {
+  config: TableConfig;
+  sort: SortInfo[];
+  onSortChanged?: (field: string, type: SortType) => void;
+}
 
-  const getSortIndex = (fieldName) => {
+const TableHeader: React.FC<TableHeaderProps> = ({
+  config,
+  sort,
+  onSortChanged,
+}) => {
+  const getSortIndex = (fieldName: string): number | null => {
     if (sort.length > 1) {
       for (let i = 0; i < sort.length; i++) {
         if (fieldName === sort[i].field) {
           return i + 1;
         }
       }
-    } else {
-      return null;
     }
+    return null;
   };
 
-  const getSortState = (fieldName) => {
+  const getSortState = (fieldName: string): SortType => {
     for (let i = 0; i < sort.length; i++) {
       if (fieldName === sort[i].field) {
         return sort[i].type;
@@ -31,12 +40,12 @@ const TableHeader = (props) => {
   return (
     <thead>
       <tr>
-        {config.columns.map((conf, index) => (
+        {config.columns.map((conf: TableColumnConfig, index: number) => (
           <TableHeading
             key={index}
             config={conf}
             isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
-            onSetSortQuery={onSortChanged && onSortChanged}
+            onSortChanged={onSortChanged && onSortChanged}
             sortIndex={getSortIndex(conf.field)}
             sortState={getSortState(conf.field)}
           />
@@ -52,32 +61,6 @@ const TableHeader = (props) => {
       </tr>
     </thead>
   );
-};
-
-TableHeader.propTypes = {
-  config: PropTypes.shape({
-    columns: PropTypes.arrayOf(
-      PropTypes.shape({
-        field: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        sorted: PropTypes.bool,
-        converter: PropTypes.func,
-      })
-    ).isRequired,
-    actions: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        action: PropTypes.func,
-      })
-    ),
-  }).isRequired,
-  sort: PropTypes.arrayOf(
-    PropTypes.shape({
-      field: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-    })
-  ),
-  onSortChanged: PropTypes.func,
 };
 
 export default TableHeader;

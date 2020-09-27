@@ -1,11 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
+
+import { TableColumnConfig } from "../../../types";
+import { FixMeLater } from "../../../../../../shared/types/common/FixMeLater";
 
 import "./TableCell.scss";
 
-const TableCell = (props) => {
-  const { columnConfig, rowData, onClick } = props;
+interface TableCellProps {
+  columnConfig: TableColumnConfig;
+  rowData: FixMeLater;
+  onClick?: (rowData: FixMeLater) => void;
+}
 
+const TableCell: React.FC<TableCellProps> = ({
+  columnConfig,
+  rowData,
+  onClick,
+}) => {
   let cellContent = columnConfig.converter
     ? columnConfig.converter(rowData[columnConfig.field], rowData)
     : rowData[columnConfig.field];
@@ -21,17 +31,6 @@ const TableCell = (props) => {
       {cellContent}
     </td>
   );
-};
-
-TableCell.propTypes = {
-  onClick: PropTypes.func,
-  columnConfig: PropTypes.shape({
-    field: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    converter: PropTypes.func,
-  }).isRequired,
-
-  rowData: PropTypes.object.isRequired,
 };
 
 export default TableCell;

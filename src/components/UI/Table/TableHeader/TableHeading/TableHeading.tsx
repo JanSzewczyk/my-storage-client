@@ -1,19 +1,35 @@
 import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
+
+import { TableColumnConfig } from "../../types";
+import { SortType } from "../../../../../hooks/useQuery";
 
 import UnfoldMoreIcon from "@material-ui/icons/UnfoldMore";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 
 import "./TableHeading.scss";
 
-const TableHeading = (props) => {
-  const { config, sortIndex, onSetSortQuery, isSorted, sortState } = props;
+interface TableHeadingProps {
+  config: TableColumnConfig;
+  onSortChanged?: (field: string, type: SortType) => void;
+  isSorted?: boolean;
+  sortState?: SortType;
+  sortIndex?: number | null;
+}
 
-  const states = ["", "desc", "asc"];
+const TableHeading: React.FC<TableHeadingProps> = ({
+  config,
 
-  const getNextState = (actualState) => {
+  onSortChanged,
+  isSorted = true,
+  sortState = "",
+  sortIndex = null,
+}) => {
+  const states: SortType[] = ["", "desc", "asc"];
+
+  const getNextState = (actualState: FixMeLater): number => {
     let nextState = actualState;
     actualState < states.length - 1 ? (nextState += 1) : (nextState = 0);
     return nextState;
@@ -22,7 +38,7 @@ const TableHeading = (props) => {
   const changeHeadingSortHandler = () => {
     if (isSorted) {
       const newIndex = getNextState(_.indexOf(states, sortState));
-      onSetSortQuery(config.field, states[newIndex]);
+      onSortChanged && onSortChanged(config.field, states[newIndex]);
     }
   };
 
@@ -46,7 +62,7 @@ const TableHeading = (props) => {
       onClick={changeHeadingSortHandler}
       className="table-heading"
       style={{
-        cursor: isSorted && "pointer",
+        cursor: isSorted ? "pointer" : "default",
       }}
     >
       <div className="table-heading__content">
@@ -60,19 +76,6 @@ const TableHeading = (props) => {
       </div>
     </th>
   );
-};
-
-TableHeading.propTypes = {
-  config: PropTypes.shape({
-    field: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    sorted: PropTypes.bool,
-    converter: PropTypes.func,
-  }).isRequired,
-  isSorted: PropTypes.bool.isRequired,
-  sortIndex: PropTypes.number,
-  onSetSortQuery: PropTypes.func,
-  sortState: PropTypes.string.isRequired,
 };
 
 export default TableHeading;

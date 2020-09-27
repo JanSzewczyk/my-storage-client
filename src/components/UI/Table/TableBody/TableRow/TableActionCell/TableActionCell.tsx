@@ -1,13 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import Button from "../../../../Button/Button";
 
+import { TableActionConfig } from "../../../types";
+import { FixMeLater } from "../../../../../../shared/types/common/FixMeLater";
+
 import "./TableActionCell.scss";
 
-const TableActionCell = (props) => {
-  const { actions, rowData } = props;
+interface TableActionCellProps {
+  actions: TableActionConfig[];
+  rowData: FixMeLater;
+}
 
+const TableActionCell: React.FC<TableActionCellProps> = ({
+  actions,
+  rowData,
+}) => {
   return (
     <td className="table-action-cell">
       <div className={"table-action-cell__buttons"}>
@@ -21,16 +29,6 @@ const TableActionCell = (props) => {
       </div>
     </td>
   );
-};
-
-TableActionCell.propTypes = {
-  rowData: PropTypes.object.isRequired,
-  actions: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      action: PropTypes.func.isRequired,
-    })
-  ),
 };
 
 export default TableActionCell;
