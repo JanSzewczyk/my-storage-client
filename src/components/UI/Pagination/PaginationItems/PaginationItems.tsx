@@ -1,13 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import PaginationItem from "./PaginationItem/PaginationItem";
 
 import "./PaginationItems.scss";
+import PageInfo from "../../../../shared/types/common/PageInfo";
 
-const PaginationItems = (props) => {
-  const { pageInfo, onPageChanged } = props;
+interface PaginationItemsProps {
+  pageInfo: PageInfo;
+  onPageChanged: (index: number) => void;
+}
 
+const PaginationItems: React.FC<PaginationItemsProps> = ({
+  pageInfo,
+  onPageChanged,
+}) => {
   const tableNavItem = () => {
     let count = 11;
     const auxCount = (count - 1) / 2;
@@ -30,7 +36,7 @@ const PaginationItems = (props) => {
     return Array.from(Array(count).keys()).map((i) => (
       <PaginationItem
         key={i + start}
-        active={i + start === props.pageInfo.number}
+        active={i + start === pageInfo.number}
         clicked={() => onPageChanged(i + start)}
       >
         {i + start + 1}
@@ -39,16 +45,6 @@ const PaginationItems = (props) => {
   };
 
   return <ul className={"pagination-items"}>{tableNavItem()}</ul>;
-};
-
-PaginationItems.propTypes = {
-  pageInfo: PropTypes.shape({
-    size: PropTypes.number.isRequired,
-    totalElements: PropTypes.number.isRequired,
-    totalPages: PropTypes.number.isRequired,
-    number: PropTypes.number.isRequired,
-  }),
-  onPageChanged: PropTypes.func.isRequired,
 };
 
 export default PaginationItems;
