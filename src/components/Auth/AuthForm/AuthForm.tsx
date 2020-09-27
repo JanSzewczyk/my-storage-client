@@ -49,7 +49,7 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
             type: "email",
             name: "email",
           }}
-          hasError={errors.email}
+          hasError={Boolean(errors.email)}
         />
         <Input
           inputClass={"auth-form__input"}
@@ -63,7 +63,7 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
             type: "password",
             name: "password",
           }}
-          hasError={errors.password}
+          hasError={Boolean(errors.password)}
         />
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button

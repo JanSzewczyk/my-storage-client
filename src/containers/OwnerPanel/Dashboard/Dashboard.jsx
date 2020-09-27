@@ -13,6 +13,7 @@ import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrap
 import Tooltip from "../../../components/UI/Tooltip/Tooltip";
 
 import "./Dashboard.scss";
+import Tabs, { Tab } from "../../../components/UI/Tabs";
 
 // import useAxios from "../../../hooks/useAxios/useAxios";
 
@@ -140,16 +141,14 @@ const Dashboard = (props) => {
             xl: "xl-12",
           }}
         >
-          HOMEPAGE
-          <div className={"tabs"}>
-            <div className={"tabs__titles"}>
-              <div className={"tabs__title tabs__title--disabled"}>Title 1</div>
-              <div className={"tabs__title tabs__title--selected"}>Title 2</div>
-              <div className={"tabs__title"}>Title 3</div>
-              <div className={"tabs__title"}>Title 4</div>
-            </div>
-            <div className={"tabs__contents"}>dfasdfas</div>
-          </div>
+          <Tabs>
+            <Tab title={"Title 1"} disabled>
+              CONTENT 1
+            </Tab>
+            <Tab title={"Title 2"}>CONTENT 2</Tab>
+            <Tab title={"Title 3"}>CONTENT 3</Tab>
+            <Tab title={"Title 4"}>CONTENT 4</Tab>
+          </Tabs>
         </Tile>
       </AppContent>
     </Aux>
