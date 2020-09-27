@@ -1,23 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import { SelectConfig, SelectOption } from "./types";
 
 import "./Select.scss";
 
-const Select = (props) => {
-  const {
-    labelClass,
-    refSelect,
-    config,
-    selectClass,
-    label,
-    errorClass,
-    hasError,
-    errorMessage,
-    // inputType,
-    options,
-  } = props;
+interface SelectProps {
+  labelClass?: string;
+  refSelect: any;
+  config: SelectConfig;
+  selectClass?: string;
+  label: string;
+  errorClass?: string;
+  hasError: boolean;
+  errorMessage: string;
+  options: SelectOption[];
+}
 
+const Select: React.FC<SelectProps> = ({
+  labelClass,
+  refSelect,
+  config,
+  selectClass,
+  label,
+  errorClass,
+  hasError,
+  errorMessage,
+  // inputType,
+  options,
+}) => {
   let labelClasses = ["select-label"];
   let selectClasses = ["select"];
   let errorClasses = ["error"];
@@ -55,28 +66,6 @@ const Select = (props) => {
       )}
     </Aux>
   );
-};
-
-Select.propTypes = {
-  labelClass: PropTypes.string,
-  label: PropTypes.string,
-  selectClass: PropTypes.string,
-  config: PropTypes.shape({
-    placeholder: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    readOnly: PropTypes.bool,
-    disabled: PropTypes.bool,
-  }),
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      value: PropTypes.any,
-    })
-  ).isRequired,
-  refSelect: PropTypes.func,
-  errorClass: PropTypes.string,
-  hasError: PropTypes.object,
-  errorMessage: PropTypes.string,
 };
 
 export default Select;
