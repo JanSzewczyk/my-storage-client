@@ -14,7 +14,7 @@ import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Table from "../../UI/Table";
-import useQuery from "../../../hooks/useQuery";
+import useQuery, { SearchQuery } from "../../../hooks/useQuery";
 
 import browserHistory from "../../../shared/config/history";
 import Search from "../../UI/Search/Search";
@@ -22,8 +22,26 @@ import useNotification from "../../../hooks/useNotification";
 import axios from "../../../shared/config/axios";
 
 import "./EmployeeTable.scss";
+import StoreState from "../../../shared/types/store/StoreState";
+import StoreDispatch from "../../../shared/types/store/StoreDispatch";
+import {
+  CUEmployee,
+  Employee,
+  EmployeeDto,
+  EmployeeView,
+} from "../../../shared/types/employee";
+import PageInfo from "../../../shared/types/common/PageInfo";
+import { AxiosResponse } from "axios";
+import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
 
-const EmployeeTable = React.memo((props) => {
+interface EmployeeTableProps {
+  onGetEmployeesList: (query: SearchQuery) => void;
+  employeeList: EmployeeView[];
+  employeeListLoading: boolean;
+  pageInfo: PageInfo | null;
+}
+
+const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
   const {
     onGetEmployeesList,
     employeeList,
@@ -31,9 +49,11 @@ const EmployeeTable = React.memo((props) => {
     pageInfo,
   } = props;
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery({
+  const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery<
+    SearchQuery
+  >({
     search: "",
     sort: [],
     page: 0,
@@ -80,7 +100,7 @@ const EmployeeTable = React.memo((props) => {
         field: "createdAt",
         name: "Created date",
         sorted: true,
-        converter: (cellData) => dateToDateTimeString(cellData),
+        converter: (cellData: any) => dateToDateTimeString(cellData),
       },
     ],
   };
@@ -126,17 +146,19 @@ const EmployeeTable = React.memo((props) => {
   const notification = useNotification();
 
   const createEmployee = useCallback(
-    (employee) => {
-      axios.post(`employees`, employee).then((res) => {
-        const newEmployee = res.data;
+    (newEmployee: CUEmployee) => {
+      axios
+        .post(`employees`, newEmployee)
+        .then((res: AxiosResponse<EmployeeDto>) => {
+          const newEmployee: Employee = mapEmployeeDtoToEmployee(res.data);
 
-        notification.add({
-          content: `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`,
-          type: "success",
+          notification.add({
+            content: `The employee ${newEmployee.firstName} ${newEmployee.lastName} has been created`,
+            type: "success",
+          });
+
+          history.push(`/employees/${newEmployee.id}`);
         });
-
-        history.push(`/employees/${newEmployee.id}`);
-      });
     },
     [history, notification]
   );
@@ -155,12 +177,6 @@ const EmployeeTable = React.memo((props) => {
     <Aux>
       {showModal && employeeModal}
       <Tile
-        tileSize={{
-          sm: "sm-12",
-          md: "md-12",
-          lg: "lg-12",
-          xl: "xl-12",
-        }}
         header={{
           title: "Employees",
           subtitle: "Storage information",
@@ -183,7 +199,7 @@ const EmployeeTable = React.memo((props) => {
   );
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     employeeList: state.employeeStore.employeeViewList,
     pageInfo: state.employeeStore.pageInfo,
@@ -191,10 +207,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetEmployeesList: (queryData) =>
-      dispatch(action.getEmployeesList(queryData)),
+    onGetEmployeesList: (query: SearchQuery) =>
+      dispatch(action.getEmployeesList(query)),
   };
 };
 

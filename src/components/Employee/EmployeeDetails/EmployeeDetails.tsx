@@ -3,12 +3,18 @@ import { useHistory } from "react-router-dom";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import axios from "../../../shared/config/axios";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
 
-import PropTypes from "prop-types";
+import axios from "../../../shared/config/axios";
+import browserHistory from "../../../shared/config/history";
+import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
+import useNotification from "../../../hooks/useNotification";
+import StoreDispatch from "../../../shared/types/store/StoreDispatch";
+import StoreState from "../../../shared/types/store/StoreState";
+import Employee from "../../../shared/types/employee/Employee";
+
 import Tile from "../../UI/Tile/Tile";
 import EmployeeDetailsData from "./EmployeeDetailsData/EmployeeDetailsData";
 import Loading from "../../UI/Loading/Loading";
@@ -16,11 +22,18 @@ import DropDown from "../../UI/DropDown/DropDown";
 import DropdownItem from "../../UI/DropDown/DropdownItem/DropdownItem";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import CUEmployeeModal from "../../EmployeePanel/EmployeeTable/CUEmployeeModal/CUEmployeeModal";
-import browserHistory from "../../../shared/config/history";
-import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
-import useNotification from "../../../hooks/useNotification";
+import { CUEmployee } from "../../../shared/types/employee";
 
-const EmployeeDetails = React.memo((props) => {
+interface EmployeeDetailsProps {
+  employeeId: string;
+  storageId?: string;
+  employee: Employee | null;
+  onGetEmployee: (employeeId: string) => void;
+  employeeLoading: boolean;
+  onSetEmployee: (employee: Employee) => void;
+}
+
+const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
   const {
     employeeId,
     storageId,
@@ -32,13 +45,13 @@ const EmployeeDetails = React.memo((props) => {
 
   const notification = useNotification();
   const history = useHistory();
-  const [showEdit, setShowEdit] = useState(false);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
   useEffect(() => {
     onGetEmployee(employeeId);
   }, [employeeId, onGetEmployee]);
 
-  const onEditEmployee = (employeeId, updatedEmployee) => {
+  const onEditEmployee = (employeeId: string, updatedEmployee: CUEmployee) => {
     axios.put(`employees/${employeeId}`, updatedEmployee).then((res) => {
       const updatedEmployee = res.data;
 
@@ -67,7 +80,7 @@ const EmployeeDetails = React.memo((props) => {
     });
   };
 
-  const removeEmployee = (employeeId) => {
+  const removeEmployee = (employeeId: string) => {
     axios.delete(`employees/${employeeId}`).then((res) => {
       notification.add({
         content: `Successful remove employee, ID=${employeeId}`,
@@ -96,7 +109,7 @@ const EmployeeDetails = React.memo((props) => {
 
   return (
     <Aux>
-      {showEdit && (
+      {showEdit && employee && (
         <CUEmployeeModal
           onCloseModal={() => setShowEdit(false)}
           editEmployee={employee}
@@ -126,22 +139,19 @@ const EmployeeDetails = React.memo((props) => {
   );
 });
 
-EmployeeDetails.propTypes = {
-  employeeId: PropTypes.string.isRequired,
-  storageId: PropTypes.string,
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     employee: state.employeeStore.employee,
     employeeLoading: state.employeeStore.employeeLoading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetEmployee: (employeeId) => dispatch(action.getEmployee(employeeId)),
-    onSetEmployee: (employee) => dispatch(action.setEmployee(employee)),
+    onGetEmployee: (employeeId: string) =>
+      dispatch(action.getEmployee(employeeId)),
+    onSetEmployee: (employee: Employee) =>
+      dispatch(action.setEmployee(employee)),
   };
 };
 

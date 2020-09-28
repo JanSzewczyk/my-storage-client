@@ -14,10 +14,14 @@ import Tooltip from "../../../components/UI/Tooltip/Tooltip";
 
 import "./Dashboard.scss";
 import Tabs, { Tab } from "../../../components/UI/Tabs";
+import StoreDispatch from "../../../shared/types/store/StoreDispatch";
+import AuthData from "../../../shared/types/auth/AuthData";
 
-// import useAxios from "../../../hooks/useAxios/useAxios";
+interface BashboardProps {
+  logout: (authData: AuthData) => void;
+}
 
-const Dashboard = (props) => {
+const Dashboard: React.FC<BashboardProps> = (props) => {
   // const { response, loading, error, sendRequest } = useAxios({
   //   url: `storages`,
   //   method: "GET",
@@ -102,11 +106,14 @@ const Dashboard = (props) => {
             }}
           >
             <DropDown btnType={"warning"} title={"dropdown"}>
-              <DropdownItem onClick={() => console.log("Elo jake")}>
-                elo
-              </DropdownItem>
+              <DropdownItem
+                onClick={() => console.log("Elo jake")}
+                text={"elo"}
+              />
+
               {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
             </DropDown>
+
             <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
             </Tooltip>
@@ -155,9 +162,9 @@ const Dashboard = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    logout: (authData) => dispatch(action.logout()),
+    logout: (authData: AuthData) => dispatch(action.logout()),
   };
 };
 

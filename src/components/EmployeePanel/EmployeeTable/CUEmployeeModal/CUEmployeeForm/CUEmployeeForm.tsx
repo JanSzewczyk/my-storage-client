@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import useAxios from "../../../../../hooks/useAxios";
+
+import axios from "../../../../../shared/config/axios";
 
 import ModalBody from "../../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
@@ -11,11 +11,26 @@ import Loading from "../../../../UI/Loading/Loading";
 import Input from "../../../../UI/Input/Input";
 import * as pattern from "../../../../../shared/patterns";
 import Select from "../../../../UI/Select/Select";
-import { createStoragesSelectList } from "../../../../../shared/data-utils/storageUtils";
+import {
+  createStoragesSelectList,
+  mapStorageDtoToStorage,
+} from "../../../../../shared/data-utils/storageUtils";
 
 import "./CUEmployeeForm.scss";
+import { StorageDto, Storage } from "../../../../../shared/types/storage";
+import { AxiosResponse } from "axios";
+import { CUEmployee, Employee } from "../../../../../shared/types/employee";
+import CUEmployeeFormType from "./CUEmployeeFormType";
+import { nullIfEmpty } from "../../../../../shared/utils/stringUtils";
 
-const CUEmployeeForm = (props) => {
+interface CUEmployeeFormProps {
+  onCloseModal: () => void;
+  onCreateEmployee?: (newEmployee: CUEmployee) => void;
+  editEmployee?: Employee;
+  onUpdateEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
+}
+
+const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
   const {
     onCloseModal,
     onCreateEmployee,
@@ -23,36 +38,60 @@ const CUEmployeeForm = (props) => {
     onUpdateEmployee,
   } = props;
 
-  const [getStorages, { response, loading }] = useAxios({
-    url: "storages",
-    storyState: { response: [], error: null, loading: true },
-  });
-
-  const { register, errors, handleSubmit, watch, formState } = useForm({
+  const { register, errors, handleSubmit, watch, formState } = useForm<
+    CUEmployeeFormType
+  >({
     defaultValues: editEmployee
       ? {
           ...editEmployee,
-          storageId: editEmployee.workPlace ? editEmployee.workPlace.id : null,
+          storageId: editEmployee.workPlace ? editEmployee.workPlace.id : "",
         }
       : {},
     mode: "onSubmit",
   });
 
+  const [storages, setStorages] = useState<Storage[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getStorages = useCallback(() => {
+    setLoading(true);
+    axios
+      .get(`storages`)
+      .then((res: AxiosResponse<StorageDto[]>) => {
+        setStorages(res.data.map(mapStorageDtoToStorage));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   useEffect(() => {
     getStorages();
   }, [getStorages]);
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: CUEmployeeFormType) => {
+    const data: CUEmployee = {
+      email: formData.email,
+      password: formData.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      addressStreet: formData.addressStreet,
+      addressCity: formData.addressCity,
+      addressZip: formData.addressZip,
+      addressCountry: formData.addressCountry,
+      storageId: nullIfEmpty(formData.storageId),
+    };
+
     if (editEmployee) {
-      onUpdateEmployee(editEmployee.id, formData);
+      onUpdateEmployee && onUpdateEmployee(editEmployee.id, data);
     } else {
-      onCreateEmployee(formData);
+      onCreateEmployee && onCreateEmployee(data);
     }
   };
 
-  const validatePasswordMatch = () => {
-    return watch("repeatPassword") === watch("password");
-  };
+  const validatePasswordMatch = (): boolean =>
+    watch("repeatPassword") === watch("password");
 
   return loading ? (
     <Loading />
@@ -71,7 +110,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               pattern: pattern.email,
             })}
-            hasError={errors.email}
+            hasError={Boolean(errors.email)}
             errorMessage={"Required email pattern."}
           />
           <Input
@@ -85,7 +124,7 @@ const CUEmployeeForm = (props) => {
               required: !editEmployee,
               pattern: pattern.password,
             })}
-            hasError={errors.password}
+            hasError={Boolean(errors.password)}
             errorMessage={"Invalid password."}
           />
           <Input
@@ -99,7 +138,7 @@ const CUEmployeeForm = (props) => {
               required: !editEmployee,
               validate: validatePasswordMatch,
             })}
-            hasError={errors.repeatPassword}
+            hasError={Boolean(errors.repeatPassword)}
             errorMessage={"Passwords do not match."}
           />
           <Select
@@ -108,8 +147,8 @@ const CUEmployeeForm = (props) => {
               name: "storageId",
             }}
             refSelect={register}
-            options={createStoragesSelectList(response)}
-            hasError={errors.storageId}
+            options={createStoragesSelectList(storages)}
+            hasError={Boolean(errors.storageId)}
           />
           <Input
             label={"First Name: "}
@@ -122,7 +161,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.firstName}
+            hasError={Boolean(errors.firstName)}
             errorMessage={"Min length is 3."}
           />
           <Input
@@ -136,7 +175,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.lastName}
+            hasError={Boolean(errors.lastName)}
             errorMessage={"Min length is 3."}
           />
           <Input
@@ -150,7 +189,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               pattern: pattern.phoneNumber,
             })}
-            hasError={errors.phone}
+            hasError={Boolean(errors.phone)}
             errorMessage={"Invalid phone number."}
           />
           <Input
@@ -164,7 +203,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.addressStreet}
+            hasError={Boolean(errors.addressStreet)}
             errorMessage={"Min length is 3."}
           />
           <Input
@@ -178,7 +217,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.addressCity}
+            hasError={Boolean(errors.addressCity)}
             errorMessage={"Min length is 3."}
           />
           <Input
@@ -192,7 +231,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.addressZip}
+            hasError={Boolean(errors.addressZip)}
             errorMessage={"Min length is 3."}
           />
           <Input
@@ -206,7 +245,7 @@ const CUEmployeeForm = (props) => {
               required: true,
               minLength: 3,
             })}
-            hasError={errors.addressCountry}
+            hasError={Boolean(errors.addressCountry)}
             errorMessage={"Min length is 3."}
           />
         </form>
@@ -223,13 +262,6 @@ const CUEmployeeForm = (props) => {
       </ModalBottom>
     </Aux>
   );
-};
-
-CUEmployeeForm.propTypes = {
-  onCloseModal: PropTypes.func.isRequired,
-  onCreateEmployee: PropTypes.func,
-  onUpdateEmployee: PropTypes.func,
-  editEmployee: PropTypes.object,
 };
 
 export default CUEmployeeForm;

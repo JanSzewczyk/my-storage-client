@@ -11,8 +11,8 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
 import "./DropDown.scss";
 
-interface DropdownProps extends PropsWithChildren {
-  type: DropdownType;
+interface DropdownProps extends PropsWithChildren<any> {
+  type?: DropdownType;
   title?: string;
   icon?: ReactNode;
   btnType?: ButtonType;
@@ -21,7 +21,7 @@ interface DropdownProps extends PropsWithChildren {
 }
 
 const DropDown: React.FC<DropdownProps> = ({
-  type,
+  type = "button",
   title,
   icon,
   btnType,

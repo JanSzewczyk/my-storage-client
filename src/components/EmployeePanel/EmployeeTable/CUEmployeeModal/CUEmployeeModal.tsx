@@ -1,14 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
+import { CUEmployee } from "../../../../shared/types/employee";
+import Employee from "../../../../shared/types/employee/Employee";
+
 import Backdrop from "../../../UI/Backdrop/Backdrop";
 import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
 import CUEmployeeForm from "./CUEmployeeForm/CUEmployeeForm";
 
-const CUEmployeeModal = React.memo((props) => {
+interface CUEmployeeModalProps {
+  onCloseModal: () => void;
+  onCreateEmployee?: FixMeLater;
+  editEmployee?: Employee;
+  onEditEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
+}
+
+const CUEmployeeModal: React.FC<CUEmployeeModalProps> = React.memo((props) => {
   const {
     onCloseModal,
     onCreateEmployee,
-    employeeActionLoading,
     editEmployee,
     onEditEmployee,
   } = props;
@@ -20,7 +29,6 @@ const CUEmployeeModal = React.memo((props) => {
         onClose={onCloseModal}
       >
         <CUEmployeeForm
-          loading={employeeActionLoading}
           onCloseModal={onCloseModal}
           onCreateEmployee={onCreateEmployee}
           onUpdateEmployee={onEditEmployee}
@@ -31,11 +39,4 @@ const CUEmployeeModal = React.memo((props) => {
   );
 });
 
-CUEmployeeModal.propTypes = {
-  onCloseModal: PropTypes.func.isRequired,
-  editEmployee: PropTypes.object,
-  onEditEmployee: PropTypes.func,
-  onCreateEmployee: PropTypes.func,
-};
-
-export default CUEmployeeModal
+export default CUEmployeeModal;

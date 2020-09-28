@@ -6,15 +6,15 @@ import { SelectConfig, SelectOption } from "./types";
 import "./Select.scss";
 
 interface SelectProps {
+  options: SelectOption[];
   labelClass?: string;
   refSelect: any;
   config: SelectConfig;
   selectClass?: string;
   label: string;
   errorClass?: string;
-  hasError: boolean;
-  errorMessage: string;
-  options: SelectOption[];
+  hasError?: boolean;
+  errorMessage?: string;
 }
 
 const Select: React.FC<SelectProps> = ({

@@ -10,10 +10,14 @@ import EmployeeDetails from "../../../components/Employee/EmployeeDetails/Employ
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
 
-const Employee = (props) => {
+interface EmployeeProps {
+  match: any;
+}
+
+const Employee: React.FC<EmployeeProps> = (props) => {
   const { match } = props;
 
-  const employeeId = match.params.employeeId;
+  const employeeId: string = match.params.employeeId;
 
   const breadcrumbs = (
     <Breadcrumbs>
@@ -46,7 +50,5 @@ const Employee = (props) => {
     </Aux>
   );
 };
-
-Employee.propTypes = {};
 
 export default withErrorHandler(Employee);

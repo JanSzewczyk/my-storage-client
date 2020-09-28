@@ -5,7 +5,7 @@ export declare type SelectOption = {
 
 export declare type SelectConfig = {
   placeholder?: string;
-  type: string;
+  type?: string;
   name: string;
   readOnly?: boolean;
   disabled?: boolean;

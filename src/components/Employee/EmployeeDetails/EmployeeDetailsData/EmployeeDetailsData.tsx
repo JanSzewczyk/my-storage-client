@@ -1,12 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import DataView from "../../../UI/DataView/DataView";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Mailto from "../../../UI/Mailto/Mailto";
+import Employee from "../../../../shared/types/employee/Employee";
 
-const EmployeeDetailsData = (props) => {
+interface EmployeeDetailsDataProps {
+  employee: Employee | null;
+}
+
+const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = (props) => {
   const { employee } = props;
 
   return employee ? (
@@ -31,10 +35,6 @@ const EmployeeDetailsData = (props) => {
   ) : (
     <>No data</>
   );
-};
-
-EmployeeDetailsData.propTypes = {
-  employee: PropTypes.object.isRequired,
 };
 
 export default EmployeeDetailsData;
