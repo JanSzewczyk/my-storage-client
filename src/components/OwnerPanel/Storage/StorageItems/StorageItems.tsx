@@ -1,5 +1,4 @@
 import React, { useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
@@ -10,9 +9,21 @@ import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
 import Table from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
-import useQuery from "../../../../hooks/useQuery";
+import useQuery, { Query } from "../../../../hooks/useQuery";
 
 import "./StorageItems.scss";
+import StoreState from "../../../../shared/types/store/StoreState";
+import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
+import PageInfo from "../../../../shared/types/common/PageInfo";
+import ItemView from "../../../../shared/types/item/ItemView";
+
+interface StorageItemsProps {
+  storageId: string;
+  onGetStorageItemViewList: (storageId: string, query: Query) => void;
+  itemsList: ItemView[];
+  pageInfo: PageInfo | null;
+  itemsListLoading: boolean;
+}
 
 const config = {
   columns: [
@@ -30,19 +41,20 @@ const config = {
       field: "value",
       name: "Value",
       sorted: true,
-      converter: (value, rowData) => formatMoney(value, rowData.currency),
+      converter: (value: number, rowData: ItemView) =>
+        formatMoney(value, rowData.currency),
     },
     {
       field: "totalValue",
       name: "Total Value",
       sorted: true,
-      converter: (totalValue, rowData) =>
+      converter: (totalValue: number, rowData: ItemView) =>
         formatMoney(totalValue, rowData.currency),
     },
   ],
 };
 
-const StorageItems = React.memo((props) => {
+const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
   const {
     storageId,
     onGetStorageItemViewList,
@@ -100,11 +112,7 @@ const StorageItems = React.memo((props) => {
   );
 });
 
-StorageItems.propTypes = {
-  storageId: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     itemsList: state.itemStore.itemViewList,
     pageInfo: state.itemStore.pageInfo,
@@ -112,10 +120,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetStorageItemViewList: (storageId, queryData) =>
-      dispatch(action.getStorageItemViewList(storageId, queryData)),
+    onGetStorageItemViewList: (storageId: string, query: Query) =>
+      dispatch(action.getStorageItemViewList(storageId, query)),
   };
 };
 

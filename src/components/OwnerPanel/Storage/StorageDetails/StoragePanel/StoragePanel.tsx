@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import DataView from "../../../../UI/DataView/DataView";
 import TileContent from "../../../../UI/Tile/TileContent/TileContent";
@@ -7,10 +6,16 @@ import TileBottom from "../../../../UI/Tile/TileBottom/TileBottom";
 import Button from "../../../../UI/Button/Button";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import { dateToDateTimeString } from "../../../../../shared/utils/dateUtils";
+import { Storage } from "../../../../../shared/types/storage";
 
-const StoragePanel = React.memo((props) => {
+interface StoragePanelProps {
+  storage: Storage | null;
+  onEdit: () => void;
+}
+
+const StoragePanel: React.FC<StoragePanelProps> = React.memo((props) => {
   const { storage, onEdit } = props;
-  
+
   return storage ? (
     <Aux>
       <TileContent>
@@ -41,10 +46,5 @@ const StoragePanel = React.memo((props) => {
     <> No Data </>
   );
 });
-
-StoragePanel.propTypes = {
-  storage: PropTypes.object,
-  onEdit: PropTypes.func.isRequired,
-};
 
 export default StoragePanel;

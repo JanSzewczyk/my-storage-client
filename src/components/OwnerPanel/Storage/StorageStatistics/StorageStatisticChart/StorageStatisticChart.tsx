@@ -9,8 +9,14 @@ import { formatMoney } from "../../../../../shared/utils/currencyUtils";
 import { setTimeUnitDate } from "../../../../../shared/utils/chartUtils";
 
 import "./StorageStatisticChart.scss";
+import StorageStatistic from "../../../../../shared/types/statistic/StorageStatistic";
 
-const StorageStatisticChart = (props) => {
+interface StorageStatisticChartProps {
+  loading: boolean;
+  statistics: StorageStatistic[];
+}
+
+const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
   const { loading, statistics } = props;
 
   let content = <Loading />;
@@ -82,7 +88,7 @@ const StorageStatisticChart = (props) => {
             position: "left",
             ticks: {
               min: 0,
-              callback: (label) => formatMoney(label, currency),
+              callback: (label: any) => formatMoney(label, currency),
             },
           },
           {
@@ -91,14 +97,14 @@ const StorageStatisticChart = (props) => {
             position: "right",
             ticks: {
               min: 0,
-              callback: (label) => formatMoney(label, currency),
+              callback: (label: any) => formatMoney(label, currency),
             },
           },
         ],
       },
       tooltips: {
         callbacks: {
-          label: (tooltipItem, object) =>
+          label: (tooltipItem: any, object: any) =>
             `${object.datasets[tooltipItem.datasetIndex].label}: ${formatMoney(
               tooltipItem.value,
               currency

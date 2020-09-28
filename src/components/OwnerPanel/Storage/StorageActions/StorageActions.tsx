@@ -7,7 +7,7 @@ import * as action from "../../../../store";
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import useQuery from "../../../../hooks/useQuery";
+import useQuery, { Query } from "../../../../hooks/useQuery";
 import Pagination from "../../../UI/Pagination/Pagination";
 
 import Loading from "../../../UI/Loading/Loading";
@@ -16,8 +16,19 @@ import TimeLineItem from "../../../UI/TimeLine/TimeLineItem/TimeLineItem";
 import ActionTimeLineItem from "./ActionTimeLineItem/ActionTimeLineItem";
 
 import "./StorageActions.scss";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
+import Action from "../../../../shared/types/action/Action";
+import PageInfo from "../../../../shared/types/common/PageInfo";
 
-const StorageActions = React.memo((props) => {
+interface StorageActionsProps {
+  storageId: string;
+  onGetStorageActionsList: (storageId: string, query: Query) => void;
+  actionsList: Action[];
+  pageInfo: PageInfo | null;
+  actionsListLoading: boolean;
+}
+
+const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
   const {
     storageId,
     onGetStorageActionsList,
@@ -26,7 +37,7 @@ const StorageActions = React.memo((props) => {
     actionsListLoading,
   } = props;
 
-  const { query, onPageChanged } = useQuery({
+  const { query, onPageChanged } = useQuery<Query>({
     sort: [{ field: "createdAt", type: "desc" }],
     page: 0,
     size: 30,
@@ -36,7 +47,7 @@ const StorageActions = React.memo((props) => {
     onGetStorageActionsList(storageId, query);
   }, [onGetStorageActionsList, query, storageId]);
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const actionTimeLine = useMemo(
     () => (
@@ -88,7 +99,7 @@ const StorageActions = React.memo((props) => {
 
 StorageActions.propTypes = { storageId: PropTypes.string.isRequired };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     actionsList: state.actionStore.actionsList,
     pageInfo: state.actionStore.pageInfo,
@@ -96,10 +107,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetStorageActionsList: (storageId, queryData) =>
-      dispatch(action.getStorageActionsList(storageId, queryData)),
+    onGetStorageActionsList: (storageId: string, query: Query) =>
+      dispatch(action.getStorageActionsList(storageId, query)),
   };
 };
 
