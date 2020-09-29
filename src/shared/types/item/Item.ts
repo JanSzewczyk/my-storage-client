@@ -1,0 +1,12 @@
+import Link from "../common/Link";
+
+export default interface Item {
+  amount: number;
+  currency: string;
+  id: string;
+  links: Link[];
+  productId: string;
+  productName: string;
+  productValue: number;
+  totalValue: number;
+}

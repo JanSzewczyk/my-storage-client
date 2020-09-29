@@ -8,13 +8,13 @@
     font-weight: 700;
     cursor: pointer;
   }
-}
 
-.pagination-item--active {
-  color: $blueColor;
+  &--active {
+    color: $blueColor;
 
-  &:hover {
-    font-weight: 700;
-    cursor: default;
+    &:hover {
+      font-weight: 700;
+      cursor: default;
+    }
   }
 }

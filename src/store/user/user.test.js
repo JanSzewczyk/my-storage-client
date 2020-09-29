@@ -1,4 +1,4 @@
-import reducer from "./userReducer";
+import reducer from "./user.reducer";
 import * as actionTypes from "../actionTypes";
 
 describe("user reducer", () => {

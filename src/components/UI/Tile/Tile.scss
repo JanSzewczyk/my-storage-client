@@ -81,10 +81,10 @@
   width: calc(91.66666667% - 40px);
 }
 .tile--sm-12 {
-  width: 100%;
+  width: calc(100% - 40px);
 }
 
-@media only screen and (min-width: 30em) {
+@media only screen and (min-width: $MD-MIN-WIGHT) {
   .tile--md-1 {
     width: calc(8.33333333% - 40px);
   }
@@ -119,11 +119,11 @@
     width: calc(91.66666667% - 40px);
   }
   .tile--md-12 {
-    width: 100%;
+    width: calc(100% - 40px);
   }
 }
 
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: $LG-MIN-WIGHT) {
   .tile--lg-1 {
     width: calc(8.33333333% - 40px);
   }
@@ -158,11 +158,11 @@
     width: calc(91.66666667% - 40px);
   }
   .tile--lg-12 {
-    width: 100%;
+    width: calc(100% - 40px);
   }
 }
 
-@media only screen and (min-width: 75em) {
+@media only screen and (min-width: $XL-MIN-WIGHT) {
   .tile--xl-1 {
     width: calc(8.33333333% - 40px);
   }
@@ -197,6 +197,6 @@
     width: calc(91.66666667% - 40px);
   }
   .tile--xl-12 {
-    width: 100%;
+    width: calc(100% - 40px);
   }
 }
