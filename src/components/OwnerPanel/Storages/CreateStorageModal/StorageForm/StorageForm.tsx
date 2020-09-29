@@ -9,8 +9,14 @@ import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../../UI/Input/Input";
 
 import "./StorageForm.scss";
+import { Storage } from "../../../../../shared/types/storage";
 
-const StorageForm = (props) => {
+interface StorageFormProps {
+  onCloseModal: () => void;
+  onCreateStorage: (storage: Storage) => void;
+}
+
+const StorageForm: React.FC<StorageFormProps> = (props) => {
   const { onCloseModal, onCreateStorage } = props;
 
   const { register, errors, handleSubmit } = useForm({

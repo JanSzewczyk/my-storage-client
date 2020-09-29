@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import * as _ from "lodash";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
+
+import axios from "../../../../shared/config/axios";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
@@ -13,8 +14,20 @@ import RemoveForm from "./RemoveForm/RemoveForm";
 import Loading from "../../../UI/Loading/Loading";
 
 import "./RemoveAction.scss";
+import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
+import Item from "../../../../shared/types/item/Item";
 
-const RemoveAction = React.memo((props) => {
+interface RemoveActionProps {
+  storageId: string;
+  onGetStorageItemList: (storageId: string) => void;
+  onClose: () => void;
+  itemsList: Item[];
+  itemsListLoading: boolean;
+  actionSRLoading: boolean;
+}
+
+const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
   const {
     storageId,
     onGetStorageItemList,
@@ -22,16 +35,22 @@ const RemoveAction = React.memo((props) => {
     itemsList,
     itemsListLoading,
     actionSRLoading,
-    onRemoveAction,
   } = props;
-  const [removeItems, setRemoveItems] = useState([]);
+  const [removeItems, setRemoveItems] = useState<FixMeLater[]>([]);
 
   useEffect(() => {
     onGetStorageItemList(storageId);
   }, [onGetStorageItemList, storageId]);
 
-  const addToRemoveItems = (data) => {
+  const addToRemoveItems = (data: FixMeLater) => {
     setRemoveItems([...removeItems, data]);
+  };
+
+  const onRemoveAction = (removedItems: FixMeLater) => {
+    axios
+      .post(`actions/remove`, removedItems)
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   return (
@@ -54,7 +73,7 @@ const RemoveAction = React.memo((props) => {
                   <span key={index}>
                     {`* ${
                       _.find(itemsList, (o) => i.productId === o.productId)
-                        .productName
+                        ?.productName
                     } X${i.amount}`}
                   </span>
                   <br />
@@ -82,24 +101,19 @@ const RemoveAction = React.memo((props) => {
   );
 });
 
-RemoveAction.propTypes = {
-  storageId: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
-    itemsList: state.itemStore.itemsList,
+    itemsList: state.itemStore.itemList,
     itemsListLoading: state.itemStore.itemListLoading,
-    actionSRLoading: state.action.actionSRLoading,
+    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetStorageItemList: (storageId) =>
+    onGetStorageItemList: (storageId: string) =>
       dispatch(action.getStorageItemList(storageId)),
-    onRemoveAction: (items) => dispatch(action.removeAction(items)),
+    // onRemoveAction: (items: FixMeLater) => dispatch(action.removeAction(items)),
   };
 };
 

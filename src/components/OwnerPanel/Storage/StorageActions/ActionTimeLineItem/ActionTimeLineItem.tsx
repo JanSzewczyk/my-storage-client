@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
 
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
@@ -8,14 +7,21 @@ import PersonIcon from "@material-ui/icons/Person";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { formatMoney } from "../../../../../shared/utils/currencyUtils";
-import Table from "../../../../UI/Table";
+import Table, { TableConfig } from "../../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
+import Action from "../../../../../shared/types/action/Action";
 
-const ActionTimeLineItem = (props) => {
+interface ActionTimeLineItemProps {
+  action: Action;
+  selected: boolean;
+  onSelect: () => void;
+}
+
+const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
   const { action, selected, onSelect } = props;
 
-  const config = {
+  const config: TableConfig = {
     columns: [
       {
         field: "productName",
@@ -28,12 +34,13 @@ const ActionTimeLineItem = (props) => {
       {
         field: "productValue",
         name: "Value",
-        converter: (value, rowData) => formatMoney(value, rowData.currency),
+        converter: (value: number, rowData: any) =>
+          formatMoney(value, rowData.currency),
       },
       {
         field: "totalValue",
         name: "Total",
-        converter: (totalValue, rowData) =>
+        converter: (totalValue: number, rowData: any) =>
           formatMoney(totalValue, rowData.currency),
       },
     ],
@@ -69,12 +76,6 @@ const ActionTimeLineItem = (props) => {
       )}
     </div>
   );
-};
-
-ActionTimeLineItem.propTypes = {
-  action: PropTypes.object.isRequired,
-  selected: PropTypes.bool.isRequired,
-  onSelect: PropTypes.func.isRequired,
 };
 
 export default ActionTimeLineItem;

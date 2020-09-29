@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import * as _ from "lodash";
+
+import _ from "lodash";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
+
+import axios from "../../../../shared/config/axios";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
@@ -13,8 +15,20 @@ import Loading from "../../../UI/Loading/Loading";
 import StoreForm from "./StoreForm/StoreForm";
 
 import "./StoreAction.scss";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
+import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
+import Product from "../../../../shared/types/product/Product";
 
-const StoreAction = React.memo((props) => {
+interface StoreActionProps {
+  ownerId: string;
+  onClose: () => void;
+  productsListLoading: boolean;
+  onGetProductsList: (ownerId: string) => void;
+  productsList: Product[];
+  actionSRLoading: boolean;
+}
+
+const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
   const {
     ownerId,
     onClose,
@@ -22,17 +36,23 @@ const StoreAction = React.memo((props) => {
     onGetProductsList,
     productsList,
     actionSRLoading,
-    onStoreAction,
   } = props;
 
-  const [storeItems, setStoreItems] = useState([]);
+  const [storeItems, setStoreItems] = useState<FixMeLater[]>([]);
 
   useEffect(() => {
     onGetProductsList(ownerId);
   }, [onGetProductsList, ownerId]);
 
-  const addToStoreItems = (data) => {
+  const addToStoreItems = (data: FixMeLater) => {
     setStoreItems([...storeItems, data]);
+  };
+
+  const onStoreAction = (storedItems: FixMeLater[]) => {
+    axios
+      .post(`actions/store`, storedItems)
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   return (
@@ -54,8 +74,10 @@ const StoreAction = React.memo((props) => {
                 <Aux>
                   <span key={index}>
                     {`* ${
-                      _.find(productsList, (o) => i.productId === o.productId)
-                        .name
+                      _.find(
+                        productsList,
+                        (o: FixMeLater) => i.productId === o.productId
+                      )?.name
                     } X${i.amount}`}
                   </span>
                   <br />
@@ -83,24 +105,18 @@ const StoreAction = React.memo((props) => {
   );
 });
 
-StoreAction.propTypes = {
-  storageId: PropTypes.string.isRequired,
-  ownerId: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     productsList: state.productStore.productList,
     productsListLoading: state.productStore.productListLoading,
-    actionSRLoading: state.action.actionSRLoading,
+    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetProductsList: (ownerId) => dispatch(action.getProductsList(ownerId)),
-    onStoreAction: (items) => dispatch(action.storeAction(items)),
+    onGetProductsList: (ownerId: string) =>
+      dispatch(action.getProductsList(ownerId)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(StoreAction);

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import axios from "../../../../shared/config/axios";
 
 import Backdrop from "../../../UI/Backdrop/Backdrop";
@@ -7,13 +6,18 @@ import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
 import StorageForm from "./StorageForm/StorageForm";
 import useNotification from "../../../../hooks/useNotification";
 import browserHistory from "../../../../shared/config/history";
+import { Storage } from "../../../../shared/types/storage";
 
-const CreateStorageModal = (props) => {
+interface CreateStorageModalProps {
+  onCloseModal: () => void;
+}
+
+const CreateStorageModal: React.FC<CreateStorageModalProps> = (props) => {
   const { onCloseModal } = props;
 
   const notification = useNotification();
 
-  const onCreateStorage = (storage) => {
+  const onCreateStorage = (storage: Storage) => {
     axios.post(`storages`, storage).then((res) => {
       const newStorage = res.data;
 
@@ -36,10 +40,6 @@ const CreateStorageModal = (props) => {
       </ModalWrapper>
     </Backdrop>
   );
-};
-
-CreateStorageModal.propTypes = {
-  onCloseModal: PropTypes.func.isRequired,
 };
 
 export default CreateStorageModal;

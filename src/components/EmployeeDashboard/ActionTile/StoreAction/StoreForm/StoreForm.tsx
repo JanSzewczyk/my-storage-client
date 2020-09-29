@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 // import _ from "lodash";
 
@@ -7,17 +6,24 @@ import Button from "../../../../UI/Button/Button";
 import Select from "../../../../UI/Select/Select";
 import Input from "../../../../UI/Input/Input";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
+import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
+import Product from "../../../../../shared/types/product/Product";
 
-const StoreForm = React.memo((props) => {
+interface StoreFormProps {
+  addItem: (data: FixMeLater) => void;
+  products: Product[];
+}
+
+const StoreForm: React.FC<StoreFormProps> = React.memo((props) => {
   const { addItem, products } = props;
 
-  const [addNewProduct, setAddNewProduct] = useState(false);
+  const [addNewProduct, setAddNewProduct] = useState<boolean>(false);
 
   const { register, errors, handleSubmit, setValue } = useForm({
     mode: "onSubmit",
   });
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: FixMeLater) => {
     let item = null;
 
     if (addNewProduct) {
@@ -74,7 +80,7 @@ const StoreForm = React.memo((props) => {
             config={{
               placeholder: "Product Value",
               type: "number",
-              step: 0.01,
+              // step: 0.01,  // TODO FIX this
               name: "value",
             }}
             refInput={register({
@@ -84,7 +90,7 @@ const StoreForm = React.memo((props) => {
             hasError={errors.value}
             errorMessage={`Min value is 0.`}
           />
-          <Button clicked={() => setAddNewProduct(false)}>back</Button>
+          <Button onClick={() => setAddNewProduct(false)}>back</Button>
         </Aux>
       ) : (
         <Aux>
@@ -129,10 +135,5 @@ const StoreForm = React.memo((props) => {
     </form>
   );
 });
-
-StoreForm.propTypes = {
-  addItem: PropTypes.func.isRequired,
-  products: PropTypes.array.isRequired,
-};
 
 export default StoreForm;

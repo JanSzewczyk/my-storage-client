@@ -1,20 +1,26 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import _ from "lodash";
 
 import Button from "../../../../UI/Button/Button";
 import Select from "../../../../UI/Select/Select";
 import Input from "../../../../UI/Input/Input";
+import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
+import Item from "../../../../../shared/types/item/Item";
 
-const RemoveForm = (props) => {
+interface RemoveFormProps {
+  addItem: (data: FixMeLater) => void;
+  items: Item[];
+}
+
+const RemoveForm: React.FC<RemoveFormProps> = (props) => {
   const { addItem, items } = props;
 
   const { register, errors, handleSubmit, watch, setValue } = useForm({
     mode: "onSubmit",
   });
 
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: FixMeLater) => {
     addItem(formData);
     setValue("amount", null);
   };
@@ -61,11 +67,6 @@ const RemoveForm = (props) => {
       </Button>
     </form>
   );
-};
-
-RemoveForm.propTypes = {
-  addItem: PropTypes.func.isRequired,
-  items: PropTypes.array.isRequired,
 };
 
 export default RemoveForm;
