@@ -1,8 +1,14 @@
 import * as actionTypes from "../actionTypes";
 import { updateObject } from "../../shared/utils/utility";
-import { StatisticActionTypes, StatisticState, StatisticStorageLoadFailureAction, StatisticStorageLoadStartAction, StatisticStorageLoadSuccessAction } from "./types";
+import {
+  StatisticActionTypes,
+  StatisticState,
+  StatisticStorageLoadFailureAction,
+  StatisticStorageLoadStartAction,
+  StatisticStorageLoadSuccessAction,
+} from "./types";
 
-const initialState = {
+const initialState: StatisticState = {
   storageStatistics: [],
   storageStatisticsLoading: true,
 };

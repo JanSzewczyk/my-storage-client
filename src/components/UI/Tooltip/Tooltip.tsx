@@ -42,7 +42,15 @@ const Tooltip: React.FC<TooltipProps> = React.memo(
         onMouseLeave={onMouseLeaveHandler}
       >
         {children}
-        {show && <div className={TMClasses.join(" ")}>{text}</div>}
+        {show && (
+          <div
+            // onMouseOver={onMouseOverHandler}
+            // onMouseLeave={onMouseLeaveHandler}
+            className={TMClasses.join(" ")}
+          >
+            {text}
+          </div>
+        )}
       </span>
     );
   }

@@ -15,6 +15,7 @@ import { AxiosResponse } from "axios";
 import PagedModel from "../../shared/types/apiResponse/PagedModel";
 import ActionDto from "../../shared/types/action/ActionDto";
 import { mapActionDtoToAction } from "../../shared/data-utils/actionUtils";
+import { FixMeLater } from "../../shared/types/common/FixMeLater";
 
 export const actionStorageListLoadStart = (): ActionStorageListLoadStartAction => {
   return {
@@ -75,7 +76,7 @@ export const getStorageActionsList = (
 //   };
 // };
 
-export const removeAction = (removedItems: any) => {
+export const removeAction = (removedItems: FixMeLater) => {
   return (dispatch: StoreDispatch) => {
     // dispatch(actionRemoveStart());
 
@@ -113,7 +114,7 @@ export const removeAction = (removedItems: any) => {
 //   };
 // };
 
-export const storeAction = (storedItems: any) => {
+export const storeAction = (storedItems: FixMeLater) => {
   return (dispatch: StoreDispatch) => {
     // dispatch(actionStoreStart());
 
