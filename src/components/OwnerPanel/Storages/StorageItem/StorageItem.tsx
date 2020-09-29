@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import StorageIcon from "@material-ui/icons/Storage";
 import Tile from "../../../UI/Tile/Tile";
@@ -8,8 +7,14 @@ import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 
 import "./StorageItem.scss";
+import { StorageView } from "../../../../shared/types/storage";
 
-const StorageItem = (props) => {
+interface StorageItemProps {
+  storage: StorageView;
+  onRedirectToStorage: () => void;
+}
+
+const StorageItem: React.FC<StorageItemProps> = (props) => {
   const { storage, onRedirectToStorage } = props;
 
   return (
@@ -17,8 +22,8 @@ const StorageItem = (props) => {
       tileSize={{
         sm: "sm-3",
         md: "md-3",
-        lg: "lg-3",
-        xl: "xl-3",
+        lg: "lg-6",
+        xl: "xl-12",
       }}
     >
       <TileContent>
@@ -51,11 +56,6 @@ const StorageItem = (props) => {
       />
     </Tile>
   );
-};
-
-StorageItem.propTypes = {
-  storage: PropTypes.object.isRequired,
-  onRedirectToStorage: PropTypes.func.isRequired,
 };
 
 export default StorageItem;

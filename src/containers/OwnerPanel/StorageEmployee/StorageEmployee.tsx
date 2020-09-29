@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { RouteComponentProps } from "react-router-dom";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import AppBar from "../../../components/UI/AppBar";
@@ -10,11 +11,18 @@ import EmployeeDetails from "../../../components/Employee/EmployeeDetails/Employ
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
 
-const StorageEmployee = (props) => {
+interface MatchParams {
+  employeeId: string;
+  storageId: string;
+}
+
+interface StorageEmployeeProps extends RouteComponentProps<MatchParams> {}
+
+const StorageEmployee: React.FC<StorageEmployeeProps> = (props) => {
   const { match } = props;
 
-  const employeeId = match.params.employeeId;
-  const storageId = match.params.storageId;
+  const employeeId: string = match.params.employeeId;
+  const storageId: string = match.params.storageId;
 
   const breadcrumbs = (
     <Breadcrumbs>

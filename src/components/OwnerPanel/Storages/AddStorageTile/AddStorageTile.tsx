@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import Tile from "../../../UI/Tile/Tile";
@@ -7,7 +6,11 @@ import TileContent from "../../../UI/Tile/TileContent/TileContent";
 
 import "./AddStorageTile.scss";
 
-const AddStorageTile = (props) => {
+interface AddStorageTileProps {
+  onAddStorage: () => void;
+}
+
+const AddStorageTile: React.FC<AddStorageTileProps> = (props) => {
   const { onAddStorage } = props;
   return (
     <Tile
@@ -26,10 +29,6 @@ const AddStorageTile = (props) => {
       </TileContent>
     </Tile>
   );
-};
-
-AddStorageTile.propTypes = {
-  onAddStorage: PropTypes.func.isRequired,
 };
 
 export default AddStorageTile;

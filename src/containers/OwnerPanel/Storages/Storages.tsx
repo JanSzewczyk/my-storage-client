@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -10,9 +11,19 @@ import StorageItem from "../../../components/OwnerPanel/Storages/StorageItem/Sto
 import AddStorageTile from "../../../components/OwnerPanel/Storages/AddStorageTile/AddStorageTile";
 import CreateStorageModal from "../../../components/OwnerPanel/Storages/CreateStorageModal/CreateStorageModal";
 import withErrorHandler from "../../../hoc/withErrorHandler";
+import { StoreDispatch, StoreState } from "../../../shared/types/store";
+import { StorageView } from "../../../shared/types/storage";
 
-const Storages = (props) => {
+interface StoragesProps {
+  onGetStorageList: () => void;
+  storageList: StorageView[];
+  storageListLoading: boolean;
+}
+
+const Storages: React.FC<StoragesProps> = (props) => {
   const { onGetStorageList, storageList, storageListLoading } = props;
+
+  const history = useHistory();
 
   const [showAddStorage, setShowAddStorage] = useState(false);
 
@@ -21,16 +32,16 @@ const Storages = (props) => {
   }, [onGetStorageList]);
 
   const redirectToStorageHandler = useCallback(
-    (storage) => {
-      props.history.push(`storages/${storage.id}`);
+    (storage: StorageView) => {
+      history.push(`storages/${storage.id}`);
     },
-    [props.history]
+    [history]
   );
 
   const storageItems = useMemo(
     () => (
       <Aux>
-        {storageList.map((storage, index) => (
+        {storageList.map((storage: StorageView, index: number) => (
           <StorageItem
             key={index}
             storage={storage}
@@ -62,14 +73,14 @@ const Storages = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreState) => {
   return {
     storageList: state.storageStore.storageViewList,
     storageListLoading: state.storageStore.storageViewListLoading,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
     onGetStorageList: () => dispatch(action.getStorageList()),
   };
