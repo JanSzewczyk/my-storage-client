@@ -1,9 +1,11 @@
 import * as actionTypes from "../actionTypes";
 import Storage from "../../shared/types/storage/Storage";
 import StorageView from "../../shared/types/storage/StorageView";
+import PageInfo from "../../shared/types/common/PageInfo";
 
 export interface StorageState {
   storageViewList: StorageView[];
+  pageInfo: PageInfo | null;
   storageViewListLoading: boolean;
   storage: Storage | null;
   storageLoading: boolean;
@@ -20,6 +22,7 @@ export interface StorageViewListLoadStartAction {
 export interface StorageViewListLoadSuccessAction {
   type: typeof actionTypes.STORAGE_VIEW_LIST_LOAD_SUCCESS;
   storages: StorageView[];
+  pageInfo: PageInfo;
 }
 
 export interface StorageViewListLoadFailureAction {

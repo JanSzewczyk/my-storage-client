@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { updateObject } from "../../shared/utils/utility";
-import { Query, SortType, UseQueryMethods } from "./types";
+import { Query, SortInfo, SortStateType, UseQueryMethods } from "./types";
 
 const useQuery = <TQuery extends Query>(
   initialQuery: TQuery
@@ -8,8 +8,8 @@ const useQuery = <TQuery extends Query>(
   const [query, setQuery] = useState<TQuery>(initialQuery);
 
   const onSortChanged = useCallback(
-    (field: string, type: SortType) => {
-      let sortData = query.sort;
+    (field: string, type: SortStateType) => {
+      let sortData: SortInfo[] = query.sort;
 
       sortData = sortData.filter((s) => s.field !== field);
       if (type !== "") {

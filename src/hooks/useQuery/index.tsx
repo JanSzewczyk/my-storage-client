@@ -4,6 +4,7 @@ export type {
   Query,
   SortInfo,
   SortType,
+  SortStateType,
   SearchQuery,
   UseQueryMethods,
 } from "./types";

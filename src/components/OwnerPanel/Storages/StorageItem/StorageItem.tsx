@@ -14,6 +14,7 @@ interface StorageItemProps {
   onRedirectToStorage: () => void;
 }
 
+// TODO Remove THIS
 const StorageItem: React.FC<StorageItemProps> = (props) => {
   const { storage, onRedirectToStorage } = props;
 

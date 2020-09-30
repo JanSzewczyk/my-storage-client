@@ -12,13 +12,13 @@ import Loading from "../Loading";
 import "./Table.scss";
 
 interface TableProps {
-  config: TableConfig;
+  config: TableConfig<any>;
   data?: FixMeLater[];
 
   onRowClick?: (rowData: FixMeLater) => void;
 
   sort?: SortInfo[];
-  onSortChanged?: (field: string, type: SortType) => void;
+  onSortChanged?: (field: string, type: SortType | "") => void;
 
   loading?: boolean;
   tableLayout?: TableLayoutType;

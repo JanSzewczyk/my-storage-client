@@ -10,12 +10,12 @@ import {
   ItemViewListLoadSuccessAction,
 } from "./types";
 import PageInfo from "../../shared/types/common/PageInfo";
-import Query from "../../shared/types/query/Query";
 import { AxiosResponse } from "axios";
 import PagedModel from "../../shared/types/apiResponse/PagedModel";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
 import Item from "../../shared/types/item/Item";
 import ItemView from "../../shared/types/item/ItemView";
+import { Query } from "../../hooks/useQuery";
 
 export const itemViewListLoadStart = (): ItemViewListLoadStartAction => {
   return {

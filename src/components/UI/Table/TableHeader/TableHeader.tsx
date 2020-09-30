@@ -4,11 +4,12 @@ import { TableColumnConfig, TableConfig } from "../types";
 import { SortInfo, SortType } from "../../../../hooks/useQuery";
 
 import TableHeading from "./TableHeading/TableHeading";
+import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 
 interface TableHeaderProps {
-  config: TableConfig;
+  config: TableConfig<any>;
   sort: SortInfo[];
-  onSortChanged?: (field: string, type: SortType) => void;
+  onSortChanged?: (field: string, type: SortType | "") => void;
 }
 
 const TableHeader: React.FC<TableHeaderProps> = ({
@@ -16,7 +17,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   sort,
   onSortChanged,
 }) => {
-  const getSortIndex = (fieldName: string): number | null => {
+  const getSortIndex = (fieldName: any): number | null => {
     if (sort.length > 1) {
       for (let i = 0; i < sort.length; i++) {
         if (fieldName === sort[i].field) {
@@ -27,7 +28,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     return null;
   };
 
-  const getSortState = (fieldName: string): SortType => {
+  const getSortState = (fieldName: any): SortType | "" => {
     for (let i = 0; i < sort.length; i++) {
       if (fieldName === sort[i].field) {
         return sort[i].type;
@@ -40,16 +41,18 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   return (
     <thead>
       <tr>
-        {config.columns.map((conf: TableColumnConfig, index: number) => (
-          <TableHeading
-            key={index}
-            config={conf}
-            isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
-            onSortChanged={onSortChanged && onSortChanged}
-            sortIndex={getSortIndex(conf.field)}
-            sortState={getSortState(conf.field)}
-          />
-        ))}
+        {config.columns.map(
+          (conf: TableColumnConfig<any>, index: number) => (
+            <TableHeading
+              key={index}
+              config={conf}
+              isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
+              onSortChanged={onSortChanged && onSortChanged}
+              sortIndex={getSortIndex(conf.field)}
+              sortState={getSortState(conf.field)}
+            />
+          )
+        )}
         {config.actions && (
           <TableHeading
             key={"actions"}

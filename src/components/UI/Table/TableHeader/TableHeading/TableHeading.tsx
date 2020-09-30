@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 
 import { TableColumnConfig } from "../../types";
-import { SortType } from "../../../../../hooks/useQuery";
+import { SortStateType, SortType } from "../../../../../hooks/useQuery";
 
 import UnfoldMoreIcon from "@material-ui/icons/UnfoldMore";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -12,10 +12,10 @@ import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 import "./TableHeading.scss";
 
 interface TableHeadingProps {
-  config: TableColumnConfig;
-  onSortChanged?: (field: string, type: SortType) => void;
+  config: TableColumnConfig<FixMeLater>;
+  onSortChanged?: (field: string, type: SortStateType) => void;
   isSorted?: boolean;
-  sortState?: SortType;
+  sortState?: SortStateType;
   sortIndex?: number | null;
 }
 
@@ -27,7 +27,7 @@ const TableHeading: React.FC<TableHeadingProps> = ({
   sortState = "",
   sortIndex = null,
 }) => {
-  const states: SortType[] = ["", "desc", "asc"];
+  const states: SortStateType[] = ["", "desc", "asc"];
 
   const getNextState = (actualState: FixMeLater): number => {
     let nextState = actualState;
