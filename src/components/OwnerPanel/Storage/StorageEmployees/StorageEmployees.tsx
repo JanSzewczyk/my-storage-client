@@ -5,7 +5,7 @@ import * as action from "../../../../store";
 
 import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import Table from "../../../UI/Table";
+import Table, { TableConfig } from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery, { Query } from "../../../../hooks/useQuery";
@@ -26,7 +26,7 @@ interface StorageEmployeesProps {
   employeeListLoading: boolean;
 }
 
-const config = {
+const config: TableConfig<EmployeeView> = {
   columns: [
     {
       field: "shortId",
@@ -78,7 +78,7 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = React.memo(
     }, [onGetStorageEmployeesList, query, storageId]);
 
     const redirectToEmployee = useCallback(
-      (employee) => {
+      (employee: EmployeeView) => {
         browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
       },
       [storageId]
@@ -86,7 +86,7 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = React.memo(
 
     const table = useMemo(
       () => (
-        <Table
+        <Table<EmployeeView>
           config={config}
           data={employeeList}
           sort={query.sort}

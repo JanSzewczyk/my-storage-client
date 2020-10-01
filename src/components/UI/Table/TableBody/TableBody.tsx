@@ -1,21 +1,24 @@
 import React from "react";
 
-import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 import { TableConfig } from "../types";
 
 import TableRow from "./TableRow/TableRow";
 
-interface TableBodyProps {
-  data: FixMeLater[];
-  config: TableConfig;
-  onRowClick?: (rowData: FixMeLater) => void;
+interface TableBodyProps<TTable> {
+  data: TTable[];
+  config: TableConfig<TTable>;
+  onRowClick?: (rowData: TTable) => void;
 }
 
-const TableBody: React.FC<TableBodyProps> = ({ data, config, onRowClick }) => {
+const TableBody = <TTable,>({
+  data,
+  config,
+  onRowClick,
+}: TableBodyProps<TTable>) => {
   return (
     <tbody className="table-body">
-      {data.map((d: FixMeLater, index: number) => (
-        <TableRow
+      {data.map((d: TTable, index: number) => (
+        <TableRow<TTable>
           key={index}
           config={config}
           data={d}

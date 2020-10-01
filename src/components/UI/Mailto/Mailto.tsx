@@ -4,7 +4,6 @@ import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
 import { MailtoHeaders } from "./types";
 
 import "./Mailto.scss";
-import { FixMeLater } from "../../../shared/types/common/FixMeLater";
 
 interface MailtoProps extends PropsWithChildren<ReactNode> {
   email: string;
@@ -12,7 +11,7 @@ interface MailtoProps extends PropsWithChildren<ReactNode> {
 }
 
 const Mailto: React.FC<MailtoProps> = ({ email, children, headers }) => {
-  const toSearchString = (searchParams: FixMeLater): string => {
+  const toSearchString = (searchParams: any): string => {
     return Object.keys(searchParams)
       .map((key: string) => `${key}=${encodeURIComponent(searchParams[key])}`)
       .join("&");

@@ -2,34 +2,32 @@ import React from "react";
 import _ from "lodash";
 
 import { TableColumnConfig } from "../../types";
-import { SortStateType, SortType } from "../../../../../hooks/useQuery";
+import { SortStateType } from "../../../../../hooks/useQuery";
 
 import UnfoldMoreIcon from "@material-ui/icons/UnfoldMore";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 
 import "./TableHeading.scss";
 
-interface TableHeadingProps {
-  config: TableColumnConfig<FixMeLater>;
-  onSortChanged?: (field: string, type: SortStateType) => void;
-  isSorted?: boolean;
+interface TableHeadingProps<TTable> {
+  config?: TableColumnConfig<TTable>;
+  onSortChanged?: (field: keyof TTable, type: SortStateType) => void;
+  isSorted: boolean;
   sortState?: SortStateType;
   sortIndex?: number | null;
 }
 
-const TableHeading: React.FC<TableHeadingProps> = ({
+const TableHeading = <TTable,>({
   config,
-
   onSortChanged,
   isSorted = true,
   sortState = "",
   sortIndex = null,
-}) => {
+}: TableHeadingProps<TTable>) => {
   const states: SortStateType[] = ["", "desc", "asc"];
 
-  const getNextState = (actualState: FixMeLater): number => {
+  const getNextState = (actualState: number): number => {
     let nextState = actualState;
     actualState < states.length - 1 ? (nextState += 1) : (nextState = 0);
     return nextState;
@@ -38,7 +36,7 @@ const TableHeading: React.FC<TableHeadingProps> = ({
   const changeHeadingSortHandler = () => {
     if (isSorted) {
       const newIndex = getNextState(_.indexOf(states, sortState));
-      onSortChanged && onSortChanged(config.field, states[newIndex]);
+      config && onSortChanged && onSortChanged(config.field, states[newIndex]);
     }
   };
 
@@ -66,7 +64,7 @@ const TableHeading: React.FC<TableHeadingProps> = ({
       }}
     >
       <div className="table-heading__content">
-        {config.name}
+        {config ? config.name : ""}
         {isSorted && (
           <div className="table-heading__sort-wrapper">
             {sortIndex && <span>{`${sortIndex}`}</span>}

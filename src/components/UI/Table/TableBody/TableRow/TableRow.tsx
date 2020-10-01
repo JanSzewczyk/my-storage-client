@@ -1,27 +1,30 @@
 import React from "react";
 
-import { TableConfig } from "../../types";
-import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
+import { TableColumnConfig, TableConfig } from "../../types";
+import TableActionCell from "./TableActionCell/TableActionCell";
 
 import TableCell from "./TableCell/TableCell";
-import TableActionCell from "./TableActionCell/TableActionCell";
 
 import "./TableRow.scss";
 
-interface TableRowProps {
-  config: TableConfig;
-  data: FixMeLater[];
-  onRowClick?: (rowData: FixMeLater) => void;
+interface TableRowProps<TTable> {
+  config: TableConfig<TTable>;
+  data: TTable;
+  onRowClick?: (rowData: TTable) => void;
 }
 
-const TableRow: React.FC<TableRowProps> = ({ config, data, onRowClick }) => {
+const TableRow = <TTable,>({
+  config,
+  data,
+  onRowClick,
+}: TableRowProps<TTable>) => {
   return (
     <tr
       className="table-row"
       //   style={props.config.setRowStyle && props.config.setRowStyle(props.data)}
     >
-      {config.columns.map((c, index) => (
-        <TableCell
+      {config.columns.map((c: TableColumnConfig<TTable>, index: number) => (
+        <TableCell<TTable>
           key={index}
           rowData={data}
           columnConfig={c}
@@ -29,7 +32,7 @@ const TableRow: React.FC<TableRowProps> = ({ config, data, onRowClick }) => {
         />
       ))}
       {config.actions && (
-        <TableActionCell
+        <TableActionCell<TTable>
           key={"actions"}
           actions={config.actions}
           rowData={data}

@@ -1,21 +1,20 @@
 import React from "react";
 
 import { TableColumnConfig } from "../../../types";
-import { FixMeLater } from "../../../../../../shared/types/common/FixMeLater";
 
 import "./TableCell.scss";
 
-interface TableCellProps {
-  columnConfig: TableColumnConfig;
-  rowData: FixMeLater;
-  onClick?: (rowData: FixMeLater) => void;
+interface TableCellProps<TTable> {
+  columnConfig: TableColumnConfig<TTable>;
+  rowData: TTable;
+  onClick?: (rowData: TTable) => void;
 }
 
-const TableCell: React.FC<TableCellProps> = ({
+const TableCell = <TTable,>({
   columnConfig,
   rowData,
   onClick,
-}) => {
+}: TableCellProps<TTable>) => {
   let cellContent = columnConfig.converter
     ? columnConfig.converter(rowData[columnConfig.field], rowData)
     : rowData[columnConfig.field];

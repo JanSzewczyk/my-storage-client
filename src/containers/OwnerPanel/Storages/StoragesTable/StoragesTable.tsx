@@ -26,7 +26,7 @@ interface StoragesTableProps {
   storageViewListLoading: boolean;
 }
 
-const config: TableConfig = {
+const config: TableConfig<StorageView> = {
   columns: [
     {
       field: "shortId",
@@ -66,6 +66,12 @@ const config: TableConfig = {
       name: "Created",
       sorted: true,
       converter: (cellData: Date) => dateToDateTimeString(cellData),
+    },
+  ],
+  actions: [
+    {
+      action: () => console.log("eloo"),
+      name: "eloo",
     },
   ],
 };
@@ -108,7 +114,7 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
 
   const table = useMemo(
     () => (
-      <Table
+      <Table<StorageView>
         config={config}
         data={storageViewList}
         sort={query.sort}

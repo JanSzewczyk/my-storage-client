@@ -1,7 +1,6 @@
 import React from "react";
 
 import { InputConfig, InputType } from "./types";
-import { FixMeLater } from "../../../shared/types/common/FixMeLater";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
@@ -9,7 +8,7 @@ import "./Input.scss";
 
 interface InputProps {
   labelClass?: string;
-  refInput: FixMeLater;
+  refInput?: (Ref: any, validateRule?: any) => void;
   config: InputConfig;
   inputClass?: string;
   label?: string;

@@ -1,11 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
-import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 
 import "./Tab.scss";
 
-interface TabProps extends PropsWithChildren<FixMeLater> {
+interface TabProps extends PropsWithChildren<ReactNode> {
   title: string;
   disabled?: boolean;
 }

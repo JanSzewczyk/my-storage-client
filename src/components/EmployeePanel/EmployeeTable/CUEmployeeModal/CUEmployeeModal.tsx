@@ -1,5 +1,5 @@
 import React from "react";
-import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
+
 import { CUEmployee } from "../../../../shared/types/employee";
 import Employee from "../../../../shared/types/employee/Employee";
 
@@ -9,7 +9,7 @@ import CUEmployeeForm from "./CUEmployeeForm/CUEmployeeForm";
 
 interface CUEmployeeModalProps {
   onCloseModal: () => void;
-  onCreateEmployee?: FixMeLater;
+  onCreateEmployee?: (newEnployee: CUEmployee) => void;
   editEmployee?: Employee;
   onEditEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
 }

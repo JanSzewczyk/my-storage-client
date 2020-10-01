@@ -1,23 +1,22 @@
 import React from "react";
 
 import { TableColumnConfig, TableConfig } from "../types";
-import { SortInfo, SortType } from "../../../../hooks/useQuery";
+import { SortInfo, SortStateType } from "../../../../hooks/useQuery";
 
 import TableHeading from "./TableHeading/TableHeading";
-import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 
-interface TableHeaderProps {
-  config: TableConfig<any>;
+interface TableHeaderProps<TTable> {
+  config: TableConfig<TTable>;
   sort: SortInfo[];
-  onSortChanged?: (field: string, type: SortType | "") => void;
+  onSortChanged?: (field: keyof TTable, type: SortStateType) => void;
 }
 
-const TableHeader: React.FC<TableHeaderProps> = ({
+const TableHeader = <TTable,>({
   config,
   sort,
   onSortChanged,
-}) => {
-  const getSortIndex = (fieldName: any): number | null => {
+}: TableHeaderProps<TTable>) => {
+  const getSortIndex = (fieldName: keyof TTable): number | null => {
     if (sort.length > 1) {
       for (let i = 0; i < sort.length; i++) {
         if (fieldName === sort[i].field) {
@@ -28,7 +27,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     return null;
   };
 
-  const getSortState = (fieldName: any): SortType | "" => {
+  const getSortState = (fieldName: keyof TTable): SortStateType => {
     for (let i = 0; i < sort.length; i++) {
       if (fieldName === sort[i].field) {
         return sort[i].type;
@@ -42,11 +41,11 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     <thead>
       <tr>
         {config.columns.map(
-          (conf: TableColumnConfig<any>, index: number) => (
-            <TableHeading
+          (conf: TableColumnConfig<TTable>, index: number) => (
+            <TableHeading<TTable>
               key={index}
               config={conf}
-              isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
+              isSorted={Boolean(onSortChanged) && conf.sorted !== null}
               onSortChanged={onSortChanged && onSortChanged}
               sortIndex={getSortIndex(conf.field)}
               sortState={getSortState(conf.field)}
@@ -54,11 +53,10 @@ const TableHeader: React.FC<TableHeaderProps> = ({
           )
         )}
         {config.actions && (
-          <TableHeading
+          <TableHeading<TTable>
             key={"actions"}
             isSorted={false}
             sortState={""}
-            config={{ name: "", field: "actions" }}
           />
         )}
       </tr>

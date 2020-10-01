@@ -11,6 +11,7 @@ import Table, { TableConfig } from "../../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
 import Action from "../../../../../shared/types/action/Action";
+import Item from "../../../../../shared/types/item/Item";
 
 interface ActionTimeLineItemProps {
   action: Action;
@@ -21,7 +22,7 @@ interface ActionTimeLineItemProps {
 const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
   const { action, selected, onSelect } = props;
 
-  const config: TableConfig = {
+  const config: TableConfig<Item> = {
     columns: [
       {
         field: "productName",
@@ -34,7 +35,7 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
       {
         field: "productValue",
         name: "Value",
-        converter: (value: number, rowData: any) =>
+        converter: (value: number, rowData: Item) =>
           formatMoney(value, rowData.currency),
       },
       {
@@ -71,7 +72,7 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
       </div>
       {selected && (
         <div className={"action-time-line-item__content"}>
-          <Table config={config} data={action.items} fontSize={14} />
+          <Table<Item> config={config} data={action.items} fontSize={14} />
         </div>
       )}
     </div>

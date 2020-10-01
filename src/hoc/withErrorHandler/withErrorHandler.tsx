@@ -6,9 +6,8 @@ import useNotification from "../../hooks/useNotification";
 import axios from "../../shared/config/axios";
 
 import ApiErrorMessage from "./ApiErrorMessage/ApiErrorMessage";
-import { FixMeLater } from "../../shared/types/common/FixMeLater";
 
-const withErrorHandler = <E extends object = FixMeLater>(
+const withErrorHandler = <E,>(
   Component: React.ComponentType<E>,
   ignoreStatus: number[] = []
 ) => {

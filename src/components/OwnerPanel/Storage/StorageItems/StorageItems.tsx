@@ -7,7 +7,7 @@ import Tile from "../../../UI/Tile/Tile";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
-import Table from "../../../UI/Table";
+import Table, { TableConfig } from "../../../UI/Table";
 import Pagination from "../../../UI/Pagination/Pagination";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 
@@ -25,7 +25,7 @@ interface StorageItemsProps {
   itemsListLoading: boolean;
 }
 
-const config = {
+const config: TableConfig<ItemView> = {
   columns: [
     {
       field: "productName",
@@ -75,7 +75,7 @@ const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
 
   const itemsTable = useMemo(
     () => (
-      <Table
+      <Table<ItemView>
         config={config}
         data={itemsList}
         sort={query.sort}

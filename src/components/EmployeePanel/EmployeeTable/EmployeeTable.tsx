@@ -13,7 +13,7 @@ import TileTop from "../../UI/Tile/TileTop/TileTop";
 import Button from "../../UI/Button/Button";
 import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Table from "../../UI/Table";
+import Table, { TableConfig } from "../../UI/Table";
 import useQuery, { SearchQuery } from "../../../hooks/useQuery";
 
 import browserHistory from "../../../shared/config/history";
@@ -64,11 +64,11 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
     onGetEmployeesList(query);
   }, [onGetEmployeesList, query]);
 
-  const config = {
+  const config: TableConfig<EmployeeView> = {
     columns: [
       {
         field: "shortId",
-        name: "Employee ID",
+        name: "ID",
         sorted: true,
       },
       {
@@ -79,7 +79,6 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
       {
         field: "email",
         name: "Email",
-        sorted: true,
       },
       {
         field: "addressCity",
