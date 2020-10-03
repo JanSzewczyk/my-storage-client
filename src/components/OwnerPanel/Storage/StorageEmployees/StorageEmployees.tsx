@@ -93,6 +93,7 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = React.memo(
           onSortChanged={onSortChanged}
           onRowClick={redirectToEmployee}
           loading={employeeListLoading}
+          fontSize={14}
         />
       ),
       [

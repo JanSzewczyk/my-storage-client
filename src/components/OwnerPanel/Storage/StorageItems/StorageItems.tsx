@@ -81,6 +81,7 @@ const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
         sort={query.sort}
         onSortChanged={onSortChanged}
         loading={itemsListLoading}
+        fontSize={14}
       />
     ),
     [itemsList, itemsListLoading, onSortChanged, query.sort]
