@@ -1,12 +1,10 @@
 import React from "react";
 import _ from "lodash";
 
+import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
+
 import { TableColumnConfig } from "../../types";
 import { SortStateType } from "../../../../../hooks/useQuery";
-
-import UnfoldMoreIcon from "@material-ui/icons/UnfoldMore";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 import "./TableHeading.scss";
 
@@ -43,13 +41,13 @@ const TableHeading = <TTable,>({
   let icon = null;
   switch (_.indexOf(states, sortState)) {
     case 0:
-      icon = <UnfoldMoreIcon />;
+      icon = <FaSort />;
       break;
     case 1:
-      icon = <KeyboardArrowDownIcon />;
+      icon = <FaSortDown />;
       break;
     case 2:
-      icon = <KeyboardArrowUpIcon />;
+      icon = <FaSortUp />;
       break;
     default:
       break;

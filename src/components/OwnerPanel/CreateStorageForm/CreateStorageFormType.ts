@@ -1,6 +1,6 @@
-export default interface CUStorage {
+export default interface CreateStorageFormType {
   name: string;
-  surface: number | null;
+  surface: string;
   addressStreet: string;
   addressCity: string;
   addressZip: string;

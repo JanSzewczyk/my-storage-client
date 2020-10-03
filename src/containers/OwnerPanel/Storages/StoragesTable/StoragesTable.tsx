@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 
@@ -20,8 +20,9 @@ import Tile, {
 import Search from "../../../../components/UI/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Button from "../../../../components/UI/Button";
-import EllipsisWrapper from "../../../../components/UI/EllipsisWrapper";
 import Tooltip from "../../../../components/UI/Tooltip";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -41,7 +42,7 @@ const config: TableConfig<StorageView> = {
       field: "surface",
       name: "Surface",
       sorted: true,
-      converter: (cellData: number) => `${cellData}m^2`,
+      converter: (cellData: number) => `${cellData} m²`,
     },
     {
       field: "numberOfEmployees",
@@ -82,7 +83,12 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     storageViewListLoading,
   } = props;
 
+  const [showCreateStorageModal, setShowCreateStorageModal] = useState<boolean>(
+    false
+  );
+
   const history = useHistory();
+
   const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery<
     SearchQuery
   >({
@@ -135,30 +141,46 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     [onPageChanged, pageInfo]
   );
 
-  return (
-    <Tile
-      header={{
-        title: "Your Storages",
-      }}
-    >
-      <TileTop
-        left={search}
-        right={
-          <Tooltip text={"Add New Storage"} position={"top-end"} color={"blue"}>
-            <Button
-              btnType={"primary"}
-              onClick={() => console.log("Add new Storage")}
-            >
-              <FaPlus />Add Storage
-            </Button>
-          </Tooltip>
-        }
+  const createStorageModal = useMemo(
+    () => (
+      <CreateStorageModal
+        onCloseModal={() => setShowCreateStorageModal(false)}
       />
-      <TileContent>
-        <div className={"storage-employees"}>{table}</div>
-      </TileContent>
-      <TileBottom right={pagination} />
-    </Tile>
+    ),
+    []
+  );
+
+  return (
+    <Aux>
+      {showCreateStorageModal && createStorageModal}
+      <Tile
+        header={{
+          title: "Your Storages",
+        }}
+      >
+        <TileTop
+          left={search}
+          right={
+            <Tooltip
+              text={"Add New Storage"}
+              position={"top-end"}
+              color={"blue"}
+            >
+              <Button
+                btnType={"icon"}
+                onClick={() => setShowCreateStorageModal(true)}
+              >
+                <FaPlus />
+              </Button>
+            </Tooltip>
+          }
+        />
+        <TileContent>
+          <div className={"storage-employees"}>{table}</div>
+        </TileContent>
+        <TileBottom right={pagination} />
+      </Tile>
+    </Aux>
   );
 });
 
