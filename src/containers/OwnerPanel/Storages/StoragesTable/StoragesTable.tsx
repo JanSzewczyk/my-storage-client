@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
@@ -18,6 +19,9 @@ import Tile, {
 } from "../../../../components/UI/Tile";
 import Search from "../../../../components/UI/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
+import Button from "../../../../components/UI/Button";
+import EllipsisWrapper from "../../../../components/UI/EllipsisWrapper";
+import Tooltip from "../../../../components/UI/Tooltip";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -66,12 +70,6 @@ const config: TableConfig<StorageView> = {
       name: "Created",
       sorted: true,
       converter: (cellData: Date) => dateToDateTimeString(cellData),
-    },
-  ],
-  actions: [
-    {
-      action: () => console.log("eloo"),
-      name: "eloo",
     },
   ],
 };
@@ -141,16 +139,20 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     <Tile
       header={{
         title: "Your Storages",
-        // subtitle: "Employees working in storage",
       }}
     >
       <TileTop
         left={search}
-        // right={
-        // //   <Button btnType={"primary"} onClick={() => setShowModal(true)}>
-        // //     add employee
-        // //   </Button>
-        // }
+        right={
+          <Tooltip text={"Add New Storage"} position={"top-end"} color={"blue"}>
+            <Button
+              btnType={"primary"}
+              onClick={() => console.log("Add new Storage")}
+            >
+              <FaPlus />Add Storage
+            </Button>
+          </Tooltip>
+        }
       />
       <TileContent>
         <div className={"storage-employees"}>{table}</div>

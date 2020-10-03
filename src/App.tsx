@@ -35,6 +35,7 @@ const App: React.FC<AppProps> = (props) => {
 
   return !authenticated ? (
     <Switch>
+      <Route path={"/test"} component={Dashboard} />
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />
     </Switch>

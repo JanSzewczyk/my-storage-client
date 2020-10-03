@@ -5,10 +5,10 @@ import User from "../../shared/types/user/User";
 import { UserRole } from "../../shared/constants";
 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import InboxIcon from "@material-ui/icons/Inbox";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../UI/Button/Button";
 import NavigationLinks from "../Navigation/NavigationLinks/NavigationLinks";
+import Logo from "./Logo/Logo";
 
 import "./Header.scss";
 
@@ -20,18 +20,11 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = (props) => {
   const { userRole, user } = props;
 
-  const logo = (
-    <Link to={"/"} className={"header__logo"}>
-      <InboxIcon />
-      MY STORAGE
-    </Link>
-  );
-
   return (
     <header className={"header"}>
       <div className={"header__left"}>
-        {logo}
-        
+        <Logo />
+
         <div className={"header__line"} />
 
         {userRole && <NavigationLinks userRole={userRole} />}

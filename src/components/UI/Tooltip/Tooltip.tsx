@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
 import { TooltipColor, TooltipPosition, TooltipType } from "./types";
 
 import "./Tooltip.scss";
+import { getApplicationWidth } from "../../../shared/utils/graphicUtils";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
@@ -13,10 +14,39 @@ interface TooltipProps extends PropsWithChildren {
   color?: TooltipColor;
 }
 
-// TODO Add show whent mouse over message
 const Tooltip: React.FC<TooltipProps> = React.memo(
   ({ children, text, type, position = "top", className, color = "white" }) => {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState<boolean>(false);
+
+    // TOOLTIP LOGIC IMPLEMENTATION
+    const [maxTooltipWidth, setMaxTooltipWidth] = useState<number>();
+    const [tooltipPosition, setTooltipPosition] = useState<TooltipPosition>(
+      position
+    );
+    const divRef = useRef<HTMLDivElement>(null);
+
+    const setTooltip = useCallback(
+      (tp: DOMRect) => {
+        const maxWidth: number = getApplicationWidth();
+
+        if (tooltipPosition === "top" && maxWidth < tp.right) {
+          const actualWidth: number = maxWidth - tp.left - 32;
+          if (actualWidth < 160) {
+            setTooltipPosition("top-end");
+          } else {
+            setMaxTooltipWidth(actualWidth);
+          }
+        }
+      },
+      [tooltipPosition]
+    );
+    // **********************
+
+    useLayoutEffect(() => {
+      if (null !== divRef.current) {
+        setTooltip(divRef.current.getBoundingClientRect());
+      }
+    }, [setTooltip, show]);
 
     const onMouseOverHandler = () => {
       setShow(true);
@@ -24,6 +54,8 @@ const Tooltip: React.FC<TooltipProps> = React.memo(
 
     const onMouseLeaveHandler = () => {
       setShow(false);
+      setMaxTooltipWidth(undefined);
+      setTooltipPosition(position);
     };
 
     let tooltipClasses: string[] = ["tooltip"];
@@ -31,7 +63,7 @@ const Tooltip: React.FC<TooltipProps> = React.memo(
     className && tooltipClasses.push(className);
 
     let TMClasses: string[] = ["tooltip__message"];
-    position && TMClasses.push(`tooltip__message--${position}`);
+    tooltipPosition && TMClasses.push(`tooltip__message--${tooltipPosition}`);
     color && TMClasses.push(`tooltip__message--${color}`);
     color && TMClasses.push(`tooltip__message--${position}-${color}`);
 
@@ -44,9 +76,12 @@ const Tooltip: React.FC<TooltipProps> = React.memo(
         {children}
         {show && (
           <div
-            // onMouseOver={onMouseOverHandler}
-            // onMouseLeave={onMouseLeaveHandler}
+            ref={divRef}
             className={TMClasses.join(" ")}
+            style={{
+              width: maxTooltipWidth,
+              whiteSpace: maxTooltipWidth ? "normal" : "nowrap",
+            }}
           >
             {text}
           </div>

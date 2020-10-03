@@ -1,1 +1,1 @@
-export declare type ButtonType = "primary" | "warning";
+export declare type ButtonType = "icon" | "primary" | "warning";

@@ -2,7 +2,8 @@
 
 .button {
   min-width: 60px;
-  padding: 8px 16px;
+  height: 35px;
+  padding: 8px 8px;
   border-radius: 4px;
   outline: 0;
   font-size: $fontMD;
@@ -11,8 +12,10 @@
   background-color: transparent;
   border: 1px solid $whiteColor;
   transition: 0.3s;
+
   display: flex;
   justify-content: center;
+  align-items: center;
 
   svg {
     height: 16px;
@@ -42,46 +45,64 @@
     border: 1px solid $whiteDarkColor;
     transition: 0.3s;
   }
-}
 
-.button--primary {
-  color: $whiteColor;
-  background-color: $blueColor;
-  border: 1px solid $blueColor;
+  &--icon {
+    border: none;
+    padding: 4px;
+    min-width: 35px;
 
-  &:hover:not(:disabled) {
-    color: $whiteColor;
-    background-color: $blueLightColor;
-    border: 1px solid $blueLightColor;
+    svg {
+      height: 20px;
+      width: 20px;
+      margin-right: 0;
+    }
+
+    &:hover:not(:disabled) {
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
   }
 
-  &:active:not(:disabled) {
+  &--primary {
     color: $whiteColor;
-    background-color: $blueDarkColor;
-    border: 1px solid $blueDarkColor;
-    transition: 0.3s;
+    background-color: $blueColor;
+    border: 1px solid $blueColor;
+
+    &:hover:not(:disabled) {
+      color: $whiteColor;
+      background-color: $blueLightColor;
+      border: 1px solid $blueLightColor;
+    }
+
+    &:active:not(:disabled) {
+      color: $whiteColor;
+      background-color: $blueDarkColor;
+      border: 1px solid $blueDarkColor;
+      transition: 0.3s;
+    }
   }
-}
 
-.button--warning {
-  color: $whiteColor;
-  background-color: $redColor;
-  border: 1px solid $redColor;
-
-  &:hover:not(:disabled) {
+  &--warning {
     color: $whiteColor;
-    background-color: $redLightColor;
-    border: 1px solid $redLightColor;
+    background-color: $redColor;
+    border: 1px solid $redColor;
+
+    &:hover:not(:disabled) {
+      color: $whiteColor;
+      background-color: $redLightColor;
+      border: 1px solid $redLightColor;
+    }
+
+    &:active:not(:disabled) {
+      color: $whiteColor;
+      background-color: $redDarkColor;
+      border: 1px solid $redDarkColor;
+      transition: none;
+    }
   }
 
-  &:active:not(:disabled) {
-    color: $whiteColor;
-    background-color: $redDarkColor;
-    border: 1px solid $redDarkColor;
-    transition: none;
+  & ~ & {
+    margin-left: 8px;
   }
-}
-
-.button ~ .button {
-  margin-left: 8px;
 }
