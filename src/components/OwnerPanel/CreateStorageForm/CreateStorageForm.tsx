@@ -27,7 +27,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
   const onSubmit = (formData: CreateStorageFormType) => {
     const data: CUStorage = {
       ...formData,
-      surface: formData.surface === null ? null : Number(formData.surface),
+      surface: Number(formData.surface),
     };
 
     onCreateStorage(data);
@@ -60,7 +60,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
               name: "surface",
             }}
             refInput={register({
-              // required: true,
+              required: true,
               min: 1,
             })}
             hasError={Boolean(errors.surface)}
@@ -76,6 +76,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
             refInput={register({
               required: true,
               minLength: 3,
+              maxLength: 255,
             })}
             hasError={Boolean(errors.addressStreet)}
             errorMessage={"Min length is 3."}
@@ -90,6 +91,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
             refInput={register({
               required: true,
               minLength: 3,
+              maxLength: 255,
             })}
             hasError={Boolean(errors.addressCity)}
             errorMessage={"Min length is 3."}
@@ -104,6 +106,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
             refInput={register({
               required: true,
               minLength: 3,
+              maxLength: 255,
             })}
             hasError={Boolean(errors.addressZip)}
             errorMessage={"Min length is 3."}
@@ -118,6 +121,7 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
             refInput={register({
               required: true,
               minLength: 3,
+              maxLength: 255,
             })}
             hasError={Boolean(errors.addressCountry)}
             errorMessage={"Min length is 3."}

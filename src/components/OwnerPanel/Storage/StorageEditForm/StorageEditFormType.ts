@@ -1,6 +1,6 @@
-export default interface StorageEditPanelFormType {
+export default interface StorageEditType {
   name: string;
-  surface: number;
+  surface: string;
   addressStreet: string;
   addressCity: string;
   addressZip: string;

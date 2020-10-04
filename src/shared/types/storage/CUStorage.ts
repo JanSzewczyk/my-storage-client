@@ -1,6 +1,6 @@
 export default interface CUStorage {
   name: string;
-  surface: number | null;
+  surface: number;
   addressStreet: string;
   addressCity: string;
   addressZip: string;

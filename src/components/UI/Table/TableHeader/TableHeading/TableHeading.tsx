@@ -1,10 +1,10 @@
 import React from "react";
 import _ from "lodash";
 
-import { FaSort, FaSortDown, FaSortUp } from "react-icons/fa";
-
 import { TableColumnConfig } from "../../types";
 import { SortStateType } from "../../../../../hooks/useQuery";
+
+import { SortDownIcon, SortIcon, SortUpIcon } from "../../../Icons";
 
 import "./TableHeading.scss";
 
@@ -41,13 +41,13 @@ const TableHeading = <TTable,>({
   let icon = null;
   switch (_.indexOf(states, sortState)) {
     case 0:
-      icon = <FaSort />;
+      icon = <SortIcon />;
       break;
     case 1:
-      icon = <FaSortDown />;
+      icon = <SortDownIcon />;
       break;
     case 2:
-      icon = <FaSortUp />;
+      icon = <SortUpIcon />;
       break;
     default:
       break;
