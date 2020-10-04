@@ -3,19 +3,19 @@ import React, { useMemo, useEffect } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../../store";
 
-import Tile from "../../../UI/Tile/Tile";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import { formatMoney } from "../../../../shared/utils/currencyUtils";
-import Table, { TableConfig } from "../../../UI/Table";
-import Pagination from "../../../UI/Pagination/Pagination";
-import useQuery, { Query } from "../../../../hooks/useQuery";
-
-import "./StorageItems.scss";
-import StoreState from "../../../../shared/types/store/StoreState";
-import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import ItemView from "../../../../shared/types/item/ItemView";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
+import useQuery, { Query } from "../../../../hooks/useQuery";
+import { formatMoney } from "../../../../shared/utils/currencyUtils";
+
+import Tile from "../../../../components/UI/Tile/Tile";
+import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
+import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
+import Table, { TableConfig } from "../../../../components/UI/Table";
+import Pagination from "../../../../components/UI/Pagination/Pagination";
+
+import "./StorageItems.scss";
 
 interface StorageItemsProps {
   storageId: string;
@@ -96,7 +96,7 @@ const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
     <Tile
       tileSize={{
         sm: "sm-12",
-        md: "md-6",
+        md: "md-12",
         lg: "lg-6",
         xl: "xl-6",
       }}
