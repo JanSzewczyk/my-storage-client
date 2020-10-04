@@ -3,20 +3,19 @@ import React, { useCallback, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../../store";
 
-import Tile from "../../../UI/Tile/Tile";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import Table, { TableConfig } from "../../../UI/Table";
-import Pagination from "../../../UI/Pagination/Pagination";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 import browserHistory from "../../../../shared/config/history";
-import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-
-import "./StorageEmployees.scss";
-import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
-import StoreState from "../../../../shared/types/store/StoreState";
 import { EmployeeView } from "../../../../shared/types/employee";
 import PageInfo from "../../../../shared/types/common/PageInfo";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
+
+import Tile from "../../../../components/UI/Tile/Tile";
+import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
+import Table, { TableConfig } from "../../../../components/UI/Table";
+import Pagination from "../../../../components/UI/Pagination/Pagination";
+import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
+
+import "./StorageEmployees.scss";
 
 interface StorageEmployeesProps {
   storageId: string;
@@ -39,6 +38,11 @@ const config: TableConfig<EmployeeView> = {
       sorted: true,
     },
     {
+      field: "email",
+      name: "Email",
+      sorted: true,
+    },
+    {
       field: "addressCity",
       name: "City",
       sorted: true,
@@ -47,12 +51,6 @@ const config: TableConfig<EmployeeView> = {
       field: "addressCountry",
       name: "Country",
       sorted: true,
-    },
-    {
-      field: "createdAt",
-      name: "Created",
-      sorted: true,
-      converter: (cellData: Date) => dateToDateTimeString(cellData),
     },
   ],
 };
@@ -114,7 +112,7 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = React.memo(
       <Tile
         tileSize={{
           sm: "sm-12",
-          md: "md-6",
+          md: "md-12",
           lg: "lg-8",
           xl: "xl-9",
         }}

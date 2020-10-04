@@ -5,7 +5,7 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import AppBar from "../../../components/UI/AppBar";
 import AppContent from "../../../components/UI/AppContent";
 import StorageDetails from "./StorageDetails/StorageDetails";
-import StorageEmployees from "../../../components/OwnerPanel/Storage/StorageEmployees/StorageEmployees";
+import StorageEmployees from "./StorageEmployees/StorageEmployees";
 import StorageItems from "../../../components/OwnerPanel/Storage/StorageItems/StorageItems";
 import StorageActions from "../../../components/OwnerPanel/Storage/StorageActions/StorageActions";
 import StorageStatistics from "../../../components/OwnerPanel/Storage/StorageStatistics/StorageStatistics";

@@ -54,16 +54,18 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
 
   const onEditStorage = useCallback(
     (storageId: string, updatedStorage: CUStorage) => {
-      axios.put(`storages/${storageId}`, updatedStorage).then((res) => {
-        const storage = res.data;
+      axios
+        .put(`storages/${storageId}`, updatedStorage)
+        .then((res: AxiosResponse<StorageDto>) => {
+          const storage: Storage = mapStorageDtoToStorage(res.data);
 
-        notification.add({
-          content: `The ${storage.name} storage has been updated`,
-          type: "success",
+          notification.add({
+            content: `The ${storage.name} storage has been updated`,
+            type: "success",
+          });
+          onSetStorage(storage);
+          setEdit(false);
         });
-        onSetStorage(mapStorageDtoToStorage(storage));
-        setEdit(false);
-      });
     },
     [notification, onSetStorage]
   );
