@@ -1,17 +1,19 @@
 import React from "react";
 import _ from "lodash";
 
+import Action from "../../../../shared/types/action/Action";
+import Item from "../../../../shared/types/item/Item";
+
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import PersonIcon from "@material-ui/icons/Person";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { formatMoney } from "../../../../../shared/utils/currencyUtils";
-import Table, { TableConfig } from "../../../../UI/Table";
+import { formatMoney } from "../../../../shared/utils/currencyUtils";
+import Table, { TableConfig } from "../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
-import Action from "../../../../../shared/types/action/Action";
-import Item from "../../../../../shared/types/item/Item";
+import { ActionType } from "../../../../shared/constants";
 
 interface ActionTimeLineItemProps {
   action: Action;
@@ -50,16 +52,16 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
   return (
     <div className={"action-time-line-item"}>
       <div className={"action-time-line-item__header"}>
-        <span>
-          {action.action === "STORE" && <ArrowDownwardIcon />}
-          {action.action === "REMOVE" && <ArrowUpwardIcon />}
+        <span className={"action-time-line-item__header--action"}>
+          {action.action === ActionType.STORE && <ArrowDownwardIcon />}
+          {action.action === ActionType.REMOVE && <ArrowUpwardIcon />}
           {action.action}
         </span>
-        <span>
+        <span className={"action-time-line-item__header--data"}>
           <PersonIcon />
           {`${action.employeeFirstName} ${action.employeeLastName}`}
         </span>
-        <span>
+        <span className={"action-time-line-item__header--data"}>
           {formatMoney(_.sumBy(action.items, "totalValue"), action.currency)}
         </span>
         <div

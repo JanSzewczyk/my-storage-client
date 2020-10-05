@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   dateToDateTimeString,
   dateToDateString,
@@ -12,15 +12,29 @@ import "./TimeLineItem.scss";
 interface TimeLineItemProps extends PropsWithChildren {
   date: Date;
   dateType?: TimeLineDateType;
+  selected?: boolean;
 }
 
 const TimeLineItem: React.FC<TimeLineItemProps> = ({
   children,
   date,
   dateType = "date-time",
+  selected,
 }) => {
+  const timeLineItemRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    if (selected && timeLineItemRef.current) {
+      console.log(timeLineItemRef.current.offsetTop);
+      timeLineItemRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [selected]);
+
   return (
-    <li className={"time-line-item"}>
+    <li className={"time-line-item"} ref={timeLineItemRef}>
       <span className={"time-line-item__date"}>
         {dateType === "date-time" && dateToDateTimeString(date)}
         {dateType === "date" && dateToDateString(date)}

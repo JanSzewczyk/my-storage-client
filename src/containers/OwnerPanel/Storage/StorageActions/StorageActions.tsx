@@ -4,21 +4,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as action from "../../../../store";
 
-import Tile from "../../../UI/Tile/Tile";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import useQuery, { Query } from "../../../../hooks/useQuery";
-import Pagination from "../../../UI/Pagination/Pagination";
-
-import Loading from "../../../UI/Loading/Loading";
-import TimeLine from "../../../UI/TimeLine/TimeLine";
-import TimeLineItem from "../../../UI/TimeLine/TimeLineItem/TimeLineItem";
-import ActionTimeLineItem from "./ActionTimeLineItem/ActionTimeLineItem";
-
-import "./StorageActions.scss";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import Action from "../../../../shared/types/action/Action";
 import PageInfo from "../../../../shared/types/common/PageInfo";
+import useQuery, { Query } from "../../../../hooks/useQuery";
+
+import TimeLine, { TimeLineItem } from "../../../../components/UI/TimeLine";
+import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
+import Pagination from "../../../../components/UI/Pagination";
+import Tile, { TileBottom, TileContent } from "../../../../components/UI/Tile";
+import Loading from "../../../../components/UI/Loading";
+
+import "./StorageActions.scss";
 
 interface StorageActionsProps {
   storageId: string;
@@ -53,7 +50,11 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
     () => (
       <TimeLine>
         {actionsList.map((action, index) => (
-          <TimeLineItem key={index} date={action.createdAt}>
+          <TimeLineItem
+            key={index}
+            date={action.createdAt}
+            selected={selected === action.id}
+          >
             <ActionTimeLineItem
               action={action}
               selected={selected === action.id}
