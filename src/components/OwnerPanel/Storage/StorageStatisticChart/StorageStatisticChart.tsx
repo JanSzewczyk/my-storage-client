@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
 import _ from "lodash";
 
-import Loading from "../../../../UI/Loading/Loading";
-import { DATE_PATTERN } from "../../../../../shared/utils/dateUtils";
-import { formatMoney } from "../../../../../shared/utils/currencyUtils";
-import { setTimeUnitDate } from "../../../../../shared/utils/chartUtils";
+import Loading from "../../../UI/Loading/Loading";
+import { DATE_PATTERN } from "../../../../shared/utils/dateUtils";
+import { formatMoney } from "../../../../shared/utils/currencyUtils";
+import { setTimeUnitDate } from "../../../../shared/utils/chartUtils";
+import StorageStatistic from "../../../../shared/types/statistic/StorageStatistic";
 
 import "./StorageStatisticChart.scss";
-import StorageStatistic from "../../../../../shared/types/statistic/StorageStatistic";
 
 interface StorageStatisticChartProps {
   loading: boolean;

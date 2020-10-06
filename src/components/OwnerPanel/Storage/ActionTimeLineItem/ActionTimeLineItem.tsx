@@ -3,17 +3,19 @@ import _ from "lodash";
 
 import Action from "../../../../shared/types/action/Action";
 import Item from "../../../../shared/types/item/Item";
-
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import PersonIcon from "@material-ui/icons/Person";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { ActionType } from "../../../../shared/constants";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
+
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  LevelDownAltIcon,
+  LevelUpAltIcon,
+  UserIcon,
+} from "../../../UI/Icons";
 import Table, { TableConfig } from "../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
-import { ActionType } from "../../../../shared/constants";
 
 interface ActionTimeLineItemProps {
   action: Action;
@@ -53,12 +55,12 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
     <div className={"action-time-line-item"}>
       <div className={"action-time-line-item__header"}>
         <span className={"action-time-line-item__header--action"}>
-          {action.action === ActionType.STORE && <ArrowDownwardIcon />}
-          {action.action === ActionType.REMOVE && <ArrowUpwardIcon />}
+          {action.action === ActionType.STORE && <LevelDownAltIcon />}
+          {action.action === ActionType.REMOVE && <LevelUpAltIcon />}
           {action.action}
         </span>
         <span className={"action-time-line-item__header--data"}>
-          <PersonIcon />
+          <UserIcon />
           {`${action.employeeFirstName} ${action.employeeLastName}`}
         </span>
         <span className={"action-time-line-item__header--data"}>
@@ -68,7 +70,7 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
           className={"action-time-line-item__show-button"}
           onClick={onSelect}
         >
-          {!selected ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />}
+          {!selected ? <ChevronDownIcon /> : <ChevronUpIcon />}
           Show details
         </div>
       </div>

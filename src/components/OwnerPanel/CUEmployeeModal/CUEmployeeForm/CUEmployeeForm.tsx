@@ -1,27 +1,27 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AxiosResponse } from "axios";
 
-import axios from "../../../../../shared/config/axios";
-
-import ModalBody from "../../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
-import ModalBottom from "../../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
-import Button from "../../../../UI/Button/Button";
-import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
-import Loading from "../../../../UI/Loading/Loading";
-import Input from "../../../../UI/Input/Input";
-import * as pattern from "../../../../../shared/patterns";
-import Select from "../../../../UI/Select/Select";
+import axios from "../../../../shared/config/axios";
+import * as pattern from "../../../../shared/patterns";
 import {
   createStoragesSelectList,
   mapStorageDtoToStorage,
-} from "../../../../../shared/data-utils/storageUtils";
+} from "../../../../shared/data-utils/storageUtils";
+import { CUEmployee, Employee } from "../../../../shared/types/employee";
+import { nullIfEmpty } from "../../../../shared/utils/stringUtils";
+import { StorageDto, Storage } from "../../../../shared/types/storage";
+import CUEmployeeFormType from "./CUEmployeeFormType";
+
+import ModalBody from "../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
+import ModalBottom from "../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
+import Button from "../../../UI/Button/Button";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Loading from "../../../UI/Loading/Loading";
+import Input from "../../../UI/Input/Input";
+import Select from "../../../UI/Select/Select";
 
 import "./CUEmployeeForm.scss";
-import { StorageDto, Storage } from "../../../../../shared/types/storage";
-import { AxiosResponse } from "axios";
-import { CUEmployee, Employee } from "../../../../../shared/types/employee";
-import CUEmployeeFormType from "./CUEmployeeFormType";
-import { nullIfEmpty } from "../../../../../shared/utils/stringUtils";
 
 interface CUEmployeeFormProps {
   onCloseModal: () => void;

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
+
 import AppContent from "../../../components/UI/AppContent/AppContent";
-import EmployeeTable from "../../../components/EmployeePanel/EmployeeTable/EmployeeTable";
+import EmployeeTable from "./EmployeeTable/EmployeeTable";
 
 interface EmployeesProps {}
 

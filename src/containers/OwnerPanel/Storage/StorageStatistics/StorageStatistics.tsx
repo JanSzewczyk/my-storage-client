@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import * as action from "../../../../store";
 
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
-
-import Tile from "../../../UI/Tile/Tile";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import StorageStatisticChart from "./StorageStatisticChart/StorageStatisticChart";
 import StorageStatistic from "../../../../shared/types/statistic/StorageStatistic";
+
+import Tile, { TileContent } from "../../../../components/UI/Tile";
+import StorageStatisticChart from "../../../../components/OwnerPanel/Storage/StorageStatisticChart/StorageStatisticChart";
 
 interface StorageStatisticsProps {
   storageId: string;

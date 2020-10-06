@@ -1,38 +1,37 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { AxiosResponse } from "axios";
 
 import { connect } from "react-redux";
-import * as action from "../../../store";
+import * as action from "../../../../store";
 
-import Tile from "../../UI/Tile/Tile";
-import TileContent from "../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../UI/Tile/TileBottom/TileBottom";
-import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
-import Pagination from "../../UI/Pagination/Pagination";
-import TileTop from "../../UI/Tile/TileTop/TileTop";
-import Button from "../../UI/Button/Button";
-import CUEmployeeModal from "./CUEmployeeModal/CUEmployeeModal";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Table, { TableConfig } from "../../UI/Table";
-import useQuery, { SearchQuery } from "../../../hooks/useQuery";
-
-import browserHistory from "../../../shared/config/history";
-import Search from "../../UI/Search/Search";
-import useNotification from "../../../hooks/useNotification";
-import axios from "../../../shared/config/axios";
-
-import "./EmployeeTable.scss";
-import StoreState from "../../../shared/types/store/StoreState";
-import StoreDispatch from "../../../shared/types/store/StoreDispatch";
+import useQuery, { SearchQuery } from "../../../../hooks/useQuery";
+import browserHistory from "../../../../shared/config/history";
+import Search from "../../../../components/UI/Search/Search";
+import useNotification from "../../../../hooks/useNotification";
+import axios from "../../../../shared/config/axios";
 import {
   CUEmployee,
   Employee,
   EmployeeDto,
   EmployeeView,
-} from "../../../shared/types/employee";
-import PageInfo from "../../../shared/types/common/PageInfo";
-import { AxiosResponse } from "axios";
-import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
+} from "../../../../shared/types/employee";
+import PageInfo from "../../../../shared/types/common/PageInfo";
+import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
+
+import CUEmployeeModal from "../../../../components/OwnerPanel/CUEmployeeModal/CUEmployeeModal";
+import Tile from "../../../../components/UI/Tile/Tile";
+import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
+import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
+import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
+import Pagination from "../../../../components/UI/Pagination/Pagination";
+import TileTop from "../../../../components/UI/Tile/TileTop/TileTop";
+import Button from "../../../../components/UI/Button/Button";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Table, { TableConfig } from "../../../../components/UI/Table";
+
+import "./EmployeeTable.scss";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 
 interface EmployeeTableProps {
   onGetEmployeesList: (query: SearchQuery) => void;

@@ -1,4 +1,6 @@
 export {
+  FaBox as BoxIcon,
+  FaUser as UserIcon,
   FaEye as EyeIcon,
   FaEyeSlash as EyeSlashIcon,
   FaEdit as EditIcon,
@@ -11,6 +13,8 @@ export {
   FaChevronUp as ChevronUpIcon,
   FaEllipsisH as EllipsisHIcon,
   FaEllipsisV as EllipsisVIcon,
+  FaLevelDownAlt as LevelDownAltIcon,
+  FaLevelUpAlt as LevelUpAltIcon,
 } from "react-icons/fa";
 
 export {

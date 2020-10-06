@@ -1,15 +1,15 @@
 import React from "react";
 
-import { CUEmployee } from "../../../../shared/types/employee";
-import Employee from "../../../../shared/types/employee/Employee";
+import { CUEmployee } from "../../../shared/types/employee";
+import Employee from "../../../shared/types/employee/Employee";
 
-import Backdrop from "../../../UI/Backdrop/Backdrop";
-import ModalWrapper from "../../../UI/Modal/ModalWrapper/ModalWrapper";
+import Backdrop from "../../UI/Backdrop/Backdrop";
+import ModalWrapper from "../../UI/Modal/ModalWrapper/ModalWrapper";
 import CUEmployeeForm from "./CUEmployeeForm/CUEmployeeForm";
 
 interface CUEmployeeModalProps {
   onCloseModal: () => void;
-  onCreateEmployee?: (newEnployee: CUEmployee) => void;
+  onCreateEmployee?: (newEmployee: CUEmployee) => void;
   editEmployee?: Employee;
   onEditEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
 }
