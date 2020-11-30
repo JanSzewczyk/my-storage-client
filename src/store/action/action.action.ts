@@ -9,13 +9,13 @@ import {
   ActionStorageListLoadSuccessAction,
 } from "./types";
 import PageInfo from "../../shared/types/common/PageInfo";
-import Query from "../../shared/types/query/Query";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
 import { AxiosResponse } from "axios";
 import PagedModel from "../../shared/types/apiResponse/PagedModel";
 import ActionDto from "../../shared/types/action/ActionDto";
 import { mapActionDtoToAction } from "../../shared/data-utils/actionUtils";
 import { FixMeLater } from "../../shared/types/common/FixMeLater";
+import { Query } from "../../hooks/useQuery";
 
 export const actionStorageListLoadStart = (): ActionStorageListLoadStartAction => {
   return {

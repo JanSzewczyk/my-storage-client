@@ -9,7 +9,7 @@ import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import Loading from "../../UI/Loading/Loading";
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import InboxIcon from "@material-ui/icons/Inbox";
+import { BoxIcon } from "../../UI/Icons";
 
 import "./AuthForm.scss";
 
@@ -35,7 +35,7 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
       )}
       <form className={"auth-form"}>
         <div className={"auth-form__logo"}>
-          <InboxIcon /> MY STORAGE
+          <BoxIcon /> MY STORAGE
         </div>
         <Input
           inputClass={"auth-form__input"}

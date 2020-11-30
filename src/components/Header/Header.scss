@@ -8,56 +8,43 @@
   height: 48px;
   padding: 0 16px;
 
-  .header__left {
+  &__left {
     align-self: center;
     display: flex;
     align-items: center;
+  }
 
-    .header__logo {
-      margin-right: 16px;
-      cursor: pointer;
-      font-size: $fontXL;
-      color: $whiteColor;
-      text-decoration: none;
-      display: flex;
+  &__line {
+    height: 20px;
+    border-right: 2px solid $whiteColor;
+    border-radius: 1px;
+    opacity: 0.5;
+    margin: 0 8px;
+  }
 
-      svg {
-        margin-right: 8px;
-      }
+  &__right {
+    align-self: center;
+    display: flex;
+    align-items: center;
+  }
+
+  &__username {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+    cursor: pointer;
+    font-size: $fontLG;
+
+    svg {
+      margin-right: 4px;
     }
 
-    .header__line {
-      height: 20px;
-      border-right: 2px solid $whiteColor;
-      border-radius: 1px;
-      opacity: 0.5;
-      margin-right: 8px;
+    &:hover {
+      opacity: 0.8;
     }
   }
 
-  .header__right {
-    align-self: center;
-    display: flex;
-    align-items: center;
-
-    .header__username {
-      display: flex;
-      align-items: center;
-      margin-right: 16px;
-      cursor: pointer;
-      font-size: $fontLG;
-
-      svg {
-        margin-right: 4px;
-      }
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-
-    a {
-      text-decoration: none;
-    }
+  a {
+    text-decoration: none;
   }
 }

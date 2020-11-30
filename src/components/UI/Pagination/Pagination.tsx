@@ -14,43 +14,41 @@ interface PaginationProps {
   onPageChanged: (index: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = React.memo(
-  ({ pageInfo, onPageChanged }) => {
-    const beforePageActive: boolean = pageInfo !== null && pageInfo.number > 0;
+const Pagination: React.FC<PaginationProps> = ({ pageInfo, onPageChanged }) => {
+  const beforePageActive: boolean = pageInfo !== null && pageInfo.number > 0;
 
-    const nextPageActive: boolean =
-      pageInfo !== null && pageInfo.number < pageInfo.totalPages - 1;
+  const nextPageActive: boolean =
+    pageInfo !== null && pageInfo.number < pageInfo.totalPages - 1;
 
-    return (
-      <div className={"pagination"}>
-        <PageChangeItem
-          active={beforePageActive}
-          clicked={
-            pageInfo && beforePageActive
-              ? () => onPageChanged(pageInfo.number - 1)
-              : undefined
-          }
-        >
-          <NavigateBeforeIcon fontSize={"large"} />
-        </PageChangeItem>
+  return (
+    <div className={"pagination"}>
+      <PageChangeItem
+        active={beforePageActive}
+        clicked={
+          pageInfo && beforePageActive
+            ? () => onPageChanged(pageInfo.number - 1)
+            : undefined
+        }
+      >
+        <NavigateBeforeIcon fontSize={"large"} />
+      </PageChangeItem>
 
-        {pageInfo && (
-          <PaginationItems pageInfo={pageInfo} onPageChanged={onPageChanged} />
-        )}
+      {pageInfo && (
+        <PaginationItems pageInfo={pageInfo} onPageChanged={onPageChanged} />
+      )}
 
-        <PageChangeItem
-          active={nextPageActive}
-          clicked={
-            pageInfo && nextPageActive
-              ? () => onPageChanged(pageInfo.number + 1)
-              : undefined
-          }
-        >
-          <NavigateNextIcon fontSize={"large"} />
-        </PageChangeItem>
-      </div>
-    );
-  }
-);
+      <PageChangeItem
+        active={nextPageActive}
+        clicked={
+          pageInfo && nextPageActive
+            ? () => onPageChanged(pageInfo.number + 1)
+            : undefined
+        }
+      >
+        <NavigateNextIcon fontSize={"large"} />
+      </PageChangeItem>
+    </div>
+  );
+};
 
 export default Pagination;

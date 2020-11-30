@@ -1,1 +1,3 @@
-export declare type ButtonType = "primary" | "warning";
+export declare type ButtonColor = "default" | "primary" | "warning";
+
+export declare type ButtonType = "button" | "submit";

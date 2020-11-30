@@ -1,0 +1,27 @@
+@import "../../../assets/variables/variables.scss";
+
+.logo {
+  cursor: pointer;
+  font-size: $fontXL;
+  color: $whiteColor;
+  text-decoration: none;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    margin-right: 8px;
+    height: 20px;
+  }
+
+  span {
+    margin-right: 8px;
+  }
+
+  @media (max-width: $LG-MIN-WIGHT) {
+    span {
+      display: none;
+    }
+  }
+}

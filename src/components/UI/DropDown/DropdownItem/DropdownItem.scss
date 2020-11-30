@@ -4,6 +4,7 @@
   height: 28px;
   display: flex;
   align-items: center;
+  font-size: $fontMD;
 
   &__icon {
     margin: 0;
@@ -17,7 +18,6 @@
 
   span {
     font-family: $font;
-    font-size: $fontMD;
   }
 
   &--clickable {

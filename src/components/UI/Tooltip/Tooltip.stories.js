@@ -39,7 +39,8 @@ export const TooltipPositions = () => (
       <Button>Tooltip Bottom</Button>
     </Tooltip>
     <Tooltip text={"Tooltip Bottom End text"} position={"bottom-end"}>
-      <Button>Tooltip Bottom End</Button>
+      {/* <Button>Tooltip Bottom End</Button> */}
+      <div>a</div>
     </Tooltip>
     <Tooltip text={"Tooltip Right text"} position={"right"}>
       <Button>Tooltip Right</Button>

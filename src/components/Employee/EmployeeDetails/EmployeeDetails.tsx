@@ -21,8 +21,8 @@ import Loading from "../../UI/Loading/Loading";
 import DropDown from "../../UI/DropDown/DropDown";
 import DropdownItem from "../../UI/DropDown/DropdownItem/DropdownItem";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import CUEmployeeModal from "../../EmployeePanel/EmployeeTable/CUEmployeeModal/CUEmployeeModal";
 import { CUEmployee } from "../../../shared/types/employee";
+import CUEmployeeModal from "../../OwnerPanel/CUEmployeeModal/CUEmployeeModal";
 
 interface EmployeeDetailsProps {
   employeeId: string;

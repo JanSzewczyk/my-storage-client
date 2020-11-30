@@ -11,6 +11,9 @@ export const mapStorageViewDtoToStorageView = (
   updateObject(storageViewDto, {
     createdAt: new Date(storageViewDto.createdAt),
     updatedAt: new Date(storageViewDto.updatedAt),
+    lastActionDate: storageViewDto.lastActionDate
+      ? new Date(storageViewDto.lastActionDate)
+      : null,
   });
 
 export const mapStorageDtoToStorage = (storage: StorageDto): Storage =>

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import * as action from "./store";
 
 import Auth from "./containers/Auth/Auth";
-import Dashboard from "./containers/OwnerPanel/Dashboard/Dashboard";
+import Dashboard from "./containers/OwnerPanel/OwnerDashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/OwnerPanel/Storages/Storages";
 import Storage from "./containers/OwnerPanel/Storage/Storage";
@@ -35,6 +35,7 @@ const App: React.FC<AppProps> = (props) => {
 
   return !authenticated ? (
     <Switch>
+      <Route path={"/test"} component={Dashboard} />
       <Route path={"/"} component={Auth} />
       <Redirect to={"/"} />
     </Switch>

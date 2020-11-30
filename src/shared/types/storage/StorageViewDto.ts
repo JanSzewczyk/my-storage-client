@@ -1,3 +1,5 @@
+import Link from "../common/Link";
+
 export default interface StorageViewDto {
   addressCity: string;
   addressCountry: string;
@@ -5,8 +7,11 @@ export default interface StorageViewDto {
   addressZip: string;
   createdAt: string;
   id: string;
+  lastActionDate: string | null;
+  links: Link[];
   name: string;
   numberOfEmployees: number;
+  ownerId: string;
   shortId: string;
   surface: number;
   updatedAt: string;

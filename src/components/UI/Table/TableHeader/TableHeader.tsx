@@ -1,22 +1,22 @@
 import React from "react";
 
 import { TableColumnConfig, TableConfig } from "../types";
-import { SortInfo, SortType } from "../../../../hooks/useQuery";
+import { SortInfo, SortStateType } from "../../../../hooks/useQuery";
 
 import TableHeading from "./TableHeading/TableHeading";
 
-interface TableHeaderProps {
-  config: TableConfig;
+interface TableHeaderProps<TTable> {
+  config: TableConfig<TTable>;
   sort: SortInfo[];
-  onSortChanged?: (field: string, type: SortType) => void;
+  onSortChanged?: (field: keyof TTable, type: SortStateType) => void;
 }
 
-const TableHeader: React.FC<TableHeaderProps> = ({
+const TableHeader = <TTable,>({
   config,
   sort,
   onSortChanged,
-}) => {
-  const getSortIndex = (fieldName: string): number | null => {
+}: TableHeaderProps<TTable>) => {
+  const getSortIndex = (fieldName: keyof TTable): number | null => {
     if (sort.length > 1) {
       for (let i = 0; i < sort.length; i++) {
         if (fieldName === sort[i].field) {
@@ -27,7 +27,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     return null;
   };
 
-  const getSortState = (fieldName: string): SortType => {
+  const getSortState = (fieldName: keyof TTable): SortStateType => {
     for (let i = 0; i < sort.length; i++) {
       if (fieldName === sort[i].field) {
         return sort[i].type;
@@ -40,22 +40,23 @@ const TableHeader: React.FC<TableHeaderProps> = ({
   return (
     <thead>
       <tr>
-        {config.columns.map((conf: TableColumnConfig, index: number) => (
-          <TableHeading
-            key={index}
-            config={conf}
-            isSorted={Boolean(onSortChanged) && Boolean(conf.sorted)}
-            onSortChanged={onSortChanged && onSortChanged}
-            sortIndex={getSortIndex(conf.field)}
-            sortState={getSortState(conf.field)}
-          />
-        ))}
+        {config.columns.map(
+          (conf: TableColumnConfig<TTable>, index: number) => (
+            <TableHeading<TTable>
+              key={index}
+              config={conf}
+              isSorted={Boolean(onSortChanged) && conf.sorted === true} // TODO check this
+              onSortChanged={onSortChanged && onSortChanged}
+              sortIndex={getSortIndex(conf.field)}
+              sortState={getSortState(conf.field)}
+            />
+          )
+        )}
         {config.actions && (
-          <TableHeading
+          <TableHeading<TTable>
             key={"actions"}
             isSorted={false}
             sortState={""}
-            config={{ name: "", field: "actions" }}
           />
         )}
       </tr>

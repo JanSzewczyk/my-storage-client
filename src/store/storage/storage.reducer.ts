@@ -15,6 +15,7 @@ import {
 
 const initialState: StorageState = {
   storageViewList: [],
+  pageInfo: null,
   storageViewListLoading: true,
   storage: null,
   storageLoading: true,
@@ -33,6 +34,7 @@ const storageViewListLoadStart = (
 ): StorageState => {
   return updateObject(state, {
     storageViewList: [],
+    pageInfo: null,
     storageViewListLoading: true,
   });
 };
@@ -43,6 +45,7 @@ const storageViewListLoadSuccess = (
 ): StorageState => {
   return updateObject(state, {
     storageViewList: action.storages,
+    pageInfo: action.pageInfo,
     storageViewListLoading: false,
   });
 };

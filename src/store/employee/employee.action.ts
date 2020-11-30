@@ -21,9 +21,8 @@ import { AxiosResponse } from "axios";
 import PagedModel from "../../shared/types/apiResponse/PagedModel";
 import EmployeeDto from "../../shared/types/employee/EmployeeDto";
 import EmployeeViewDto from "../../shared/types/employee/EmployeeViewDto";
-import Query from "../../shared/types/query/Query";
-import SearchQuery from "../../shared/types/query/SearchQuery";
 import Employee from "../../shared/types/employee/Employee";
+import { Query, SearchQuery } from "../../hooks/useQuery";
 
 export const employeeStoreClear = (): EmployeeStoreClearAction => {
   return {
