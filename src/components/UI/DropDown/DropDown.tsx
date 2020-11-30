@@ -59,7 +59,7 @@ const DropDown = React.forwardRef<Ref, DropdownProps>(
     return (
       <div className={"drop-down"} ref={ref}>
         {type === "button" && (
-          <Button onClick={active ? onClose : onShow} btnType={btnType}>
+          <Button onClick={active ? onClose : onShow} color={btnType}>
             {left && arrowIcon}
             {title}
             {!left && arrowIcon}

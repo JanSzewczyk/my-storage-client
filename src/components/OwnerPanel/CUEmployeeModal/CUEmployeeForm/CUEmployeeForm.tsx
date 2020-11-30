@@ -257,7 +257,7 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
       <ModalBottom>
         <Button onClick={onCloseModal}>Cancel</Button>
         <Button
-          btnType={"primary"}
+          color={"primary"}
           onClick={handleSubmit(onSubmit)}
           disabled={!formState.isDirty}
         >
