@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 import { FixMeLater } from "../../../shared/types/common/FixMeLater";
 
 export declare type TableLayoutType = "auto" | "fixed";
@@ -13,6 +13,9 @@ export declare type TableColumnConfig<T> = {
   name: string;
   sorted?: boolean;
   converter?: (cellData: FixMeLater, rowData: T) => ReactNode;
+  clickable?: boolean;
+  style?: CSSProperties;
+  className?: string;
 };
 
 export declare type TableActionConfig<T> = {

@@ -89,9 +89,12 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
 
   const history = useHistory();
 
-  const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery<
-    SearchQuery
-  >({
+  const {
+    query,
+    onSortChanged,
+    onPageChanged,
+    onSearchChanged,
+  } = useQuery<SearchQuery>({
     sort: [],
     page: 0,
     size: 20,
@@ -167,7 +170,7 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
               color={"blue"}
             >
               <Button
-                btnType={"icon"}
+                // btnType={"icon"}
                 onClick={() => setShowCreateStorageModal(true)}
               >
                 <FaPlus />

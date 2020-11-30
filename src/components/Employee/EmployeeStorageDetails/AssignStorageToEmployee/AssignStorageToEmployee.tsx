@@ -60,7 +60,7 @@ const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = React.me
     useEffect(() => {
       setLoading(true);
       axios
-        .get(`storages`)
+        .get(`storages/list`)
         .then((res: AxiosResponse<StorageDto[]>) => {
           setStorages(res.data.map(mapStorageDtoToStorage));
         })

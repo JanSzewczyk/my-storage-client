@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { TableConfig, TableLayoutType } from "./types";
 import { SortInfo, SortStateType } from "../../../hooks/useQuery";
@@ -13,16 +13,14 @@ import "./Table.scss";
 interface TableProps<TTable> {
   config: TableConfig<TTable>;
   data?: TTable[];
-
+  loading?: boolean;
   onRowClick?: (rowData: TTable) => void;
-
   sort?: SortInfo[];
   onSortChanged?: (field: keyof TTable, type: SortStateType) => void;
-
-  loading?: boolean;
   tableLayout?: TableLayoutType;
   fontSize?: number;
-  tableClass?: string;
+  className?: string;
+  style?: CSSProperties;
 }
 
 const Table = <TTable,>({
@@ -34,15 +32,20 @@ const Table = <TTable,>({
   loading = false,
   tableLayout = "auto",
   fontSize = 16,
-  tableClass,
+  className,
+  style,
 }: TableProps<TTable>) => {
+  let tableClasses: string[] = ["table"];
+  if (className) tableClasses.push(className);
+
   return (
     <Aux>
       <table
-        className={"table"}
+        className={tableClasses.join(" ")}
         style={{
           tableLayout: tableLayout,
           fontSize: fontSize,
+          ...style,
         }}
       >
         <TableHeader<TTable>

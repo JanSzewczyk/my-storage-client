@@ -27,6 +27,7 @@ import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/S
 import StorageEditForm from "../../../../components/OwnerPanel/Storage/StorageEditForm/StorageEditForm";
 import DropDown from "../../../../components/UI/DropDown/DropDown";
 import DropdownItem from "../../../../components/UI/DropDown/DropdownItem/DropdownItem";
+import Tooltip from "../../../../components/UI/Tooltip";
 
 interface StorageDetailsProps {
   onGetStorage: (storageId: string) => void;
@@ -87,20 +88,22 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
   );
 
   const options = (
-    <DropDown type={"icon"} icon={<EllipsisHIcon />}>
-      <DropdownItem
-        text={"Edit"}
-        icon={<EditIcon />}
-        onClick={() => setEdit(true)}
-        disabled={edit}
-      />
-      <DropdownItem
-        text={"Remove"}
-        icon={<DeleteIcon />}
-        disabled={!storage}
-        onClick={() => storage && onRemoveStorage(storage.id)}
-      />
-    </DropDown>
+    <Tooltip text={"Options"}>
+      <DropDown type={"icon"} icon={<EllipsisHIcon />}>
+        <DropdownItem
+          text={"Edit"}
+          icon={<EditIcon />}
+          onClick={() => setEdit(true)}
+          disabled={edit}
+        />
+        <DropdownItem
+          text={"Remove"}
+          icon={<DeleteIcon />}
+          disabled={!storage}
+          onClick={() => storage && onRemoveStorage(storage.id)}
+        />
+      </DropDown>
+    </Tooltip>
   );
 
   const storagePanel = useMemo(() => <StorageData storage={storage} />, [

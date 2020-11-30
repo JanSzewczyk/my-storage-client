@@ -39,15 +39,16 @@ const EllipsisWrapper: React.FC<EllipsisWrapperProps> = React.memo(
       };
     }, [allowTooltip, divRef, setAllowTooltipHandler]);
 
-    if (allowTooltip) {
-      return (
-        <Tooltip text={children} className={"ellipsis-wrapper__tooltip"}>
-          <span className={"ellipsis-wrapper"} ref={divRef}>
-            {children}
-          </span>
-        </Tooltip>
-      );
-    }
+    // TODO FIX this
+    // if (allowTooltip) {
+    //   return (
+    //     // <Tooltip text={children} className={"ellipsis-wrapper__tooltip"}>
+    //     //   <span className={"ellipsis-wrapper"} ref={divRef}>
+    //     //     {children}
+    //     //   </span>
+    //     // </Tooltip>
+    //   );
+    // }
 
     return (
       <div className={"ellipsis-wrapper"} ref={divRef}>

@@ -63,6 +63,7 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
           <UserIcon />
           {`${action.employeeFirstName} ${action.employeeLastName}`}
         </span>
+
         <span className={"action-time-line-item__header--data"}>
           {formatMoney(_.sumBy(action.items, "totalValue"), action.currency)}
         </span>

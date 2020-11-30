@@ -45,7 +45,7 @@ const TableHeader = <TTable,>({
             <TableHeading<TTable>
               key={index}
               config={conf}
-              isSorted={Boolean(onSortChanged) && conf.sorted !== null}
+              isSorted={Boolean(onSortChanged) && conf.sorted === true} // TODO check this
               onSortChanged={onSortChanged && onSortChanged}
               sortIndex={getSortIndex(conf.field)}
               sortState={getSortState(conf.field)}

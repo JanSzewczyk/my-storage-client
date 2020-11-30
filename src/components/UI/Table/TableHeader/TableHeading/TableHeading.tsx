@@ -25,13 +25,16 @@ const TableHeading = <TTable,>({
 }: TableHeadingProps<TTable>) => {
   const states: SortStateType[] = ["", "desc", "asc"];
 
+  let tableHeadingClasses: string[] = ["table-heading"];
+  if (config && config.className) tableHeadingClasses.push(config.className);
+
   const getNextState = (actualState: number): number => {
     let nextState = actualState;
     actualState < states.length - 1 ? (nextState += 1) : (nextState = 0);
     return nextState;
   };
 
-  const changeHeadingSortHandler = () => {
+  const changeHeadingSortHandler = (): void => {
     if (isSorted) {
       const newIndex = getNextState(_.indexOf(states, sortState));
       config && onSortChanged && onSortChanged(config.field, states[newIndex]);
@@ -56,15 +59,16 @@ const TableHeading = <TTable,>({
   return (
     <th
       onClick={changeHeadingSortHandler}
-      className="table-heading"
+      className={tableHeadingClasses.join(" ")}
       style={{
         cursor: isSorted ? "pointer" : "default",
+        ...config?.style,
       }}
     >
-      <div className="table-heading__content">
+      <div className={"table-heading__content"}>
         {config ? config.name : ""}
         {isSorted && (
-          <div className="table-heading__sort-wrapper">
+          <div className={"table-heading__sort-wrapper"}>
             {sortIndex && <span>{`${sortIndex}`}</span>}
             {icon}
           </div>

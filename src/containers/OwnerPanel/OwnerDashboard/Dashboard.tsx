@@ -16,6 +16,7 @@ import "./Dashboard.scss";
 import Tabs, { Tab } from "../../../components/UI/Tabs";
 import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 import AuthData from "../../../shared/types/auth/AuthData";
+import Button from "../../../components/UI/Button";
 
 interface BashboardProps {
   logout: (authData: AuthData) => void;
@@ -53,13 +54,13 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
             subtitle: "Thinks to do",
           }}
         >
-          <Tooltip
+          {/* <Tooltip
             text={"Lorem Ipesetting industry. Lorem Ipsum"}
             type={"dotted"}
             position={"top-end"}
           >
             Lorem Ipsum is simply dummy text
-          </Tooltip>
+          </Tooltip> */}
         </Tile>
         <Tile
           tileSize={{
@@ -86,9 +87,9 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               }
               type={"dotted"}
             >
-              Lorem Ipsum is simply dummy text
+              <Button>assdfsd</Button>
             </Tooltip>
-            fs asdf asdfsadfdsdfsdfsdfsd
+            fs assdfsd
           </div>
         </Tile>
         <Tile
@@ -114,9 +115,9 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
             </DropDown>
 
-            <Tooltip text={"ni chuja nie działa"}>
+            {/* <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </Tile>
         <Tile

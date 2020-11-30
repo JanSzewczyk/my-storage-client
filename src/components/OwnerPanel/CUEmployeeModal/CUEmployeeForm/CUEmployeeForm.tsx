@@ -38,9 +38,13 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
     onUpdateEmployee,
   } = props;
 
-  const { register, errors, handleSubmit, watch, formState } = useForm<
-    CUEmployeeFormType
-  >({
+  const {
+    register,
+    errors,
+    handleSubmit,
+    watch,
+    formState,
+  } = useForm<CUEmployeeFormType>({
     defaultValues: editEmployee
       ? {
           ...editEmployee,
@@ -56,7 +60,7 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
   const getStorages = useCallback(() => {
     setLoading(true);
     axios
-      .get(`storages`)
+      .get(`storages/list`)
       .then((res: AxiosResponse<StorageDto[]>) => {
         setStorages(res.data.map(mapStorageDtoToStorage));
       })
