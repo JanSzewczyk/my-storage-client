@@ -9,7 +9,7 @@ interface ButtonProps extends PropsWithChildren<ReactNode> {
   type?: ButtonType;
   onClick?: () => void;
   disabled?: boolean;
-  btnType?: ButtonColor;
+  color?: ButtonColor;
   className?: string;
   style?: CSSProperties;
 }
@@ -23,14 +23,14 @@ const Button = React.forwardRef<RefType, ButtonProps>(
       onClick,
       disabled,
       children,
-      btnType = "default",
+      color = "default",
       className,
       style,
     },
     ref
   ) => {
     let buttonClasses: string[] = ["button"];
-    btnType && buttonClasses.push(`button--${btnType}`);
+    color && buttonClasses.push(`button--${color}`);
     className && buttonClasses.push(className);
 
     return (

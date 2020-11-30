@@ -67,7 +67,7 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
         />
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
-          btnType={"primary"}
+          color={"primary"}
           onClick={handleSubmit(onAuthSubmit)}
           className={"auth-form__button"}
         >
