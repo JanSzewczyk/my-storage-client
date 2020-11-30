@@ -90,7 +90,7 @@ const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
         right={
           <Button
             onClick={() => onRemoveAction(removeItems)}
-            btnType={"warning"}
+            color={"warning"}
             disabled={removeItems.length === 0}
           >
             remove

@@ -44,7 +44,7 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = React.memo
               <TileBottom
                 right={
                   <Button
-                    btnType={"primary"}
+                    color={"primary"}
                     onClick={() => setAssignStorage(true)}
                   >
                     Change
@@ -57,7 +57,7 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = React.memo
               <h4>This employee is not assigned to any warehouse :(</h4>
               <h6>You can do this by clicking the button below</h6>
               <Button
-                btnType={"primary"}
+                color={"primary"}
                 onClick={() => setAssignStorage(true)}
               >
                 Assign to Workplace

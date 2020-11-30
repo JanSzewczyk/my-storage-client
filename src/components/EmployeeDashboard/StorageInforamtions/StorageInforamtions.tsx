@@ -51,10 +51,10 @@ const StorageInforamtions: React.FC<StorageInforamtionsProps> = React.memo(
         <TileBottom
           right={
             <Aux>
-              <Button btnType={"primary"} onClick={() => onAction("STORE")}>
+              <Button color={"primary"} onClick={() => onAction("STORE")}>
                 STORE
               </Button>
-              <Button btnType={"warning"} onClick={() => onAction("REMOVE")}>
+              <Button color={"warning"} onClick={() => onAction("REMOVE")}>
                 REMOVE
               </Button>
             </Aux>

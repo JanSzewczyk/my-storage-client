@@ -183,7 +183,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
         <TileTop
           left={search}
           right={
-            <Button btnType={"primary"} onClick={() => setShowModal(true)}>
+            <Button color={"primary"} onClick={() => setShowModal(true)}>
               add employee
             </Button>
           }
