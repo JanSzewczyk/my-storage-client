@@ -10,6 +10,8 @@ interface InputProps {
   labelClass?: string;
   refInput?: (Ref: any, validateRule?: any) => void;
   config: InputConfig;
+  autoFocus?: boolean;
+  step?: number;
   inputClass?: string;
   label?: string;
   errorClass?: string;
@@ -20,9 +22,11 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
   labelClass,
+  autoFocus,
   refInput,
   config,
   inputClass,
+  step,
   label,
   errorClass,
   hasError,
@@ -53,6 +57,8 @@ const Input: React.FC<InputProps> = ({
         id={config.name}
         className={inputClasses.join(" ")}
         ref={refInput}
+        step={step}
+        autoFocus={autoFocus}
         {...config}
       />
       {hasError && errorMessage && (
