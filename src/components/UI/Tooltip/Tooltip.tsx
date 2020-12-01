@@ -33,38 +33,45 @@ const Tooltip: React.FC<TooltipProps> = ({
     position
   );
 
-  const [x, setx] = useState<number>(0);
-  const [y, sety] = useState<number>(0);
+  const [pos, setPos] = useState<any>();
 
   const divRef = useRef<HTMLDivElement>(null);
   const childrenRef = useRef<HTMLDivElement>(null);
 
-  const setTooltip = useCallback(
-    (tp: DOMRect) => {
-      const maxWidth: number = getApplicationWidth();
-      // console.log(maxWidth);
-      // console.log(tp);
-      console.log(tp);
-      setx(tp.x);
-      sety(tp.y);
+  const setTooltip = useCallback((tp: DOMRect) => {
+    const maxWidth: number = getApplicationWidth();
 
-      if (tooltipPosition === "top" && maxWidth < tp.right) {
-        const actualWidth: number = maxWidth - tp.left - 32;
-        if (actualWidth < 160) {
-          setTooltipPosition("top-end");
-        } else {
-          setMaxTooltipWidth(actualWidth);
-        }
-      }
-    },
-    [tooltipPosition]
-  );
+    if (null !== divRef.current) {
+      const xxx = divRef.current.getBoundingClientRect();
+
+      console.log(tp, xxx);
+      setPos({
+        x: tp.x,
+        y: tp.y - xxx.height,
+      });
+    }
+
+    // setx(tp.x);
+    // sety(tp.y);
+
+    // if (tooltipPosition === "top" && maxWidth < tp.right) {
+    //   const actualWidth: number = maxWidth - tp.left - 32;
+    //   if (actualWidth < 160) {
+    //     setTooltipPosition("top-end");
+    //   } else {
+    //     setMaxTooltipWidth(actualWidth);
+    //   }
+    // }
+  }, []);
   // **********************
 
   const onMouseOverHandler = useCallback(() => {
     setShow(true);
-    if (divRef.current) setTooltip(divRef.current.getBoundingClientRect());
-  }, [setTooltip]);
+    // if (null !== childrenRef.current) {
+    //   setTooltip(childrenRef.current.getBoundingClientRect());
+    //   // setTooltip(divRef.current.getBoundingClientRect());
+    // }
+  }, []);
 
   const onMouseLeaveHandler = useCallback(() => {
     setShow(false);
@@ -75,33 +82,49 @@ const Tooltip: React.FC<TooltipProps> = ({
   useLayoutEffect(() => {
     if (null !== childrenRef.current) {
       childrenRef.current.onmouseover = () => onMouseOverHandler();
-      childrenRef.current.onmouseleave = () => onMouseLeaveHandler();
+      childrenRef.current.onmouseout = () => onMouseLeaveHandler();
       // setTooltip(divRef.current.getBoundingClientRect());
     }
   }, [onMouseLeaveHandler, onMouseOverHandler]);
 
+  // useLayoutEffect(() => {
+  //   if (show && null !== childrenRef.current) {
+  //     setTooltip(childrenRef.current.getBoundingClientRect());
+  //     // setTooltip(divRef.current.getBoundingClientRect());
+  //   }
+  // }, [setTooltip, show]);
+
   useEffect(() => {
-    const handleScroll = (event: any) => {
-      // if (null !== childrenRef.current)
-      //   setTooltip(childrenRef.current.getBoundingClientRect());
-      // console.log("elo");
-      // let scrollTop = event.srcElement.body;
-      // console.log(scrollTop);
-      // const itemTranslate = Math.min(0, scrollTop / 3 - 60);
-      // setState({
-      //   transform: itemTranslate,
-      // });
-    };
-
-    window.addEventListener("scroll", handleScroll, true);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [setTooltip]);
-
-  useLayoutEffect(() => {
-    if (null !== childrenRef.current) {
+    console.log("useEffect()");
+    if (show && null !== childrenRef.current) {
       setTooltip(childrenRef.current.getBoundingClientRect());
+      // setTooltip(divRef.current.getBoundingClientRect());
     }
-  }, [onMouseLeaveHandler, setTooltip, show]);
+  }, [setTooltip, show]);
+
+  // TODO ADD SCROLL ACTION
+  // useEffect(() => {
+  //   const handleScroll = (event: any) => {
+  //     if (null !== childrenRef.current)
+  //       setTooltip(childrenRef.current.getBoundingClientRect());
+  //     // console.log("elo");
+  //     // let scrollTop = event.srcElement.body;
+  //     // console.log(scrollTop);
+  //     // const itemTranslate = Math.min(0, scrollTop / 3 - 60);
+  //     // setState({
+  //     //   transform: itemTranslate,
+  //     // });
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll, true);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [setTooltip]);
+
+  // useLayoutEffect(() => {
+  //   if (null !== childrenRef.current) {
+  //     setTooltip(childrenRef.current.getBoundingClientRect());
+  //   }
+  // }, [onMouseLeaveHandler, setTooltip, show]);
 
   let tooltipClasses: string[] = ["tooltip"];
   type && tooltipClasses.push(`tooltip--${type}`);
@@ -125,11 +148,11 @@ const Tooltip: React.FC<TooltipProps> = ({
             ref={divRef}
             className={TMClasses.join(" ")}
             style={{
-              position: "absolute",
+              // position: "absolute",
               willChange: "transform",
               top: "0px",
               left: "0px",
-              transform: `translate3d(${x}px,${y}px,0)`,
+              transform: `translate3d(${pos?.x}px,${pos?.y}px,0)`,
               width: maxTooltipWidth,
               whiteSpace: maxTooltipWidth ? "normal" : "nowrap",
             }}

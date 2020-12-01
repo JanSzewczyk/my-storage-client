@@ -1,14 +1,14 @@
 .tooltip {
-  position: relative;
-  cursor: pointer;
+  // position: relative;
+  // cursor: pointer;
 
-  &--dotted {
-    border-bottom: 1px dotted #f2f2f2;
-  }
+  // &--dotted {
+  //   border-bottom: 1px dotted #f2f2f2;
+  // }
 
   &__message {
     position: absolute;
-
+    // height: 40px;
     background: #fafafa;
     color: #242424;
     font-size: 12px;
@@ -35,8 +35,8 @@
     }
 
     &--top {
-      bottom: 100%;
-      left: 0;
+      // bottom: 100%;
+      // left: 0;
       margin-bottom: 8px;
 
       &::after {
