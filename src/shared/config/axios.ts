@@ -1,7 +1,9 @@
 import axios from "axios";
+import { cacheAdapter, myAdapter } from "./cacheHandler";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_ADDRESS,
+  adapter: myAdapter(cacheAdapter.adapter),
 });
 
 export const setBasicToken = (token: string) => {
