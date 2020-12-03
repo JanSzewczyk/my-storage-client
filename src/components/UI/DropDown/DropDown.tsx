@@ -4,6 +4,7 @@ import DropdownWrapper from "./DropdownWrapper/DropdownWrapper";
 import { DropdownType } from "./types";
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
 import { ButtonColor } from "../Button";
+import { FixMeLater } from "../../../shared/types/common/FixMeLater";
 
 import Button from "../Button/Button";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -20,7 +21,7 @@ interface DropdownProps extends PropsWithChildren<any> {
   left?: boolean;
 }
 
-export type Ref = HTMLDivElement;
+export type Ref = FixMeLater;
 
 const DropDown = React.forwardRef<Ref, DropdownProps>(
   ({ type = "button", title, icon, btnType, children, top, left }, ref) => {
@@ -57,9 +58,9 @@ const DropDown = React.forwardRef<Ref, DropdownProps>(
     active && IBClasses.push("drop-down__icon-button--active");
 
     return (
-      <div className={"drop-down"} ref={ref}>
+      <div className={"drop-down"}>
         {type === "button" && (
-          <Button onClick={active ? onClose : onShow} color={btnType}>
+          <Button onClick={active ? onClose : onShow} color={btnType} ref={ref}>
             {left && arrowIcon}
             {title}
             {!left && arrowIcon}
@@ -69,6 +70,7 @@ const DropDown = React.forwardRef<Ref, DropdownProps>(
           <div
             className={IBClasses.join(" ")}
             onClick={active ? onClose : onShow}
+            ref={ref}
           >
             {icon}
           </div>

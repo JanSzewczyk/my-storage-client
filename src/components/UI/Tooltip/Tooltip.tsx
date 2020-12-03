@@ -1,13 +1,22 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  CSSProperties,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
 
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
 import { TooltipColor, TooltipPosition, TooltipType } from "./types";
 
 import "./Tooltip.scss";
-import { getApplicationWidth } from "../../../shared/utils/graphicUtils";
+import {
+  getApplicationHeight,
+  getApplicationWidth,
+} from "../../../shared/utils/graphicUtils";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import { createPortal } from "react-dom";
-import { useEffect } from "react";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
@@ -25,136 +34,126 @@ const Tooltip: React.FC<TooltipProps> = ({
   className,
   color = "white",
 }) => {
-  const [show, setShow] = useState<boolean>(false);
+  const [coordinates, setCoordinates] = useState<any>(null);
 
-  // TOOLTIP LOGIC IMPLEMENTATION
-  const [maxTooltipWidth, setMaxTooltipWidth] = useState<number>();
-  const [tooltipPosition, setTooltipPosition] = useState<TooltipPosition>(
-    position
+  const messageRef = useRef<HTMLDivElement>(null);
+  const childrenRef = useRef<any>(null);
+
+  const setTooltip = useCallback(
+    (chp: DOMRect) => {
+      const maxWidth: number = getApplicationWidth();
+      const maxHeight: number = getApplicationHeight();
+
+      if (position === "top")
+        setCoordinates({
+          x: chp.left,
+          y: chp.top - maxHeight,
+          maxWidth: maxWidth - chp.left - 24,
+        });
+
+      if (position === "top-end")
+        setCoordinates({
+          x: chp.right - maxWidth,
+          y: chp.top - maxHeight,
+          maxWidth: chp.right - 24,
+        });
+
+      if (position === "bottom")
+        setCoordinates({
+          x: chp.left,
+          y: chp.bottom,
+          maxWidth: maxWidth - chp.left - 24,
+        });
+
+      if (position === "bottom-end")
+        setCoordinates({
+          x: chp.right - maxWidth,
+          y: chp.bottom,
+          maxWidth: chp.right - 24,
+        });
+
+      if (position === "right")
+        setCoordinates({
+          x: chp.right,
+          y: chp.top,
+          maxWidth: maxWidth - chp.right - 32,
+        });
+
+      if (position === "left")
+        setCoordinates({
+          x: chp.left - maxWidth,
+          y: chp.top,
+          maxWidth: chp.left - 32,
+        });
+    },
+    [position]
   );
 
-  const [pos, setPos] = useState<any>();
-
-  const divRef = useRef<HTMLDivElement>(null);
-  const childrenRef = useRef<HTMLDivElement>(null);
-
-  const setTooltip = useCallback((tp: DOMRect) => {
-    const maxWidth: number = getApplicationWidth();
-
-    if (null !== divRef.current) {
-      const xxx = divRef.current.getBoundingClientRect();
-
-      console.log(tp, xxx);
-      setPos({
-        x: tp.x,
-        y: tp.y - xxx.height,
-      });
-    }
-
-    // setx(tp.x);
-    // sety(tp.y);
-
-    // if (tooltipPosition === "top" && maxWidth < tp.right) {
-    //   const actualWidth: number = maxWidth - tp.left - 32;
-    //   if (actualWidth < 160) {
-    //     setTooltipPosition("top-end");
-    //   } else {
-    //     setMaxTooltipWidth(actualWidth);
-    //   }
-    // }
-  }, []);
-  // **********************
-
   const onMouseOverHandler = useCallback(() => {
-    setShow(true);
-    // if (null !== childrenRef.current) {
-    //   setTooltip(childrenRef.current.getBoundingClientRect());
-    //   // setTooltip(divRef.current.getBoundingClientRect());
-    // }
-  }, []);
+    if (null !== childrenRef.current) {
+      setTooltip(childrenRef.current.getBoundingClientRect());
+    }
+  }, [setTooltip]);
 
   const onMouseLeaveHandler = useCallback(() => {
-    setShow(false);
-    setMaxTooltipWidth(undefined);
-    setTooltipPosition(position);
-  }, [position]);
+    setCoordinates(null);
+  }, []);
 
   useLayoutEffect(() => {
     if (null !== childrenRef.current) {
       childrenRef.current.onmouseover = () => onMouseOverHandler();
       childrenRef.current.onmouseout = () => onMouseLeaveHandler();
-      // setTooltip(divRef.current.getBoundingClientRect());
     }
   }, [onMouseLeaveHandler, onMouseOverHandler]);
 
-  // useLayoutEffect(() => {
-  //   if (show && null !== childrenRef.current) {
-  //     setTooltip(childrenRef.current.getBoundingClientRect());
-  //     // setTooltip(divRef.current.getBoundingClientRect());
-  //   }
-  // }, [setTooltip, show]);
+  const handleScroll = useCallback(
+    (event: any) => {
+      if (null !== childrenRef.current && null !== messageRef.current) {
+        setTooltip(childrenRef.current.getBoundingClientRect());
+      }
+    },
+    [setTooltip]
+  );
 
-  useEffect(() => {
-    console.log("useEffect()");
-    if (show && null !== childrenRef.current) {
-      setTooltip(childrenRef.current.getBoundingClientRect());
-      // setTooltip(divRef.current.getBoundingClientRect());
-    }
-  }, [setTooltip, show]);
-
-  // TODO ADD SCROLL ACTION
-  // useEffect(() => {
-  //   const handleScroll = (event: any) => {
-  //     if (null !== childrenRef.current)
-  //       setTooltip(childrenRef.current.getBoundingClientRect());
-  //     // console.log("elo");
-  //     // let scrollTop = event.srcElement.body;
-  //     // console.log(scrollTop);
-  //     // const itemTranslate = Math.min(0, scrollTop / 3 - 60);
-  //     // setState({
-  //     //   transform: itemTranslate,
-  //     // });
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll, true);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [setTooltip]);
-
-  // useLayoutEffect(() => {
-  //   if (null !== childrenRef.current) {
-  //     setTooltip(childrenRef.current.getBoundingClientRect());
-  //   }
-  // }, [onMouseLeaveHandler, setTooltip, show]);
+  useLayoutEffect(() => {
+    coordinates && window.addEventListener("scroll", handleScroll, true);
+    return () =>
+      coordinates && window.removeEventListener("scroll", handleScroll);
+  }, [coordinates, handleScroll]);
 
   let tooltipClasses: string[] = ["tooltip"];
   type && tooltipClasses.push(`tooltip--${type}`);
   className && tooltipClasses.push(className);
 
   let TMClasses: string[] = ["tooltip__message"];
-  tooltipPosition && TMClasses.push(`tooltip__message--${tooltipPosition}`);
+  position && TMClasses.push(`tooltip__message--${position}`);
   color && TMClasses.push(`tooltip__message--${color}`);
   color && TMClasses.push(`tooltip__message--${position}-${color}`);
 
-  // TODO REMOVE!!!
-  // console.log(childrenRef);
+  const setPosition = (): CSSProperties => {
+    if (position === "top-end") return { bottom: "0px", right: "0px" };
+    if (position === "bottom" || position === "right")
+      return { top: "0px", left: "0px" };
+    if (position === "bottom-end" || position === "left")
+      return { top: "0px", right: "0px" };
+
+    return { bottom: "0px", left: "0px" };
+  };
 
   return (
     <Aux>
       {React.cloneElement(children, { ref: childrenRef })}
-      {show &&
+      {coordinates &&
         createPortal(
           <div
             role={"tooltip"}
-            ref={divRef}
+            ref={messageRef}
             className={TMClasses.join(" ")}
             style={{
-              // position: "absolute",
+              ...setPosition(),
               willChange: "transform",
-              top: "0px",
-              left: "0px",
-              transform: `translate3d(${pos?.x}px,${pos?.y}px,0)`,
-              width: maxTooltipWidth,
-              whiteSpace: maxTooltipWidth ? "normal" : "nowrap",
+              transform: `translate3d(${coordinates?.x}px,${coordinates?.y}px,0)`,
+              maxWidth: coordinates?.maxWidth,
             }}
           >
             {text}
