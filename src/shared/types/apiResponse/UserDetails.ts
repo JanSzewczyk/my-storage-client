@@ -3,5 +3,5 @@ import UserDto from "../user/UserDto";
 
 export default interface UserDetails {
   user: UserDto;
-  role: UserRole;
+  role: keyof typeof UserRole;
 }

@@ -165,19 +165,19 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
         <TileTop
           left={search}
           right={
-            // TODO FIX TOOLTIP 
-            <Tooltip
-              text={"Add New Storage"}
-              position={"top-end"}
-              color={"blue"}
-            >
+            // TODO FIX TOOLTIP
+            // <Tooltip
+            //   text={"Add New Storage"}
+            //   position={"top-end"}
+            //   color={"blue"}
+            // >
             <IconButton
               color={"warning"}
               onClick={() => setShowCreateStorageModal(true)}
             >
               <FaPlus />
             </IconButton>
-            </Tooltip>
+            // </Tooltip>
           }
         />
         <TileContent>

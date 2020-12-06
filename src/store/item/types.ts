@@ -3,12 +3,16 @@ import Item from "../../shared/types/item/Item";
 import ItemView from "../../shared/types/item/ItemView";
 import * as actionTypes from "../actionTypes";
 
-export interface ItemState {
+export interface ItemStoreState {
   itemViewList: ItemView[];
   pageInfo: PageInfo | null;
   itemViewListLoading: boolean;
   itemList: Item[];
   itemListLoading: boolean;
+}
+
+export interface InitItemStoreAction {
+  type: typeof actionTypes.ITEM_INIT;
 }
 
 export interface ItemViewListLoadStartAction {
@@ -39,6 +43,7 @@ export interface ItemListLoadFailureAction {
 }
 
 export type ItemActionTypes =
+  | InitItemStoreAction
   | ItemViewListLoadStartAction
   | ItemViewListLoadSuccessAction
   | ItemViewListLoadFailureAction

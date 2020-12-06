@@ -14,7 +14,7 @@ import "./Header.scss";
 
 interface HeaderProps {
   user: User | null;
-  userRole: UserRole | null;
+  userRole: keyof typeof UserRole | null;
 }
 
 const Header: React.FC<HeaderProps> = (props) => {

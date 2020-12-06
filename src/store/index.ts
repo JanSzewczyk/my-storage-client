@@ -23,14 +23,18 @@ export {
   setEmployee,
 } from "./employee/employee.action";
 
-export { getStorageItemViewList, getStorageItemList } from "./item/item.action";
+export {
+  initItemStore,
+  getStorageItemViewList,
+  getStorageItemList,
+} from "./item/item.action";
 
 export { getProductsList } from "./product/product.action";
 
 export { getStorageStatistics } from "./statistic/statistic.action";
 
 export {
-  clearStorageStore,
+  initStorageStore,
   setStorage,
   getStorageList,
   getStorage,

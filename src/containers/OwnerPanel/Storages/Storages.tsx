@@ -7,7 +7,7 @@ import StoragesTable from "./StoragesTable/StoragesTable";
 
 interface StoragesProps {}
 
-const Storages: React.FC<StoragesProps> = (props) => {
+const Storages: React.FC<StoragesProps> = () => {
   const storagesTable = useMemo(() => <StoragesTable />, []);
 
   return <AppContent>{storagesTable}</AppContent>;
