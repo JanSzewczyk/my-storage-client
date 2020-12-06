@@ -3,6 +3,8 @@ import React, { CSSProperties } from "react";
 import Tooltip from ".";
 import Button from "../Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import IconButton from "../IconButton";
+import { EditIcon } from "../Icons";
 
 const styles: CSSProperties = {
   marginTop: "38px",
@@ -65,4 +67,12 @@ export const TooltipColors = () => (
       <Button>Tooltip Black</Button>
     </Tooltip>
   </Aux>
+);
+
+export const IconButtonTooltip = () => (
+  <Tooltip text={"Edit Icon Button"}>
+    <IconButton>
+      <EditIcon />
+    </IconButton>
+  </Tooltip>
 );

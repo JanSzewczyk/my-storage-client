@@ -14,7 +14,7 @@ import {
   getApplicationWidth,
 } from "../../../shared/utils/graphicUtils";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import { TooltipMessage } from ".";
+import TooltipMessage from "./TooltipMessage/TooltipMessage";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
@@ -131,7 +131,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   return (
     <Aux>
-      {React.cloneElement(children, { ref: childrenRef })}
+      {children && React.cloneElement(children, { ref: childrenRef })}
       {coordinates &&
         createPortal(
           <TooltipMessage
