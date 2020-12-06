@@ -1,6 +1,6 @@
 import * as actionTypes from "../actionTypes";
 
-export interface AuthState {
+export interface AuthStoreState {
   accessToken: string | null;
   refreshToken: string | null;
   error: string | null;

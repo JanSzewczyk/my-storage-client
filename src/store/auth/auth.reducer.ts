@@ -5,25 +5,28 @@ import {
   AuthFailureAction,
   AuthLogoutAction,
   AuthStartAction,
-  AuthState,
+  AuthStoreState,
   AuthSuccessAction,
 } from "./types";
 
-const initialState: AuthState = {
+export const initialState: AuthStoreState = {
   accessToken: null,
   refreshToken: null,
   error: null,
   authLoading: false,
 };
 
-const authStart = (state: AuthState, action: AuthStartAction): AuthState => {
+const authStart = (
+  state: AuthStoreState,
+  action: AuthStartAction
+): AuthStoreState => {
   return updateObject(state, { error: null, authLoading: true });
 };
 
 const authSuccess = (
-  state: AuthState,
+  state: AuthStoreState,
   action: AuthSuccessAction
-): AuthState => {
+): AuthStoreState => {
   return updateObject(state, {
     accessToken: action.accessToken,
     refreshToken: action.refreshToken,
@@ -33,23 +36,29 @@ const authSuccess = (
 };
 
 const authFailure = (
-  state: AuthState,
+  state: AuthStoreState,
   action: AuthFailureAction
-): AuthState => {
+): AuthStoreState => {
   return updateObject(state, {
     error: action.error,
     authLoading: false,
   });
 };
 
-const authLogout = (state: AuthState, action: AuthLogoutAction): AuthState => {
+const authLogout = (
+  state: AuthStoreState,
+  action: AuthLogoutAction
+): AuthStoreState => {
   return updateObject(state, {
     accessToken: null,
     refreshToken: null,
   });
 };
 
-const reducer = (state = initialState, action: AuthActionTypes): AuthState => {
+const reducer = (
+  state = initialState,
+  action: AuthActionTypes
+): AuthStoreState => {
   switch (action.type) {
     case actionTypes.AUTH_START:
       return authStart(state, action);
