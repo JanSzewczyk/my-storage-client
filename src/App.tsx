@@ -22,7 +22,7 @@ import StoreState from "./shared/types/store/StoreState";
 
 interface AppProps {
   authenticated: boolean;
-  userRole: UserRole | null;
+  userRole: keyof typeof UserRole | null;
   onAuthCheck: () => void;
 }
 

@@ -2,9 +2,9 @@ import { UserRole } from "../../shared/constants";
 import User from "../../shared/types/user/User";
 import * as actionTypes from "../actionTypes";
 
-export interface UserState {
+export interface UserStoreState {
   user: User | null;
-  role: UserRole | null;
+  role: keyof typeof UserRole | null;
 }
 
 export interface UserLoadStartAction {
@@ -14,7 +14,7 @@ export interface UserLoadStartAction {
 export interface UserLoadSuccessAction {
   type: typeof actionTypes.USER_LOAD_SUCCESS;
   user: User;
-  role: UserRole;
+  role: keyof typeof UserRole;
 }
 
 export interface UserLoadFailureAction {

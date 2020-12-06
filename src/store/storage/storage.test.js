@@ -3,7 +3,7 @@ import * as actionTypes from "../actionTypes";
 
 describe("storage reducer", () => {
   it("should return the initial state", () => {
-    expect(reducer(undefined, {})).toEqual({
+    expect(reducer(undefined, {})).pwtoEqual({
       storageList: [],
       storageListLoading: true,
       storage: null,

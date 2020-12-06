@@ -6,25 +6,25 @@ import {
   UserLoadStartAction,
   UserLoadSuccessAction,
   UserLogoutAction,
-  UserState,
+  UserStoreState,
 } from "./types";
 
-const initialState: UserState = {
+export const initialState: UserStoreState = {
   user: null,
   role: null,
 };
 
 const userLoadStart = (
-  state: UserState,
+  state: UserStoreState,
   action: UserLoadStartAction
-): UserState => {
+): UserStoreState => {
   return updateObject(state, { user: null, role: null });
 };
 
 const userLoadSuccess = (
-  state: UserState,
+  state: UserStoreState,
   action: UserLoadSuccessAction
-): UserState => {
+): UserStoreState => {
   return updateObject(state, {
     user: action.user,
     role: action.role,
@@ -32,23 +32,29 @@ const userLoadSuccess = (
 };
 
 const userLoadFailure = (
-  state: UserState,
+  state: UserStoreState,
   action: UserLoadFailureAction
-): UserState => {
+): UserStoreState => {
   return updateObject(state, {
     user: null,
     role: null,
   });
 };
 
-const userLogout = (state: UserState, action: UserLogoutAction): UserState => {
+const userLogout = (
+  state: UserStoreState,
+  action: UserLogoutAction
+): UserStoreState => {
   return updateObject(state, {
     user: null,
     role: null,
   });
 };
 
-const reducer = (state = initialState, action: UserActionTypes): UserState => {
+const reducer = (
+  state = initialState,
+  action: UserActionTypes
+): UserStoreState => {
   switch (action.type) {
     case actionTypes.USER_LOAD_START:
       return userLoadStart(state, action);

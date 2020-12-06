@@ -8,7 +8,7 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import "./NavigationLinks.scss";
 
 interface NavigationLinksProps {
-  userRole: UserRole | null;
+  userRole: keyof typeof UserRole | null;
 }
 
 const NavigationLinks: React.FC<NavigationLinksProps> = (props) => {
