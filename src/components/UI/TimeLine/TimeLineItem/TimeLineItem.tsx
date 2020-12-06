@@ -25,7 +25,6 @@ const TimeLineItem: React.FC<TimeLineItemProps> = ({
 
   useEffect(() => {
     if (selected && timeLineItemRef.current) {
-      console.log(timeLineItemRef.current.offsetTop);
       timeLineItemRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
