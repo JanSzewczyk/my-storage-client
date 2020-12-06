@@ -49,10 +49,7 @@ const authLogout = (
   state: AuthStoreState,
   action: AuthLogoutAction
 ): AuthStoreState => {
-  return updateObject(state, {
-    accessToken: null,
-    refreshToken: null,
-  });
+  return initialState;
 };
 
 const reducer = (

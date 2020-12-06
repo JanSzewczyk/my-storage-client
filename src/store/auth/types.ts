@@ -4,7 +4,7 @@ export interface AuthStoreState {
   accessToken: string | null;
   refreshToken: string | null;
   error: string | null;
-  authLoading: false;
+  authLoading: boolean;
 }
 
 export interface AuthStartAction {
