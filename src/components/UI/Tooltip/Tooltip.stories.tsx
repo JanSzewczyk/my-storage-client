@@ -1,13 +1,14 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
-import Tooltip from "./";
+import Tooltip from ".";
 import Button from "../Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
-const styles = {
+const styles: CSSProperties = {
   marginTop: "38px",
   width: "100%",
   display: "flex",
+  flexFlow: "wrap",
   justifyContent: "space-around",
 };
 
@@ -16,7 +17,9 @@ export default {
   component: Tooltip,
   componentSubtitle: "Tooltip",
   excludeStories: /.*Data$/,
-  decorators: [(storyFn) => <div style={styles}>{storyFn()}</div>],
+  decorators: [
+    (storyFn: () => React.ReactNode) => <div style={styles}>{storyFn()}</div>,
+  ],
 };
 
 export const Default = () => (

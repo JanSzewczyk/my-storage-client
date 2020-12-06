@@ -14,7 +14,7 @@ import {
   getApplicationWidth,
 } from "../../../shared/utils/graphicUtils";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import TooltipMessage from "./TooltipMessage/TooltipMessage";
+import { TooltipMessage } from ".";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
