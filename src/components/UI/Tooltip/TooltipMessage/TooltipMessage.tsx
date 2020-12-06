@@ -1,6 +1,8 @@
 import React, { CSSProperties, ReactNode } from "react";
 import { TooltipColor, TooltipPosition } from "../types";
 
+import "./TooltipMessage.scss";
+
 interface TooltipMessageProps {
   title: ReactNode;
   position: TooltipPosition;
@@ -13,10 +15,11 @@ type RefType = HTMLDivElement;
 
 const TooltipMessage = React.forwardRef<RefType, TooltipMessageProps>(
   ({ title, position, color, className, style }, ref) => {
-    let tooltipMessageClasses: string[] = ["tooltip__message"];
-    tooltipMessageClasses.push(`tooltip__message--${position}`);
-    tooltipMessageClasses.push(`tooltip__message--${color}`);
-    tooltipMessageClasses.push(`tooltip__message--${position}-${color}`);
+    let tooltipMessageClasses: string[] = ["tooltip-message"];
+    tooltipMessageClasses.push(`tooltip-message--${position}`);
+    tooltipMessageClasses.push(`tooltip-message--${color}`);
+    tooltipMessageClasses.push(`tooltip-message--${position}-${color}`);
+    if (className) tooltipMessageClasses.push(className);
 
     return (
       <div
@@ -24,15 +27,6 @@ const TooltipMessage = React.forwardRef<RefType, TooltipMessageProps>(
         ref={ref}
         className={tooltipMessageClasses.join(" ")}
         style={style}
-        // style={{
-        //   position: "absolute",
-        //   willChange: "transform",
-        //   top: "0px",
-        //   left: "0px",
-        //   transform: `translate3d(${x}px,${y}px,0)`,
-        //   // width: maxTooltipWidth,
-        //   // whiteSpace: maxTooltipWidth ? "normal" : "nowrap",
-        // }}
       >
         {title}
       </div>

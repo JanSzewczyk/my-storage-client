@@ -1,143 +1,153 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  CSSProperties,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
 
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
-import { TooltipColor, TooltipPosition, TooltipType } from "./types";
-
-import "./Tooltip.scss";
-import { getApplicationWidth } from "../../../shared/utils/graphicUtils";
+import { TooltipColor, TooltipPosition } from "./types";
+import {
+  getApplicationHeight,
+  getApplicationWidth,
+} from "../../../shared/utils/graphicUtils";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import { createPortal } from "react-dom";
-import { useEffect } from "react";
+import { TooltipMessage } from ".";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
-  type?: TooltipType;
   position?: TooltipPosition;
   color?: TooltipColor;
   className?: string;
+  style?: CSSProperties;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
   children,
   text,
-  type,
   position = "top",
   className,
   color = "white",
+  style,
 }) => {
-  const [show, setShow] = useState<boolean>(false);
+  const [coordinates, setCoordinates] = useState<any>(null);
 
-  // TOOLTIP LOGIC IMPLEMENTATION
-  const [maxTooltipWidth, setMaxTooltipWidth] = useState<number>();
-  const [tooltipPosition, setTooltipPosition] = useState<TooltipPosition>(
-    position
-  );
-
-  const [x, setx] = useState<number>();
-  const [y, sety] = useState<number>();
-
-  const [staty, setState] = useState<any>();
-
-  const divRef = useRef<HTMLDivElement>(null);
-  const childrenRef = useRef<HTMLDivElement>(null);
+  const messageRef = useRef<HTMLDivElement>(null);
+  const childrenRef = useRef<any>(null);
 
   const setTooltip = useCallback(
-    (tp: DOMRect) => {
+    (chp: DOMRect) => {
       const maxWidth: number = getApplicationWidth();
-      // console.log(maxWidth);
-      // console.log(tp);
-      console.log(tp);
-      setx(tp.x);
-      sety(tp.y);
+      const maxHeight: number = getApplicationHeight();
 
-      // if (tooltipPosition === "top" && maxWidth < tp.right) {
-      //   const actualWidth: number = maxWidth - tp.left - 32;
-      //   if (actualWidth < 160) {
-      //     setTooltipPosition("top-end");
-      //   } else {
-      //     setMaxTooltipWidth(actualWidth);
-      //   }
-      // }
+      if (position === "top")
+        setCoordinates({
+          x: chp.left,
+          y: chp.top - maxHeight,
+          maxWidth: maxWidth - chp.left - 24,
+        });
+
+      if (position === "top-end")
+        setCoordinates({
+          x: chp.right - maxWidth,
+          y: chp.top - maxHeight,
+          maxWidth: chp.right - 24,
+        });
+
+      if (position === "bottom")
+        setCoordinates({
+          x: chp.left,
+          y: chp.bottom,
+          maxWidth: maxWidth - chp.left - 24,
+        });
+
+      if (position === "bottom-end")
+        setCoordinates({
+          x: chp.right - maxWidth,
+          y: chp.bottom,
+          maxWidth: chp.right - 24,
+        });
+
+      if (position === "right")
+        setCoordinates({
+          x: chp.right,
+          y: chp.top,
+          maxWidth: maxWidth - chp.right - 32,
+        });
+
+      if (position === "left")
+        setCoordinates({
+          x: chp.left - maxWidth,
+          y: chp.top,
+          maxWidth: chp.left - 32,
+        });
     },
-    [tooltipPosition]
+    [position]
   );
-  // **********************
 
-  const onMouseOverHandler = () => {
-    setShow(true);
-  };
+  const onMouseOverHandler = useCallback(() => {
+    if (null !== childrenRef.current) {
+      setTooltip(childrenRef.current.getBoundingClientRect());
+    }
+  }, [setTooltip]);
 
   const onMouseLeaveHandler = useCallback(() => {
-    setShow(false);
-    setMaxTooltipWidth(undefined);
-    setTooltipPosition(position);
-  }, [position]);
+    setCoordinates(null);
+  }, []);
 
   useLayoutEffect(() => {
     if (null !== childrenRef.current) {
       childrenRef.current.onmouseover = () => onMouseOverHandler();
-      childrenRef.current.onmouseleave = () => onMouseLeaveHandler();
-      // setTooltip(divRef.current.getBoundingClientRect());
+      childrenRef.current.onmouseout = () => onMouseLeaveHandler();
     }
-  }, [onMouseLeaveHandler]);
+  }, [onMouseLeaveHandler, onMouseOverHandler]);
 
-  useEffect(() => {
-    const handleScroll = (event: any) => {
-      if (null !== childrenRef.current)
+  const handleScroll = useCallback(
+    (event: any) => {
+      if (null !== childrenRef.current && null !== messageRef.current) {
         setTooltip(childrenRef.current.getBoundingClientRect());
-      // console.log("elo");
-      // let scrollTop = event.srcElement.body;
-      // console.log(scrollTop);
-      // const itemTranslate = Math.min(0, scrollTop / 3 - 60);
-
-      // setState({
-      //   transform: itemTranslate,
-      // });
-    };
-
-    window.addEventListener("scroll", handleScroll, true);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [setTooltip]);
+      }
+    },
+    [setTooltip]
+  );
 
   useLayoutEffect(() => {
-    if (null !== childrenRef.current) {
-      setTooltip(childrenRef.current.getBoundingClientRect());
-    }
-  }, [onMouseLeaveHandler, setTooltip, show]);
+    coordinates && window.addEventListener("scroll", handleScroll, true);
+    return () =>
+      coordinates && window.removeEventListener("scroll", handleScroll);
+  }, [coordinates, handleScroll]);
 
-  let tooltipClasses: string[] = ["tooltip"];
-  type && tooltipClasses.push(`tooltip--${type}`);
-  className && tooltipClasses.push(className);
+  const setPosition = (): CSSProperties => {
+    if (position === "top-end") return { bottom: "0px", right: "0px" };
+    if (position === "bottom" || position === "right")
+      return { top: "0px", left: "0px" };
+    if (position === "bottom-end" || position === "left")
+      return { top: "0px", right: "0px" };
 
-  let TMClasses: string[] = ["tooltip__message"];
-  tooltipPosition && TMClasses.push(`tooltip__message--${tooltipPosition}`);
-  color && TMClasses.push(`tooltip__message--${color}`);
-  color && TMClasses.push(`tooltip__message--${position}-${color}`);
-
-  // TODO REMOVE!!!
-  // console.log(childrenRef);
+    return { bottom: "0px", left: "0px" };
+  };
 
   return (
     <Aux>
       {React.cloneElement(children, { ref: childrenRef })}
-      {show &&
+      {coordinates &&
         createPortal(
-          <div
-            role={"tooltip"}
-            ref={divRef}
-            className={TMClasses.join(" ")}
+          <TooltipMessage
+            title={text}
+            position={position}
+            color={color}
+            ref={messageRef}
+            className={className}
             style={{
-              position: "absolute",
+              ...setPosition(),
               willChange: "transform",
-              top: "0px",
-              left: "0px",
-              transform: `translate3d(${x}px,${y}px,0)`,
-              // width: maxTooltipWidth,
-              // whiteSpace: maxTooltipWidth ? "normal" : "nowrap",
+              transform: `translate3d(${coordinates?.x}px,${coordinates?.y}px,0)`,
+              maxWidth: coordinates?.maxWidth,
+              ...style,
             }}
-          >
-            {text}
-          </div>,
+          />,
           document.body
         )}
     </Aux>

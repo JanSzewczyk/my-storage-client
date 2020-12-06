@@ -1,13 +1,14 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
-import Tooltip from "./";
+import Tooltip from ".";
 import Button from "../Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
-const styles = {
+const styles: CSSProperties = {
   marginTop: "38px",
   width: "100%",
   display: "flex",
+  flexFlow: "wrap",
   justifyContent: "space-around",
 };
 
@@ -16,7 +17,9 @@ export default {
   component: Tooltip,
   componentSubtitle: "Tooltip",
   excludeStories: /.*Data$/,
-  decorators: [(storyFn) => <div style={styles}>{storyFn()}</div>],
+  decorators: [
+    (storyFn: () => React.ReactNode) => <div style={styles}>{storyFn()}</div>,
+  ],
 };
 
 export const Default = () => (
@@ -39,8 +42,7 @@ export const TooltipPositions = () => (
       <Button>Tooltip Bottom</Button>
     </Tooltip>
     <Tooltip text={"Tooltip Bottom End text"} position={"bottom-end"}>
-      {/* <Button>Tooltip Bottom End</Button> */}
-      <div>a</div>
+      <Button>Tooltip Bottom End</Button>
     </Tooltip>
     <Tooltip text={"Tooltip Right text"} position={"right"}>
       <Button>Tooltip Right</Button>
@@ -63,14 +65,4 @@ export const TooltipColors = () => (
       <Button>Tooltip Black</Button>
     </Tooltip>
   </Aux>
-);
-
-export const DottedTooltip = () => (
-  <span style={{ color: "#f2f2f2" }}>
-    <Tooltip text={"Tooltip text"} type={"dotted"}>
-      Lorem Ipsum
-    </Tooltip>{" "}
-    is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-    has been the industry's standard dummy
-  </span>
 );

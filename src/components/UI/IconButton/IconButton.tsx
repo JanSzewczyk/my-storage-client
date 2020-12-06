@@ -1,11 +1,9 @@
-import React, { CSSProperties, ReactNode } from "react";
+import React, { CSSProperties, PropsWithChildren } from "react";
+import { ButtonColor, ButtonType } from "../Button";
 
-import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
-import { ButtonColor, ButtonType } from "./types";
+import "./IconButton.scss";
 
-import "./Button.scss";
-
-interface ButtonProps extends PropsWithChildren<ReactNode> {
+interface IconButtonProps {
   type?: ButtonType;
   onClick?: () => void;
   disabled?: boolean;
@@ -16,7 +14,10 @@ interface ButtonProps extends PropsWithChildren<ReactNode> {
 
 type RefType = HTMLButtonElement;
 
-const Button = React.forwardRef<RefType, ButtonProps>(
+const IconButton = React.forwardRef<
+  RefType,
+  PropsWithChildren<IconButtonProps>
+>(
   (
     {
       type = "button",
@@ -29,7 +30,7 @@ const Button = React.forwardRef<RefType, ButtonProps>(
     },
     ref
   ) => {
-    let buttonClasses: string[] = ["button"];
+    let buttonClasses: string[] = ["button", "icon-button"];
     color && buttonClasses.push(`button--${color}`);
     className && buttonClasses.push(className);
 
@@ -42,10 +43,10 @@ const Button = React.forwardRef<RefType, ButtonProps>(
         ref={ref}
         style={style}
       >
-        {children}
+        {React.Children.only(children)}
       </button>
     );
   }
 );
 
-export default Button;
+export default IconButton;

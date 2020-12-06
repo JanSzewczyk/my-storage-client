@@ -143,13 +143,13 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
           <Aux>
             <Button onClick={onCloseEdit}>Cancel</Button>
             <Button
-              btnType={"warning"}
+              color={"warning"}
               onClick={() => onRemoveStorage(defaultStorage.id)}
             >
               Remove
             </Button>
             <Button
-              btnType={"primary"}
+              color={"primary"}
               onClick={handleSubmit(onSubmit)}
               disabled={!formState.isDirty}
             >

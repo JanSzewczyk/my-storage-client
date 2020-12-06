@@ -82,10 +82,10 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
           >
             sdfasd <span>fasdfsdfsd asdf s</span>
             <Tooltip
+              position={"left"}
               text={
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
               }
-              type={"dotted"}
             >
               <Button>assdfsd</Button>
             </Tooltip>
@@ -106,14 +106,21 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               display: "flex",
             }}
           >
-            <DropDown btnType={"warning"} title={"dropdown"}>
-              <DropdownItem
-                onClick={() => console.log("Elo jake")}
-                text={"elo"}
-              />
+            <Tooltip
+              text={
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+              }
+              position={"top-end"}
+            >
+              <DropDown btnType={"warning"} title={"dropdown"}>
+                <DropdownItem
+                  onClick={() => console.log("Elo jake")}
+                  text={"elo"}
+                />
 
-              {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
-            </DropDown>
+                {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
+              </DropDown>
+            </Tooltip>
 
             {/* <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
@@ -137,6 +144,13 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
             <EllipsisWrapper>
               Litwo ojczyzno moja ty jesteś jak zdrowie ten tylko się dowie kto
               cię straci,
+              <Tooltip
+                text={
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+                }
+              >
+                <Button>button 2</Button>
+              </Tooltip>
             </EllipsisWrapper>
             {/* <Button onClick={() => log("sadfasdfsdfasdfasdf")}>asdasd</Button> */}
           </div>
@@ -154,7 +168,15 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               CONTENT 1
             </Tab>
             <Tab title={"Title 2"}>CONTENT 2</Tab>
-            <Tab title={"Title 3"}>CONTENT 3</Tab>
+            <Tab title={"Title 3"}>
+              <Tooltip
+                text={
+                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
+                }
+              >
+                <Button>button 2</Button>
+              </Tooltip>
+            </Tab>
             <Tab title={"Title 4"}>CONTENT 4</Tab>
           </Tabs>
         </Tile>

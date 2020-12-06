@@ -3,9 +3,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-
-  &__tooltip {
-    max-width: 100%;
-    display: inline-flex;
-  }
 }

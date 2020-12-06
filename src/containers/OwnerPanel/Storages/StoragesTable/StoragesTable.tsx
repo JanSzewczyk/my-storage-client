@@ -19,10 +19,11 @@ import Tile, {
 } from "../../../../components/UI/Tile";
 import Search from "../../../../components/UI/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-import Button from "../../../../components/UI/Button";
-import Tooltip from "../../../../components/UI/Tooltip";
+// import Tooltip from "../../../../components/UI/Tooltip";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
+import IconButton from "../../../../components/UI/IconButton";
+import Tooltip from "../../../../components/UI/Tooltip";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -164,17 +165,18 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
         <TileTop
           left={search}
           right={
+            // TODO FIX TOOLTIP 
             <Tooltip
               text={"Add New Storage"}
               position={"top-end"}
               color={"blue"}
             >
-              <Button
-                // btnType={"icon"}
-                onClick={() => setShowCreateStorageModal(true)}
-              >
-                <FaPlus />
-              </Button>
+            <IconButton
+              color={"warning"}
+              onClick={() => setShowCreateStorageModal(true)}
+            >
+              <FaPlus />
+            </IconButton>
             </Tooltip>
           }
         />

@@ -119,7 +119,7 @@ const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = React.me
             <Aux>
               <Button onClick={onClose}>Cancel</Button>
               <Button
-                btnType={"primary"}
+                color={"primary"}
                 onClick={handleSubmit(onChangeWorkplace)}
                 disabled={loading || !formState.isDirty}
               >

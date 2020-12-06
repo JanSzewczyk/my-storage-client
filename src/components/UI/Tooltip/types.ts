@@ -1,5 +1,3 @@
-export declare type TooltipType = "dotted";
-
 export declare type TooltipPosition =
   | "top"
   | "top-end"

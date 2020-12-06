@@ -46,24 +46,6 @@
     transition: 0.3s;
   }
 
-  &--icon {
-    border: none;
-    padding: 4px;
-    min-width: 35px;
-
-    svg {
-      height: 20px;
-      width: 20px;
-      margin-right: 0;
-    }
-
-    &:hover:not(:disabled) {
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-  }
-
   &--primary {
     color: $whiteColor;
     background-color: $blueColor;

@@ -130,7 +130,11 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
       </ModalBody>
       <ModalBottom>
         <Button onClick={onCloseModal}>Cancel</Button>
-        <Button btnType={"primary"} onClick={handleSubmit(onSubmit)}>
+        <Button
+          type={"submit"}
+          color={"primary"}
+          onClick={handleSubmit(onSubmit)}
+        >
           Create Storage
         </Button>
       </ModalBottom>

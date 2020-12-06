@@ -27,12 +27,12 @@ export const Primary = () => (
   <Aux>
     <Button
       onClick={action("onClick")}
-      btnType={"primary"}
+      color={"primary"}
       disabled={boolean("disabled", false)}
     >
       {text("text", "Primary")}
     </Button>
-    <Button onClick={action("onClick")} btnType={"primary"} disabled>
+    <Button onClick={action("onClick")} color={"primary"} disabled>
       Disable Primary
     </Button>
   </Aux>
@@ -42,12 +42,12 @@ export const Warning = () => (
   <Aux>
     <Button
       onClick={action("onClick")}
-      btnType={"warning"}
+      color={"warning"}
       disabled={boolean("disabled", false)}
     >
       {text("text", "Warning")}
     </Button>
-    <Button onClick={action("onClick")} btnType={"warning"} disabled>
+    <Button onClick={action("onClick")} color={"warning"} disabled>
       Disable Warning
     </Button>
   </Aux>

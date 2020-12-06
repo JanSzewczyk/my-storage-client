@@ -94,7 +94,7 @@ const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
         right={
           <Button
             onClick={() => onStoreAction(storeItems)}
-            btnType={"primary"}
+            color={"primary"}
             disabled={storeItems.length === 0}
           >
             store
