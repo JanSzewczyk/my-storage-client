@@ -39,8 +39,7 @@ export const TooltipPositions = () => (
       <Button>Tooltip Bottom</Button>
     </Tooltip>
     <Tooltip text={"Tooltip Bottom End text"} position={"bottom-end"}>
-      {/* <Button>Tooltip Bottom End</Button> */}
-      <div>a</div>
+      <Button>Tooltip Bottom End</Button>
     </Tooltip>
     <Tooltip text={"Tooltip Right text"} position={"right"}>
       <Button>Tooltip Right</Button>
@@ -63,14 +62,4 @@ export const TooltipColors = () => (
       <Button>Tooltip Black</Button>
     </Tooltip>
   </Aux>
-);
-
-export const DottedTooltip = () => (
-  <span style={{ color: "#f2f2f2" }}>
-    <Tooltip text={"Tooltip text"} type={"dotted"}>
-      Lorem Ipsum
-    </Tooltip>{" "}
-    is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-    has been the industry's standard dummy
-  </span>
 );

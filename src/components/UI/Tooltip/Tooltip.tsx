@@ -1,7 +1,6 @@
 import React, {
   CSSProperties,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -9,30 +8,29 @@ import React, {
 import { createPortal } from "react-dom";
 
 import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
-import { TooltipColor, TooltipPosition, TooltipType } from "./types";
-
-import "./Tooltip.scss";
+import { TooltipColor, TooltipPosition } from "./types";
 import {
   getApplicationHeight,
   getApplicationWidth,
 } from "../../../shared/utils/graphicUtils";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import TooltipMessage from "./TooltipMessage/TooltipMessage";
 
 interface TooltipProps extends PropsWithChildren {
   text: string;
-  type?: TooltipType;
   position?: TooltipPosition;
   color?: TooltipColor;
   className?: string;
+  style?: CSSProperties;
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
   children,
   text,
-  type,
   position = "top",
   className,
   color = "white",
+  style,
 }) => {
   const [coordinates, setCoordinates] = useState<any>(null);
 
@@ -121,15 +119,6 @@ const Tooltip: React.FC<TooltipProps> = ({
       coordinates && window.removeEventListener("scroll", handleScroll);
   }, [coordinates, handleScroll]);
 
-  let tooltipClasses: string[] = ["tooltip"];
-  type && tooltipClasses.push(`tooltip--${type}`);
-  className && tooltipClasses.push(className);
-
-  let TMClasses: string[] = ["tooltip__message"];
-  position && TMClasses.push(`tooltip__message--${position}`);
-  color && TMClasses.push(`tooltip__message--${color}`);
-  color && TMClasses.push(`tooltip__message--${position}-${color}`);
-
   const setPosition = (): CSSProperties => {
     if (position === "top-end") return { bottom: "0px", right: "0px" };
     if (position === "bottom" || position === "right")
@@ -145,19 +134,20 @@ const Tooltip: React.FC<TooltipProps> = ({
       {React.cloneElement(children, { ref: childrenRef })}
       {coordinates &&
         createPortal(
-          <div
-            role={"tooltip"}
+          <TooltipMessage
+            title={text}
+            position={position}
+            color={color}
             ref={messageRef}
-            className={TMClasses.join(" ")}
+            className={className}
             style={{
               ...setPosition(),
               willChange: "transform",
               transform: `translate3d(${coordinates?.x}px,${coordinates?.y}px,0)`,
               maxWidth: coordinates?.maxWidth,
+              ...style,
             }}
-          >
-            {text}
-          </div>,
+          />,
           document.body
         )}
     </Aux>
