@@ -8,12 +8,12 @@ import "./EllipsisWrapper.scss";
 
 interface EllipsisWrapperProps extends PropsWithChildren {}
 
-const EllipsisWrapper: React.FC<EllipsisWrapperProps> = React.memo(
-  ({ children }) => {
-    const divRef: any = useRef(null);
-    const [allowTooltip, setAllowTooltip] = useState<boolean>(false);
+const EllipsisWrapper: React.FC<EllipsisWrapperProps> = ({ children }) => {
+  const divRef = useRef<any>(null);
+  const [allowTooltip, setAllowTooltip] = useState<boolean>(false);
 
-    const setAllowTooltipHandler = useCallback(() => {
+  const setAllowTooltipHandler = useCallback(() => {
+    if (divRef.current) {
       if (
         !allowTooltip &&
         divRef.current.scrollWidth > divRef.current.offsetWidth
@@ -27,35 +27,34 @@ const EllipsisWrapper: React.FC<EllipsisWrapperProps> = React.memo(
       ) {
         setAllowTooltip(false);
       }
-    }, [allowTooltip, divRef]);
+    }
+  }, [allowTooltip, divRef]);
 
-    useEffect(() => {
-      setAllowTooltipHandler();
+  useEffect(() => {
+    setAllowTooltipHandler();
 
-      window.addEventListener("resize", setAllowTooltipHandler);
+    window.addEventListener("resize", setAllowTooltipHandler);
 
-      return () => {
-        window.removeEventListener("resize", setAllowTooltipHandler);
-      };
-    }, [allowTooltip, divRef, setAllowTooltipHandler]);
+    return () => {
+      window.removeEventListener("resize", setAllowTooltipHandler);
+    };
+  }, [allowTooltip, divRef, setAllowTooltipHandler]);
 
-    // TODO FIX this
-    // if (allowTooltip) {
-    //   return (
-    //     // <Tooltip text={children} className={"ellipsis-wrapper__tooltip"}>
-    //     //   <span className={"ellipsis-wrapper"} ref={divRef}>
-    //     //     {children}
-    //     //   </span>
-    //     // </Tooltip>
-    //   );
-    // }
-
+  if (allowTooltip) {
     return (
-      <div className={"ellipsis-wrapper"} ref={divRef}>
-        {children}
-      </div>
+      <Tooltip text={children}>
+        <span className={"ellipsis-wrapper"} ref={divRef}>
+          {children}
+        </span>
+      </Tooltip>
     );
   }
-);
+
+  return (
+    <div className={"ellipsis-wrapper"} ref={divRef}>
+      {children}
+    </div>
+  );
+};
 
 export default EllipsisWrapper;

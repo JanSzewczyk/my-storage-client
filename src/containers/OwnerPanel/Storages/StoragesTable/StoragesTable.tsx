@@ -23,6 +23,7 @@ import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
 import IconButton from "../../../../components/UI/IconButton";
+import Tooltip from "../../../../components/UI/Tooltip";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -165,18 +166,18 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
           left={search}
           right={
             // TODO FIX TOOLTIP 
-            // <Tooltip
-            //   text={"Add New Storage"}
-            //   position={"top-end"}
-            //   color={"blue"}
-            // >
+            <Tooltip
+              text={"Add New Storage"}
+              position={"top-end"}
+              color={"blue"}
+            >
             <IconButton
               color={"warning"}
               onClick={() => setShowCreateStorageModal(true)}
             >
               <FaPlus />
             </IconButton>
-            // </Tooltip>
+            </Tooltip>
           }
         />
         <TileContent>
