@@ -46,9 +46,9 @@ export const userLoadFailure = (): UserLoadFailureAction => {
 export const getUserDetails = (): any => (dispatch: StoreDispatch): any => {
   dispatch(userLoadStart());
 
- return axios
+  return axios
     .get("users/details")
-    .then((res: AxiosResponse<UserDetails>) => {
+    .then((res: AxiosResponse<any>) => {
       const { user, role } = res.data;
 
       dispatch(userLoadSuccess(user, role));
