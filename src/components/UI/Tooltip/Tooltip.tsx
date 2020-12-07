@@ -131,7 +131,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   return (
     <Aux>
-      {children && React.cloneElement(children, { ref: childrenRef })}
+      {React.cloneElement(children, { ref: childrenRef })}
       {coordinates &&
         createPortal(
           <TooltipMessage

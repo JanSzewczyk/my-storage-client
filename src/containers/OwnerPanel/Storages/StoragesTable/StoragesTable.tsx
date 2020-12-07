@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
-
 import { connect } from "react-redux";
+
 import * as action from "../../../../store";
 
 import PageInfo from "../../../../shared/types/common/PageInfo";
@@ -19,11 +18,13 @@ import Tile, {
 } from "../../../../components/UI/Tile";
 import Search from "../../../../components/UI/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-// import Tooltip from "../../../../components/UI/Tooltip";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
 import IconButton from "../../../../components/UI/IconButton";
 import Tooltip from "../../../../components/UI/Tooltip";
+import { PlusIcon } from "../../../../components/UI/Icons";
+
+import "./StoragesTable.scss";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -120,26 +121,6 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     [onSearchChanged, query.search]
   );
 
-  const table = useMemo(
-    () => (
-      <Table<StorageView>
-        config={config}
-        data={storageViewList}
-        sort={query.sort}
-        onSortChanged={onSortChanged}
-        onRowClick={redirectToStorage}
-        loading={storageViewListLoading}
-      />
-    ),
-    [
-      onSortChanged,
-      query.sort,
-      redirectToStorage,
-      storageViewList,
-      storageViewListLoading,
-    ]
-  );
-
   const pagination = useMemo(
     () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
     [onPageChanged, pageInfo]
@@ -165,23 +146,31 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
         <TileTop
           left={search}
           right={
-            // TODO FIX TOOLTIP
-            // <Tooltip
-            //   text={"Add New Storage"}
-            //   position={"top-end"}
-            //   color={"blue"}
-            // >
-            <IconButton
-              color={"warning"}
-              onClick={() => setShowCreateStorageModal(true)}
+            <Tooltip
+              text={"Add New Storage"}
+              position={"top-end"}
+              color={"blue"}
             >
-              <FaPlus />
-            </IconButton>
-            // </Tooltip>
+              <IconButton
+                color={"default"}
+                onClick={() => setShowCreateStorageModal(true)}
+              >
+                <PlusIcon />
+              </IconButton>
+            </Tooltip>
           }
         />
         <TileContent>
-          <div className={"storage-employees"}>{table}</div>
+          <div className={"storages-table"}>
+            <Table<StorageView>
+              config={config}
+              data={storageViewList}
+              sort={query.sort}
+              onSortChanged={onSortChanged}
+              onRowClick={redirectToStorage}
+              loading={storageViewListLoading}
+            />
+          </div>
         </TileContent>
         <TileBottom right={pagination} />
       </Tile>

@@ -15,6 +15,7 @@ export {
   FaEllipsisV as EllipsisVIcon,
   FaLevelDownAlt as LevelDownAltIcon,
   FaLevelUpAlt as LevelUpAltIcon,
+  FaPlus as PlusIcon,
 } from "react-icons/fa";
 
 export {
