@@ -88,22 +88,22 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
   );
 
   const options = (
-    // <Tooltip text={"Options"}>
-    <DropDown type={"icon"} icon={<EllipsisHIcon />}>
-      <DropdownItem
-        text={"Edit"}
-        icon={<EditIcon />}
-        onClick={() => setEdit(true)}
-        disabled={edit}
-      />
-      <DropdownItem
-        text={"Remove"}
-        icon={<DeleteIcon />}
-        disabled={!storage}
-        onClick={() => storage && onRemoveStorage(storage.id)}
-      />
-    </DropDown>
-    // </Tooltip>
+    <Tooltip text={"Options"}>
+      <DropDown type={"icon"} icon={<EllipsisHIcon />}>
+        <DropdownItem
+          text={"Edit"}
+          icon={<EditIcon />}
+          onClick={() => setEdit(true)}
+          disabled={edit}
+        />
+        <DropdownItem
+          text={"Remove"}
+          icon={<DeleteIcon />}
+          disabled={!storage}
+          onClick={() => storage && onRemoveStorage(storage.id)}
+        />
+      </DropDown>
+    </Tooltip>
   );
 
   const storagePanel = useMemo(() => <StorageData storage={storage} />, [

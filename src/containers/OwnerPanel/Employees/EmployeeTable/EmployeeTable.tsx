@@ -16,6 +16,7 @@ import {
   EmployeeDto,
   EmployeeView,
 } from "../../../../shared/types/employee";
+import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
 
@@ -31,7 +32,6 @@ import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Table, { TableConfig } from "../../../../components/UI/Table";
 
 import "./EmployeeTable.scss";
-import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 
 interface EmployeeTableProps {
   onGetEmployeesList: (query: SearchQuery) => void;
@@ -50,9 +50,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const { query, onSortChanged, onPageChanged, onSearchChanged } = useQuery<
-    SearchQuery
-  >({
+  const {
+    query,
+    onSortChanged,
+    onPageChanged,
+    onSearchChanged,
+  } = useQuery<SearchQuery>({
     search: "",
     sort: [],
     page: 0,
@@ -114,27 +117,6 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
     browserHistory.push(`/employees/${employee.id}`);
   }, []);
 
-  const employeeTable = useMemo(
-    () => (
-      <Table
-        config={config}
-        data={employeeList}
-        sort={query.sort}
-        onSortChanged={onSortChanged}
-        loading={employeeListLoading}
-        onRowClick={redirectToEmployee}
-      />
-    ),
-    [
-      config,
-      employeeList,
-      employeeListLoading,
-      onSortChanged,
-      query.sort,
-      redirectToEmployee,
-    ]
-  );
-
   const pagination = useMemo(
     () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
     [onPageChanged, pageInfo]
@@ -189,7 +171,16 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
           }
         />
         <TileContent>
-          <div className={"employee-table"}>{employeeTable}</div>
+          <div className={"employee-table"}>
+            <Table
+              config={config}
+              data={employeeList}
+              sort={query.sort}
+              onSortChanged={onSortChanged}
+              loading={employeeListLoading}
+              onRowClick={redirectToEmployee}
+            />
+          </div>
         </TileContent>
         <TileBottom right={pagination} />
       </Tile>
