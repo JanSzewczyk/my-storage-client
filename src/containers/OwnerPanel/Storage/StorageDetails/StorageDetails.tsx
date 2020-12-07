@@ -25,7 +25,7 @@ import Tile from "../../../../components/UI/Tile/Tile";
 import Loading from "../../../../components/UI/Loading/Loading";
 import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 import StorageEditForm from "../../../../components/OwnerPanel/Storage/StorageEditForm/StorageEditForm";
-import DropDown from "../../../../components/UI/DropDown/DropDown";
+import DropDown from "../../../../components/UI/DropDown/Dropdown";
 import DropdownItem from "../../../../components/UI/DropDown/DropdownItem/DropdownItem";
 import Tooltip from "../../../../components/UI/Tooltip";
 

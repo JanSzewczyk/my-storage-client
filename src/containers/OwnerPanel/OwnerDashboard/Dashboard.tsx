@@ -7,7 +7,7 @@ import AppBar from "../../../components/UI/AppBar/AppBar";
 import AppContent from "../../../components/UI/AppContent/AppContent";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Tile from "../../../components/UI/Tile/Tile";
-import DropDown from "../../../components/UI/DropDown/DropDown";
+import DropDown from "../../../components/UI/DropDown/Dropdown";
 import DropdownItem from "../../../components/UI/DropDown/DropdownItem/DropdownItem";
 import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrapper";
 import Tooltip from "../../../components/UI/Tooltip/Tooltip";

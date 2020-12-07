@@ -7,7 +7,7 @@ import "./Button.scss";
 
 interface ButtonProps extends PropsWithChildren<ReactNode> {
   type?: ButtonType;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   color?: ButtonColor;
   className?: string;

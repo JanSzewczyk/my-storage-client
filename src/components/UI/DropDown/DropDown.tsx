@@ -10,7 +10,7 @@ import Button from "../Button/Button";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 
-import "./DropDown.scss";
+import "./Dropdown.scss";
 
 interface DropdownProps extends PropsWithChildren<any> {
   type?: DropdownType;
@@ -23,7 +23,7 @@ interface DropdownProps extends PropsWithChildren<any> {
 
 export type Ref = FixMeLater;
 
-const DropDown = React.forwardRef<Ref, DropdownProps>(
+const Dropdown = React.forwardRef<Ref, DropdownProps>(
   ({ type = "button", title, icon, btnType, children, top, left }, ref) => {
     const [active, setActive] = useState<boolean>(false);
 
@@ -85,4 +85,4 @@ const DropDown = React.forwardRef<Ref, DropdownProps>(
   }
 );
 
-export default DropDown;
+export default Dropdown;

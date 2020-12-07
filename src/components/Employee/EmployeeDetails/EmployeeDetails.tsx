@@ -18,7 +18,7 @@ import Employee from "../../../shared/types/employee/Employee";
 import Tile from "../../UI/Tile/Tile";
 import EmployeeDetailsData from "./EmployeeDetailsData/EmployeeDetailsData";
 import Loading from "../../UI/Loading/Loading";
-import DropDown from "../../UI/DropDown/DropDown";
+import DropDown from "../../UI/DropDown/Dropdown";
 import DropdownItem from "../../UI/DropDown/DropdownItem/DropdownItem";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import { CUEmployee } from "../../../shared/types/employee";
