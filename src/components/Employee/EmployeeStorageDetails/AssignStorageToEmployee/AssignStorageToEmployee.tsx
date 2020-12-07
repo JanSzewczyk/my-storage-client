@@ -7,9 +7,9 @@ import useNotification from "../../../../hooks/useNotification";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import { TileContent, TileBottom } from "../../../UI/Tile";
-import Button from "../../../UI/Button";
+import Button from "../../../UI/Inputs/Button";
 import Loading from "../../../UI/Loading/Loading";
-import Select from "../../../UI/Select";
+import Select from "../../../UI/Inputs/Select";
 import axios from "../../../../shared/config/axios";
 import browserHistory from "../../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";

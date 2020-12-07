@@ -1,7 +1,7 @@
 import React from "react";
 
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import DataView from "../../../UI/DataView/DataView";
+import DataView from "../../../UI/DataDisplay/DataView/DataView";
 import { Link } from "react-router-dom";
 import { Storage } from "../../../../shared/types/storage";
 

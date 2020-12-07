@@ -1,6 +1,6 @@
 import React from "react";
 
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import { SelectConfig, SelectOption } from "./types";
 
 import "./Select.scss";

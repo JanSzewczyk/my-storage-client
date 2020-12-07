@@ -5,11 +5,11 @@ import AuthData from "../../../shared/types/auth/AuthData";
 import * as pattern from "../../../shared/patterns";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Input from "../../UI/Input/Input";
-import Button from "../../UI/Button/Button";
+import Input from "../../UI/Inputs/Input/Input";
+import Button from "../../UI/Inputs/Button/Button";
 import Loading from "../../UI/Loading/Loading";
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import { BoxIcon } from "../../UI/Icons";
+import { BoxIcon } from "../../UI/DataDisplay/Icons";
 
 import "./AuthForm.scss";
 

@@ -7,7 +7,7 @@ import * as action from "../../../../store";
 
 import useQuery, { SearchQuery } from "../../../../hooks/useQuery";
 import browserHistory from "../../../../shared/config/history";
-import Search from "../../../../components/UI/Search/Search";
+import Search from "../../../../components/UI/Inputs/Search/Search";
 import useNotification from "../../../../hooks/useNotification";
 import axios from "../../../../shared/config/axios";
 import {
@@ -27,7 +27,7 @@ import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Pagination from "../../../../components/UI/Pagination/Pagination";
 import TileTop from "../../../../components/UI/Tile/TileTop/TileTop";
-import Button from "../../../../components/UI/Button/Button";
+import Button from "../../../../components/UI/Inputs/Button/Button";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Table, { TableConfig } from "../../../../components/UI/Table";
 

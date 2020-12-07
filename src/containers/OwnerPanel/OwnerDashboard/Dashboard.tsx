@@ -3,20 +3,18 @@ import React from "react";
 import { connect } from "react-redux";
 import * as action from "../../../store";
 
-import AppBar from "../../../components/UI/AppBar/AppBar";
-import AppContent from "../../../components/UI/AppContent/AppContent";
+import AppBar from "../../../components/UI/Layout/AppBar/AppBar";
+import AppContent from "../../../components/UI/Layout/AppContent/AppContent";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Tile from "../../../components/UI/Tile/Tile";
-import DropDown from "../../../components/UI/DropDown/Dropdown";
-import DropdownItem from "../../../components/UI/DropDown/DropdownItem/DropdownItem";
-import EllipsisWrapper from "../../../components/UI/EllipsisWrapper/EllipsisWrapper";
+import EllipsisWrapper from "../../../components/UI/DataDisplay/EllipsisWrapper/EllipsisWrapper";
 import Tooltip from "../../../components/UI/Tooltip/Tooltip";
 
 import "./Dashboard.scss";
 import Tabs, { Tab } from "../../../components/UI/Tabs";
 import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 import AuthData from "../../../shared/types/auth/AuthData";
-import Button from "../../../components/UI/Button";
+import Button from "../../../components/UI/Inputs/Button";
 
 interface BashboardProps {
   logout: (authData: AuthData) => void;
@@ -106,21 +104,6 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               display: "flex",
             }}
           >
-            <Tooltip
-              text={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum"
-              }
-              position={"top-end"}
-            >
-              <DropDown btnType={"warning"} title={"dropdown"}>
-                <DropdownItem
-                  onClick={() => console.log("Elo jake")}
-                  text={"elo"}
-                />
-
-                {/* <DropdownItem onClick={sendRequest}>elo1</DropdownItem> */}
-              </DropDown>
-            </Tooltip>
 
             {/* <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
@@ -187,7 +170,7 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    logout: (authData: AuthData) => dispatch(action.logout()),
+    logout: () => dispatch(action.logout()),
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
 import { MailtoHeaders } from "./types";
 
 import "./Mailto.scss";

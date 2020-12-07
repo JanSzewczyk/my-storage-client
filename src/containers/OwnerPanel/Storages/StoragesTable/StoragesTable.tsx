@@ -16,13 +16,13 @@ import Tile, {
   TileContent,
   TileTop,
 } from "../../../../components/UI/Tile";
-import Search from "../../../../components/UI/Search";
+import Search from "../../../../components/UI/Inputs/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
-import IconButton from "../../../../components/UI/IconButton";
+import IconButton from "../../../../components/UI/Inputs/IconButton";
 import Tooltip from "../../../../components/UI/Tooltip";
-import { PlusIcon } from "../../../../components/UI/Icons";
+import { PlusIcon } from "../../../../components/UI/DataDisplay/Icons";
 
 import "./StoragesTable.scss";
 

@@ -6,7 +6,7 @@ import { UserRole } from "../../shared/constants";
 
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
-import Button from "../UI/Button/Button";
+import Button from "../UI/Inputs/Button/Button";
 import NavigationLinks from "../Navigation/NavigationLinks/NavigationLinks";
 import Logo from "./Logo/Logo";
 

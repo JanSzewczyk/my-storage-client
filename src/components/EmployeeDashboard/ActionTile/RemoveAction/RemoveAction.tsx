@@ -9,7 +9,7 @@ import axios from "../../../../shared/config/axios";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Inputs/Button/Button";
 import RemoveForm from "./RemoveForm/RemoveForm";
 import Loading from "../../../UI/Loading/Loading";
 

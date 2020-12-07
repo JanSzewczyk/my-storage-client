@@ -1,10 +1,10 @@
 import React, { CSSProperties } from "react";
 
 import Tooltip from ".";
-import Button from "../Button";
+import Button from "../Inputs/Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import IconButton from "../IconButton";
-import { EditIcon } from "../Icons";
+import IconButton from "../Inputs/IconButton";
+import { EditIcon } from "../DataDisplay/Icons";
 
 const styles: CSSProperties = {
   marginTop: "38px",

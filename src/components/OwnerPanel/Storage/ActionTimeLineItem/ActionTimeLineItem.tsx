@@ -12,7 +12,7 @@ import {
   LevelDownAltIcon,
   LevelUpAltIcon,
   UserIcon,
-} from "../../../UI/Icons";
+} from "../../../UI/DataDisplay/Icons";
 import Table, { TableConfig } from "../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";

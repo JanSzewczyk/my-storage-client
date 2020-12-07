@@ -7,7 +7,7 @@ import Tile, { TileBottom } from "../../UI/Tile";
 import Loading from "../../UI/Loading/Loading";
 import EmployeeStorageData from "./EmployeeStorageData/EmployeeStorageData";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../UI/Button";
+import Button from "../../UI/Inputs/Button";
 import AssignStorageToEmployee from "./AssignStorageToEmployee/AssignStorageToEmployee";
 import StoreState from "../../../shared/types/store/StoreState";
 import StoreDispatch from "../../../shared/types/store/StoreDispatch";

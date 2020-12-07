@@ -1,8 +1,8 @@
 import React, { useRef, useCallback, useState, useEffect } from "react";
 
-import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
 
-import Tooltip from "../Tooltip/Tooltip";
+import Tooltip from "../../Tooltip/Tooltip";
 
 import "./EllipsisWrapper.scss";
 

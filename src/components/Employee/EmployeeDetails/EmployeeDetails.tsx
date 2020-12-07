@@ -18,8 +18,6 @@ import Employee from "../../../shared/types/employee/Employee";
 import Tile from "../../UI/Tile/Tile";
 import EmployeeDetailsData from "./EmployeeDetailsData/EmployeeDetailsData";
 import Loading from "../../UI/Loading/Loading";
-import DropDown from "../../UI/DropDown/Dropdown";
-import DropdownItem from "../../UI/DropDown/DropdownItem/DropdownItem";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import { CUEmployee } from "../../../shared/types/employee";
 import CUEmployeeModal from "../../OwnerPanel/CUEmployeeModal/CUEmployeeModal";
@@ -90,22 +88,22 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
     });
   };
 
-  const optionsDropdown = (
-    <DropDown type={"icon"} icon={<MoreHorizIcon />}>
-      <DropdownItem
-        text={"Edit"}
-        icon={<EditIcon />}
-        onClick={() => setShowEdit(true)}
-        disabled={!employee}
-      />
-      <DropdownItem
-        text={"Remove"}
-        icon={<DeleteIcon />}
-        disabled={!employee}
-        onClick={() => removeEmployee(employeeId)}
-      />
-    </DropDown>
-  );
+  // const optionsDropdown = (
+  //   <DropDown type={"icon"} icon={<MoreHorizIcon />}>
+  //     <DropdownItem
+  //       text={"Edit"}
+  //       icon={<EditIcon />}
+  //       onClick={() => setShowEdit(true)}
+  //       disabled={!employee}
+  //     />
+  //     <DropdownItem
+  //       text={"Remove"}
+  //       icon={<DeleteIcon />}
+  //       disabled={!employee}
+  //       onClick={() => removeEmployee(employeeId)}
+  //     />
+  //   </DropDown>
+  // );
 
   return (
     <Aux>
@@ -126,7 +124,7 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
         header={{
           title: "Employee",
           subtitle: "Employee Details",
-          right: optionsDropdown,
+          // right: optionsDropdown,
         }}
       >
         {employeeLoading ? (

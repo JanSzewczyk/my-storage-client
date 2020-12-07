@@ -2,7 +2,7 @@ import React from "react";
 
 import { InputConfig, InputType } from "./types";
 
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 
 import "./Input.scss";
 

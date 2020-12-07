@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import AppBar from "../../../components/UI/AppBar";
-import AppContent from "../../../components/UI/AppContent";
+import AppBar from "../../../components/UI/Layout/AppBar";
+import AppContent from "../../../components/UI/Layout/AppContent";
 import Breadcrumbs, {
   BreadcrumbItem,
 } from "../../../components/UI/Breadcrumbs";

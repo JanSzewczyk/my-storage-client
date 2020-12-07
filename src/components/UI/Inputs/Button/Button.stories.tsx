@@ -3,7 +3,9 @@ import { action } from "@storybook/addon-actions";
 import { withKnobs, text, boolean } from "@storybook/addon-knobs";
 
 import Button from "./Button";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import IconButton from "../IconButton";
+import { EditIcon } from "../../DataDisplay/Icons";
 
 export default {
   title: "Button",
@@ -50,5 +52,13 @@ export const Warning = () => (
     <Button onClick={action("onClick")} color={"warning"} disabled>
       Disable Warning
     </Button>
+  </Aux>
+);
+
+export const Icon = () => (
+  <Aux>
+    <IconButton>
+      <EditIcon />
+    </IconButton>
   </Aux>
 );

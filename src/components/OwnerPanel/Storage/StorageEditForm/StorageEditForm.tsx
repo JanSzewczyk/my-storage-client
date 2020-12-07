@@ -1,12 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import DataView from "../../../UI/DataView/DataView";
+import DataView from "../../../UI/DataDisplay/DataView/DataView";
 import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Inputs/Button/Button";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Input from "../../../UI/Input/Input";
+import Input from "../../../UI/Inputs/Input/Input";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import { CUStorage, Storage } from "../../../../shared/types/storage";
 import StorageEditFormType from "./StorageEditFormType";

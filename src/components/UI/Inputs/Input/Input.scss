@@ -1,6 +1,6 @@
-@import "../../../assets/variables/variables.scss";
+@import "../../../../assets/variables/variables.scss";
 
-.select-label {
+.label {
   font-family: $font;
   font-size: $fontMD;
   width: calc(100% - 4px);
@@ -12,11 +12,11 @@
   }
 }
 
-.select {
+.input {
   margin: 8px 8px 8px 0;
   color: $whiteColor;
   display: inline-block;
-  width: calc(100% - 8px);
+  width: calc(100% - 26px);
   font-size: $fontMD;
   font-family: $font;
   font-weight: 300;
@@ -44,22 +44,31 @@
   }
 
   &:invalid {
-    border: 1px solid $redColor;
-  }
-
-  option {
-    background: $grey1Color;
-    padding: 4px;
+    border: 1px solid #dc2d37;
   }
 }
 
-.select--invalid {
-  border: 1px solid $redColor;
+.input--invalid {
+  border: 1px solid #dc2d37;
 }
 
-.select-error {
+.error {
   font-family: $font;
   font-size: $fontSM;
   margin-bottom: 4px;
   color: $redColor;
+}
+
+.label--edit {
+  display: block;
+  padding: 4px 0 4px 0;
+  font-size: $fontSM;
+  opacity: 0.8;
+}
+
+.input--edit {
+  margin: 1px 0 5px 5px;
+  color: $blueColor;
+  font-size: $fontMD;
+  padding: 2px;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../Button";
+import Button from "../../Inputs/Button";
 import { withKnobs } from "@storybook/addon-knobs";
 import Menu from "./Menu";
 import MenuItem from "../MenuItem";

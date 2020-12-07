@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode } from "react";
 
-import PropsWithChildren from "../../../shared/types/props/PropsWithChildren";
+import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
 import { ButtonColor, ButtonType } from "./types";
 
 import "./Button.scss";

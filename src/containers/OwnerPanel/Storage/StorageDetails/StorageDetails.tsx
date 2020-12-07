@@ -20,13 +20,11 @@ import {
   DeleteIcon,
   EditIcon,
   EllipsisHIcon,
-} from "../../../../components/UI/Icons";
+} from "../../../../components/UI/DataDisplay/Icons";
 import Tile from "../../../../components/UI/Tile/Tile";
 import Loading from "../../../../components/UI/Loading/Loading";
 import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 import StorageEditForm from "../../../../components/OwnerPanel/Storage/StorageEditForm/StorageEditForm";
-import DropDown from "../../../../components/UI/DropDown/Dropdown";
-import DropdownItem from "../../../../components/UI/DropDown/DropdownItem/DropdownItem";
 import Tooltip from "../../../../components/UI/Tooltip";
 
 interface StorageDetailsProps {
@@ -87,24 +85,25 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
     [notification]
   );
 
-  const options = (
-    <Tooltip text={"Options"}>
-      <DropDown type={"icon"} icon={<EllipsisHIcon />}>
-        <DropdownItem
-          text={"Edit"}
-          icon={<EditIcon />}
-          onClick={() => setEdit(true)}
-          disabled={edit}
-        />
-        <DropdownItem
-          text={"Remove"}
-          icon={<DeleteIcon />}
-          disabled={!storage}
-          onClick={() => storage && onRemoveStorage(storage.id)}
-        />
-      </DropDown>
-    </Tooltip>
-  );
+  // TODO FIX
+  // const options = (
+  //   <Tooltip text={"Options"}>
+  //     <DropDown type={"icon"} icon={<EllipsisHIcon />}>
+  //       <DropdownItem
+  //         text={"Edit"}
+  //         icon={<EditIcon />}
+  //         onClick={() => setEdit(true)}
+  //         disabled={edit}
+  //       />
+  //       <DropdownItem
+  //         text={"Remove"}
+  //         icon={<DeleteIcon />}
+  //         disabled={!storage}
+  //         onClick={() => storage && onRemoveStorage(storage.id)}
+  //       />
+  //     </DropDown>
+  //   </Tooltip>
+  // );
 
   const storagePanel = useMemo(() => <StorageData storage={storage} />, [
     storage,
@@ -134,7 +133,7 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
       header={{
         title: "Storage",
         subtitle: "Storage information",
-        right: options,
+        // right: options,
       }}
     >
       {storageLoading ? <Loading /> : !edit ? storagePanel : storageEditPanel}

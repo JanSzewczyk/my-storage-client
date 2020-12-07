@@ -4,11 +4,11 @@ import { Storage } from "../../../shared/types/storage";
 
 import Tile from "../../UI/Tile/Tile";
 import TileContent from "../../UI/Tile/TileContent/TileContent";
-import DataView from "../../UI/DataView/DataView";
+import DataView from "../../UI/DataDisplay/DataView/DataView";
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import TileBottom from "../../UI/Tile/TileBottom/TileBottom";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../UI/Button/Button";
+import Button from "../../UI/Inputs/Button/Button";
 
 interface StorageInforamtionsProps {
   storage: Storage;
