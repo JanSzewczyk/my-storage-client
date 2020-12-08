@@ -1,0 +1,21 @@
+@import "../../../../assets/variables/variables.scss";
+
+.menu-item {
+  //   height: 28px;
+  display: flex;
+  align-items: center;
+  font-size: $fontMD;
+  color: $whiteColor;
+  margin: 4px;
+
+  &--clickable {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.4;
+  }
+}

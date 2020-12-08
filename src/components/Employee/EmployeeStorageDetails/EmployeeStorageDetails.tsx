@@ -3,16 +3,16 @@ import React, { useMemo, useState } from "react";
 import { connect } from "react-redux";
 import * as action from "../../../store";
 
-import Tile, { TileBottom } from "../../UI/Tile";
 import Loading from "../../UI/Loading/Loading";
 import EmployeeStorageData from "./EmployeeStorageData/EmployeeStorageData";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../UI/Button";
+import Button from "../../UI/Inputs/Button";
 import AssignStorageToEmployee from "./AssignStorageToEmployee/AssignStorageToEmployee";
 import StoreState from "../../../shared/types/store/StoreState";
 import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 import Employee from "../../../shared/types/employee/Employee";
 import _ from "lodash";
+import Tile, { TileBottom } from "../../UI/DataDisplay/Tile";
 
 interface EmployeeStorageDetailsProps {
   employeeId: string;
@@ -56,10 +56,7 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = React.memo
             <div>
               <h4>This employee is not assigned to any warehouse :(</h4>
               <h6>You can do this by clicking the button below</h6>
-              <Button
-                color={"primary"}
-                onClick={() => setAssignStorage(true)}
-              >
+              <Button color={"primary"} onClick={() => setAssignStorage(true)}>
                 Assign to Workplace
               </Button>
             </div>

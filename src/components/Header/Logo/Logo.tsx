@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BoxIcon } from "../../UI/Icons";
+import { BoxIcon } from "../../UI/DataDisplay/Icons";
 
 import "./Logo.scss";
 

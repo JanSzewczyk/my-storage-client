@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 // import _ from "lodash";
 
-import Button from "../../../../UI/Button/Button";
-import Select from "../../../../UI/Select/Select";
-import Input from "../../../../UI/Input/Input";
+import Button from "../../../../UI/Inputs/Button/Button";
+import Select from "../../../../UI/Inputs/Select/Select";
+import Input from "../../../../UI/Inputs/Input/Input";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 import Product from "../../../../../shared/types/product/Product";

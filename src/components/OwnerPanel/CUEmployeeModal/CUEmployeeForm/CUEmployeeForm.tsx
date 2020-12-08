@@ -15,11 +15,11 @@ import CUEmployeeFormType from "./CUEmployeeFormType";
 
 import ModalBody from "../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Inputs/Button/Button";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Loading from "../../../UI/Loading/Loading";
-import Input from "../../../UI/Input/Input";
-import Select from "../../../UI/Select/Select";
+import Input from "../../../UI/Inputs/Input/Input";
+import Select from "../../../UI/Inputs/Select/Select";
 
 import "./CUEmployeeForm.scss";
 

@@ -6,10 +6,9 @@ import { useForm } from "react-hook-form";
 import useNotification from "../../../../hooks/useNotification";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import { TileContent, TileBottom } from "../../../UI/Tile";
-import Button from "../../../UI/Button";
+import Button from "../../../UI/Inputs/Button";
 import Loading from "../../../UI/Loading/Loading";
-import Select from "../../../UI/Select";
+import Select from "../../../UI/Inputs/Select";
 import axios from "../../../../shared/config/axios";
 import browserHistory from "../../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
@@ -22,6 +21,7 @@ import Employee from "../../../../shared/types/employee/Employee";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
 import StorageDto from "../../../../shared/types/storage/StorageDto";
+import { TileBottom, TileContent } from "../../../UI/DataDisplay/Tile";
 
 interface AssignStorageToEmployeeForm {
   storageId: string;

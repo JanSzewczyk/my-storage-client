@@ -9,13 +9,13 @@ import Action from "../../../../shared/types/action/Action";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 
-import TimeLine, { TimeLineItem } from "../../../../components/UI/TimeLine";
+import TimeLine, { TimeLineItem } from "../../../../components/UI/DataDisplay/TimeLine";
 import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
-import Pagination from "../../../../components/UI/Pagination";
-import Tile, { TileBottom, TileContent } from "../../../../components/UI/Tile";
 import Loading from "../../../../components/UI/Loading";
 
 import "./StorageActions.scss";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Tile, { TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageActionsProps {
   storageId: string;

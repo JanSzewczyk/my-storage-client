@@ -9,13 +9,11 @@ import { EmployeeView } from "../../../../shared/types/employee";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 
-import Tile from "../../../../components/UI/Tile/Tile";
-import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
-import Table, { TableConfig } from "../../../../components/UI/Table";
-import Pagination from "../../../../components/UI/Pagination/Pagination";
-import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
 
 import "./StorageEmployees.scss";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
+import Tile, { TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageEmployeesProps {
   storageId: string;

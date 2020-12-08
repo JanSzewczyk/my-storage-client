@@ -3,7 +3,7 @@ import { updateObject } from "../utils/utility";
 import Storage from "../types/storage/Storage";
 import StorageViewDto from "../types/storage/StorageViewDto";
 import StorageView from "../types/storage/StorageView";
-import { SelectOption } from "../../components/UI/Select";
+import { SelectOption } from "../../components/UI/Inputs/Select";
 
 export const mapStorageViewDtoToStorageView = (
   storageViewDto: StorageViewDto

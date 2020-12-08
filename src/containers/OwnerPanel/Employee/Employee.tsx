@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import AppBar from "../../../components/UI/AppBar";
-import AppContent from "../../../components/UI/AppContent";
+import AppBar from "../../../components/UI/Layout/AppBar";
+import AppContent from "../../../components/UI/Layout/AppContent";
 import Breadcrumbs, {
   BreadcrumbItem,
 } from "../../../components/UI/Breadcrumbs";
-import EmployeeDetails from "../../../components/Employee/EmployeeDetails/EmployeeDetails";
+import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
 

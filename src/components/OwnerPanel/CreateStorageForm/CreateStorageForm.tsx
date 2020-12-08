@@ -6,9 +6,9 @@ import CreateStorageFormType from "./CreateStorageFormType";
 
 import ModalBody from "../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
-import Button from "../../UI/Button/Button";
+import Button from "../../UI/Inputs/Button/Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Input from "../../UI/Input/Input";
+import Input from "../../UI/Inputs/Input/Input";
 
 import "./CreateStorageForm.scss";
 

@@ -9,22 +9,18 @@ import { StorageView } from "../../../../shared/types/storage";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import useQuery, { SearchQuery } from "../../../../hooks/useQuery";
 
-import Table, { TableConfig } from "../../../../components/UI/Table";
-import Pagination from "../../../../components/UI/Pagination";
-import Tile, {
-  TileBottom,
-  TileContent,
-  TileTop,
-} from "../../../../components/UI/Tile";
-import Search from "../../../../components/UI/Search";
+import Search from "../../../../components/UI/Inputs/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
-import IconButton from "../../../../components/UI/IconButton";
-import Tooltip from "../../../../components/UI/Tooltip";
-import { PlusIcon } from "../../../../components/UI/Icons";
+import IconButton from "../../../../components/UI/Inputs/IconButton";
+import { PlusIcon } from "../../../../components/UI/DataDisplay/Icons";
 
 import "./StoragesTable.scss";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
+import Tile, { TileTop, TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
+import Tooltip from "../../../../components/UI/DataDisplay/Tooltip";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
