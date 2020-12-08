@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import { connect } from "react-redux";
 import * as action from "../../../store";
@@ -15,12 +12,12 @@ import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 import StoreState from "../../../shared/types/store/StoreState";
 import Employee from "../../../shared/types/employee/Employee";
 
-import Tile from "../../UI/Tile/Tile";
 import EmployeeDetailsData from "./EmployeeDetailsData/EmployeeDetailsData";
 import Loading from "../../UI/Loading/Loading";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import { CUEmployee } from "../../../shared/types/employee";
 import CUEmployeeModal from "../../OwnerPanel/CUEmployeeModal/CUEmployeeModal";
+import Tile from "../../UI/DataDisplay/Tile";
 
 interface EmployeeDetailsProps {
   employeeId: string;

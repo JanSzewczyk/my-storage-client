@@ -6,8 +6,8 @@ import * as action from "../../../../store";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import StorageStatistic from "../../../../shared/types/statistic/StorageStatistic";
 
-import Tile, { TileContent } from "../../../../components/UI/Tile";
 import StorageStatisticChart from "../../../../components/OwnerPanel/Storage/StorageStatisticChart/StorageStatisticChart";
+import Tile, { TileContent } from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageStatisticsProps {
   storageId: string;

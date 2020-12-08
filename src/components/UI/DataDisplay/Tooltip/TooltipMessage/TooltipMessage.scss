@@ -1,0 +1,172 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.tooltip-message {
+  position: absolute;
+  background: #fafafa;
+  color: $grey-1Color;
+  font-size: 12px;
+  padding: 8px;
+  line-height: 16px;
+  z-index: $tooltipMessageZIndex;
+
+  pointer-events: none;
+
+  &--white {
+    background-color: #eee;
+    color: $grey-1Color;
+  }
+
+  &--blue {
+    background-color: $blueColor;
+    color: #fafafa;
+  }
+
+  &--black {
+    background-color: $grey1Color;
+    color: $whiteColor;
+  }
+
+  &--top {
+    margin-bottom: 8px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-left: 8px;
+      border: 5px solid transparent;
+      border-top-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: #eee transparent transparent;
+    }
+    &-blue::after {
+      border-color: $blueColor transparent transparent transparent;
+    }
+    &-black::after {
+      border-color: $grey1Color transparent transparent;
+    }
+  }
+
+  &--top-end {
+    margin-bottom: 8px;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-right: 8px;
+      border: 5px solid transparent;
+      border-top-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: #eee transparent transparent;
+    }
+    &-blue::after {
+      border-color: $blueColor transparent transparent transparent;
+    }
+    &-black::after {
+      border-color: $grey1Color transparent transparent;
+    }
+  }
+
+  &--bottom {
+    margin-top: 8px;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 8px;
+      margin-top: -10px;
+      border: 5px solid transparent;
+      border-bottom-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: transparent transparent #eee;
+    }
+    &-blue::after {
+      border-color: transparent transparent $blueColor transparent;
+    }
+    &-black::after {
+      border-color: transparent transparent $grey1Color;
+    }
+  }
+
+  &--bottom-end {
+    margin-top: 8px;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 8px;
+      margin-top: -10px;
+      border: 5px solid transparent;
+      border-bottom-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: transparent transparent #eee;
+    }
+    &-blue::after {
+      border-color: transparent transparent $blueColor transparent;
+    }
+    &-black::after {
+      border-color: transparent transparent $grey1Color;
+    }
+  }
+
+  &--right {
+    margin-left: 8px;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 100%;
+      margin-top: 8px;
+      border: 5px solid transparent;
+      border-right-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: transparent #eee transparent transparent;
+    }
+    &-blue::after {
+      border-color: transparent $blueColor transparent transparent;
+    }
+    &-black::after {
+      border-color: transparent $grey1Color transparent transparent;
+    }
+  }
+
+  &--left {
+    margin-right: 8px;
+
+    &::after {
+      content: " ";
+      position: absolute;
+      top: 0;
+      left: 100%;
+      margin-top: 8px;
+      border: 5px solid transparent;
+      border-left-color: #fafafa;
+    }
+
+    &-white::after {
+      border-color: transparent transparent transparent #eee;
+    }
+    &-blue::after {
+      border-color: transparent transparent transparent $blueColor;
+    }
+    &-black::after {
+      border-color: transparent transparent transparent $grey1Color;
+    }
+  }
+}

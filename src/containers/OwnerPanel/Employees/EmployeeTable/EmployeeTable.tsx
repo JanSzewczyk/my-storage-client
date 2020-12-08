@@ -21,17 +21,14 @@ import PageInfo from "../../../../shared/types/common/PageInfo";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
 
 import CUEmployeeModal from "../../../../components/OwnerPanel/CUEmployeeModal/CUEmployeeModal";
-import Tile from "../../../../components/UI/Tile/Tile";
-import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-import Pagination from "../../../../components/UI/Pagination/Pagination";
-import TileTop from "../../../../components/UI/Tile/TileTop/TileTop";
 import Button from "../../../../components/UI/Inputs/Button/Button";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Table, { TableConfig } from "../../../../components/UI/Table";
 
 import "./EmployeeTable.scss";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
+import Tile, { TileTop, TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
 
 interface EmployeeTableProps {
   onGetEmployeesList: (query: SearchQuery) => void;

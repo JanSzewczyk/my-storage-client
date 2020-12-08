@@ -6,15 +6,15 @@ import * as action from "../../../store";
 import AppBar from "../../../components/UI/Layout/AppBar/AppBar";
 import AppContent from "../../../components/UI/Layout/AppContent/AppContent";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Tile from "../../../components/UI/Tile/Tile";
 import EllipsisWrapper from "../../../components/UI/DataDisplay/EllipsisWrapper/EllipsisWrapper";
-import Tooltip from "../../../components/UI/Tooltip/Tooltip";
 
 import "./Dashboard.scss";
-import Tabs, { Tab } from "../../../components/UI/Tabs";
 import StoreDispatch from "../../../shared/types/store/StoreDispatch";
 import AuthData from "../../../shared/types/auth/AuthData";
 import Button from "../../../components/UI/Inputs/Button";
+import Tile from "../../../components/UI/DataDisplay/Tile";
+import Tooltip from "../../../components/UI/DataDisplay/Tooltip";
+import Tabs, { Tab } from "../../../components/UI/DataDisplay/Tabs";
 
 interface BashboardProps {
   logout: (authData: AuthData) => void;

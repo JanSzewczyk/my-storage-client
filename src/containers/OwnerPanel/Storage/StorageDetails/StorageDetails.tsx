@@ -16,16 +16,10 @@ import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
 import StoreState from "../../../../shared/types/store/StoreState";
 import axios from "../../../../shared/config/axios";
 
-import {
-  DeleteIcon,
-  EditIcon,
-  EllipsisHIcon,
-} from "../../../../components/UI/DataDisplay/Icons";
-import Tile from "../../../../components/UI/Tile/Tile";
 import Loading from "../../../../components/UI/Loading/Loading";
 import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 import StorageEditForm from "../../../../components/OwnerPanel/Storage/StorageEditForm/StorageEditForm";
-import Tooltip from "../../../../components/UI/Tooltip";
+import Tile from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageDetailsProps {
   onGetStorage: (storageId: string) => void;

@@ -1,0 +1,10 @@
+@import "../../../../assets/variables/variables.scss";
+
+.tabs {
+  display: block;
+  color: $whiteColor;
+
+  &__contents {
+    padding: 9px 0;
+  }
+}

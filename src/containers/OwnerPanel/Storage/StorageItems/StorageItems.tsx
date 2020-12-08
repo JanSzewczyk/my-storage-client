@@ -9,13 +9,11 @@ import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
 
-import Tile from "../../../../components/UI/Tile/Tile";
-import TileContent from "../../../../components/UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../../components/UI/Tile/TileBottom/TileBottom";
-import Table, { TableConfig } from "../../../../components/UI/Table";
-import Pagination from "../../../../components/UI/Pagination/Pagination";
 
 import "./StorageItems.scss";
+import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Tile, { TileBottom, TileContent } from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageItemsProps {
   storageId: string;

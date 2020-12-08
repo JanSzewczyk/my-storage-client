@@ -13,9 +13,9 @@ import {
   LevelUpAltIcon,
   UserIcon,
 } from "../../../UI/DataDisplay/Icons";
-import Table, { TableConfig } from "../../../UI/Table";
 
 import "./ActionTimeLineItem.scss";
+import Table, { TableConfig } from "../../../UI/DataDisplay/Table";
 
 interface ActionTimeLineItemProps {
   action: Action;

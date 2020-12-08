@@ -4,7 +4,7 @@ import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import { Storage } from "../../../../shared/types/storage";
 
 import DataView from "../../../UI/DataDisplay/DataView/DataView";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
+import { TileContent } from "../../../UI/DataDisplay/Tile";
 
 interface StorageDataProps {
   storage: Storage | null;

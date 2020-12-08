@@ -1,10 +1,10 @@
 import React from "react";
 
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
 import DataView from "../../../UI/DataDisplay/DataView/DataView";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import Mailto from "../../../UI/DataDisplay/Mailto/Mailto";
 import Employee from "../../../../shared/types/employee/Employee";
+import { TileContent } from "../../../UI/DataDisplay/Tile";
 
 interface EmployeeDetailsDataProps {
   employee: Employee | null;

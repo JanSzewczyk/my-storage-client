@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
+import Tile from "../../UI/DataDisplay/Tile";
 
-import Tile from "../../UI/Tile/Tile";
 import RemoveAction from "./RemoveAction/RemoveAction";
 import StoreAction from "./StoreAction/StoreAction";
 
@@ -15,9 +15,7 @@ const ActionTile: React.FC<ActionTileProps> = (props) => {
   const { action, onClose, storageId, ownerId } = props;
 
   const store = useMemo(
-    () => (
-      <StoreAction ownerId={ownerId} onClose={onClose} />
-    ),
+    () => <StoreAction ownerId={ownerId} onClose={onClose} />,
     [onClose, ownerId]
   );
 
