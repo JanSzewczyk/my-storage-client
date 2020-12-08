@@ -1,11 +1,15 @@
 import React, {
   CSSProperties,
   PropsWithChildren,
+  useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
+  useState,
 } from "react";
-import { getApplicationWidth } from "../../../../shared/utils/graphicUtils";
-import Backdrop from "../../Backdrop";
+import {
+  getApplicationWidth,
+} from "../../../../shared/utils/graphicUtils";
 
 import "./Menu.scss";
 
@@ -28,47 +32,77 @@ const Menu = ({
   style,
 }: PropsWithChildren<MenuProps>) => {
   const menuRef = useRef<HTMLUListElement>(null);
+  const [coordinates, setCoordinates] = useState<any>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
+  const setTooltip = useCallback((chp: DOMRect) => {
+    const maxWidth: number = getApplicationWidth();
+
+    setCoordinates({
+      x: chp.right - maxWidth + 8,
+      y: chp.bottom - 8,
+    });
+  }, []);
+
+  const handleScroll = useCallback(
+    (event: any) => {
+      if (null !== anchorEl) {
+        setTooltip(anchorEl.getBoundingClientRect());
+      }
+    },
+    [anchorEl, setTooltip]
+  );
+
+  useLayoutEffect(() => {
+    if (null !== anchorEl) {
+      setTooltip(anchorEl.getBoundingClientRect());
+    }
+  }, [anchorEl, setTooltip]);
+
+  useLayoutEffect(() => {
+    coordinates && window.addEventListener("scroll", handleScroll, true);
+    return () => {
+      window.removeEventListener("scroll", handleScroll, true);
+    };
+  }, [coordinates, handleScroll, onClose]);
+
+  const handleClickOutside = useCallback(
+    (event: any) => {
       event.stopPropagation();
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         onClose();
       }
-    };
+    },
+    [onClose]
+  );
 
+  useEffect(() => {
     open && document.addEventListener("click", handleClickOutside);
-
     return () => {
-      open && document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
-  }, [onClose, open]);
+  }, [handleClickOutside, open]);
 
   let menuClasses: string[] = ["menu"];
   if (className) menuClasses.push(className);
 
-  const pos = anchorEl?.getBoundingClientRect();
-
-  return open && pos ? (
-    <Backdrop
+  return open ? (
+    <ul
+      id={id}
+      className={menuClasses.join(" ")}
       style={{
-        background: "none",
+        ...style,
+        top: 0,
+        right: 0,
+        willChange: "transform",
+        transform: `translate3d(${coordinates?.x}px,${coordinates?.y}px,0)`,
       }}
+      ref={menuRef}
     >
-      <ul
-        id={id}
-        className={menuClasses.join(" ")}
-        style={{
-          ...style,
-          top: pos.bottom - 8,
-          right: getApplicationWidth() - pos.right - 8,
-        }}
-        ref={menuRef}
-      >
-        {children}
-      </ul>
-    </Backdrop>
-  ) : null;
+      {children}
+    </ul>
+  ) : (
+    <></>
+  );
 };
 
 export default Menu;

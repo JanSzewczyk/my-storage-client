@@ -8,6 +8,7 @@ interface TileProps extends PropsWithChildren<ReactNode> {
   tileClass?: string;
   header?: TileHeader;
   tileSize?: TileSizeConfig;
+  right?: ReactNode;
 }
 
 const Tile: React.FC<TileProps> = ({
@@ -20,6 +21,7 @@ const Tile: React.FC<TileProps> = ({
     lg: "lg-12",
     xl: "xl-12",
   },
+  right,
 }) => {
   let tileClasses: string[] = ["tile"];
 
@@ -40,7 +42,10 @@ const Tile: React.FC<TileProps> = ({
             <div className={"tile__title"}>{header.title}</div>
             <div className={"tile__subtitle"}>{header.subtitle}</div>
           </div>
-          <div className={"tile__right"}>{header.right}</div>
+          <div className={"tile__right"}>
+            {header.right}
+            {right}
+          </div>
         </div>
       )}
       {children}

@@ -41,7 +41,9 @@ export const Default = () => {
         <MenuItem onClick={() => console.log("onClick")}>
           Menu Item 4 clickable
         </MenuItem>
-        <MenuItem>Menu Item 5</MenuItem>
+        <MenuItem onClick={() => handleClose()}>
+          Menu Item 5 handleClose()
+        </MenuItem>
       </Menu>
     </Aux>
   );

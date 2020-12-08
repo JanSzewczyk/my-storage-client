@@ -6,7 +6,7 @@ import AppContent from "../../../components/UI/Layout/AppContent";
 import Breadcrumbs, {
   BreadcrumbItem,
 } from "../../../components/UI/Breadcrumbs";
-import EmployeeDetails from "../../../components/Employee/EmployeeDetails/EmployeeDetails";
+import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
 

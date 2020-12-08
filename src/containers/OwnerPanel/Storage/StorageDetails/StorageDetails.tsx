@@ -20,6 +20,7 @@ import Loading from "../../../../components/UI/Loading/Loading";
 import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 import StorageEditForm from "../../../../components/OwnerPanel/Storage/StorageEditForm/StorageEditForm";
 import Tile from "../../../../components/UI/DataDisplay/Tile";
+import StorageDropdownOption from "../../../../components/OwnerPanel/Storage/StorageDropdownOption/StorageDropdownOption";
 
 interface StorageDetailsProps {
   onGetStorage: (storageId: string) => void;
@@ -79,26 +80,6 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
     [notification]
   );
 
-  // TODO FIX
-  // const options = (
-  //   <Tooltip text={"Options"}>
-  //     <DropDown type={"icon"} icon={<EllipsisHIcon />}>
-  //       <DropdownItem
-  //         text={"Edit"}
-  //         icon={<EditIcon />}
-  //         onClick={() => setEdit(true)}
-  //         disabled={edit}
-  //       />
-  //       <DropdownItem
-  //         text={"Remove"}
-  //         icon={<DeleteIcon />}
-  //         disabled={!storage}
-  //         onClick={() => storage && onRemoveStorage(storage.id)}
-  //       />
-  //     </DropDown>
-  //   </Tooltip>
-  // );
-
   const storagePanel = useMemo(() => <StorageData storage={storage} />, [
     storage,
   ]);
@@ -116,6 +97,15 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
     [onEditStorage, onRemoveStorage, storage]
   );
 
+  const storageDropdownOption = (
+    <StorageDropdownOption
+      onEditStorage={() => setEdit(true)}
+      activeEditStorage={!edit}
+      onRemoveStorage={() => storage && onRemoveStorage(storage.id)}
+      activeRemoveStorage={!!storage}
+    />
+  );
+
   return (
     <Tile
       tileSize={{
@@ -127,8 +117,9 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
       header={{
         title: "Storage",
         subtitle: "Storage information",
-        // right: options,
+        // right: storageDropdownOption,
       }}
+      right={storageDropdownOption}
     >
       {storageLoading ? <Loading /> : !edit ? storagePanel : storageEditPanel}
     </Tile>

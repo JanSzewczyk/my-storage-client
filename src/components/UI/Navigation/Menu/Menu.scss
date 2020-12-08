@@ -4,7 +4,9 @@
   position: absolute;
   list-style: none;
   margin: 0;
-  z-index: $menuZIndex;
+  // z-index: $menuZIndex;
+  z-index: 1;
+
   min-width: 64px;
   background-color: $grey1Color;
   border: 1px solid $greyColor;
@@ -14,7 +16,9 @@
   transition: height 500ms ease;
   display: flex;
   flex-direction: column;
+
   cursor: default;
 
   margin: 8px;
+  width: auto;
 }

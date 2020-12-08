@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { connect } from "react-redux";
-import * as action from "../../../store";
+import * as action from "../../../../store";
 
-import axios from "../../../shared/config/axios";
-import browserHistory from "../../../shared/config/history";
-import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
-import useNotification from "../../../hooks/useNotification";
-import StoreDispatch from "../../../shared/types/store/StoreDispatch";
-import StoreState from "../../../shared/types/store/StoreState";
-import Employee from "../../../shared/types/employee/Employee";
+import axios from "../../../../shared/config/axios";
+import browserHistory from "../../../../shared/config/history";
+import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
+import useNotification from "../../../../hooks/useNotification";
+import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
+import StoreState from "../../../../shared/types/store/StoreState";
+import Employee from "../../../../shared/types/employee/Employee";
 
-import EmployeeDetailsData from "./EmployeeDetailsData/EmployeeDetailsData";
-import Loading from "../../UI/Loading/Loading";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import { CUEmployee } from "../../../shared/types/employee";
-import CUEmployeeModal from "../../OwnerPanel/CUEmployeeModal/CUEmployeeModal";
-import Tile from "../../UI/DataDisplay/Tile";
+import EmployeeDetailsData from "../../../../components/Employee/EmployeeDetailsData/EmployeeDetailsData";
+import Loading from "../../../../components/UI/Loading/Loading";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import { CUEmployee } from "../../../../shared/types/employee";
+import CUEmployeeModal from "../../../../components/OwnerPanel/CUEmployeeModal/CUEmployeeModal";
+import Tile from "../../../../components/UI/DataDisplay/Tile";
+import EmployeeDropdownOption from "../../../../components/Employee/EmployeeDropdownOption/EmployeeDropdownOption";
 
 interface EmployeeDetailsProps {
   employeeId: string;
@@ -85,23 +86,6 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
     });
   };
 
-  // const optionsDropdown = (
-  //   <DropDown type={"icon"} icon={<MoreHorizIcon />}>
-  //     <DropdownItem
-  //       text={"Edit"}
-  //       icon={<EditIcon />}
-  //       onClick={() => setShowEdit(true)}
-  //       disabled={!employee}
-  //     />
-  //     <DropdownItem
-  //       text={"Remove"}
-  //       icon={<DeleteIcon />}
-  //       disabled={!employee}
-  //       onClick={() => removeEmployee(employeeId)}
-  //     />
-  //   </DropDown>
-  // );
-
   return (
     <Aux>
       {showEdit && employee && (
@@ -121,7 +105,14 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
         header={{
           title: "Employee",
           subtitle: "Employee Details",
-          // right: optionsDropdown,
+          right: (
+            <EmployeeDropdownOption
+              onEditEmployee={() => setShowEdit(true)}
+              activeEditEmployee={Boolean(employee)}
+              onRemoveEmployee={() => removeEmployee(employeeId)}
+              activeRemoveEmployee={Boolean(employee)}
+            />
+          ),
         }}
       >
         {employeeLoading ? (
