@@ -3,25 +3,25 @@ import _ from "lodash";
 import { useForm } from "react-hook-form";
 
 // import useAxios from "../../../../hooks/useAxios";
-import useNotification from "../../../../hooks/useNotification";
+import useNotification from "../../../hooks/useNotification";
 
-import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../../UI/Inputs/Button";
-import Loading from "../../../UI/Loading/Loading";
-import Select from "../../../UI/Inputs/Select";
-import axios from "../../../../shared/config/axios";
-import browserHistory from "../../../../shared/config/history";
-import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../UI/Inputs/Button";
+import Loading from "../../UI/Loading/Loading";
+import Select from "../../UI/Inputs/Select";
+import axios from "../../../shared/config/axios";
+import browserHistory from "../../../shared/config/history";
+import { mapEmployeeDtoToEmployee } from "../../../shared/data-utils/employeeUtils";
 import {
   createStoragesSelectList,
   mapStorageDtoToStorage,
-} from "../../../../shared/data-utils/storageUtils";
-import Storage from "../../../../shared/types/storage/Storage";
-import Employee from "../../../../shared/types/employee/Employee";
+} from "../../../shared/data-utils/storageUtils";
+import Storage from "../../../shared/types/storage/Storage";
+import Employee from "../../../shared/types/employee/Employee";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
-import StorageDto from "../../../../shared/types/storage/StorageDto";
-import { TileBottom, TileContent } from "../../../UI/DataDisplay/Tile";
+import StorageDto from "../../../shared/types/storage/StorageDto";
+import { TileBottom, TileContent } from "../../UI/DataDisplay/Tile";
 
 interface AssignStorageToEmployeeForm {
   storageId: string;
@@ -40,11 +40,7 @@ const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = React.me
     const { employeeId, storageId, onClose, storage, onSetEmployee } = props;
 
     const notification = useNotification();
-    // const [getStorages, { response, loading }] = useAxios({
-    //   url: "storages",
-    //   storyState: { response: [], error: null, loading: true },
-    // });
-
+    
     const [storages, setStorages] = useState<Storage[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -132,13 +128,5 @@ const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = React.me
     );
   }
 );
-
-// AssignStorageToEmployee.propTypes = {
-//   employeeId: PropTypes.string.isRequired,
-//   storageId: PropTypes.string,
-//   storage: PropTypes.object,
-//   onClose: PropTypes.func.isRequired,
-//   onSetEmployee: PropTypes.func.isRequired,
-// };
 
 export default AssignStorageToEmployee;

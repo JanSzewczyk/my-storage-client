@@ -1,9 +1,9 @@
 import React from "react";
 
-import DataView from "../../../UI/DataDisplay/DataView/DataView";
+import DataView from "../../UI/DataDisplay/DataView/DataView";
 import { Link } from "react-router-dom";
-import { Storage } from "../../../../shared/types/storage";
-import { TileContent } from "../../../UI/DataDisplay/Tile";
+import { Storage } from "../../../shared/types/storage";
+import { TileContent } from "../../UI/DataDisplay/Tile";
 
 interface EmployeeStorageDataProps {
   storage: Storage;

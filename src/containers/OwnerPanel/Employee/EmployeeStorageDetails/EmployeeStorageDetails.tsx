@@ -1,18 +1,18 @@
 import React, { useMemo, useState } from "react";
 
 import { connect } from "react-redux";
-import * as action from "../../../store";
+import * as action from "../../../../store";
 
-import Loading from "../../UI/Loading/Loading";
-import EmployeeStorageData from "./EmployeeStorageData/EmployeeStorageData";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../UI/Inputs/Button";
-import AssignStorageToEmployee from "./AssignStorageToEmployee/AssignStorageToEmployee";
-import StoreState from "../../../shared/types/store/StoreState";
-import StoreDispatch from "../../../shared/types/store/StoreDispatch";
-import Employee from "../../../shared/types/employee/Employee";
+import Loading from "../../../../components/UI/Loading/Loading";
+import EmployeeStorageData from "../../../../components/Employee/EmployeeStorageData/EmployeeStorageData";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../../../components/UI/Inputs/Button";
+import AssignStorageToEmployee from "../../../../components/Employee/AssignStorageToEmployee/AssignStorageToEmployee";
+import StoreState from "../../../../shared/types/store/StoreState";
+import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
+import Employee from "../../../../shared/types/employee/Employee";
 import _ from "lodash";
-import Tile, { TileBottom } from "../../UI/DataDisplay/Tile";
+import Tile, { TileBottom } from "../../../../components/UI/DataDisplay/Tile";
 
 interface EmployeeStorageDetailsProps {
   employeeId: string;
