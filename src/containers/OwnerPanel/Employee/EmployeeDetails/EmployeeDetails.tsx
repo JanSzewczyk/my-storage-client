@@ -58,20 +58,16 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
 
       setShowEdit(false);
 
-      if (storageId) {
-        if (
-          updatedEmployee.workPlace &&
-          storageId !== updatedEmployee.workPlace.id
-        ) {
-          browserHistory.replace(
-            `/storages/${updatedEmployee.workPlace.id}/employee/${updatedEmployee.id}`
-          );
-          onSetEmployee(mapEmployeeDtoToEmployee(updatedEmployee));
-        } else {
-          browserHistory.replace(`/employees/${updatedEmployee.id}`);
-        }
+      onSetEmployee(mapEmployeeDtoToEmployee(updatedEmployee));
+      if (
+        updatedEmployee.workPlace &&
+        storageId !== updatedEmployee.workPlace.id
+      ) {
+        browserHistory.replace(
+          `/storages/${updatedEmployee.workPlace.id}/employee/${updatedEmployee.id}`
+        );
       } else {
-        onSetEmployee(mapEmployeeDtoToEmployee(updatedEmployee));
+        browserHistory.replace(`/employees/${updatedEmployee.id}`);
       }
     });
   };
