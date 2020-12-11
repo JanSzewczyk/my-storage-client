@@ -7,9 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import {
-  getApplicationWidth,
-} from "../../../../shared/utils/graphicUtils";
+import { getApplicationWidth } from "../../../../shared/utils/graphicUtils";
 
 import "./Menu.scss";
 
@@ -60,8 +58,10 @@ const Menu = ({
 
   useLayoutEffect(() => {
     coordinates && window.addEventListener("scroll", handleScroll, true);
+    coordinates && window.addEventListener("resize", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll, true);
+      coordinates && window.removeEventListener("scroll", handleScroll, true);
+      coordinates && window.removeEventListener("resize", handleScroll);
     };
   }, [coordinates, handleScroll, onClose]);
 

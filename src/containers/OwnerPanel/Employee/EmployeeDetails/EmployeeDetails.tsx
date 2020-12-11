@@ -82,6 +82,15 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
     });
   };
 
+  const employeeDropdownOption = (
+    <EmployeeDropdownOption
+      onEditEmployee={() => setShowEdit(true)}
+      activeEditEmployee={Boolean(employee)}
+      onRemoveEmployee={() => removeEmployee(employeeId)}
+      activeRemoveEmployee={Boolean(employee)}
+    />
+  );
+
   return (
     <Aux>
       {showEdit && employee && (
@@ -101,15 +110,8 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
         header={{
           title: "Employee",
           subtitle: "Employee Details",
-          right: (
-            <EmployeeDropdownOption
-              onEditEmployee={() => setShowEdit(true)}
-              activeEditEmployee={Boolean(employee)}
-              onRemoveEmployee={() => removeEmployee(employeeId)}
-              activeRemoveEmployee={Boolean(employee)}
-            />
-          ),
         }}
+        right={employeeDropdownOption}
       >
         {employeeLoading ? (
           <Loading />

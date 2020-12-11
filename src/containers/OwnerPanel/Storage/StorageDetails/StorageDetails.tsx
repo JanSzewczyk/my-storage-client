@@ -117,7 +117,6 @@ const StorageDetails: React.FC<StorageDetailsProps> = React.memo((props) => {
       header={{
         title: "Storage",
         subtitle: "Storage information",
-        // right: storageDropdownOption,
       }}
       right={storageDropdownOption}
     >

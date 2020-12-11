@@ -106,10 +106,8 @@ const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
       },
       tooltips: {
         callbacks: {
-          title: (tooltipItem: any[]) => {
-            console.log(tooltipItem);
-            return dateToDateString(new Date(tooltipItem[0].label));
-          },
+          title: (tooltipItem: any[]) =>
+            dateToDateString(new Date(tooltipItem[0].label)),
           label: (tooltipItem: any, object: any) =>
             `${object.datasets[tooltipItem.datasetIndex].label}: ${formatMoney(
               tooltipItem.value,
