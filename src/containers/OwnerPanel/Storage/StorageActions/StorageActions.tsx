@@ -9,13 +9,18 @@ import Action from "../../../../shared/types/action/Action";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 
-import TimeLine, { TimeLineItem } from "../../../../components/UI/DataDisplay/TimeLine";
+import TimeLine, {
+  TimeLineItem,
+} from "../../../../components/UI/DataDisplay/TimeLine";
 import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
 import Loading from "../../../../components/UI/Loading";
 
 import "./StorageActions.scss";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
-import Tile, { TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
+import Tile, {
+  TileContent,
+  TileBottom,
+} from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageActionsProps {
   storageId: string;
@@ -46,31 +51,6 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
 
   const [selected, setSelected] = useState<string | null>(null);
 
-  const actionTimeLine = useMemo(
-    () => (
-      <TimeLine>
-        {actionsList.map((action, index) => (
-          <TimeLineItem
-            key={index}
-            date={action.createdAt}
-            selected={selected === action.id}
-          >
-            <ActionTimeLineItem
-              action={action}
-              selected={selected === action.id}
-              onSelect={
-                selected !== action.id
-                  ? () => setSelected(action.id)
-                  : () => setSelected(null)
-              }
-            />
-          </TimeLineItem>
-        ))}
-      </TimeLine>
-    ),
-    [actionsList, selected]
-  );
-
   const pagination = useMemo(
     () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
     [onPageChanged, pageInfo]
@@ -90,7 +70,29 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
     >
       <TileContent>
         <div className={"storage-actions"}>
-          {!actionsListLoading ? actionTimeLine : <Loading />}
+          {!actionsListLoading ? (
+            <TimeLine>
+              {actionsList.map((action, index) => (
+                <TimeLineItem
+                  key={index}
+                  date={action.createdAt}
+                  selected={selected === action.id}
+                >
+                  <ActionTimeLineItem
+                    action={action}
+                    selected={selected === action.id}
+                    onSelect={
+                      selected !== action.id
+                        ? () => setSelected(action.id)
+                        : () => setSelected(null)
+                    }
+                  />
+                </TimeLineItem>
+              ))}
+            </TimeLine>
+          ) : (
+            <Loading />
+          )}
         </div>
       </TileContent>
       <TileBottom right={pagination} />

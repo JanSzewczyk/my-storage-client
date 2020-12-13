@@ -1,6 +1,29 @@
+@import "../../../../assets/variables/variables.scss";
+
 .cu-employee-form {
   display: flex;
-  width: 100%;
   flex-direction: column;
-  margin-bottom: 8px;
+  flex: 1 1;
+  overflow-y: auto;
+
+  @media only screen and (min-width: $LG-MIN-WIGHT) {
+    width: 600px;
+  }
+
+  &__content {
+    display: flex;
+
+    flex-direction: column;
+    flex: 1 1;
+
+    @media only screen and (min-width: $LG-MIN-WIGHT) {
+      flex-direction: row;
+    }
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
 }

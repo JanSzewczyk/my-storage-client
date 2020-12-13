@@ -15,7 +15,6 @@ import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard"
 import { UserRole } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
-import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
 import Employee from "./containers/OwnerPanel/Employee/Employee";
 import StoreDispatch from "./shared/types/store/StoreDispatch";
 import StoreState from "./shared/types/store/StoreState";
@@ -45,7 +44,7 @@ const App: React.FC<AppProps> = (props) => {
         <Switch>
           <Route
             path={"/storages/:storageId/employee/:employeeId"}
-            component={StorageEmployee}
+            component={Employee}
           />
           <Route path={"/storages/:storageId"} component={Storage} />
           <Route path={"/storages"} component={Storages} />

@@ -8,18 +8,23 @@ import Breadcrumbs, {
 } from "../../../components/UI/Breadcrumbs";
 import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import EmployeeStorageDetails from "../../../components/Employee/EmployeeStorageDetails/EmployeeStorageDetails";
+import EmployeeStorageDetails from "./EmployeeStorageDetails/EmployeeStorageDetails";
+import { RouteComponentProps } from "react-router-dom";
 
-interface EmployeeProps {
-  match: any;
+interface MatchProps {
+  employeeId: string;
+  storageId?: string;
 }
+
+interface EmployeeProps extends RouteComponentProps<MatchProps> {}
 
 const Employee: React.FC<EmployeeProps> = (props) => {
   const { match } = props;
 
-  const employeeId: string = match.params.employeeId;
+  const employeeId = match.params.employeeId;
+  const storageId = match.params.storageId;
 
-  const breadcrumbs = (
+  const breadcrumbs = !storageId ? (
     <Breadcrumbs>
       <BreadcrumbItem text={"Employees"} path={`/employees`} />
       <BreadcrumbItem
@@ -28,16 +33,28 @@ const Employee: React.FC<EmployeeProps> = (props) => {
         active
       />
     </Breadcrumbs>
+  ) : (
+    <Breadcrumbs>
+      <BreadcrumbItem text={"Storages"} path={`/storages`} />
+      <BreadcrumbItem text={"Storage"} path={`/storages/${storageId}`} />
+      <BreadcrumbItem
+        text={"Employee"}
+        path={`/storages/${storageId}/employee/${employeeId}`}
+        active
+      />
+    </Breadcrumbs>
   );
 
   const employeeDetails = useMemo(
-    () => <EmployeeDetails employeeId={employeeId} />,
-    [employeeId]
+    () => <EmployeeDetails employeeId={employeeId} storageId={storageId} />,
+    [employeeId, storageId]
   );
 
   const employeeStorageDetails = useMemo(
-    () => <EmployeeStorageDetails employeeId={employeeId} />,
-    [employeeId]
+    () => (
+      <EmployeeStorageDetails employeeId={employeeId} storageId={storageId} />
+    ),
+    [employeeId, storageId]
   );
 
   return (

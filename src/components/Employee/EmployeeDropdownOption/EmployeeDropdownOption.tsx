@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import { EditIcon } from "../../UI/DataDisplay/Icons";
+import { EllipsisVIcon } from "../../UI/DataDisplay/Icons";
 import IconButton from "../../UI/Inputs/IconButton";
 import Menu from "../../UI/Navigation/Menu";
 import MenuItem from "../../UI/Navigation/MenuItem";
@@ -21,12 +21,6 @@ const EmployeeDropdownOption = ({
 }: EmployeeDropdownOptionProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  useEffect(() => {
-    return () => {
-      setAnchorEl(null);
-    };
-  }, []);
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -38,7 +32,7 @@ const EmployeeDropdownOption = ({
   return (
     <Aux>
       <IconButton onClick={handleClick}>
-        <EditIcon />
+        <EllipsisVIcon />
       </IconButton>
       <Menu
         id="storage-dropdown"
