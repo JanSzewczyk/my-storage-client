@@ -100,6 +100,13 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
     <Loading />
   ) : (
     <form className={"cu-employee-form"}>
+      <h5
+        style={{
+          margin: "0 0 8px 0",
+        }}
+      >
+        Please complete the form below
+      </h5>
       <ModalBody>
         <div className={"cu-employee-form__content"}>
           <div className={"cu-employee-form__container"}>

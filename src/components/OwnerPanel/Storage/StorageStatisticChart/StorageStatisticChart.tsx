@@ -7,12 +7,12 @@ import Loading from "../../../UI/Loading/Loading";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
 import { setTimeUnitDate } from "../../../../shared/utils/chartUtils";
 import StorageStatistic from "../../../../shared/types/statistic/StorageStatistic";
-
-import "./StorageStatisticChart.scss";
 import {
   dateToApiDateString,
   dateToDateString,
 } from "../../../../shared/utils/dateUtils";
+
+import "./StorageStatisticChart.scss";
 
 interface StorageStatisticChartProps {
   loading: boolean;
