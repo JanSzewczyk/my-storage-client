@@ -49,7 +49,7 @@ export const getStorageActionsList = (
   const query = createSearchQuery(queryData);
 
   axios
-    .get(`actions/storage/${storageId}${query}`)
+    .get(`storage/${storageId}/actions${query}`)
     .then((res: AxiosResponse<PagedModel<ActionDto[]>>) => {
       dispatch(actionStorageListLoadSuccess(res.data.content, res.data.page));
     })
