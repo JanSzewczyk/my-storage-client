@@ -20,7 +20,7 @@ import { Query } from "../../hooks/useQuery";
 
 export const initItemStore = (): InitItemStoreAction => {
   return {
-    type: actionTypes.ITEM_INIT,
+    type: actionTypes.INIT_ITEM_STORE,
   };
 };
 

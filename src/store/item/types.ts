@@ -12,7 +12,7 @@ export interface ItemStoreState {
 }
 
 export interface InitItemStoreAction {
-  type: typeof actionTypes.ITEM_INIT;
+  type: typeof actionTypes.INIT_ITEM_STORE;
 }
 
 export interface ItemViewListLoadStartAction {

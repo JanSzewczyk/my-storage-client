@@ -92,7 +92,7 @@ const reducer = (
   action: ItemActionTypes
 ): ItemStoreState => {
   switch (action.type) {
-    case actionTypes.ITEM_INIT:
+    case actionTypes.INIT_ITEM_STORE:
       return initItemStore(state, action);
 
     case actionTypes.ITEM_VIEW_LIST_LOAD_START:

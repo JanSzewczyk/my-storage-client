@@ -3,7 +3,7 @@ import Employee from "../../shared/types/employee/Employee";
 import EmployeeView from "../../shared/types/employee/EmployeeView";
 import * as actionTypes from "../actionTypes";
 
-export interface EmployeeState {
+export interface EmployeeStoreState {
   employeeViewList: EmployeeView[];
   pageInfo: PageInfo | null;
   employeeViewListLoading: boolean;
@@ -11,8 +11,8 @@ export interface EmployeeState {
   employeeLoading: boolean;
 }
 
-export interface EmployeeStoreClearAction {
-  type: typeof actionTypes.EMPLOYEE_STORE_CLEAR;
+export interface InitEmployeeStoreAction {
+  type: typeof actionTypes.INIT_EMPLOYEE_STORE;
 }
 
 export interface EmployeeViewListLoadStartAction {
@@ -48,7 +48,7 @@ export interface EmployeeLoadFailureAction {
 }
 
 export type EmployeeActionTypes =
-  | EmployeeStoreClearAction
+  | InitEmployeeStoreAction
   | EmployeeViewListLoadStartAction
   | EmployeeViewListLoadSuccessAction
   | EmployeeViewListLoadFailureAction

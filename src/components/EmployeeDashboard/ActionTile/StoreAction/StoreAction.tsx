@@ -24,7 +24,6 @@ interface StoreActionProps {
   productsListLoading: boolean;
   onGetProductsList: (ownerId: string) => void;
   productsList: Product[];
-  actionSRLoading: boolean;
 }
 
 const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
@@ -34,7 +33,6 @@ const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
     productsListLoading,
     onGetProductsList,
     productsList,
-    actionSRLoading,
   } = props;
 
   const [storeItems, setStoreItems] = useState<FixMeLater[]>([]);
@@ -57,36 +55,32 @@ const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
   return (
     <Aux>
       <TileContent>
-        {!actionSRLoading ? (
-          <div className={"store-action"}>
-            <div className={"store-action__container"}>
-              {productsListLoading ? (
-                <Loading />
-              ) : (
-                <StoreForm addItem={addToStoreItems} products={productsList} />
-              )}
-            </div>
-            <div className={"store-action__container"}>
-              Items :
-              <br />
-              {storeItems.map((i, index) => (
-                <Aux>
-                  <span key={index}>
-                    {`* ${
-                      _.find(
-                        productsList,
-                        (o: FixMeLater) => i.productId === o.productId
-                      )?.name
-                    } X${i.amount}`}
-                  </span>
-                  <br />
-                </Aux>
-              ))}
-            </div>
+        <div className={"store-action"}>
+          <div className={"store-action__container"}>
+            {productsListLoading ? (
+              <Loading />
+            ) : (
+              <StoreForm addItem={addToStoreItems} products={productsList} />
+            )}
           </div>
-        ) : (
-          <Loading />
-        )}
+          <div className={"store-action__container"}>
+            Items :
+            <br />
+            {storeItems.map((i, index) => (
+              <Aux>
+                <span key={index}>
+                  {`* ${
+                    _.find(
+                      productsList,
+                      (o: FixMeLater) => i.productId === o.productId
+                    )?.name
+                  } X${i.amount}`}
+                </span>
+                <br />
+              </Aux>
+            ))}
+          </div>
+        </div>
       </TileContent>
       <TileBottom
         left={<Button onClick={onClose}>close</Button>}
@@ -108,7 +102,6 @@ const mapStateToProps = (state: StoreState) => {
   return {
     productsList: state.productStore.productList,
     productsListLoading: state.productStore.productListLoading,
-    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 

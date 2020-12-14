@@ -8,7 +8,9 @@ export const logout = (): any => (dispatch: StoreDispatch) => {
 };
 
 export {
-  getStorageActionsList,
+  initActionStore,
+  getStorageActionList,
+  getEmployeeActionList,
   removeAction,
   storeAction,
 } from "./action/action.action";
@@ -16,7 +18,7 @@ export {
 export { auth, authCheck, authLogout } from "./auth/auth.action";
 
 export {
-  employeeStoreClear,
+  initEmployeeStore,
   getEmployeesList,
   getStorageEmployeesList,
   getEmployee,
