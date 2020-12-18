@@ -15,7 +15,7 @@ import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard"
 import { UserRole } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
-import Employee from "./containers/OwnerPanel/Employee/Employee";
+import Employee from "./containers/OwnerPanel/Employee/EmployeePage";
 import StoreDispatch from "./shared/types/store/StoreDispatch";
 import StoreState from "./shared/types/store/StoreState";
 

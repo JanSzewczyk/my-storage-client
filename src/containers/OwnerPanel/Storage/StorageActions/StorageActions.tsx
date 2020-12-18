@@ -1,5 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
@@ -14,13 +13,13 @@ import TimeLine, {
 } from "../../../../components/UI/DataDisplay/TimeLine";
 import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
 import Loading from "../../../../components/UI/Loading";
-
-import "./StorageActions.scss";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
 import Tile, {
   TileContent,
   TileBottom,
 } from "../../../../components/UI/DataDisplay/Tile";
+
+import "./StorageActions.scss";
 
 interface StorageActionsProps {
   storageId: string;
@@ -50,11 +49,6 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
   }, [onGetStorageActionList, query, storageId]);
 
   const [selected, setSelected] = useState<string | null>(null);
-
-  const pagination = useMemo(
-    () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
-    [onPageChanged, pageInfo]
-  );
 
   return (
     <Tile
@@ -95,12 +89,12 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
           )}
         </div>
       </TileContent>
-      <TileBottom right={pagination} />
+      <TileBottom
+        right={<Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />}
+      />
     </Tile>
   );
 });
-
-StorageActions.propTypes = { storageId: PropTypes.string.isRequired };
 
 const mapStateToProps = (state: StoreState) => {
   return {

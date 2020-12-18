@@ -21,6 +21,16 @@
     }
   }
 
+  // TODO add notification 
+  &--warning {
+    background-color: $orangeColor;
+    border: 1px solid $orangeColor;
+
+    &:hover {
+      border-color: $orangeColor;
+    }
+  }
+
   &--success {
     background-color: $blueColor;
     border: 1px solid $blueLightColor;
