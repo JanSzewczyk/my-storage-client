@@ -23,7 +23,6 @@ interface RemoveActionProps {
   onClose: () => void;
   itemsList: Item[];
   itemsListLoading: boolean;
-  actionSRLoading: boolean;
 }
 
 const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
@@ -33,7 +32,6 @@ const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
     onClose,
     itemsList,
     itemsListLoading,
-    actionSRLoading,
   } = props;
   const [removeItems, setRemoveItems] = useState<FixMeLater[]>([]);
 
@@ -55,34 +53,30 @@ const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
   return (
     <Aux>
       <TileContent>
-        {!actionSRLoading ? (
-          <div className={"remove-action"}>
-            <div className={"remove-action__container"}>
-              {itemsListLoading ? (
-                <Loading />
-              ) : (
-                <RemoveForm addItem={addToRemoveItems} items={itemsList} />
-              )}
-            </div>
-            <div className={"remove-action__container"}>
-              Items :
-              <br />
-              {removeItems.map((i, index) => (
-                <Aux>
-                  <span key={index}>
-                    {`* ${
-                      _.find(itemsList, (o) => i.productId === o.productId)
-                        ?.productName
-                    } X${i.amount}`}
-                  </span>
-                  <br />
-                </Aux>
-              ))}
-            </div>
+        <div className={"remove-action"}>
+          <div className={"remove-action__container"}>
+            {itemsListLoading ? (
+              <Loading />
+            ) : (
+              <RemoveForm addItem={addToRemoveItems} items={itemsList} />
+            )}
           </div>
-        ) : (
-          <Loading />
-        )}
+          <div className={"remove-action__container"}>
+            Items :
+            <br />
+            {removeItems.map((i, index) => (
+              <Aux>
+                <span key={index}>
+                  {`* ${
+                    _.find(itemsList, (o) => i.productId === o.productId)
+                      ?.productName
+                  } X${i.amount}`}
+                </span>
+                <br />
+              </Aux>
+            ))}
+          </div>
+        </div>
       </TileContent>
       <TileBottom
         left={<Button onClick={onClose}>close</Button>}
@@ -104,7 +98,6 @@ const mapStateToProps = (state: StoreState) => {
   return {
     itemsList: state.itemStore.itemList,
     itemsListLoading: state.itemStore.itemListLoading,
-    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 

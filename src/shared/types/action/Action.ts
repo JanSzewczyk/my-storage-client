@@ -12,4 +12,7 @@ export default interface Action {
   id: string;
   items: Item[];
   links: Link[];
+  storageId: string;
+  storageShortId: string;
+  storageName: string;
 }

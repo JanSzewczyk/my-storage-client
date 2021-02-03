@@ -22,3 +22,9 @@ export {
   MdDelete as DeleteIcon,
   MdDeleteForever as DeleteForeverIcon,
 } from "react-icons/md";
+
+export {
+  RiCheckboxIndeterminateLine as CheckboxIndeterminateIcon,
+  RiCheckboxLine as CheckboxIcon,
+  RiCheckboxBlankLine as CheckboxBlankIcon,
+} from "react-icons/ri";

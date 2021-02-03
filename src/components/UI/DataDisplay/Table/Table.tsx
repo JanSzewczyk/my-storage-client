@@ -1,4 +1,5 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
+import _ from "lodash";
 
 import { TableConfig, TableLayoutType } from "./types";
 
@@ -21,6 +22,8 @@ interface TableProps<TTable> {
   fontSize?: number;
   className?: string;
   style?: CSSProperties;
+  selectable?: boolean;
+  selectionChanged?: (selections: TTable[]) => void;
 }
 
 const Table = <TTable,>({
@@ -34,9 +37,35 @@ const Table = <TTable,>({
   fontSize = 16,
   className,
   style,
+  selectable = false,
+  selectionChanged,
 }: TableProps<TTable>) => {
   let tableClasses: string[] = ["table"];
   if (className) tableClasses.push(className);
+
+  const [selected, setSelected] = useState<TTable[]>([]);
+
+  const onSelectCellClick = (selectedObject: TTable) => {
+    if (Boolean(_.find(selected, (o) => _.isEqual(o, selectedObject)))) {
+      setSelected((prev) =>
+        _.filter(prev, (o) => !_.isEqual(o, selectedObject))
+      );
+    } else {
+      setSelected((prev) => [...prev, selectedObject]);
+    }
+  };
+
+  const onSelectHeadingClick = () => {
+    if (_.differenceWith(data, selected, _.isEqual).length < data.length) {
+      setSelected(_.differenceWith(selected, data, _.isEqual));
+    } else {
+      setSelected((prev) => [...prev, ...data]);
+    }
+  };
+
+  useEffect(() => {
+    if (selectionChanged) selectionChanged(selected);
+  }, [selected, selectionChanged]);
 
   return (
     <Aux>
@@ -52,12 +81,20 @@ const Table = <TTable,>({
           config={config}
           sort={sort}
           onSortChanged={onSortChanged}
+          selectable={selectable}
+          // singleSelect={singleSelect}
+          selected={selected}
+          data={data}
+          onSelectHeadingClick={onSelectHeadingClick}
         />
         {!loading && (
           <TableBody<TTable>
             config={config}
             data={data}
             onRowClick={onRowClick}
+            selectable={selectable}
+            selected={selected}
+            onSelectCellClick={onSelectCellClick}
           />
         )}
       </table>

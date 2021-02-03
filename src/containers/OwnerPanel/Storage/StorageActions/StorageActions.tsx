@@ -1,5 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 import * as action from "../../../../store";
@@ -14,18 +13,18 @@ import TimeLine, {
 } from "../../../../components/UI/DataDisplay/TimeLine";
 import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
 import Loading from "../../../../components/UI/Loading";
-
-import "./StorageActions.scss";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
 import Tile, {
   TileContent,
   TileBottom,
 } from "../../../../components/UI/DataDisplay/Tile";
 
+import "./StorageActions.scss";
+
 interface StorageActionsProps {
   storageId: string;
-  onGetStorageActionsList: (storageId: string, query: Query) => void;
-  actionsList: Action[];
+  onGetStorageActionList: (storageId: string, query: Query) => void;
+  actionList: Action[];
   pageInfo: PageInfo | null;
   actionsListLoading: boolean;
 }
@@ -33,8 +32,8 @@ interface StorageActionsProps {
 const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
   const {
     storageId,
-    onGetStorageActionsList,
-    actionsList,
+    onGetStorageActionList,
+    actionList,
     pageInfo,
     actionsListLoading,
   } = props;
@@ -46,15 +45,10 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStorageActionsList(storageId, query);
-  }, [onGetStorageActionsList, query, storageId]);
+    onGetStorageActionList(storageId, query);
+  }, [onGetStorageActionList, query, storageId]);
 
   const [selected, setSelected] = useState<string | null>(null);
-
-  const pagination = useMemo(
-    () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
-    [onPageChanged, pageInfo]
-  );
 
   return (
     <Tile
@@ -72,7 +66,7 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
         <div className={"storage-actions"}>
           {!actionsListLoading ? (
             <TimeLine>
-              {actionsList.map((action, index) => (
+              {actionList.map((action, index) => (
                 <TimeLineItem
                   key={index}
                   date={action.createdAt}
@@ -95,16 +89,16 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
           )}
         </div>
       </TileContent>
-      <TileBottom right={pagination} />
+      <TileBottom
+        right={<Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />}
+      />
     </Tile>
   );
 });
 
-StorageActions.propTypes = { storageId: PropTypes.string.isRequired };
-
 const mapStateToProps = (state: StoreState) => {
   return {
-    actionsList: state.actionStore.actionsList,
+    actionList: state.actionStore.actionList,
     pageInfo: state.actionStore.pageInfo,
     actionsListLoading: state.actionStore.actionsListLoading,
   };
@@ -112,8 +106,8 @@ const mapStateToProps = (state: StoreState) => {
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetStorageActionsList: (storageId: string, query: Query) =>
-      dispatch(action.getStorageActionsList(storageId, query)),
+    onGetStorageActionList: (storageId: string, query: Query) =>
+      dispatch(action.getStorageActionList(storageId, query)),
   };
 };
 

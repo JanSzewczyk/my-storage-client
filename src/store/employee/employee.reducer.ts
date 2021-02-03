@@ -5,33 +5,34 @@ import {
   EmployeeLoadFailureAction,
   EmployeeLoadStartAction,
   EmployeeLoadSuccessAction,
-  EmployeeState,
-  EmployeeStoreClearAction,
+  EmployeeStoreState,
   EmployeeViewListLoadFailureAction,
   EmployeeViewListLoadStartAction,
   EmployeeViewListLoadSuccessAction,
+  InitEmployeeStoreAction,
   SetEmployeeAction,
 } from "./types";
 
-const initialState: EmployeeState = {
+const initialState: EmployeeStoreState = {
   employeeViewList: [],
   pageInfo: null,
   employeeViewListLoading: true,
+
   employee: null,
   employeeLoading: true,
 };
 
-const employeeStoreClear = (
-  state: EmployeeState,
-  action: EmployeeStoreClearAction
-): EmployeeState => {
-  return updateObject(state, initialState);
+const initEmployeeStore = (
+  state: EmployeeStoreState,
+  action: InitEmployeeStoreAction
+): EmployeeStoreState => {
+  return initialState;
 };
 
 const employeeListLoadStart = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeViewListLoadStartAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employeeViewList: [],
     pageInfo: null,
@@ -40,9 +41,9 @@ const employeeListLoadStart = (
 };
 
 const employeeListLoadSuccess = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeViewListLoadSuccessAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employeeViewList: action.employeeList,
     pageInfo: action.pageInfo,
@@ -51,27 +52,27 @@ const employeeListLoadSuccess = (
 };
 
 const employeeListLoadFailure = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeViewListLoadFailureAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employeeViewListLoading: false,
   });
 };
 
 const setEmployee = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: SetEmployeeAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employee: action.employee,
   });
 };
 
 const employeeLoadStart = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeLoadStartAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employee: null,
     employeeLoading: true,
@@ -79,9 +80,9 @@ const employeeLoadStart = (
 };
 
 const employeeLoadSuccess = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeLoadSuccessAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employee: action.employee,
     employeeLoading: false,
@@ -89,9 +90,9 @@ const employeeLoadSuccess = (
 };
 
 const employeeLoadFailure = (
-  state: EmployeeState,
+  state: EmployeeStoreState,
   action: EmployeeLoadFailureAction
-): EmployeeState => {
+): EmployeeStoreState => {
   return updateObject(state, {
     employeeLoading: false,
   });
@@ -100,10 +101,10 @@ const employeeLoadFailure = (
 const reducer = (
   state = initialState,
   action: EmployeeActionTypes
-): EmployeeState => {
+): EmployeeStoreState => {
   switch (action.type) {
-    case actionTypes.EMPLOYEE_STORE_CLEAR:
-      return employeeStoreClear(state, action);
+    case actionTypes.INIT_EMPLOYEE_STORE:
+      return initEmployeeStore(state, action);
 
     case actionTypes.EMPLOYEE_LIST_LOAD_START:
       return employeeListLoadStart(state, action);

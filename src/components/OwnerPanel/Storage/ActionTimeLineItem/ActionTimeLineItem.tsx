@@ -16,6 +16,8 @@ import {
 
 import "./ActionTimeLineItem.scss";
 import Table, { TableConfig } from "../../../UI/DataDisplay/Table";
+import Tooltip from "../../../UI/DataDisplay/Tooltip";
+import ItemTooltipContent from "./ItemTooltipContent/ItemTooltipContent";
 
 interface ActionTimeLineItemProps {
   action: Action;
@@ -31,6 +33,11 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
       {
         field: "productName",
         name: "Product Name",
+        converter: (productName: string, item: Item) => (
+          <Tooltip text={<ItemTooltipContent item={item} />}>
+            <span>{productName}</span>
+          </Tooltip>
+        ),
       },
       {
         field: "amount",
@@ -71,8 +78,8 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
           className={"action-time-line-item__show-button"}
           onClick={onSelect}
         >
-          {!selected ? <ChevronDownIcon /> : <ChevronUpIcon />}
           Show details
+          {!selected ? <ChevronDownIcon /> : <ChevronUpIcon />}
         </div>
       </div>
       {selected && (

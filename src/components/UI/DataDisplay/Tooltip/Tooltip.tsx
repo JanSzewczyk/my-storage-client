@@ -1,5 +1,6 @@
 import React, {
   CSSProperties,
+  ReactNode,
   useCallback,
   useLayoutEffect,
   useRef,
@@ -17,7 +18,7 @@ import TooltipMessage from "./TooltipMessage/TooltipMessage";
 import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
 
 interface TooltipProps extends PropsWithChildren {
-  text: string;
+  text: ReactNode;
   position?: TooltipPosition;
   color?: TooltipColor;
   className?: string;
@@ -46,7 +47,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         setCoordinates({
           x: chp.left,
           y: chp.top - maxHeight,
-          maxWidth: maxWidth - chp.left - 24,
+          maxWidth: maxWidth - chp.left - 32,
         });
 
       if (position === "top-end")

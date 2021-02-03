@@ -8,12 +8,18 @@ interface TableBodyProps<TTable> {
   data: TTable[];
   config: TableConfig<TTable>;
   onRowClick?: (rowData: TTable) => void;
+  selectable: boolean;
+  selected: TTable[];
+  onSelectCellClick: (selectedObject: TTable) => void;
 }
 
 const TableBody = <TTable,>({
   data,
   config,
   onRowClick,
+  selectable,
+  selected,
+  onSelectCellClick,
 }: TableBodyProps<TTable>) => {
   return (
     <tbody className="table-body">
@@ -23,6 +29,9 @@ const TableBody = <TTable,>({
           config={config}
           data={d}
           onRowClick={onRowClick}
+          selectable={selectable}
+          selected={selected}
+          onSelectCellClick={onSelectCellClick}
         />
       ))}
     </tbody>

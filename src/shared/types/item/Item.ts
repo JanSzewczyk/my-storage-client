@@ -7,6 +7,7 @@ export default interface Item {
   links: Link[];
   productId: string;
   productName: string;
+  productDescription: string;
   productValue: number;
   totalValue: number;
 }

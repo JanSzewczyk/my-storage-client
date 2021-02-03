@@ -2,11 +2,15 @@ import React from "react";
 import _ from "lodash";
 
 import { TableColumnConfig } from "../../types";
+import { SortStateType } from "../../../../../../hooks/useQuery";
 
-import { SortDownIcon, SortIcon, SortUpIcon } from "../../../../DataDisplay/Icons";
+import {
+  SortDownIcon,
+  SortIcon,
+  SortUpIcon,
+} from "../../../../DataDisplay/Icons";
 
 import "./TableHeading.scss";
-import { SortStateType } from "../../../../../../hooks/useQuery";
 
 interface TableHeadingProps<TTable> {
   config?: TableColumnConfig<TTable>;

@@ -2,93 +2,71 @@ import * as actionTypes from "../actionTypes";
 import { updateObject } from "../../shared/utils/utility";
 import {
   ActionActionTypes,
-  ActionState,
-  ActionStorageListLoadFailureAction,
-  ActionStorageListLoadStartAction,
-  ActionStorageListLoadSuccessAction,
+  ActionListLoadFailureAction,
+  ActionListLoadStartAction,
+  ActionListLoadSuccessAction,
+  ActionStoreState,
+  InitActionStoreAction,
 } from "./types";
 
-const initialState: ActionState = {
-  actionsList: [],
+const initialState: ActionStoreState = {
+  actionList: [],
   pageInfo: null,
   actionsListLoading: true,
-  actionSRLoading: false,
 };
 
-const actionStorageListLoadStart = (
-  state: ActionState,
-  action: ActionStorageListLoadStartAction
-): ActionState => {
+const initActionStore = (
+  state: ActionStoreState,
+  action: InitActionStoreAction
+): ActionStoreState => {
+  return initialState;
+};
+
+const actionListLoadStart = (
+  state: ActionStoreState,
+  action: ActionListLoadStartAction
+): ActionStoreState => {
   return updateObject(state, {
-    actionsList: [],
+    actionList: [],
     pageInfo: null,
     actionsListLoading: true,
   });
 };
 
-const actionStorageListLoadSuccess = (
-  state: ActionState,
-  action: ActionStorageListLoadSuccessAction
-): ActionState => {
+const actionListLoadSuccess = (
+  state: ActionStoreState,
+  action: ActionListLoadSuccessAction
+): ActionStoreState => {
   return updateObject(state, {
-    actionsList: action.actions,
+    actionList: action.actions,
     pageInfo: action.pageInfo,
     actionsListLoading: false,
   });
 };
 
-const actionStorageListLoadFail = (
-  state: ActionState,
-  action: ActionStorageListLoadFailureAction
-): ActionState => {
+const actionListLoadFailure = (
+  state: ActionStoreState,
+  action: ActionListLoadFailureAction
+): ActionStoreState => {
   return updateObject(state, {
-    actionsListLoading: false,
+    actionListLoading: false,
   });
 };
-
-// const actionOnStorageStart = (state, action) => {
-//   return updateObject(state, {
-//     actionSRLoading: true,
-//   });
-// };
-
-// const actionOnStorageSuccess = (state, action) => {
-//   return updateObject(state, {
-//     actionSRLoading: false,
-//   });
-// };
-
-// const actionOnStorageFail = (state, action) => {
-//   return updateObject(state, {
-//     actionSRLoading: false,
-//   });
-// };
 
 const reducer = (
   state = initialState,
   action: ActionActionTypes
-): ActionState => {
+): ActionStoreState => {
   switch (action.type) {
-    case actionTypes.ACTION_STORAGE_LIST_LOAD_START:
-      return actionStorageListLoadStart(state, action);
-    case actionTypes.ACTION_STORAGE_LIST_LOAD_SUCCESS:
-      return actionStorageListLoadSuccess(state, action);
-    case actionTypes.ACTION_STORAGE_LIST_LOAD_FAILURE:
-      return actionStorageListLoadFail(state, action);
+    case actionTypes.INIT_ACTION_STORE:
+      return initActionStore(state, action);
 
-    // case actionTypes.ACTION_REMOVE_START:
-    //   return actionOnStorageStart(state, action);
-    // case actionTypes.ACTION_REMOVE_SUCCESS:
-    //   return actionOnStorageSuccess(state, action);
-    // case actionTypes.ACTION_REMOVE_FAIL:
-    //   return actionOnStorageFail(state, action);
-
-    // case actionTypes.ACTION_STORE_START:
-    //   return actionOnStorageStart(state, action);
-    // case actionTypes.ACTION_STORE_SUCCESS:
-    //   return actionOnStorageSuccess(state, action);
-    // case actionTypes.ACTION_STORE_FAIL:
-    //   return actionOnStorageFail(state, action);
+    case actionTypes.ACTION_LIST_LOAD_START:
+      return actionListLoadStart(state, action);
+    case actionTypes.ACTION_LIST_LOAD_SUCCESS:
+      return actionListLoadSuccess(state, action);
+    case actionTypes.ACTION_LIST_LOAD_FAILURE:
+      return actionListLoadFailure(state, action);
 
     default:
       return state;
