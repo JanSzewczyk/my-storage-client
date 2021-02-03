@@ -65,7 +65,7 @@ const EmployeeActions: React.FC<EmployeeActionsProps> = (props) => {
       }}
     >
       <TileContent>
-        <div className={"employee-actions"}>
+        {/* <div className={"employee-actions"}>
           {!actionsListLoading ? (
             <TimeLine>
               {actionList.map((action, index) => (
@@ -75,7 +75,7 @@ const EmployeeActions: React.FC<EmployeeActionsProps> = (props) => {
                   // selected={selected === action.id}
                 >
                   {action.storageName}
-                  {/* <ActionTimeLineItem
+                  <ActionTimeLineItem
                   action={action}
                   selected={selected === action.id}
                   onSelect={
@@ -83,14 +83,15 @@ const EmployeeActions: React.FC<EmployeeActionsProps> = (props) => {
                       ? () => setSelected(action.id)
                       : () => setSelected(null)
                   }
-                /> */}
+                />
                 </TimeLineItem>
               ))}
             </TimeLine>
           ) : (
             <Loading />
           )}
-        </div>
+        </div> */}
+        WORKING in progress ...
       </TileContent>
       <TileBottom
         right={<Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />}
