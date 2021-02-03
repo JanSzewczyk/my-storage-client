@@ -81,6 +81,11 @@ const Table = <TTable,>({
           config={config}
           sort={sort}
           onSortChanged={onSortChanged}
+          selectable={selectable}
+          // singleSelect={singleSelect}
+          selected={selected}
+          data={data}
+          onSelectHeadingClick={onSelectHeadingClick}
         />
         {!loading && (
           <TableBody<TTable>

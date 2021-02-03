@@ -4,17 +4,28 @@ import { SortInfo, SortStateType } from "../../../../../hooks/useQuery";
 import { TableColumnConfig, TableConfig } from "../types";
 
 import TableHeading from "./TableHeading/TableHeading";
+import TableSelectHeading from "./TableSelectHeading/TableSelectHeading";
 
 interface TableHeaderProps<TTable> {
   config: TableConfig<TTable>;
   sort: SortInfo[];
   onSortChanged?: (field: keyof TTable, type: SortStateType) => void;
+  selectable: boolean;
+  // singleSelect: boolean;
+  selected: TTable[];
+  data: TTable[];
+  onSelectHeadingClick: () => void;
 }
 
 const TableHeader = <TTable,>({
   config,
   sort,
   onSortChanged,
+  selectable,
+  // singleSelect,
+  selected,
+  data,
+  onSelectHeadingClick,
 }: TableHeaderProps<TTable>) => {
   const getSortIndex = (fieldName: keyof TTable): number | null => {
     if (sort.length > 1) {
@@ -40,6 +51,14 @@ const TableHeader = <TTable,>({
   return (
     <thead>
       <tr>
+        {selectable && (
+          <TableSelectHeading
+            // singleSelect={singleSelect}
+            selected={selected}
+            data={data}
+            onSelectHeadingClick={onSelectHeadingClick}
+          />
+        )}
         {config.columns.map(
           (conf: TableColumnConfig<TTable>, index: number) => (
             <TableHeading<TTable>

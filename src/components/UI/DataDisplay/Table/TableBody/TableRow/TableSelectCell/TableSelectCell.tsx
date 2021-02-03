@@ -1,5 +1,7 @@
 import React, { CSSProperties } from "react";
 
+import "./TableSelectCell.scss";
+
 interface TableSelectCellProps<TTable> {
   rowData: TTable;
   checked: boolean;
