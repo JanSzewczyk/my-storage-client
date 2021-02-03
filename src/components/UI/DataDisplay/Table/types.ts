@@ -6,15 +6,17 @@ export declare type TableLayoutType = "auto" | "fixed";
 export declare type TableConfig<T> = {
   columns: TableColumnConfig<T>[];
   actions?: TableActionConfig<T>[];
+  setRowStyle?: (rowData: T) => CSSProperties;
 };
 
 export declare type TableColumnConfig<T> = {
   field: keyof T;
+  converter?: (cellData: FixMeLater, rowData: T) => ReactNode;
   name: string;
   sorted?: boolean;
-  converter?: (cellData: FixMeLater, rowData: T) => ReactNode;
   clickable?: boolean;
   style?: CSSProperties;
+  setCellStyle?: (cellData: any, rowData: T) => CSSProperties;
   className?: string;
 };
 

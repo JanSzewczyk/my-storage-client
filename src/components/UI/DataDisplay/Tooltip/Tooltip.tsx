@@ -47,7 +47,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         setCoordinates({
           x: chp.left,
           y: chp.top - maxHeight,
-          maxWidth: maxWidth - chp.left - 24,
+          maxWidth: maxWidth - chp.left - 32,
         });
 
       if (position === "top-end")

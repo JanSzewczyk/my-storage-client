@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 import { TableColumnConfig } from "../../../types";
 
@@ -8,12 +8,14 @@ interface TableCellProps<TTable> {
   columnConfig: TableColumnConfig<TTable>;
   rowData: TTable;
   onClick?: (rowData: TTable) => void;
+  setRowStyle?: (rowData: TTable) => CSSProperties;
 }
 
 const TableCell = <TTable,>({
   columnConfig,
   rowData,
   onClick,
+  setRowStyle,
 }: TableCellProps<TTable>) => {
   let tableCellClasses: string[] = ["table-cell"];
   if (columnConfig.className) tableCellClasses.push(columnConfig.className);
@@ -21,6 +23,17 @@ const TableCell = <TTable,>({
   let cellContent = columnConfig.converter
     ? columnConfig.converter(rowData[columnConfig.field], rowData)
     : rowData[columnConfig.field];
+
+  let tableCellStyles: CSSProperties = {};
+  if (columnConfig.style)
+    tableCellStyles = { ...tableCellStyles, ...columnConfig.style };
+  if (setRowStyle)
+    tableCellStyles = { ...tableCellStyles, ...setRowStyle(rowData) };
+  if (columnConfig.setCellStyle)
+    tableCellStyles = {
+      ...tableCellStyles,
+      ...columnConfig.setCellStyle(rowData[columnConfig.field], rowData),
+    };
 
   return (
     <td
@@ -32,7 +45,7 @@ const TableCell = <TTable,>({
       }
       style={{
         cursor: onClick ? "pointer" : "default",
-        ...columnConfig.style,
+        ...tableCellStyles,
       }}
     >
       {cellContent}
