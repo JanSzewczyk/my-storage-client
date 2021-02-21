@@ -2,14 +2,14 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import _ from "lodash";
 
 import { TableConfig, TableLayoutType } from "./types";
+import { SortInfo, SortStateType } from "../../../../hooks/useQuery";
 
 import TableHeader from "./TableHeader/TableHeader";
 import TableBody from "./TableBody/TableBody";
-
-import "./Table.scss";
 import Loading from "../../Loading";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import { SortInfo, SortStateType } from "../../../../hooks/useQuery";
+
+import "./Table.scss";
 
 interface TableProps<TTable> {
   config: TableConfig<TTable>;

@@ -25,7 +25,7 @@ const CreateStorageModal: React.FC<CreateStorageModalProps> = (props) => {
   const history = useHistory();
   const notification = useNotification();
 
-  const onCreateStorage = (newStorage: CUStorage) => {
+  const onCreateStorage = (newStorage: CUStorage): void => {
     axios
       .post(`storages`, newStorage)
       .then((res: AxiosResponse<StorageDto>) => {

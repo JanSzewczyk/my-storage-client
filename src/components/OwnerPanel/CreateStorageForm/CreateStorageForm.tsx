@@ -17,14 +17,15 @@ interface StorageFormProps {
   onCreateStorage: (newStorage: CUStorage) => void;
 }
 
-const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
-  const { onCloseModal, onCreateStorage } = props;
-
+const CreateStorageForm: React.FC<StorageFormProps> = ({
+  onCloseModal,
+  onCreateStorage,
+}) => {
   const { register, errors, handleSubmit } = useForm<CreateStorageFormType>({
     mode: "onSubmit",
   });
 
-  const onSubmit = (formData: CreateStorageFormType) => {
+  const onSubmit = (formData: CreateStorageFormType): void => {
     const data: CUStorage = {
       ...formData,
       surface: Number(formData.surface),
@@ -35,8 +36,8 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
 
   return (
     <Aux>
-      <ModalBody>
-        <form className={"storage-form"}>
+      <form className={"storage-form"}>
+        <ModalBody className={"storage-form__content"}>
           <Input
             label={"Name: "}
             config={{
@@ -126,18 +127,18 @@ const CreateStorageForm: React.FC<StorageFormProps> = (props) => {
             hasError={Boolean(errors.addressCountry)}
             errorMessage={"Min length is 3."}
           />
-        </form>
-      </ModalBody>
-      <ModalBottom>
-        <Button onClick={onCloseModal}>Cancel</Button>
-        <Button
-          type={"submit"}
-          color={"primary"}
-          onClick={handleSubmit(onSubmit)}
-        >
-          Create Storage
-        </Button>
-      </ModalBottom>
+        </ModalBody>
+        <ModalBottom>
+          <Button onClick={onCloseModal}>Cancel</Button>
+          <Button
+            type={"submit"}
+            color={"primary"}
+            onClick={handleSubmit(onSubmit)}
+          >
+            Create Storage
+          </Button>
+        </ModalBottom>
+      </form>
     </Aux>
   );
 };
