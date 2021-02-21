@@ -27,8 +27,14 @@ import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 
 import "./EmployeeTable.scss";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
-import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
-import Tile, { TileTop, TileContent, TileBottom } from "../../../../components/UI/DataDisplay/Tile";
+import Table, {
+  TableConfig,
+} from "../../../../components/UI/DataDisplay/Table";
+import Tile, {
+  TileTop,
+  TileContent,
+  TileBottom,
+} from "../../../../components/UI/DataDisplay/Tile";
 
 interface EmployeeTableProps {
   onGetEmployeesList: (query: SearchQuery) => void;
@@ -156,7 +162,6 @@ const EmployeeTable: React.FC<EmployeeTableProps> = React.memo((props) => {
       <Tile
         header={{
           title: "Employees",
-          subtitle: "Storage information",
         }}
       >
         <TileTop
