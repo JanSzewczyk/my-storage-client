@@ -2,10 +2,9 @@ import React from "react";
 
 import PageInfo from "../../../../shared/types/common/PageInfo";
 
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import PageChangeItem from "./PageChangeItem/PageChangeItem";
 import PaginationItems from "./PaginationItems/PaginationItems";
+import { ChevronLeftIcon, ChevronRightIcon } from "../Icons";
 
 import "./Pagination.scss";
 
@@ -30,7 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageInfo, onPageChanged }) => {
             : undefined
         }
       >
-        <NavigateBeforeIcon fontSize={"large"} />
+        <ChevronLeftIcon fontSize={"large"} />
       </PageChangeItem>
 
       {pageInfo && (
@@ -45,7 +44,7 @@ const Pagination: React.FC<PaginationProps> = ({ pageInfo, onPageChanged }) => {
             : undefined
         }
       >
-        <NavigateNextIcon fontSize={"large"} />
+        <ChevronRightIcon fontSize={"large"} />
       </PageChangeItem>
     </div>
   );

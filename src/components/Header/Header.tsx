@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import User from "../../shared/types/user/User";
 import { UserRole } from "../../shared/constants";
 
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import PersonIcon from "@material-ui/icons/Person";
 import Button from "../UI/Inputs/Button/Button";
 import NavigationLinks from "../Navigation/NavigationLinks/NavigationLinks";
 import Logo from "./Logo/Logo";
+import { LogOutIcon, UserIcon } from "../UI/DataDisplay/Icons";
 
 import "./Header.scss";
 
@@ -32,13 +31,13 @@ const Header: React.FC<HeaderProps> = (props) => {
       <div className={"header__right"}>
         {user && (
           <div className={"header__username"}>
-            <PersonIcon height={16} />
+            <UserIcon height={16} />
             {`${user.firstName} ${user.lastName}`}
           </div>
         )}
         <Link to={"/logout"}>
           <Button>
-            <ExitToAppIcon />
+            <LogOutIcon />
             LOGOUT
           </Button>
         </Link>

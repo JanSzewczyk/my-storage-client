@@ -21,6 +21,7 @@ export {
 export {
   MdDelete as DeleteIcon,
   MdDeleteForever as DeleteForeverIcon,
+  MdClose as CloseIcon,
 } from "react-icons/md";
 
 export {
@@ -28,3 +29,5 @@ export {
   RiCheckboxLine as CheckboxIcon,
   RiCheckboxBlankLine as CheckboxBlankIcon,
 } from "react-icons/ri";
+
+export { IoIosLogOut as LogOutIcon } from "react-icons/io";

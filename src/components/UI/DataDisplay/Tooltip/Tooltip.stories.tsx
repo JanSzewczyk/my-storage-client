@@ -1,9 +1,9 @@
-import { IconButton } from "@material-ui/core";
 import React, { CSSProperties } from "react";
 
 import Tooltip from ".";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Button from "../../Inputs/Button";
+import IconButton from "../../Inputs/IconButton";
 import { EditIcon } from "../Icons";
 
 const styles: CSSProperties = {
