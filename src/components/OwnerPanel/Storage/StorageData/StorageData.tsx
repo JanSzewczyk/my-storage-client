@@ -7,13 +7,11 @@ import DataView from "../../../UI/DataDisplay/DataView/DataView";
 import { TileContent } from "../../../UI/DataDisplay/Tile";
 
 interface StorageDataProps {
-  storage: Storage | null;
+  storage: Storage;
 }
 
-const StorageData: React.FC<StorageDataProps> = (props) => {
-  const { storage } = props;
-
-  return storage ? (
+const StorageData: React.FC<StorageDataProps> = ({ storage }) => {
+  return (
     <TileContent>
       <DataView label={"Name:"} data={storage.name} />
       <DataView label={"Surface:"} data={`${storage.surface} m²`} />
@@ -30,8 +28,6 @@ const StorageData: React.FC<StorageDataProps> = (props) => {
         data={dateToDateTimeString(storage.updatedAt)}
       />
     </TileContent>
-  ) : (
-    <> No Data </>
   );
 };
 

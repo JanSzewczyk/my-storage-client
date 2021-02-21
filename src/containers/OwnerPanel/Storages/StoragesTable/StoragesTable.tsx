@@ -42,6 +42,11 @@ const config: TableConfig<StorageView> = {
       sorted: true,
     },
     {
+      field: "name",
+      name: "Name",
+      sorted: true,
+    },
+    {
       field: "surface",
       name: "Surface",
       sorted: true,
@@ -107,7 +112,7 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     onGetStorageList(query);
   }, [onGetStorageList, query]);
 
-  const redirectToStorage = (storage: StorageView) => {
+  const redirectToStorage = (storage: StorageView): void => {
     history.push(`storages/${storage.id}`);
   };
 

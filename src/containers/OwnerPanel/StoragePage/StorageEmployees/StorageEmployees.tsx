@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
+import * as action from "../../../../store";
 import useQuery, { Query } from "../../../../hooks/useQuery";
-import browserHistory from "../../../../shared/config/history";
 import { EmployeeView } from "../../../../shared/types/employee";
 import PageInfo from "../../../../shared/types/common/PageInfo";
+import { Storage } from "../../../../shared/types/storage";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
@@ -21,7 +21,7 @@ import Tile, {
 import "./StorageEmployees.scss";
 
 interface StorageEmployeesProps {
-  storageId: string;
+  storage: Storage | null;
   onGetStorageEmployeesList: (storageId: string, queryData: Query) => void;
   employeeList: EmployeeView[];
   pageInfo: PageInfo | null;
@@ -60,13 +60,14 @@ const config: TableConfig<EmployeeView> = {
 
 const StorageEmployees: React.FC<StorageEmployeesProps> = (props) => {
   const {
-    storageId,
+    storage,
     onGetStorageEmployeesList,
     employeeList,
     pageInfo,
     employeeListLoading,
   } = props;
 
+  const history = useHistory();
   const { query, onSortChanged, onPageChanged } = useQuery<Query>({
     sort: [],
     page: 0,
@@ -74,11 +75,11 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = (props) => {
   });
 
   useEffect(() => {
-    onGetStorageEmployeesList(storageId, query);
-  }, [onGetStorageEmployeesList, query, storageId]);
+    if (storage) onGetStorageEmployeesList(storage.id, query);
+  }, [onGetStorageEmployeesList, query, storage]);
 
   const redirectToEmployee = (employee: EmployeeView): void => {
-    browserHistory.push(`/storages/${storageId}/employee/${employee.id}`);
+    history.push(`/storages/${storage?.id}/employee/${employee.id}`);
   };
 
   return (
@@ -96,7 +97,6 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = (props) => {
     >
       <TileContent>
         <div className={"storage-employees"}>
-          {" "}
           <Table<EmployeeView>
             config={config}
             data={employeeList}
@@ -117,6 +117,7 @@ const StorageEmployees: React.FC<StorageEmployeesProps> = (props) => {
 
 const mapStateToProps = (state: StoreState) => {
   return {
+    storage: state.storageStore.storage,
     employeeList: state.employeeStore.employeeViewList,
     pageInfo: state.employeeStore.pageInfo,
     employeeListLoading: state.employeeStore.employeeViewListLoading,

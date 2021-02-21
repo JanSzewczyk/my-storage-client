@@ -1,12 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
+import { CUStorage, Storage } from "../../../../shared/types/storage";
+
 import DataView from "../../../UI/DataDisplay/DataView/DataView";
 import Button from "../../../UI/Inputs/Button/Button";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../../UI/Inputs/Input/Input";
-import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-import { CUStorage, Storage } from "../../../../shared/types/storage";
 import StorageEditFormType from "./StorageEditFormType";
 import { TileContent, TileBottom } from "../../../UI/DataDisplay/Tile";
 
@@ -17,15 +18,21 @@ interface StorageEditFormProps {
   onRemoveStorage: (storageId: string) => void;
 }
 
-const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
-  const { defaultStorage, onCloseEdit, onRemoveStorage, onEditStorage } = props;
-
-  const { register, errors, handleSubmit, formState } = useForm<
-    StorageEditFormType
-  >({
+const StorageEditForm: React.FC<StorageEditFormProps> = ({
+  defaultStorage,
+  onCloseEdit,
+  onRemoveStorage,
+  onEditStorage,
+}) => {
+  const {
+    register,
+    errors,
+    handleSubmit,
+    formState,
+  } = useForm<StorageEditFormType>({
     defaultValues: {
       name: defaultStorage.name,
-      surface: defaultStorage.surface.toString(),
+      surface: defaultStorage.surface,
       addressStreet: defaultStorage.addressStreet,
       addressCity: defaultStorage.addressCity,
       addressZip: defaultStorage.addressZip,
@@ -34,10 +41,10 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
     mode: "onChange",
   });
 
-  const onSubmit = (formData: StorageEditFormType) => {
+  const onSubmit = (formData: StorageEditFormType): void => {
     const data: CUStorage = {
       ...formData,
-      surface: Number(formData.surface),
+      surface: formData.surface,
     };
 
     onEditStorage(defaultStorage.id, data);
@@ -159,6 +166,6 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
       />
     </Aux>
   );
-});
+};
 
 export default StorageEditForm;

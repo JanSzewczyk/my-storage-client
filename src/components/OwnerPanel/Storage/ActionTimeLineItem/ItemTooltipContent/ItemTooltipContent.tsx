@@ -8,7 +8,7 @@ interface ItemTooltipContentProps {
   item: Item;
 }
 
-const ItemTooltipContent = ({ item }: ItemTooltipContentProps) => {
+const ItemTooltipContent: React.FC<ItemTooltipContentProps> = ({ item }) => {
   return (
     <div className={"item-tooltip-content"}>
       <span className={"item-tooltip-content__name"}>{item.productName}</span>

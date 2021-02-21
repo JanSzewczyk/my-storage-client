@@ -8,7 +8,7 @@ import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/OwnerPanel/OwnerDashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/OwnerPanel/Storages/Storages";
-import Storage from "./containers/OwnerPanel/Storage/Storage";
+import Storage from "./containers/OwnerPanel/StoragePage/StoragePage";
 import Logout from "./containers/Auth/Logout/Logout";
 import Employees from "./containers/OwnerPanel/Employees/Employees";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";

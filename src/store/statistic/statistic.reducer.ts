@@ -1,22 +1,30 @@
 import * as actionTypes from "../actionTypes";
 import { updateObject } from "../../shared/utils/utility";
 import {
+  InitStatisticStoreAction,
   StatisticActionTypes,
-  StatisticState,
+  StatisticStoreState,
   StatisticStorageLoadFailureAction,
   StatisticStorageLoadStartAction,
   StatisticStorageLoadSuccessAction,
 } from "./types";
 
-const initialState: StatisticState = {
+const initialState: StatisticStoreState = {
   storageStatistics: [],
   storageStatisticsLoading: true,
 };
 
+const initStatisticStore = (
+  state: StatisticStoreState,
+  action: InitStatisticStoreAction
+): StatisticStoreState => {
+  return initialState;
+};
+
 const statisticStorageLoadStart = (
-  state: StatisticState,
+  state: StatisticStoreState,
   action: StatisticStorageLoadStartAction
-): StatisticState => {
+): StatisticStoreState => {
   return updateObject(state, {
     storageStatistics: [],
     storageStatisticsLoading: true,
@@ -24,9 +32,9 @@ const statisticStorageLoadStart = (
 };
 
 const statisticStorageLoadSuccess = (
-  state: StatisticState,
+  state: StatisticStoreState,
   action: StatisticStorageLoadSuccessAction
-): StatisticState => {
+): StatisticStoreState => {
   return updateObject(state, {
     storageStatistics: action.statistics,
     storageStatisticsLoading: false,
@@ -34,9 +42,9 @@ const statisticStorageLoadSuccess = (
 };
 
 const statisticStorageLoadFailure = (
-  state: StatisticState,
+  state: StatisticStoreState,
   action: StatisticStorageLoadFailureAction
-): StatisticState => {
+): StatisticStoreState => {
   return updateObject(state, {
     storageStatisticsLoading: false,
   });
@@ -45,8 +53,11 @@ const statisticStorageLoadFailure = (
 const reducer = (
   state = initialState,
   action: StatisticActionTypes
-): StatisticState => {
+): StatisticStoreState => {
   switch (action.type) {
+    case actionTypes.INIT_STATISTIC_STORE:
+      return initStatisticStore(state, action);
+
     case actionTypes.STATISTIC_STORAGE_LOAD_START:
       return statisticStorageLoadStart(state, action);
     case actionTypes.STATISTIC_STORAGE_LOAD_SUCCESS:

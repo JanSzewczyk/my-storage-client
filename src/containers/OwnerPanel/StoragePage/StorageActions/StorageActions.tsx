@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
+import * as action from "../../../../store";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import Action from "../../../../shared/types/action/Action";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import useQuery, { Query } from "../../../../hooks/useQuery";
+import { Storage } from "../../../../shared/types/storage";
 
 import TimeLine, {
   TimeLineItem,
@@ -22,16 +22,16 @@ import Tile, {
 import "./StorageActions.scss";
 
 interface StorageActionsProps {
-  storageId: string;
+  storage: Storage | null;
   onGetStorageActionList: (storageId: string, query: Query) => void;
   actionList: Action[];
   pageInfo: PageInfo | null;
   actionsListLoading: boolean;
 }
 
-const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
+const StorageActions: React.FC<StorageActionsProps> = (props) => {
   const {
-    storageId,
+    storage,
     onGetStorageActionList,
     actionList,
     pageInfo,
@@ -45,8 +45,8 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStorageActionList(storageId, query);
-  }, [onGetStorageActionList, query, storageId]);
+    if (storage) onGetStorageActionList(storage.id, query);
+  }, [onGetStorageActionList, query, storage]);
 
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -94,10 +94,11 @@ const StorageActions: React.FC<StorageActionsProps> = React.memo((props) => {
       />
     </Tile>
   );
-});
+};
 
 const mapStateToProps = (state: StoreState) => {
   return {
+    storage: state.storageStore.storage,
     actionList: state.actionStore.actionList,
     pageInfo: state.actionStore.pageInfo,
     actionsListLoading: state.actionStore.actionsListLoading,
