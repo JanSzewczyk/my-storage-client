@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
 import _ from "lodash";
 
@@ -19,9 +18,10 @@ interface StorageStatisticChartProps {
   statistics: StorageStatistic[];
 }
 
-const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
-  const { loading, statistics } = props;
-
+const StorageStatisticChart: React.FC<StorageStatisticChartProps> = ({
+  loading,
+  statistics,
+}) => {
   let content = <Loading />;
   if (!loading) {
     const currency = _.uniq(_.map(statistics, (s) => s.currency))[0];
@@ -121,11 +121,6 @@ const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
   }
 
   return <div className={"storage-statistic-chart"}>{content}</div>;
-};
-
-StorageStatisticChart.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  statistics: PropTypes.array.isRequired,
 };
 
 export default StorageStatisticChart;

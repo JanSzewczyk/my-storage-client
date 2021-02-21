@@ -13,11 +13,11 @@ import {
   LevelUpAltIcon,
   UserIcon,
 } from "../../../UI/DataDisplay/Icons";
-
-import "./ActionTimeLineItem.scss";
 import Table, { TableConfig } from "../../../UI/DataDisplay/Table";
 import Tooltip from "../../../UI/DataDisplay/Tooltip";
 import ItemTooltipContent from "./ItemTooltipContent/ItemTooltipContent";
+
+import "./ActionTimeLineItem.scss";
 
 interface ActionTimeLineItemProps {
   action: Action;
@@ -25,9 +25,7 @@ interface ActionTimeLineItemProps {
   onSelect: () => void;
 }
 
-const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
-  const { action, selected, onSelect } = props;
-
+const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = ({ action, selected, onSelect }) => {
   const config: TableConfig<Item> = {
     columns: [
       {

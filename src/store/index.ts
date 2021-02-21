@@ -33,7 +33,10 @@ export {
 
 export { getProductsList } from "./product/product.action";
 
-export { getStorageStatistics } from "./statistic/statistic.action";
+export {
+  initStatisticStore,
+  getStorageStatistics,
+} from "./statistic/statistic.action";
 
 export {
   initStorageStore,

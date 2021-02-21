@@ -1,22 +1,27 @@
-import React, { useMemo, useEffect } from "react";
-
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
+import * as action from "../../../../store";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import ItemView from "../../../../shared/types/item/ItemView";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import useQuery, { Query } from "../../../../hooks/useQuery";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
+import { Storage } from "../../../../shared/types/storage";
 
+import Table, {
+  TableConfig,
+} from "../../../../components/UI/DataDisplay/Table";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Tile, {
+  TileBottom,
+  TileContent,
+} from "../../../../components/UI/DataDisplay/Tile";
 
 import "./StorageItems.scss";
-import Table, { TableConfig } from "../../../../components/UI/DataDisplay/Table";
-import Pagination from "../../../../components/UI/DataDisplay/Pagination";
-import Tile, { TileBottom, TileContent } from "../../../../components/UI/DataDisplay/Tile";
 
 interface StorageItemsProps {
-  storageId: string;
+  storage: Storage | null;
   onGetStorageItemViewList: (storageId: string, query: Query) => void;
   itemsList: ItemView[];
   pageInfo: PageInfo | null;
@@ -52,9 +57,9 @@ const config: TableConfig<ItemView> = {
   ],
 };
 
-const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
+const StorageItems: React.FC<StorageItemsProps> = (props) => {
   const {
-    storageId,
+    storage,
     onGetStorageItemViewList,
     itemsList,
     pageInfo,
@@ -68,27 +73,8 @@ const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
   });
 
   useEffect(() => {
-    onGetStorageItemViewList(storageId, query);
-  }, [onGetStorageItemViewList, query, storageId]);
-
-  const itemsTable = useMemo(
-    () => (
-      <Table<ItemView>
-        config={config}
-        data={itemsList}
-        sort={query.sort}
-        onSortChanged={onSortChanged}
-        loading={itemsListLoading}
-        fontSize={14}
-      />
-    ),
-    [itemsList, itemsListLoading, onSortChanged, query.sort]
-  );
-
-  const pagination = useMemo(
-    () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
-    [onPageChanged, pageInfo]
-  );
+    if (storage) onGetStorageItemViewList(storage.id, query);
+  }, [onGetStorageItemViewList, query, storage]);
 
   return (
     <Tile
@@ -104,15 +90,27 @@ const StorageItems: React.FC<StorageItemsProps> = React.memo((props) => {
       }}
     >
       <TileContent>
-        <div className={"storage-items"}>{itemsTable}</div>
+        <div className={"storage-items"}>
+          <Table<ItemView>
+            config={config}
+            data={itemsList}
+            sort={query.sort}
+            onSortChanged={onSortChanged}
+            loading={itemsListLoading}
+            fontSize={14}
+          />
+        </div>
       </TileContent>
-      <TileBottom right={pagination} />
+      <TileBottom
+        right={<Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />}
+      />
     </Tile>
   );
-});
+};
 
 const mapStateToProps = (state: StoreState) => {
   return {
+    storage: state.storageStore.storage,
     itemsList: state.itemStore.itemViewList,
     pageInfo: state.itemStore.pageInfo,
     itemsListLoading: state.itemStore.itemViewListLoading,
