@@ -1,20 +1,21 @@
 import React, { useEffect, useMemo } from "react";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 
 import * as action from "../../../store";
-import Aux from "../../../hoc/Auxiliary/Auxiliary";
-import AppBar from "../../../components/UI/Layout/AppBar";
-import AppContent from "../../../components/UI/Layout/AppContent";
 import Breadcrumbs, {
   BreadcrumbItem,
 } from "../../../components/UI/Breadcrumbs";
 import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import EmployeeStorageDetails from "./EmployeeStorageDetails/EmployeeStorageDetails";
-import { RouteComponentProps } from "react-router-dom";
 import { StoreDispatch, StoreState } from "../../../shared/types/store";
 import Employee from "../../../shared/types/employee/Employee";
+
 import EmployeeActions from "./EmployeeActions/EmployeeActions";
+import Aux from "../../../hoc/Auxiliary/Auxiliary";
+import AppBar from "../../../components/UI/Layout/AppBar";
+import EmployeeStorageDetails from "./EmployeeStorageDetails/EmployeeStorageDetails";
+import AppContent from "../../../components/UI/Layout/AppContent";
 
 interface MatchProps {
   employeeId: string;
@@ -24,6 +25,7 @@ interface MatchProps {
 interface EmployeePageProps extends RouteComponentProps<MatchProps> {
   employee: Employee | null;
   employeeLoading: boolean;
+  onGetEmployee: (employeeId: string) => void;
   onInitEmployeeStore: () => void;
   onInitActionStore: () => void;
 }
@@ -33,6 +35,7 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
     match,
     employee,
     employeeLoading,
+    onGetEmployee,
     onInitEmployeeStore,
     onInitActionStore,
   } = props;
@@ -41,11 +44,12 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
   const storageId = match.params.storageId;
 
   useEffect(() => {
+    onGetEmployee(employeeId);
     return () => {
       onInitEmployeeStore();
       onInitActionStore();
     };
-  }, [onInitActionStore, onInitEmployeeStore]);
+  }, [employeeId, onGetEmployee, onInitActionStore, onInitEmployeeStore]);
 
   const breadcrumbs = !storageId ? (
     <Breadcrumbs>
@@ -105,8 +109,8 @@ const mapStateToProps = (state: StoreState) => {
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    // onGetEmployeeActionList: (employeeId: string) =>
-    //   dispatch(action.getEmployeeActionList(employeeId)),
+    onGetEmployee: (employeeId: string) =>
+      dispatch(action.getEmployee(employeeId)),
     onInitEmployeeStore: () => dispatch(action.initEmployeeStore()),
     onInitActionStore: () => dispatch(action.initActionStore()),
   };

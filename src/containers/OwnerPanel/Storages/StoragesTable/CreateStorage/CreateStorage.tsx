@@ -15,11 +15,11 @@ import Backdrop from "../../../../../components/UI/Backdrop/Backdrop";
 import ModalWrapper from "../../../../../components/UI/Modal/ModalWrapper/ModalWrapper";
 import CreateStorageForm from "../../../../../components/OwnerPanel/CreateStorageForm/CreateStorageForm";
 
-interface CreateStorageModalProps {
+interface CreateStorageProps {
   onCloseModal: () => void;
 }
 
-const CreateStorageModal: React.FC<CreateStorageModalProps> = (props) => {
+const CreateStorage: React.FC<CreateStorageProps> = (props) => {
   const { onCloseModal } = props;
 
   const history = useHistory();
@@ -52,4 +52,4 @@ const CreateStorageModal: React.FC<CreateStorageModalProps> = (props) => {
   );
 };
 
-export default CreateStorageModal;
+export default CreateStorage;

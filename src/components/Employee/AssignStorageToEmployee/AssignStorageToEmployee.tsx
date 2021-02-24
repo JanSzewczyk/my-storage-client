@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { useForm } from "react-hook-form";
+import { AxiosResponse } from "axios";
 
-// import useAxios from "../../../../hooks/useAxios";
 import useNotification from "../../../hooks/useNotification";
 
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
@@ -17,11 +17,10 @@ import {
   mapStorageDtoToStorage,
 } from "../../../shared/data-utils/storageUtils";
 import Storage from "../../../shared/types/storage/Storage";
-import Employee from "../../../shared/types/employee/Employee";
-import { useState } from "react";
-import { AxiosResponse } from "axios";
+
 import StorageDto from "../../../shared/types/storage/StorageDto";
 import { TileBottom, TileContent } from "../../UI/DataDisplay/Tile";
+import { Employee, EmployeeDto } from "../../../shared/types/employee";
 
 interface AssignStorageToEmployeeForm {
   storageId: string;
@@ -35,98 +34,101 @@ interface AssignStorageToEmployeeProps {
   onSetEmployee: (employee: Employee) => void;
 }
 
-const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = React.memo(
-  (props) => {
-    const { employeeId, storageId, onClose, storage, onSetEmployee } = props;
+const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = ({
+  employeeId,
+  storageId,
+  onClose,
+  storage,
+  onSetEmployee,
+}) => {
+  const notification = useNotification();
+  const {
+    register,
+    handleSubmit,
+    formState,
+  } = useForm<AssignStorageToEmployeeForm>({
+    defaultValues: {
+      storageId: storage ? storage.id : "",
+    },
+    mode: "onSubmit",
+  });
 
-    const notification = useNotification();
-    
-    const [storages, setStorages] = useState<Storage[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+  const [storages, setStorages] = useState<Storage[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-    const { register, handleSubmit, formState } = useForm<
-      AssignStorageToEmployeeForm
-    >({
-      defaultValues: {
-        storageId: storage ? storage.id : "",
-      },
-      mode: "onSubmit",
-    });
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`storages/list`)
+      .then((res: AxiosResponse<StorageDto[]>) => {
+        setStorages(res.data.map(mapStorageDtoToStorage));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
-    useEffect(() => {
-      setLoading(true);
-      axios
-        .get(`storages/list`)
-        .then((res: AxiosResponse<StorageDto[]>) => {
-          setStorages(res.data.map(mapStorageDtoToStorage));
-        })
-        .finally(() => {
-          setLoading(false);
+  const onChangeWorkplace = (formData: AssignStorageToEmployeeForm) => {
+    axios
+      .post(`employees/${employeeId}/storage`, {
+        storageId: !_.isEmpty(formData.storageId) ? formData.storageId : null,
+      })
+      .then((res: AxiosResponse<EmployeeDto>) => {
+        const employee = mapEmployeeDtoToEmployee(res.data);
+
+        notification.add({
+          content: `Employee id=${employee.id} changed the workplace`,
+          type: "success",
         });
-    }, []);
 
-    const onChangeWorkplace = (formData: AssignStorageToEmployeeForm) => {
-      axios
-        .post(`employees/${employeeId}/storage`, {
-          storageId: !_.isEmpty(formData.storageId) ? formData.storageId : null,
-        })
-        .then((res) => {
-          const employee = res.data;
-
-          onClose();
-          notification.add({
-            content: `Employee id=${employee.id} changed the workplace`,
-            type: "success",
-          });
-
-          if (storageId) {
-            if (employee.workPlace) {
-              onSetEmployee(mapEmployeeDtoToEmployee(employee));
-              browserHistory.replace(
-                `/storages/${employee.workPlace.id}/employee/${employee.id}`
-              );
-            } else {
-              browserHistory.replace(`/employees/${employee.id}`);
-            }
+        if (storageId) {
+          if (employee.workPlace) {
+            onSetEmployee(employee);
+            browserHistory.push(
+              `/storages/${employee.workPlace.id}/employee/${employee.id}`
+            );
           } else {
-            onSetEmployee(mapEmployeeDtoToEmployee(employee));
+            browserHistory.replace(`/employees/${employee.id}`);
           }
-        });
-    };
+        } else {
+          onSetEmployee(employee);
+        }
+        onClose();
+      });
+  };
 
-    const chooseWorkplaceForm = (
-      <form>
-        <Select
-          label={"Choose working place: "}
-          config={{
-            name: "storageId",
-          }}
-          refSelect={register}
-          options={createStoragesSelectList(storages)}
-        />
-      </form>
-    );
+  const chooseWorkplaceForm = (
+    <form>
+      <Select
+        label={"Choose working place: "}
+        config={{
+          name: "storageId",
+        }}
+        refSelect={register}
+        options={createStoragesSelectList(storages)}
+      />
+    </form>
+  );
 
-    return (
-      <Aux>
-        <TileContent>{loading ? <Loading /> : chooseWorkplaceForm}</TileContent>
-        <TileBottom
-          right={
-            <Aux>
-              <Button onClick={onClose}>Cancel</Button>
-              <Button
-                color={"primary"}
-                onClick={handleSubmit(onChangeWorkplace)}
-                disabled={loading || !formState.isDirty}
-              >
-                Save
-              </Button>
-            </Aux>
-          }
-        />
-      </Aux>
-    );
-  }
-);
+  return (
+    <Aux>
+      <TileContent>{loading ? <Loading /> : chooseWorkplaceForm}</TileContent>
+      <TileBottom
+        right={
+          <Aux>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button
+              color={"primary"}
+              onClick={handleSubmit(onChangeWorkplace)}
+              disabled={loading || !formState.isDirty}
+            >
+              Save
+            </Button>
+          </Aux>
+        }
+      />
+    </Aux>
+  );
+};
 
 export default AssignStorageToEmployee;

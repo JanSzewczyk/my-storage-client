@@ -1,19 +1,20 @@
 import React from "react";
 
-import DataView from "../../UI/DataDisplay/DataView/DataView";
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
-import Mailto from "../../UI/DataDisplay/Mailto/Mailto";
 import Employee from "../../../shared/types/employee/Employee";
+
+import DataView from "../../UI/DataDisplay/DataView/DataView";
+import Mailto from "../../UI/DataDisplay/Mailto/Mailto";
 import { TileContent } from "../../UI/DataDisplay/Tile";
 
 interface EmployeeDetailsDataProps {
-  employee: Employee | null;
+  employee: Employee;
 }
 
-const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = (props) => {
-  const { employee } = props;
-
-  return employee ? (
+const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = ({
+  employee,
+}) => {
+  return (
     <TileContent>
       <DataView label={"Employee ID:"} data={employee.shortId} />
       <DataView label={"First Name:"} data={employee.firstName} />
@@ -32,8 +33,6 @@ const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = (props) => {
         data={dateToDateTimeString(employee.createdAt)}
       />
     </TileContent>
-  ) : (
-    <>No data</>
   );
 };
 

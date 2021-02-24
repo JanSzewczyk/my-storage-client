@@ -11,7 +11,7 @@ import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 
 import Search from "../../../../components/UI/Inputs/Search";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
+import CreateStorageModal from "./CreateStorage/CreateStorage";
 import IconButton from "../../../../components/UI/Inputs/IconButton";
 import { PlusIcon } from "../../../../components/UI/DataDisplay/Icons";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";

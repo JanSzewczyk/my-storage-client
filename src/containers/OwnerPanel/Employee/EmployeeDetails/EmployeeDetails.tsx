@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
+import * as action from "../../../../store";
 import axios from "../../../../shared/config/axios";
-import browserHistory from "../../../../shared/config/history";
 import { mapEmployeeDtoToEmployee } from "../../../../shared/data-utils/employeeUtils";
 import useNotification from "../../../../hooks/useNotification";
 import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
@@ -24,16 +22,14 @@ interface EmployeeDetailsProps {
   employeeId: string;
   storageId?: string;
   employee: Employee | null;
-  onGetEmployee: (employeeId: string) => void;
   employeeLoading: boolean;
   onSetEmployee: (employee: Employee) => void;
 }
 
-const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
+const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props) => {
   const {
     employeeId,
     storageId,
-    onGetEmployee,
     employee,
     employeeLoading,
     onSetEmployee,
@@ -41,11 +37,8 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
 
   const notification = useNotification();
   const history = useHistory();
-  const [showEdit, setShowEdit] = useState<boolean>(false);
 
-  useEffect(() => {
-    onGetEmployee(employeeId);
-  }, [employeeId, onGetEmployee]);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
 
   const onEditEmployee = (employeeId: string, updatedEmployee: CUEmployee) => {
     axios.put(`employees/${employeeId}`, updatedEmployee).then((res) => {
@@ -63,11 +56,11 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
         updatedEmployee.workPlace &&
         storageId !== updatedEmployee.workPlace.id
       ) {
-        browserHistory.replace(
+        history.replace(
           `/storages/${updatedEmployee.workPlace.id}/employee/${updatedEmployee.id}`
         );
       } else {
-        browserHistory.replace(`/employees/${updatedEmployee.id}`);
+        history.replace(`/employees/${updatedEmployee.id}`);
       }
     });
   };
@@ -113,15 +106,15 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = React.memo((props) => {
         }}
         right={employeeDropdownOption}
       >
-        {employeeLoading ? (
-          <Loading />
-        ) : (
+        {!employeeLoading && employee ? (
           <EmployeeDetailsData employee={employee} />
+        ) : (
+          <Loading />
         )}
       </Tile>
     </Aux>
   );
-});
+};
 
 const mapStateToProps = (state: StoreState) => {
   return {
@@ -132,8 +125,6 @@ const mapStateToProps = (state: StoreState) => {
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetEmployee: (employeeId: string) =>
-      dispatch(action.getEmployee(employeeId)),
     onSetEmployee: (employee: Employee) =>
       dispatch(action.setEmployee(employee)),
   };
