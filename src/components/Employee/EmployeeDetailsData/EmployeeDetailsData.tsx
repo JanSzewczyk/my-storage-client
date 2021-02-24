@@ -1,21 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
+import Employee from "../../../shared/types/employee/Employee";
 
 import DataView from "../../UI/DataDisplay/DataView/DataView";
-import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import Mailto from "../../UI/DataDisplay/Mailto/Mailto";
-import Employee from "../../../shared/types/employee/Employee";
 import { TileContent } from "../../UI/DataDisplay/Tile";
 
 interface EmployeeDetailsDataProps {
-  employee: Employee | null;
+  employee: Employee;
 }
 
-const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = (props) => {
-  const { employee } = props;
-
-  return employee ? (
+const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = ({
+  employee,
+}) => {
+  return (
     <TileContent>
-      <DataView label={"Employee ID:"} data={employee.shortId} />
+      <DataView
+        label={"Employee ID:"}
+        data={<Link to={`/employees/${employee.id}`}>{employee.shortId}</Link>}
+      />
       <DataView label={"First Name:"} data={employee.firstName} />
       <DataView label={"Last Name:"} data={employee.lastName} />
       <DataView
@@ -32,8 +37,6 @@ const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = (props) => {
         data={dateToDateTimeString(employee.createdAt)}
       />
     </TileContent>
-  ) : (
-    <>No data</>
   );
 };
 

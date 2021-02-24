@@ -1,18 +1,17 @@
-import React, { useMemo, useState } from "react";
-
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
-import Loading from "../../../../components/UI/Loading/Loading";
-import EmployeeStorageData from "../../../../components/Employee/EmployeeStorageData/EmployeeStorageData";
-import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Button from "../../../../components/UI/Inputs/Button";
-import AssignStorageToEmployee from "../../../../components/Employee/AssignStorageToEmployee/AssignStorageToEmployee";
+import * as action from "../../../../store";
 import StoreState from "../../../../shared/types/store/StoreState";
 import StoreDispatch from "../../../../shared/types/store/StoreDispatch";
 import Employee from "../../../../shared/types/employee/Employee";
-import _ from "lodash";
+
 import Tile, { TileBottom } from "../../../../components/UI/DataDisplay/Tile";
+import Loading from "../../../../components/UI/Loading/Loading";
+import AssignStorageToEmployee from "../../../../components/Employee/AssignStorageToEmployee/AssignStorageToEmployee";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../../../components/UI/Inputs/Button";
+import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 
 interface EmployeeStorageDetailsProps {
   employeeId: string;
@@ -22,25 +21,37 @@ interface EmployeeStorageDetailsProps {
   onSetEmployee: (employee: Employee) => void;
 }
 
-const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = React.memo(
-  (props) => {
-    const {
-      employeeId,
-      storageId,
-      employee,
-      employeeLoading,
-      onSetEmployee,
-    } = props;
+const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = (
+  props
+) => {
+  const {
+    employeeId,
+    storageId,
+    employee,
+    employeeLoading,
+    onSetEmployee,
+  } = props;
 
-    const [assignStorage, setAssignStorage] = useState<boolean>(false);
+  const [assignStorage, setAssignStorage] = useState<boolean>(false);
 
-    // TODO FIX THIS!!!!!!!!!!!!!!
-    const employeeDetails = useMemo(
-      () =>
-        !_.isNull(employee) && !assignStorage ? (
+  return (
+    <Tile
+      tileSize={{
+        sm: "sm-12",
+        md: "md-6",
+        lg: "lg-4",
+        xl: "xl-3",
+      }}
+      header={{
+        title: "Workplace",
+        subtitle: "Employee Workplace",
+      }}
+    >
+      {!employeeLoading && employee ? (
+        !assignStorage ? (
           employee.workPlace ? (
             <Aux>
-              <EmployeeStorageData storage={employee.workPlace} />
+              <StorageData storage={employee.workPlace} />
               <TileBottom
                 right={
                   <Button
@@ -62,37 +73,20 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = React.memo
             </div>
           )
         ) : (
-          !_.isNull(employee) && (
-            <AssignStorageToEmployee
-              employeeId={employeeId}
-              storageId={storageId}
-              storage={employee.workPlace}
-              onClose={() => setAssignStorage(false)}
-              onSetEmployee={onSetEmployee}
-            />
-          )
-        ),
-      [assignStorage, employee, employeeId, onSetEmployee, storageId]
-    );
-
-    return (
-      <Tile
-        tileSize={{
-          sm: "sm-12",
-          md: "md-6",
-          lg: "lg-4",
-          xl: "xl-3",
-        }}
-        header={{
-          title: "Workplace",
-          subtitle: "Employee Workplace",
-        }}
-      >
-        {employeeLoading ? <Loading /> : employeeDetails}
-      </Tile>
-    );
-  }
-);
+          <AssignStorageToEmployee
+            employeeId={employeeId}
+            storageId={storageId}
+            storage={employee.workPlace}
+            onClose={() => setAssignStorage(false)}
+            onSetEmployee={onSetEmployee}
+          />
+        )
+      ) : (
+        <Loading />
+      )}
+    </Tile>
+  );
+};
 
 const mapStateToProps = (state: StoreState) => {
   return {

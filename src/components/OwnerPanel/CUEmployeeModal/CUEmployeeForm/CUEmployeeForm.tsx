@@ -29,14 +29,12 @@ interface CUEmployeeFormProps {
   onUpdateEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
 }
 
-const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
-  const {
-    onCloseModal,
-    onCreateEmployee,
-    editEmployee,
-    onUpdateEmployee,
-  } = props;
-
+const CUEmployeeForm: React.FC<CUEmployeeFormProps> = ({
+  onCloseModal,
+  onCreateEmployee,
+  editEmployee,
+  onUpdateEmployee,
+}) => {
   const {
     register,
     errors,

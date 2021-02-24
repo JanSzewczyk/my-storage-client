@@ -31,7 +31,13 @@ const StorageDropdownOption = ({
 
   return (
     <Aux>
-      <IconButton onClick={handleClick}>
+      <IconButton
+        onClick={handleClick}
+        style={{
+          margin: 0,
+          padding: 0,
+        }}
+      >
         <EllipsisVIcon />
       </IconButton>
       <Menu
