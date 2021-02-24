@@ -8,10 +8,10 @@ import Employee from "../../../../shared/types/employee/Employee";
 
 import Tile, { TileBottom } from "../../../../components/UI/DataDisplay/Tile";
 import Loading from "../../../../components/UI/Loading/Loading";
-import EmployeeStorageData from "../../../../components/Employee/EmployeeStorageData/EmployeeStorageData";
 import AssignStorageToEmployee from "../../../../components/Employee/AssignStorageToEmployee/AssignStorageToEmployee";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import Button from "../../../../components/UI/Inputs/Button";
+import StorageData from "../../../../components/OwnerPanel/Storage/StorageData/StorageData";
 
 interface EmployeeStorageDetailsProps {
   employeeId: string;
@@ -51,7 +51,7 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = (
         !assignStorage ? (
           employee.workPlace ? (
             <Aux>
-              <EmployeeStorageData storage={employee.workPlace} />
+              <StorageData storage={employee.workPlace} />
               <TileBottom
                 right={
                   <Button

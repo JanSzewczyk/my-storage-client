@@ -56,7 +56,7 @@ const StorageEditForm: React.FC<StorageEditFormProps> = ({
         <form>
           <Input
             inputType={"edit"}
-            label={"Name: "}
+            label={"Name:"}
             refInput={register({
               required: true,
             })}

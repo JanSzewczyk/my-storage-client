@@ -40,7 +40,10 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props) => {
 
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
-  const onEditEmployee = (employeeId: string, updatedEmployee: CUEmployee) => {
+  const onEditEmployee = (
+    employeeId: string,
+    updatedEmployee: CUEmployee
+  ): void => {
     axios.put(`employees/${employeeId}`, updatedEmployee).then((res) => {
       const updatedEmployee = res.data;
 
@@ -49,9 +52,6 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props) => {
         type: "success",
       });
 
-      setShowEdit(false);
-
-      onSetEmployee(mapEmployeeDtoToEmployee(updatedEmployee));
       if (
         updatedEmployee.workPlace &&
         storageId !== updatedEmployee.workPlace.id
@@ -62,11 +62,14 @@ const EmployeeDetails: React.FC<EmployeeDetailsProps> = (props) => {
       } else {
         history.replace(`/employees/${updatedEmployee.id}`);
       }
+
+      onSetEmployee(mapEmployeeDtoToEmployee(updatedEmployee));
+      setShowEdit(false);
     });
   };
 
-  const removeEmployee = (employeeId: string) => {
-    axios.delete(`employees/${employeeId}`).then((res) => {
+  const removeEmployee = (employeeId: string): void => {
+    axios.delete(`employees/${employeeId}`).then(() => {
       notification.add({
         content: `Successful remove employee, ID=${employeeId}`,
         type: "error",

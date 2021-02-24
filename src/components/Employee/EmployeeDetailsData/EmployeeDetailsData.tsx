@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { dateToDateTimeString } from "../../../shared/utils/dateUtils";
 import Employee from "../../../shared/types/employee/Employee";
@@ -16,7 +17,10 @@ const EmployeeDetailsData: React.FC<EmployeeDetailsDataProps> = ({
 }) => {
   return (
     <TileContent>
-      <DataView label={"Employee ID:"} data={employee.shortId} />
+      <DataView
+        label={"Employee ID:"}
+        data={<Link to={`/employees/${employee.id}`}>{employee.shortId}</Link>}
+      />
       <DataView label={"First Name:"} data={employee.firstName} />
       <DataView label={"Last Name:"} data={employee.lastName} />
       <DataView

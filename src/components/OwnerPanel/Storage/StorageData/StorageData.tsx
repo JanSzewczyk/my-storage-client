@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import { Storage } from "../../../../shared/types/storage";
@@ -13,6 +14,10 @@ interface StorageDataProps {
 const StorageData: React.FC<StorageDataProps> = ({ storage }) => {
   return (
     <TileContent>
+      <DataView
+        label={"Storage ID:"}
+        data={<Link to={`/storages/${storage.id}`}>{storage.shortId}</Link>}
+      />
       <DataView label={"Name:"} data={storage.name} />
       <DataView label={"Surface:"} data={`${storage.surface} m²`} />
       <DataView label={"Street:"} data={storage.addressStreet} />

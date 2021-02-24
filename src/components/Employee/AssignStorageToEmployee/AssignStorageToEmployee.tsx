@@ -83,16 +83,16 @@ const AssignStorageToEmployee: React.FC<AssignStorageToEmployeeProps> = ({
 
         if (storageId) {
           if (employee.workPlace) {
-            onSetEmployee(employee);
             browserHistory.push(
               `/storages/${employee.workPlace.id}/employee/${employee.id}`
             );
           } else {
             browserHistory.replace(`/employees/${employee.id}`);
           }
-        } else {
-          onSetEmployee(employee);
-        }
+        } 
+        
+        // TODO Change to getEmployee #CACHE
+        onSetEmployee(employee);
         onClose();
       });
   };

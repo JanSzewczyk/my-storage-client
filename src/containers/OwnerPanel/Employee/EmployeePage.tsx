@@ -6,7 +6,6 @@ import * as action from "../../../store";
 import Breadcrumbs, {
   BreadcrumbItem,
 } from "../../../components/UI/Breadcrumbs";
-import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 import { StoreDispatch, StoreState } from "../../../shared/types/store";
 import Employee from "../../../shared/types/employee/Employee";
@@ -16,6 +15,7 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import AppBar from "../../../components/UI/Layout/AppBar";
 import EmployeeStorageDetails from "./EmployeeStorageDetails/EmployeeStorageDetails";
 import AppContent from "../../../components/UI/Layout/AppContent";
+import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
 
 interface MatchProps {
   employeeId: string;
@@ -45,6 +45,7 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
 
   useEffect(() => {
     onGetEmployee(employeeId);
+
     return () => {
       onInitEmployeeStore();
       onInitActionStore();
@@ -89,7 +90,6 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
   return (
     <Aux>
       <AppBar left={breadcrumbs} />
-
       {(employee || employeeLoading) && (
         <AppContent>
           {employeeDetails}
@@ -100,6 +100,7 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
     </Aux>
   );
 };
+
 const mapStateToProps = (state: StoreState) => {
   return {
     employee: state.employeeStore.employee,
