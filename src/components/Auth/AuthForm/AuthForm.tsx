@@ -39,33 +39,38 @@ const AuthForm: React.FC<AuthFormProps> = (props) => {
           <BoxIcon /> MY STORAGE
         </div>
 
-        <Label name={"email"}>Email</Label>
-        <Input
-          name={"email"}
-          type={"email"}
-          placeholder={"Email"}
-          ref={register({
-            required: true,
-            pattern: pattern.email,
-          })}
-          className={"auth-form__input"}
-          fullWidth
-          isInvalid={Boolean(errors.email)}
-        />
-        
-        <Label name={"password"}>Password</Label>
-        <Input
-          name={"password"}
-          type={"password"}
-          placeholder={"Password"}
-          ref={register({
-            required: true,
-            minLength: 3,
-          })}
-          className={"auth-form__input"}
-          fullWidth
-          isInvalid={Boolean(errors.password)}
-        />
+        <div className={"field"}>
+          <Label name={"email"}>Email</Label>
+          <Input
+            name={"email"}
+            type={"email"}
+            placeholder={"Email"}
+            ref={register({
+              required: true,
+              pattern: pattern.email,
+            })}
+            className={"auth-form__input"}
+            fullWidth
+            isInvalid={Boolean(errors.email)}
+          />
+        </div>
+
+        <div className={"field"}>
+          <Label name={"password"}>Password</Label>
+          <Input
+            name={"password"}
+            type={"password"}
+            placeholder={"Password"}
+            ref={register({
+              required: true,
+              minLength: 3,
+            })}
+            className={"auth-form__input"}
+            fullWidth
+            isInvalid={Boolean(errors.password)}
+          />
+        </div>
+
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
           type={"submit"}

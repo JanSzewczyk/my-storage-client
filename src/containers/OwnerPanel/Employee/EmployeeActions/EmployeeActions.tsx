@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import * as action from "../../../../store";
@@ -10,16 +10,10 @@ import useQuery, { Query } from "../../../../hooks/useQuery";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import Action from "../../../../shared/types/action/Action";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
-import ActionTimeLineItem from "../../../../components/OwnerPanel/Storage/ActionTimeLineItem/ActionTimeLineItem";
-import TimeLine, {
-  TimeLineItem,
-} from "../../../../components/UI/DataDisplay/TimeLine";
-import Loading from "../../../../components/UI/Loading";
 import { Employee } from "../../../../shared/types/employee";
 import Pagination from "../../../../components/UI/DataDisplay/Pagination";
 
 import "./EmployeeActions.scss";
-import { useState } from "react";
 
 interface EmployeeActionsProps {
   employee: Employee | null;
