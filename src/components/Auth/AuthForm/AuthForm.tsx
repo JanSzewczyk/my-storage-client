@@ -10,9 +10,9 @@ import Button from "../../UI/Inputs/Button/Button";
 import Loading from "../../UI/Loading/Loading";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import { BoxIcon } from "../../UI/DataDisplay/Icons";
+import Label from "../../UI/Inputs/Label";
 
 import "./AuthForm.scss";
-import Label from "../../UI/Inputs/Label";
 
 interface AuthFormProps {
   onAuthSubmit: (authData: AuthData) => void;
@@ -20,7 +20,7 @@ interface AuthFormProps {
   error: string | null;
 }
 
-const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
+const AuthForm: React.FC<AuthFormProps> = (props) => {
   const { onAuthSubmit, loading, error } = props;
 
   const { register, errors, handleSubmit } = useForm<AuthData>({
@@ -49,7 +49,10 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
             pattern: pattern.email,
           })}
           className={"auth-form__input"}
+          fullWidth
+          isInvalid={Boolean(errors.email)}
         />
+        
         <Label name={"password"}>Password</Label>
         <Input
           name={"password"}
@@ -60,6 +63,8 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
             minLength: 3,
           })}
           className={"auth-form__input"}
+          fullWidth
+          isInvalid={Boolean(errors.password)}
         />
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
@@ -73,6 +78,6 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
       </form>
     </Aux>
   );
-});
+};
 
 export default AuthForm;

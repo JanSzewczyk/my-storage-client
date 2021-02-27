@@ -105,7 +105,7 @@ export const InputWithLabelAndErrorMessage = () => (
       iconInside={text("input icon inside", "")}
       required
     />
-    <ValidationError isError={boolean("is error", false)}>
+    <ValidationError hasError={boolean("is error", false)}>
       {text("error content", "Error information")}
     </ValidationError>
   </div>

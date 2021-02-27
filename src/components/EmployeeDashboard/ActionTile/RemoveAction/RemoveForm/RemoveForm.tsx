@@ -7,6 +7,8 @@ import Select from "../../../../UI/Inputs/Select/Select";
 import Input from "../../../../UI/Inputs/Input/Input";
 import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 import Item from "../../../../../shared/types/item/Item";
+import Label from "../../../../UI/Inputs/Label";
+import ValidationError from "../../../../UI/Inputs/ValidationError";
 
 interface RemoveFormProps {
   addItem: (data: FixMeLater) => void;
@@ -47,21 +49,22 @@ const RemoveForm: React.FC<RemoveFormProps> = (props) => {
         hasError={errors.productId}
         errorMessage={"Select required."}
       />
+
+      <Label name={"amount"}>Amount of items</Label>
       <Input
-        label={"Amount of items: "}
-        config={{
-          placeholder: "Amount",
-          type: "number",
-          name: "amount",
-        }}
-        refInput={register({
+        name={"amount"}
+        type={"number"}
+        placeholder={"Amount"}
+        ref={register({
           required: true,
           min: 1,
           max: setMaxAmount(),
         })}
-        hasError={errors.amount}
-        errorMessage={`Amount value from 1 to ${setMaxAmount()}.`}
       />
+      <ValidationError
+        hasError={errors.amount}
+      >{`Amount value from 1 to ${setMaxAmount()}.`}</ValidationError>
+
       <Button onClick={handleSubmit(onSubmit)} disabled={items.length === 0}>
         add
       </Button>

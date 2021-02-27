@@ -19,6 +19,7 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   // Additional config
+  isInvalid?: boolean;
   fullWidth?: boolean;
   prefix?: ReactNode;
   suffix?: ReactNode;
@@ -44,11 +45,13 @@ const Input = forwardRef<RefType, InputProps>(
       prefix,
       suffix,
       iconInside,
+      isInvalid,
     },
     ref
   ) => {
     let inputClasses: string[] = ["input"];
     if (fullWidth) inputClasses.push("input--full-width");
+    if (isInvalid) inputClasses.push("input--invalid");
 
     return (
       <div className={inputClasses.join(" ")}>

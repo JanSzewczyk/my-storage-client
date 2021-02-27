@@ -48,6 +48,12 @@
     }
   }
 
+  &--invalid {
+    input {
+      border: 1px solid $redColor;
+    }
+  }
+
   &--full-width {
     width: 100%;
 

@@ -3,19 +3,19 @@ import React, { CSSProperties, PropsWithChildren } from "react";
 import "./ValidationError.scss";
 
 interface ValidationErrorProps {
-  isError?: boolean;
+  hasError?: boolean;
   style?: CSSProperties;
   className?: string;
 }
 
 const ValidationError: React.FC<PropsWithChildren<ValidationErrorProps>> = ({
-  isError,
+  hasError,
   children,
   style,
   className,
 }) => {
   let validationErrorClasses: string[] = ["validation-error"];
-  if (isError) validationErrorClasses.push("validation-error--active");
+  if (hasError) validationErrorClasses.push("validation-error--active");
   if (className) validationErrorClasses.push(className);
 
   return (
