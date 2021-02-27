@@ -12,6 +12,7 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 import { BoxIcon } from "../../UI/DataDisplay/Icons";
 
 import "./AuthForm.scss";
+import Label from "../../UI/Inputs/Label";
 
 interface AuthFormProps {
   onAuthSubmit: (authData: AuthData) => void;
@@ -37,33 +38,28 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
         <div className={"auth-form__logo"}>
           <BoxIcon /> MY STORAGE
         </div>
+
+        <Label name={"email"}>Email</Label>
         <Input
-          inputClass={"auth-form__input"}
-          label={"Email"}
-          refInput={register({
+          name={"email"}
+          type={"email"}
+          placeholder={"Email"}
+          ref={register({
             required: true,
             pattern: pattern.email,
           })}
-          config={{
-            placeholder: "Email",
-            type: "email",
-            name: "email",
-          }}
-          hasError={Boolean(errors.email)}
+          className={"auth-form__input"}
         />
+        <Label name={"password"}>Password</Label>
         <Input
-          inputClass={"auth-form__input"}
-          label={"Password"}
-          refInput={register({
+          name={"password"}
+          type={"password"}
+          placeholder={"Password"}
+          ref={register({
             required: true,
             minLength: 3,
           })}
-          config={{
-            placeholder: "Password",
-            type: "password",
-            name: "password",
-          }}
-          hasError={Boolean(errors.password)}
+          className={"auth-form__input"}
         />
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
