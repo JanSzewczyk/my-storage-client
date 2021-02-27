@@ -1,74 +1,85 @@
 @import "../../../../assets/variables/variables.scss";
 
-.label {
-  font-family: $font;
-  font-size: $fontMD;
-  width: calc(100% - 4px);
-  color: $whiteColor;
-  padding: 4px 0 0 4px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .input {
-  margin: 8px 8px 8px 0;
-  color: $whiteColor;
-  display: inline-block;
-  width: calc(100% - 26px);
-  font-size: $fontMD;
-  font-family: $font;
-  font-weight: 300;
-  background: rgba(0, 0, 0, 0.15);
-  border: 1px solid $greyColor;
-  padding: 8px;
-  outline: 0;
+  display: flex;
 
-  &::placeholder {
+  input {
+    color: $textColor;
+    display: inline-block;
+    width: 160px;
+    font-size: 12px;
+    font-family: $font;
+    font-weight: 300;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid #4e4e4e;
+    padding: 6px;
+    -webkit-appearance: none;
+    outline: 0;
+
+    &[type="number"] {
+      width: 50px;
+      -moz-appearance: textfield;
+    }
+
+    &::placeholder {
+      color: rgba(242, 242, 242, 0.6);
+    }
+
+    &:hover:not([disabled]):not([readonly]) {
+      border-color: $greyLightColor;
+    }
+
+    &:focus:not([disabled]):not([readonly]) {
+      outline: 0;
+      border-color: $blueColor;
+    }
+
+    &:active {
+      outline: 0;
+      border-color: $blueColor;
+    }
+
+    &:invalid {
+      border: 1px solid $redColor;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+
+    input {
+      width: calc(100% - 12px) !important ;
+    }
+  }
+
+  &__prefix {
+    color: $textColor;
+    display: inline-block;
+    border: solid 1px #4e4e4e;
+    border-right: none;
+    padding: 6px;
+    margin-right: 0px;
+    font-size: 12px;
+  }
+
+  &__suffix {
+    color: $textColor;
+    display: inline;
+    border: solid 1px #4e4e4e;
+    border-left: none;
+    padding: 6px;
+    margin-left: 0px;
+    font-size: 12px;
+  }
+
+  &__icon-inside {
+    margin-left: -38px;
+    border: none;
+    padding: 6px;
     color: rgba(242, 242, 242, 0.6);
   }
-
-  &:hover:not([disabled]):not([readonly]) {
-    border-color: $greyLightColor;
-  }
-
-  &:focus:not([disabled]):not([readonly]) {
-    outline: 0;
-    border-color: $blueColor;
-  }
-
-  &:active {
-    outline: 0;
-    border-color: $blueColor;
-  }
-
-  &:invalid {
-    border: 1px solid #dc2d37;
-  }
-}
-
-.input--invalid {
-  border: 1px solid #dc2d37;
-}
-
-.error {
-  font-family: $font;
-  font-size: $fontSM;
-  margin-bottom: 4px;
-  color: $redColor;
-}
-
-.label--edit {
-  display: block;
-  padding: 4px 0 4px 0;
-  font-size: $fontSM;
-  opacity: 0.8;
-}
-
-.input--edit {
-  margin: 1px 0 5px 5px;
-  color: $blueColor;
-  font-size: $fontMD;
-  padding: 2px;
 }

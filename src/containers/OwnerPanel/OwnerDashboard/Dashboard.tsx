@@ -15,6 +15,7 @@ import Button from "../../../components/UI/Inputs/Button";
 import Tile from "../../../components/UI/DataDisplay/Tile";
 import Tooltip from "../../../components/UI/DataDisplay/Tooltip";
 import Tabs, { Tab } from "../../../components/UI/DataDisplay/Tabs";
+import Slider from "../../../components/UI/Inputs/Slider/Slider";
 
 interface BashboardProps {
   logout: (authData: AuthData) => void;
@@ -52,13 +53,7 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
             subtitle: "Thinks to do",
           }}
         >
-          {/* <Tooltip
-            text={"Lorem Ipesetting industry. Lorem Ipsum"}
-            type={"dotted"}
-            position={"top-end"}
-          >
-            Lorem Ipsum is simply dummy text
-          </Tooltip> */}
+          <Slider />
         </Tile>
         <Tile
           tileSize={{
@@ -104,7 +99,6 @@ const Dashboard: React.FC<BashboardProps> = (props) => {
               display: "flex",
             }}
           >
-
             {/* <Tooltip text={"ni chuja nie działa"}>
               <DropDown btnType={"primary"} title={"dropdown"} left></DropDown>
             </Tooltip> */}

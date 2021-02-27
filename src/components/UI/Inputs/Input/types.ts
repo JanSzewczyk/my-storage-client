@@ -1,9 +1,12 @@
-export declare type InputType = "edit";
-
-export declare type InputConfig = {
-  placeholder?: string;
-  type: string;
-  name: string;
-  readOnly?: boolean;
-  disabled?: boolean;
-};
+export declare type InputType =
+  | "text"
+  | "number"
+  | "date"
+  | "datetime-local"
+  | "email"
+  | "password"
+  | "search"
+  | "time"
+  | "url"
+  | "week"
+  | "tel";
