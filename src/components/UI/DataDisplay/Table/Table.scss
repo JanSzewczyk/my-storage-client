@@ -1,4 +1,8 @@
+@import "../../../../assets/variables/variables.scss";
+
 .table {
+  color: $textColor;
+  font-size: $fontMD;
   width: 100%;
   border-left: none;
   border-right: none;
