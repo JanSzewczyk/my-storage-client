@@ -10,6 +10,7 @@ import Button from "../../UI/Inputs/Button/Button";
 import Loading from "../../UI/Loading/Loading";
 import Backdrop from "../../UI/Backdrop/Backdrop";
 import { BoxIcon } from "../../UI/DataDisplay/Icons";
+import Label from "../../UI/Inputs/Label";
 
 import "./AuthForm.scss";
 
@@ -19,7 +20,7 @@ interface AuthFormProps {
   error: string | null;
 }
 
-const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
+const AuthForm: React.FC<AuthFormProps> = (props) => {
   const { onAuthSubmit, loading, error } = props;
 
   const { register, errors, handleSubmit } = useForm<AuthData>({
@@ -37,34 +38,39 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
         <div className={"auth-form__logo"}>
           <BoxIcon /> MY STORAGE
         </div>
-        <Input
-          inputClass={"auth-form__input"}
-          label={"Email"}
-          refInput={register({
-            required: true,
-            pattern: pattern.email,
-          })}
-          config={{
-            placeholder: "Email",
-            type: "email",
-            name: "email",
-          }}
-          hasError={Boolean(errors.email)}
-        />
-        <Input
-          inputClass={"auth-form__input"}
-          label={"Password"}
-          refInput={register({
-            required: true,
-            minLength: 3,
-          })}
-          config={{
-            placeholder: "Password",
-            type: "password",
-            name: "password",
-          }}
-          hasError={Boolean(errors.password)}
-        />
+
+        <div className={"field"}>
+          <Label name={"email"}>Email</Label>
+          <Input
+            name={"email"}
+            type={"email"}
+            placeholder={"Email"}
+            ref={register({
+              required: true,
+              pattern: pattern.email,
+            })}
+            className={"auth-form__input"}
+            fullWidth
+            isInvalid={Boolean(errors.email)}
+          />
+        </div>
+
+        <div className={"field"}>
+          <Label name={"password"}>Password</Label>
+          <Input
+            name={"password"}
+            type={"password"}
+            placeholder={"Password"}
+            ref={register({
+              required: true,
+              minLength: 3,
+            })}
+            className={"auth-form__input"}
+            fullWidth
+            isInvalid={Boolean(errors.password)}
+          />
+        </div>
+
         {error && <div className={"auth-form__error-message"}>{error}</div>}
         <Button
           type={"submit"}
@@ -77,6 +83,6 @@ const AuthForm: React.FC<AuthFormProps> = React.memo((props) => {
       </form>
     </Aux>
   );
-});
+};
 
 export default AuthForm;

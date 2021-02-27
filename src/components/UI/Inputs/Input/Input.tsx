@@ -1,71 +1,80 @@
-import React from "react";
+import React, { CSSProperties, forwardRef, ReactNode } from "react";
 
-import { InputConfig, InputType } from "./types";
-
-import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import { InputType } from "./types";
 
 import "./Input.scss";
 
 interface InputProps {
-  labelClass?: string;
-  refInput?: (Ref: any, validateRule?: any) => void;
-  config: InputConfig;
+  name: string;
+  type?: InputType;
+  placeholder?: string;
+  readOnly?: boolean;
+  disabled?: boolean;
   autoFocus?: boolean;
-  step?: number;
-  inputClass?: string;
-  label?: string;
-  errorClass?: string;
-  hasError?: boolean;
-  errorMessage?: string;
-  inputType?: InputType;
+  step?: number | "any";
+  className?: string;
+  style?: CSSProperties;
+  value?: string | number;
+  required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  // Additional config
+  isInvalid?: boolean;
+  fullWidth?: boolean;
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  iconInside?: ReactNode;
 }
 
-const Input: React.FC<InputProps> = ({
-  labelClass,
-  autoFocus,
-  refInput,
-  config,
-  inputClass,
-  step,
-  label,
-  errorClass,
-  hasError,
-  errorMessage,
-  inputType,
-}) => {
-  let labelClasses: string[] = ["label"];
-  let inputClasses: string[] = ["input"];
-  let errorClasses: string[] = ["error"];
+type RefType = HTMLInputElement;
 
-  inputType && labelClasses.push(`label--${inputType}`);
-  inputType && inputClasses.push(`input--${inputType}`);
+const Input = forwardRef<RefType, InputProps>(
+  (
+    {
+      name,
+      type,
+      placeholder,
+      step = "any",
+      autoFocus,
+      value,
+      onChange,
+      required,
+      className,
+      style,
+      fullWidth,
+      prefix,
+      suffix,
+      iconInside,
+      isInvalid,
+    },
+    ref
+  ) => {
+    let inputClasses: string[] = ["input"];
+    if (fullWidth) inputClasses.push("input--full-width");
+    if (isInvalid) inputClasses.push("input--invalid");
 
-  hasError && inputClasses.push("input--invalid");
-
-  labelClass && labelClasses.push(labelClass);
-  inputClass && inputClasses.push(inputClass);
-  errorClass && errorClasses.push(errorClass);
-
-  return (
-    <Aux>
-      {label && (
-        <label htmlFor={config.name} className={labelClasses.join(" ")}>
-          {label}
-        </label>
-      )}
-      <input
-        id={config.name}
-        className={inputClasses.join(" ")}
-        ref={refInput}
-        step={step}
-        autoFocus={autoFocus}
-        {...config}
-      />
-      {hasError && errorMessage && (
-        <div className={errorClasses.join(" ")}>{errorMessage}</div>
-      )}
-    </Aux>
-  );
-};
+    return (
+      <div className={inputClasses.join(" ")}>
+        {prefix && <div className={"input__prefix"}>{prefix}</div>}
+        <input
+          id={name}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          ref={ref}
+          onChange={onChange}
+          step={step}
+          autoFocus={autoFocus}
+          className={className}
+          style={style}
+          required={required}
+        />
+        {iconInside && <div className={"input__icon-inside"}>{iconInside}</div>}
+        {suffix && <div className={"input__suffix"}>{suffix}</div>}
+      </div>
+    );
+  }
+);
 
 export default Input;

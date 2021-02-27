@@ -9,6 +9,8 @@ import ModalBottom from "../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
 import Button from "../../UI/Inputs/Button/Button";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import Input from "../../UI/Inputs/Input/Input";
+import ValidationError from "../../UI/Inputs/ValidationError";
+import Label from "../../UI/Inputs/Label";
 
 import "./CreateStorageForm.scss";
 
@@ -38,95 +40,102 @@ const CreateStorageForm: React.FC<StorageFormProps> = ({
     <Aux>
       <form className={"storage-form"}>
         <ModalBody className={"storage-form__content"}>
+          <Label name={"name"}>Name</Label>
           <Input
-            label={"Name: "}
-            config={{
-              placeholder: "Storage Name",
-              type: "text",
-              name: "name",
-            }}
-            refInput={register({
+            name={"name"}
+            type={"text"}
+            placeholder={"Storage Name"}
+            ref={register({
               required: true,
               minLength: 3,
               maxLength: 255,
             })}
-            hasError={Boolean(errors.name)}
-            errorMessage={"Required length is from 3 to 255."}
+            fullWidth
+            autoFocus
+            isInvalid={Boolean(errors.name)}
           />
+          <ValidationError hasError={Boolean(errors.name)}>
+            Required length is from 3 to 255.
+          </ValidationError>
+          <Label name={"surface"}>Amount of items</Label>
           <Input
-            label={"Surface: "}
-            config={{
-              placeholder: "Surface",
-              type: "number",
-              name: "surface",
-            }}
-            refInput={register({
+            name={"surface"}
+            type={"number"}
+            placeholder={"Surface"}
+            ref={register({
               required: true,
               min: 1,
             })}
-            hasError={Boolean(errors.surface)}
-            errorMessage={"Min value is 1."}
+            fullWidth
+            isInvalid={Boolean(errors.surface)}
           />
+          <ValidationError hasError={Boolean(errors.surface)}>
+            Min value is 1.
+          </ValidationError>
+          <Label name={"addressStreet"}>Street</Label>
           <Input
-            label={"Street: "}
-            config={{
-              placeholder: "Address Street",
-              type: "text",
-              name: "addressStreet",
-            }}
-            refInput={register({
+            name={"addressStreet"}
+            type={"text"}
+            placeholder={"Address Street"}
+            ref={register({
               required: true,
               minLength: 3,
               maxLength: 255,
             })}
-            hasError={Boolean(errors.addressStreet)}
-            errorMessage={"Min length is 3."}
+            fullWidth
+            isInvalid={Boolean(errors.addressStreet)}
           />
+          <ValidationError hasError={Boolean(errors.addressStreet)}>
+            Min length is 3.
+          </ValidationError>
+          <Label name={"addressCity"}>City</Label>
           <Input
-            label={"City: "}
-            config={{
-              placeholder: "Address City",
-              type: "text",
-              name: "addressCity",
-            }}
-            refInput={register({
+            name={"addressCity"}
+            type={"text"}
+            placeholder={"Address City"}
+            ref={register({
               required: true,
               minLength: 3,
               maxLength: 255,
             })}
-            hasError={Boolean(errors.addressCity)}
-            errorMessage={"Min length is 3."}
+            fullWidth
+            isInvalid={Boolean(errors.addressCity)}
           />
+          <ValidationError hasError={Boolean(errors.addressCity)}>
+            Min length is 3.
+          </ValidationError>
+          <Label name={"addressZip"}>Zip</Label>
           <Input
-            label={"Zip: "}
-            config={{
-              placeholder: "Address Zip",
-              type: "text",
-              name: "addressZip",
-            }}
-            refInput={register({
+            name={"addressZip"}
+            type={"text"}
+            placeholder={"Address Zip"}
+            ref={register({
               required: true,
               minLength: 3,
               maxLength: 255,
             })}
-            hasError={Boolean(errors.addressZip)}
-            errorMessage={"Min length is 3."}
+            fullWidth
+            isInvalid={Boolean(errors.addressZip)}
           />
+          <ValidationError hasError={Boolean(errors.addressZip)}>
+            Min length is 3.
+          </ValidationError>
+          <Label name={"addressCountry"}>Country</Label>
           <Input
-            label={"Country: "}
-            config={{
-              placeholder: "Address Country",
-              type: "text",
-              name: "addressCountry",
-            }}
-            refInput={register({
+            name={"addressCountry"}
+            type={"text"}
+            placeholder={"Address Country"}
+            ref={register({
               required: true,
               minLength: 3,
               maxLength: 255,
             })}
-            hasError={Boolean(errors.addressCountry)}
-            errorMessage={"Min length is 3."}
+            fullWidth
+            isInvalid={Boolean(errors.addressCountry)}
           />
+          <ValidationError hasError={Boolean(errors.addressCountry)}>
+            Min length is 3.
+          </ValidationError>
         </ModalBody>
         <ModalBottom>
           <Button onClick={onCloseModal}>Cancel</Button>

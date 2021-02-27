@@ -2,16 +2,14 @@
 
 .button {
   min-width: 60px;
-  height: 35px;
-  padding: 8px 8px;
-  border-radius: 4px;
+  padding: 8px 16px;
+  border-radius: 3px;
   outline: 0;
-  font-size: $fontMD;
+  font-size: $fontSM;
   font-family: $font;
-  color: $whiteColor;
+  color: $textColor;
   background-color: transparent;
-  border: 1px solid $whiteColor;
-  transition: 0.3s;
+  border: 1px solid $textColor;
 
   display: flex;
   justify-content: center;
@@ -20,7 +18,8 @@
   svg {
     height: 16px;
     width: 16px;
-    margin-right: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
   }
 
   &:last-child {
@@ -34,8 +33,8 @@
   &:hover:not(:disabled) {
     color: $darkColor;
     text-decoration: none;
-    background-color: $whiteColor;
-    border: 1px solid $whiteColor;
+    background-color: $textColor;
+    border: 1px solid $textColor;
     cursor: pointer;
   }
 
@@ -47,18 +46,18 @@
   }
 
   &--primary {
-    color: $whiteColor;
+    color: $textColor;
     background-color: $blueColor;
     border: 1px solid $blueColor;
 
     &:hover:not(:disabled) {
-      color: $whiteColor;
+      color: $textColor;
       background-color: $blueLightColor;
       border: 1px solid $blueLightColor;
     }
 
     &:active:not(:disabled) {
-      color: $whiteColor;
+      color: $textColor;
       background-color: $blueDarkColor;
       border: 1px solid $blueDarkColor;
       transition: 0.3s;
@@ -66,18 +65,18 @@
   }
 
   &--warning {
-    color: $whiteColor;
+    color: $textColor;
     background-color: $redColor;
     border: 1px solid $redColor;
 
     &:hover:not(:disabled) {
-      color: $whiteColor;
+      color: $textColor;
       background-color: $redLightColor;
       border: 1px solid $redLightColor;
     }
 
     &:active:not(:disabled) {
-      color: $whiteColor;
+      color: $textColor;
       background-color: $redDarkColor;
       border: 1px solid $redDarkColor;
       transition: none;

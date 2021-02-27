@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   padding: 8px;
-  color: $whiteColor;
+  color: $textColor;
   margin-bottom: 8px;
   font-size: $fontMD;
 
@@ -17,7 +17,7 @@
     border: 1px solid $grey2Color;
 
     &:hover {
-      border-color: $whiteColor;
+      border-color: $textColor;
     }
   }
 

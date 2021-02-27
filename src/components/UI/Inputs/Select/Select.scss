@@ -4,7 +4,7 @@
   font-family: $font;
   font-size: $fontMD;
   width: calc(100% - 4px);
-  color: $whiteColor;
+  color: $textColor;
   padding: 4px 0 0 4px;
 
   &:hover {
@@ -14,7 +14,7 @@
 
 .select {
   margin: 8px 8px 8px 0;
-  color: $whiteColor;
+  color: $textColor;
   display: inline-block;
   width: calc(100% - 8px);
   font-size: $fontMD;

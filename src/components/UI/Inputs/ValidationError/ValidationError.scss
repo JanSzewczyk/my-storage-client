@@ -1,0 +1,12 @@
+.validation-error {
+  display: none;
+
+  &--active {
+    display: block;
+    height: 16px;
+    line-height: 16px;
+    margin: 4px 0;
+    font-size: 12px;
+    color: rgba(242, 242, 242, 0.6);
+  }
+}
