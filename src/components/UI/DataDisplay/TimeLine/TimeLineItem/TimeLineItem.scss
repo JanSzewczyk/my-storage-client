@@ -1,0 +1,56 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.time-line-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  color: $textColor;
+  padding: 0 0 16px 32px;
+  font-family: $font;
+  font-size: $fontMD;
+
+  &:before {
+    display: inline-block;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 2px solid $blueColor;
+    border-radius: 50%;
+    background: $grey-1Color;
+    z-index: 1;
+  }
+
+  &:after {
+    content: "";
+    border-left: 2px solid $blueColor;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 9px;
+    z-index: 0;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:hover > &__date {
+    opacity: 1;
+  }
+
+  &__date {
+    margin: 2px 0 4px;
+    opacity: 0.6;
+    display: inline-block;
+    font-size: $fontSM;
+    cursor: default;
+  }
+
+  &__content {
+    display: flex;
+    padding-left: 8px;
+  }
+}

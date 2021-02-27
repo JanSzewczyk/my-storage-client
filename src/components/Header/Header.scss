@@ -4,7 +4,7 @@
   display: flex;
   background-color: $black;
   justify-content: space-between;
-  color: $whiteColor;
+  color: $textColor;
   height: 48px;
   padding: 0 16px;
 
@@ -16,7 +16,7 @@
 
   &__line {
     height: 20px;
-    border-right: 2px solid $whiteColor;
+    border-right: 2px solid $textColor;
     border-radius: 1px;
     opacity: 0.5;
     margin: 0 8px;

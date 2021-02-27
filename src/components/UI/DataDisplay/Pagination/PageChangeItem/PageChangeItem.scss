@@ -1,0 +1,22 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.page-change-item {
+  color: $textColor;
+  cursor: default;
+  opacity: 0.3;
+
+  svg {
+    margin: 0;
+    padding: 0;
+  }
+
+  &--active {
+    color: $textColor;
+    cursor: pointer;
+    opacity: 1;
+
+    &:hover {
+      color: $blueColor;
+    }
+  }
+}

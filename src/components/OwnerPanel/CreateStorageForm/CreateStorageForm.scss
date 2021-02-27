@@ -1,5 +1,10 @@
 .storage-form {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   width: 100%;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
 }

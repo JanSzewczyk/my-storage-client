@@ -1,0 +1,13 @@
+@import "../../../../../assets/variables/variables.scss";
+
+.item-tooltip-content {
+  &__name {
+    border-bottom: 1px solid $grey2Color;
+    padding: 0 4px 2px 4px;
+    font-weight: bold;
+  }
+
+  &__details {
+    margin-top: 4px;
+  }
+}

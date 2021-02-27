@@ -14,7 +14,7 @@ import "./AppLayout.scss";
 
 interface AppLayoutProps extends PropsWithChildren<any> {
   user: User | null;
-  userRole: UserRole | null;
+  userRole: keyof typeof UserRole | null;
 }
 
 const AppLayout: React.FC<AppLayoutProps> = (props) => {

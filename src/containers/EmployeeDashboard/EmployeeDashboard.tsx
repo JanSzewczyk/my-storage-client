@@ -3,13 +3,13 @@ import React, { useMemo, useState } from "react";
 import { connect } from "react-redux";
 // import * as action from "../../store";
 
-import AppContent from "../../components/UI/AppContent/AppContent";
-import Tile from "../../components/UI/Tile/Tile";
+import AppContent from "../../components/UI/Layout/AppContent/AppContent";
 import StorageInforamtions from "../../components/EmployeeDashboard/StorageInforamtions/StorageInforamtions";
 import ActionTile from "../../components/EmployeeDashboard/ActionTile/ActionTile";
 import { StoreDispatch, StoreState } from "../../shared/types/store";
 import User from "../../shared/types/user/User";
 import { Employee } from "../../shared/types/employee";
+import Tile from "../../components/UI/DataDisplay/Tile";
 
 interface EmployeeDashboardProps {
   user: User | null;

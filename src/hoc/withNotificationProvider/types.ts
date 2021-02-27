@@ -19,4 +19,4 @@ export declare type NotificationInfo = {
   type: NotificationType;
 };
 
-export declare type NotificationType = "info" | "success" | "error";
+export declare type NotificationType = "info" | "success" | "warning" | "error";

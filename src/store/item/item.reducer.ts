@@ -1,17 +1,18 @@
 import * as actionTypes from "../actionTypes";
 import { updateObject } from "../../shared/utils/utility";
 import {
+  InitItemStoreAction,
   ItemActionTypes,
   ItemListLoadFailureAction,
   ItemListLoadStartAction,
   ItemListLoadSuccessAction,
-  ItemState,
+  ItemStoreState,
   ItemViewListLoadFailureAction,
   ItemViewListLoadStartAction,
   ItemViewListLoadSuccessAction,
 } from "./types";
 
-const initialState: ItemState = {
+export const initialState: ItemStoreState = {
   itemViewList: [],
   pageInfo: null,
   itemViewListLoading: true,
@@ -19,10 +20,17 @@ const initialState: ItemState = {
   itemListLoading: true,
 };
 
+const initItemStore = (
+  state: ItemStoreState,
+  action: InitItemStoreAction
+): ItemStoreState => {
+  return initialState;
+};
+
 const itemViewListLoadStart = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemViewListLoadStartAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
     itemViewList: [],
     pageInfo: null,
@@ -31,9 +39,9 @@ const itemViewListLoadStart = (
 };
 
 const itemViewListLoadSuccess = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemViewListLoadSuccessAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
     itemViewList: action.itemViewList,
     pageInfo: action.pageInfo,
@@ -42,45 +50,51 @@ const itemViewListLoadSuccess = (
 };
 
 const itemViewListLoadFailure = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemViewListLoadFailureAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
     itemViewListLoading: false,
   });
 };
 
 const itemListLoadStart = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemListLoadStartAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
-    itemsList: [],
+    itemList: [],
     itemListLoading: true,
   });
 };
 
 const itemListLoadSuccess = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemListLoadSuccessAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
-    itemsList: action.itemList,
+    itemList: action.itemList,
     itemListLoading: false,
   });
 };
 
 const itemListLoadFailure = (
-  state: ItemState,
+  state: ItemStoreState,
   action: ItemListLoadFailureAction
-): ItemState => {
+): ItemStoreState => {
   return updateObject(state, {
     itemListLoading: false,
   });
 };
 
-const reducer = (state = initialState, action: ItemActionTypes): ItemState => {
+const reducer = (
+  state = initialState,
+  action: ItemActionTypes
+): ItemStoreState => {
   switch (action.type) {
+    case actionTypes.INIT_ITEM_STORE:
+      return initItemStore(state, action);
+
     case actionTypes.ITEM_VIEW_LIST_LOAD_START:
       return itemViewListLoadStart(state, action);
     case actionTypes.ITEM_VIEW_LIST_LOAD_SUCCESS:

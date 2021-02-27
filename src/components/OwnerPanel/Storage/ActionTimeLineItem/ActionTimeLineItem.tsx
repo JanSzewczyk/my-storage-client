@@ -12,8 +12,10 @@ import {
   LevelDownAltIcon,
   LevelUpAltIcon,
   UserIcon,
-} from "../../../UI/Icons";
-import Table, { TableConfig } from "../../../UI/Table";
+} from "../../../UI/DataDisplay/Icons";
+import Table, { TableConfig } from "../../../UI/DataDisplay/Table";
+import Tooltip from "../../../UI/DataDisplay/Tooltip";
+import ItemTooltipContent from "./ItemTooltipContent/ItemTooltipContent";
 
 import "./ActionTimeLineItem.scss";
 
@@ -23,14 +25,17 @@ interface ActionTimeLineItemProps {
   onSelect: () => void;
 }
 
-const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
-  const { action, selected, onSelect } = props;
-
+const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = ({ action, selected, onSelect }) => {
   const config: TableConfig<Item> = {
     columns: [
       {
         field: "productName",
         name: "Product Name",
+        converter: (productName: string, item: Item) => (
+          <Tooltip text={<ItemTooltipContent item={item} />}>
+            <span>{productName}</span>
+          </Tooltip>
+        ),
       },
       {
         field: "amount",
@@ -71,8 +76,8 @@ const ActionTimeLineItem: React.FC<ActionTimeLineItemProps> = (props) => {
           className={"action-time-line-item__show-button"}
           onClick={onSelect}
         >
-          {!selected ? <ChevronDownIcon /> : <ChevronUpIcon />}
           Show details
+          {!selected ? <ChevronDownIcon /> : <ChevronUpIcon />}
         </div>
       </div>
       {selected && (

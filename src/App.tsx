@@ -8,21 +8,20 @@ import Auth from "./containers/Auth/Auth";
 import Dashboard from "./containers/OwnerPanel/OwnerDashboard/Dashboard";
 import AppLayout from "./hoc/AppLayout/AppLayout";
 import Storages from "./containers/OwnerPanel/Storages/Storages";
-import Storage from "./containers/OwnerPanel/Storage/Storage";
+import Storage from "./containers/OwnerPanel/StoragePage/StoragePage";
 import Logout from "./containers/Auth/Logout/Logout";
 import Employees from "./containers/OwnerPanel/Employees/Employees";
 import EmployeeDashboard from "./containers/EmployeeDashboard/EmployeeDashboard";
 import { UserRole } from "./shared/constants";
 
 import withNotificationProvider from "./hoc/withNotificationProvider";
-import StorageEmployee from "./containers/OwnerPanel/StorageEmployee/StorageEmployee";
-import Employee from "./containers/OwnerPanel/Employee/Employee";
+import Employee from "./containers/OwnerPanel/Employee/EmployeePage";
 import StoreDispatch from "./shared/types/store/StoreDispatch";
 import StoreState from "./shared/types/store/StoreState";
 
 interface AppProps {
   authenticated: boolean;
-  userRole: UserRole | null;
+  userRole: keyof typeof UserRole | null;
   onAuthCheck: () => void;
 }
 
@@ -45,7 +44,7 @@ const App: React.FC<AppProps> = (props) => {
         <Switch>
           <Route
             path={"/storages/:storageId/employee/:employeeId"}
-            component={StorageEmployee}
+            component={Employee}
           />
           <Route path={"/storages/:storageId"} component={Storage} />
           <Route path={"/storages"} component={Storages} />

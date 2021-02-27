@@ -4,9 +4,10 @@ import * as actionTypes from "../actionTypes";
 import { createSearchQuery } from "../../shared/utils/utility";
 import browserHistory from "../../shared/config/history";
 import {
-  ActionStorageListLoadFailureAction,
-  ActionStorageListLoadStartAction,
-  ActionStorageListLoadSuccessAction,
+  ActionListLoadFailureAction,
+  ActionListLoadStartAction,
+  ActionListLoadSuccessAction,
+  InitActionStoreAction,
 } from "./types";
 import PageInfo from "../../shared/types/common/PageInfo";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
@@ -17,44 +18,68 @@ import { mapActionDtoToAction } from "../../shared/data-utils/actionUtils";
 import { FixMeLater } from "../../shared/types/common/FixMeLater";
 import { Query } from "../../hooks/useQuery";
 
-export const actionStorageListLoadStart = (): ActionStorageListLoadStartAction => {
+export const initActionStore = (): InitActionStoreAction => {
   return {
-    type: actionTypes.ACTION_STORAGE_LIST_LOAD_START,
+    type: actionTypes.INIT_ACTION_STORE,
   };
 };
 
-export const actionStorageListLoadSuccess = (
+export const actionListLoadStart = (): ActionListLoadStartAction => {
+  return {
+    type: actionTypes.ACTION_LIST_LOAD_START,
+  };
+};
+
+export const actionListLoadSuccess = (
   actionsList: ActionDto[],
   pageInfo: PageInfo
-): ActionStorageListLoadSuccessAction => {
+): ActionListLoadSuccessAction => {
   return {
-    type: actionTypes.ACTION_STORAGE_LIST_LOAD_SUCCESS,
+    type: actionTypes.ACTION_LIST_LOAD_SUCCESS,
     actions: actionsList.map(mapActionDtoToAction),
     pageInfo: pageInfo,
   };
 };
 
-export const actionStorageListLoadFailure = (): ActionStorageListLoadFailureAction => {
+export const actionListLoadFailure = (): ActionListLoadFailureAction => {
   return {
-    type: actionTypes.ACTION_STORAGE_LIST_LOAD_FAILURE,
+    type: actionTypes.ACTION_LIST_LOAD_FAILURE,
   };
 };
 
-export const getStorageActionsList = (
+export const getStorageActionList = (
   storageId: string,
   queryData: Query
 ): any => (dispatch: StoreDispatch): any => {
-  dispatch(actionStorageListLoadStart());
+  dispatch(actionListLoadStart());
 
   const query = createSearchQuery(queryData);
 
   axios
-    .get(`actions/storage/${storageId}${query}`)
+    .get(`storage/${storageId}/actions${query}`)
     .then((res: AxiosResponse<PagedModel<ActionDto[]>>) => {
-      dispatch(actionStorageListLoadSuccess(res.data.content, res.data.page));
+      dispatch(actionListLoadSuccess(res.data.content, res.data.page));
     })
-    .catch((err) => {
-      dispatch(actionStorageListLoadFailure());
+    .catch(() => {
+      dispatch(actionListLoadFailure());
+    });
+};
+
+export const getEmployeeActionList = (
+  employeeId: string,
+  queryData: Query
+): any => (dispatch: StoreDispatch): any => {
+  dispatch(actionListLoadStart());
+
+  const query = createSearchQuery(queryData);
+
+  axios
+    .get(`employee/${employeeId}/actions${query}`)
+    .then((res: AxiosResponse<PagedModel<ActionDto[]>>) => {
+      dispatch(actionListLoadSuccess(res.data.content, res.data.page));
+    })
+    .catch(() => {
+      dispatch(actionListLoadFailure());
     });
 };
 

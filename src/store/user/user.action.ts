@@ -25,7 +25,7 @@ export const userLoadStart = (): UserLoadStartAction => {
 
 export const userLoadSuccess = (
   userDto: UserDto,
-  role: UserRole
+  role: keyof typeof UserRole
 ): UserLoadSuccessAction => {
   return {
     type: actionTypes.USER_LOAD_SUCCESS,
@@ -46,14 +46,14 @@ export const userLoadFailure = (): UserLoadFailureAction => {
 export const getUserDetails = (): any => (dispatch: StoreDispatch): any => {
   dispatch(userLoadStart());
 
- return axios
+  return axios
     .get("users/details")
     .then((res: AxiosResponse<UserDetails>) => {
       const { user, role } = res.data;
 
       dispatch(userLoadSuccess(user, role));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(logout());
       dispatch(userLoadFailure());
     });

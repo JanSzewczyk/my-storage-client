@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 // import _ from "lodash";
 
-import Button from "../../../../UI/Button/Button";
-import Select from "../../../../UI/Select/Select";
-import Input from "../../../../UI/Input/Input";
+import Button from "../../../../UI/Inputs/Button/Button";
+import Select from "../../../../UI/Inputs/Select/Select";
+import Input from "../../../../UI/Inputs/Input/Input";
 import Aux from "../../../../../hoc/Auxiliary/Auxiliary";
 import { FixMeLater } from "../../../../../shared/types/common/FixMeLater";
 import Product from "../../../../../shared/types/product/Product";
+import Label from "../../../../UI/Inputs/Label";
+import ValidationError from "../../../../UI/Inputs/ValidationError";
 
 interface StoreFormProps {
   addItem: (data: FixMeLater) => void;
@@ -47,49 +49,48 @@ const StoreForm: React.FC<StoreFormProps> = React.memo((props) => {
     <form>
       {addNewProduct ? (
         <Aux>
+          <Label name={"name"}>Product Name</Label>
           <Input
-            label={"Product Name: "}
-            config={{
-              placeholder: "Product Name",
-              type: "text",
-              name: "name",
-            }}
-            refInput={register({
+            name={"name"}
+            type={"text"}
+            ref={register({
               required: true,
               minLength: 3,
             })}
-            hasError={errors.name}
-            errorMessage={`Min length is 3.`}
           />
+          <ValidationError
+            hasError={errors.name}
+          >{`Min length is 3.`}</ValidationError>
+
+          <Label name={"description"}>Description</Label>
           <Input
-            label={"Description: "}
-            config={{
-              placeholder: "Description",
-              type: "text",
-              name: "description",
-            }}
-            refInput={register({
+            name={"description"}
+            type={"text"}
+            placeholder={"Description"}
+            ref={register({
               required: true,
               min: 30,
             })}
-            hasError={errors.description}
-            errorMessage={`Min length is 30.`}
           />
+          <ValidationError
+            hasError={errors.description}
+          >{`Min length is 30.`}</ValidationError>
+
+          <Label name={"value"}>Product Value</Label>
           <Input
-            label={"Product Value: "}
-            config={{
-              placeholder: "Product Value",
-              type: "number",
-              // step: 0.01,  // TODO FIX this
-              name: "value",
-            }}
-            refInput={register({
+            name={"value"}
+            type={"number"}
+            placeholder={"Product Value"}
+            step={0.01}
+            ref={register({
               required: true,
               min: 0,
             })}
-            hasError={errors.value}
-            errorMessage={`Min value is 0.`}
           />
+          <ValidationError
+            hasError={errors.value}
+          >{`Min value is 0.`}</ValidationError>
+
           <Button onClick={() => setAddNewProduct(false)}>back</Button>
         </Aux>
       ) : (
@@ -115,20 +116,20 @@ const StoreForm: React.FC<StoreFormProps> = React.memo((props) => {
         </Aux>
       )}
 
+      <Label name={"amount"}>Amount of items</Label>
       <Input
-        label={"Amount of items: "}
-        config={{
-          placeholder: "Amount",
-          type: "number",
-          name: "amount",
-        }}
-        refInput={register({
+        name={"amount"}
+        type={"number"}
+        placeholder={"Amount"}
+        step={1}
+        ref={register({
           required: true,
           min: 1,
         })}
-        hasError={errors.amount}
-        errorMessage={`Min value is 1.`}
       />
+      <ValidationError
+        hasError={errors.amount}
+      >{`Min value is 1.`}</ValidationError>
       <Button onClick={handleSubmit(onSubmit)} disabled={products.length === 0}>
         add
       </Button>

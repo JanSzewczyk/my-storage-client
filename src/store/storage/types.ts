@@ -3,7 +3,7 @@ import Storage from "../../shared/types/storage/Storage";
 import StorageView from "../../shared/types/storage/StorageView";
 import PageInfo from "../../shared/types/common/PageInfo";
 
-export interface StorageState {
+export interface StorageStoreState {
   storageViewList: StorageView[];
   pageInfo: PageInfo | null;
   storageViewListLoading: boolean;
@@ -11,8 +11,8 @@ export interface StorageState {
   storageLoading: boolean;
 }
 
-export interface ClearStorageStoreAction {
-  type: typeof actionTypes.STORAGE_STORE_CLEAR;
+export interface InitStorageStoreAction {
+  type: typeof actionTypes.INIT_STORAGE_STORE;
 }
 
 export interface StorageViewListLoadStartAction {
@@ -48,7 +48,7 @@ export interface StorageLoadFailureAction {
 }
 
 export type StorageActionTypes =
-  | ClearStorageStoreAction
+  | InitStorageStoreAction
   | StorageViewListLoadStartAction
   | StorageViewListLoadSuccessAction
   | StorageViewListLoadFailureAction

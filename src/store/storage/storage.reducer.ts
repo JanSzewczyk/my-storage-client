@@ -1,19 +1,19 @@
 import * as actionTypes from "../actionTypes";
 import { updateObject } from "../../shared/utils/utility";
 import {
-  ClearStorageStoreAction,
+  InitStorageStoreAction,
   SetStorageAction,
   StorageActionTypes,
   StorageLoadFailureAction,
   StorageLoadStartAction,
   StorageLoadSuccessAction,
-  StorageState,
+  StorageStoreState,
   StorageViewListLoadFailureAction,
   StorageViewListLoadStartAction,
   StorageViewListLoadSuccessAction,
 } from "./types";
 
-const initialState: StorageState = {
+export const initialState: StorageStoreState = {
   storageViewList: [],
   pageInfo: null,
   storageViewListLoading: true,
@@ -21,17 +21,17 @@ const initialState: StorageState = {
   storageLoading: true,
 };
 
-const clearStorageStore = (
-  state: StorageState,
-  action: ClearStorageStoreAction
-): StorageState => {
-  return updateObject(state, initialState);
+const initStorageStore = (
+  state: StorageStoreState,
+  action: InitStorageStoreAction
+): StorageStoreState => {
+  return initialState;
 };
 
 const storageViewListLoadStart = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageViewListLoadStartAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storageViewList: [],
     pageInfo: null,
@@ -40,9 +40,9 @@ const storageViewListLoadStart = (
 };
 
 const storageViewListLoadSuccess = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageViewListLoadSuccessAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storageViewList: action.storages,
     pageInfo: action.pageInfo,
@@ -51,34 +51,34 @@ const storageViewListLoadSuccess = (
 };
 
 const storageViewListLoadFailure = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageViewListLoadFailureAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storageViewListLoading: false,
   });
 };
 
 const setStorage = (
-  state: StorageState,
+  state: StorageStoreState,
   action: SetStorageAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storage: action.storage,
   });
 };
 
 const storageLoadStart = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageLoadStartAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, { storage: null, storageLoading: true });
 };
 
 const storageLoadSuccess = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageLoadSuccessAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storage: action.storage,
     storageLoading: false,
@@ -86,9 +86,9 @@ const storageLoadSuccess = (
 };
 
 const storageLoadFailure = (
-  state: StorageState,
+  state: StorageStoreState,
   action: StorageLoadFailureAction
-): StorageState => {
+): StorageStoreState => {
   return updateObject(state, {
     storageLoading: false,
   });
@@ -97,10 +97,10 @@ const storageLoadFailure = (
 const reducer = (
   state = initialState,
   action: StorageActionTypes
-): StorageState => {
+): StorageStoreState => {
   switch (action.type) {
-    case actionTypes.STORAGE_STORE_CLEAR:
-      return clearStorageStore(state, action);
+    case actionTypes.INIT_STORAGE_STORE:
+      return initStorageStore(state, action);
 
     case actionTypes.STORAGE_VIEW_LIST_LOAD_START:
       return storageViewListLoadStart(state, action);

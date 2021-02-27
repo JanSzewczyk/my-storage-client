@@ -14,7 +14,7 @@ interface CUEmployeeModalProps {
   onEditEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
 }
 
-const CUEmployeeModal: React.FC<CUEmployeeModalProps> = React.memo((props) => {
+const CUEmployeeModal: React.FC<CUEmployeeModalProps> = (props) => {
   const {
     onCloseModal,
     onCreateEmployee,
@@ -37,6 +37,6 @@ const CUEmployeeModal: React.FC<CUEmployeeModalProps> = React.memo((props) => {
       </ModalWrapper>
     </Backdrop>
   );
-});
+};
 
 export default CUEmployeeModal;

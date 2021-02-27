@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
+import "./shared/config/moment";
 import browserHistory from "./shared/config/history";
 import store from "./shared/config/store";
 import * as serviceWorker from "./serviceWorker";

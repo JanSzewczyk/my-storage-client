@@ -10,10 +10,10 @@ import {
   EmployeeLoadFailureAction,
   EmployeeLoadStartAction,
   EmployeeLoadSuccessAction,
-  EmployeeStoreClearAction,
   EmployeeViewListLoadFailureAction,
   EmployeeViewListLoadStartAction,
   EmployeeViewListLoadSuccessAction,
+  InitEmployeeStoreAction,
   SetEmployeeAction,
 } from "./types";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
@@ -24,9 +24,9 @@ import EmployeeViewDto from "../../shared/types/employee/EmployeeViewDto";
 import Employee from "../../shared/types/employee/Employee";
 import { Query, SearchQuery } from "../../hooks/useQuery";
 
-export const employeeStoreClear = (): EmployeeStoreClearAction => {
+export const initEmployeeStore = (): InitEmployeeStoreAction => {
   return {
-    type: actionTypes.EMPLOYEE_STORE_CLEAR,
+    type: actionTypes.INIT_EMPLOYEE_STORE,
   };
 };
 

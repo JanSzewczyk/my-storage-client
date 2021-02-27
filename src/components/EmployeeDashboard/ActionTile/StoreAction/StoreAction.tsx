@@ -8,9 +8,7 @@ import * as action from "../../../../store";
 import axios from "../../../../shared/config/axios";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Inputs/Button/Button";
 import Loading from "../../../UI/Loading/Loading";
 import StoreForm from "./StoreForm/StoreForm";
 
@@ -18,6 +16,7 @@ import "./StoreAction.scss";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 import Product from "../../../../shared/types/product/Product";
+import { TileContent, TileBottom } from "../../../UI/DataDisplay/Tile";
 
 interface StoreActionProps {
   ownerId: string;
@@ -25,7 +24,6 @@ interface StoreActionProps {
   productsListLoading: boolean;
   onGetProductsList: (ownerId: string) => void;
   productsList: Product[];
-  actionSRLoading: boolean;
 }
 
 const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
@@ -35,7 +33,6 @@ const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
     productsListLoading,
     onGetProductsList,
     productsList,
-    actionSRLoading,
   } = props;
 
   const [storeItems, setStoreItems] = useState<FixMeLater[]>([]);
@@ -58,36 +55,32 @@ const StoreAction: React.FC<StoreActionProps> = React.memo((props) => {
   return (
     <Aux>
       <TileContent>
-        {!actionSRLoading ? (
-          <div className={"store-action"}>
-            <div className={"store-action__container"}>
-              {productsListLoading ? (
-                <Loading />
-              ) : (
-                <StoreForm addItem={addToStoreItems} products={productsList} />
-              )}
-            </div>
-            <div className={"store-action__container"}>
-              Items :
-              <br />
-              {storeItems.map((i, index) => (
-                <Aux>
-                  <span key={index}>
-                    {`* ${
-                      _.find(
-                        productsList,
-                        (o: FixMeLater) => i.productId === o.productId
-                      )?.name
-                    } X${i.amount}`}
-                  </span>
-                  <br />
-                </Aux>
-              ))}
-            </div>
+        <div className={"store-action"}>
+          <div className={"store-action__container"}>
+            {productsListLoading ? (
+              <Loading />
+            ) : (
+              <StoreForm addItem={addToStoreItems} products={productsList} />
+            )}
           </div>
-        ) : (
-          <Loading />
-        )}
+          <div className={"store-action__container"}>
+            Items :
+            <br />
+            {storeItems.map((i, index) => (
+              <Aux>
+                <span key={index}>
+                  {`* ${
+                    _.find(
+                      productsList,
+                      (o: FixMeLater) => i.productId === o.productId
+                    )?.name
+                  } X${i.amount}`}
+                </span>
+                <br />
+              </Aux>
+            ))}
+          </div>
+        </div>
       </TileContent>
       <TileBottom
         left={<Button onClick={onClose}>close</Button>}
@@ -109,7 +102,6 @@ const mapStateToProps = (state: StoreState) => {
   return {
     productsList: state.productStore.productList,
     productsListLoading: state.productStore.productListLoading,
-    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 
