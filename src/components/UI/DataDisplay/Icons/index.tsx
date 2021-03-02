@@ -22,6 +22,7 @@ export {
   MdDelete as DeleteIcon,
   MdDeleteForever as DeleteForeverIcon,
   MdClose as CloseIcon,
+  MdSearch as SearchIcon,
 } from "react-icons/md";
 
 export {
