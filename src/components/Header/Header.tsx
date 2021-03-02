@@ -36,10 +36,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           </div>
         )}
         <Link to={"/logout"}>
-          <Button>
-            <LogOutIcon />
-            LOGOUT
-          </Button>
+          <Button withIcon={<LogOutIcon />}>LOGOUT</Button>
         </Link>
       </div>
     </header>

@@ -1,5 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 
+import Input from "../Input";
+import { SearchIcon } from "../../DataDisplay/Icons";
+
 import "./Search.scss";
 
 interface SearchProps {
@@ -7,40 +10,41 @@ interface SearchProps {
   searchString: string;
 }
 
-const Search: React.FC<SearchProps> = React.memo(
-  ({ onSearchChanged, searchString }) => {
-    const [value, setValue] = useState<string>(searchString);
-    const [lastValue, setLastValue] = useState<string>(searchString);
-    const inputRef: any = useRef();
+const Search: React.FC<SearchProps> = ({ onSearchChanged, searchString }) => {
+  const [value, setValue] = useState<string>(searchString);
+  const [lastValue, setLastValue] = useState<string>(searchString);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        if (value === inputRef.current.value && value !== lastValue) {
-          if (value.length !== 1) {
-            onSearchChanged(value);
-            setLastValue(value);
-          }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (
+        inputRef.current &&
+        value === inputRef.current.value &&
+        value !== lastValue
+      ) {
+        if (value.length !== 1) {
+          onSearchChanged(value);
+          setLastValue(value);
         }
-      }, 500);
-      return () => {
-        clearTimeout(timer);
-      };
-    }, [lastValue, onSearchChanged, value]);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [lastValue, onSearchChanged, value]);
 
-    return (
-      <div className={"search"}>
-        <label className={"search__label"}>Search: </label>
-        <input
-          ref={inputRef}
-          type={"search"}
-          placeholder={"Search..."}
-          className={"search__input"}
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-        />
-      </div>
-    );
-  }
-);
+  return (
+    <div className={"search"}>
+      <Input
+        name={"search"}
+        ref={inputRef}
+        type={"text"}
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        iconInside={<SearchIcon />}
+      />
+    </div>
+  );
+};
 
 export default Search;
