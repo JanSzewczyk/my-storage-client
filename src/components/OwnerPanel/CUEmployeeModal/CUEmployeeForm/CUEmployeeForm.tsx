@@ -15,11 +15,12 @@ import CUEmployeeFormType from "./CUEmployeeFormType";
 
 import ModalBody from "../../../UI/Modal/ModalWrapper/ModalBody/ModalBody";
 import ModalBottom from "../../../UI/Modal/ModalWrapper/ModalBottom/ModalBottom";
-import Button from "../../../UI/Button/Button";
-import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Button from "../../../UI/Inputs/Button/Button";
 import Loading from "../../../UI/Loading/Loading";
-import Input from "../../../UI/Input/Input";
-import Select from "../../../UI/Select/Select";
+import Select from "../../../UI/Inputs/Select/Select";
+import Label from "../../../UI/Inputs/Label";
+import ValidationError from "../../../UI/Inputs/ValidationError";
+import Input from "../../../UI/Inputs/Input";
 
 import "./CUEmployeeForm.scss";
 
@@ -30,14 +31,12 @@ interface CUEmployeeFormProps {
   onUpdateEmployee?: (employeeId: string, updatedEmployee: CUEmployee) => void;
 }
 
-const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
-  const {
-    onCloseModal,
-    onCreateEmployee,
-    editEmployee,
-    onUpdateEmployee,
-  } = props;
-
+const CUEmployeeForm: React.FC<CUEmployeeFormProps> = ({
+  onCloseModal,
+  onCreateEmployee,
+  editEmployee,
+  onUpdateEmployee,
+}) => {
   const {
     register,
     errors,
@@ -100,163 +99,187 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
   return loading ? (
     <Loading />
   ) : (
-    <Aux>
+    <form className={"cu-employee-form"}>
+      <h5
+        style={{
+          margin: "0 0 8px 0",
+        }}
+      >
+        Please complete the form below
+      </h5>
       <ModalBody>
-        <form className={"cu-employee-form"}>
-          <Input
-            label={"Email: "}
-            config={{
-              placeholder: "Email",
-              type: "email",
-              name: "email",
-            }}
-            refInput={register({
-              required: true,
-              pattern: pattern.email,
-            })}
-            hasError={Boolean(errors.email)}
-            errorMessage={"Required email pattern."}
-          />
-          <Input
-            label={"Password: "}
-            config={{
-              placeholder: "Password",
-              type: "password",
-              name: "password",
-            }}
-            refInput={register({
-              required: !editEmployee,
-              pattern: pattern.password,
-            })}
-            hasError={Boolean(errors.password)}
-            errorMessage={"Invalid password."}
-          />
-          <Input
-            label={"Repeat Password: "}
-            config={{
-              placeholder: "Repeat Password",
-              type: "password",
-              name: "repeatPassword",
-            }}
-            refInput={register({
-              required: !editEmployee,
-              validate: validatePasswordMatch,
-            })}
-            hasError={Boolean(errors.repeatPassword)}
-            errorMessage={"Passwords do not match."}
-          />
-          <Select
-            label={"Select working place: "}
-            config={{
-              name: "storageId",
-            }}
-            refSelect={register}
-            options={createStoragesSelectList(storages)}
-            hasError={Boolean(errors.storageId)}
-          />
-          <Input
-            label={"First Name: "}
-            config={{
-              placeholder: "First Name",
-              type: "text",
-              name: "firstName",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.firstName)}
-            errorMessage={"Min length is 3."}
-          />
-          <Input
-            label={"Last Name: "}
-            config={{
-              placeholder: "Last Name",
-              type: "text",
-              name: "lastName",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.lastName)}
-            errorMessage={"Min length is 3."}
-          />
-          <Input
-            label={"Phone: "}
-            config={{
-              placeholder: "Phone",
-              type: "text",
-              name: "phone",
-            }}
-            refInput={register({
-              required: true,
-              pattern: pattern.phoneNumber,
-            })}
-            hasError={Boolean(errors.phone)}
-            errorMessage={"Invalid phone number."}
-          />
-          <Input
-            label={"Street: "}
-            config={{
-              placeholder: "Address Street",
-              type: "text",
-              name: "addressStreet",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.addressStreet)}
-            errorMessage={"Min length is 3."}
-          />
-          <Input
-            label={"City: "}
-            config={{
-              placeholder: "Address City",
-              type: "text",
-              name: "addressCity",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.addressCity)}
-            errorMessage={"Min length is 3."}
-          />
-          <Input
-            label={"Zip: "}
-            config={{
-              placeholder: "Address Zip",
-              type: "text",
-              name: "addressZip",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.addressZip)}
-            errorMessage={"Min length is 3."}
-          />
-          <Input
-            label={"Country: "}
-            config={{
-              placeholder: "Address Country",
-              type: "text",
-              name: "addressCountry",
-            }}
-            refInput={register({
-              required: true,
-              minLength: 3,
-            })}
-            hasError={Boolean(errors.addressCountry)}
-            errorMessage={"Min length is 3."}
-          />
-        </form>
+        <div className={"cu-employee-form__content"}>
+          <div className={"cu-employee-form__container"}>
+            <Label name={"email"}>Email</Label>
+            <Input
+              name={"email"}
+              type={"email"}
+              placeholder={"Email"}
+              ref={register({
+                required: true,
+                pattern: pattern.email,
+              })}
+              fullWidth
+              autoFocus
+              isInvalid={Boolean(errors.email)}
+            />
+            <ValidationError hasError={Boolean(errors.email)}>
+              Required email pattern
+            </ValidationError>
+            <Label name={"password"}>Password</Label>
+            <Input
+              name={"password"}
+              type={"password"}
+              placeholder={"Password"}
+              ref={register({
+                required: !editEmployee,
+                pattern: pattern.password,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.password)}
+            />
+            <ValidationError hasError={Boolean(errors.password)}>
+              Invalid password
+            </ValidationError>
+            <Label name={"repeatPassword"}>Repeat Password</Label>
+            <Input
+              name={"repeatPassword"}
+              type={"password"}
+              placeholder={"Repeat Password"}
+              ref={register({
+                required: !editEmployee,
+                validate: validatePasswordMatch,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.repeatPassword)}
+            />
+            <ValidationError hasError={Boolean(errors.repeatPassword)}>
+              Passwords do not match.
+            </ValidationError>
+            <Select
+              label={"Select working place: "}
+              config={{
+                name: "storageId",
+              }}
+              refSelect={register}
+              options={createStoragesSelectList(storages)}
+              hasError={Boolean(errors.storageId)}
+            />
+            <Label name={"firstName"}>First Name</Label>
+            <Input
+              name={"firstName"}
+              type={"text"}
+              placeholder={"First Name"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.firstName)}
+            />
+            <ValidationError hasError={Boolean(errors.firstName)}>
+              Min length is 3.
+            </ValidationError>
+            <Label name={"lastName"}>Last Name</Label>
+            <Input
+              name={"lastName"}
+              type={"text"}
+              placeholder={"Last Name"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.lastName)}
+            />
+            <ValidationError hasError={Boolean(errors.lastName)}>
+              Min length is 3.
+            </ValidationError>
+          </div>
+          <div className={"cu-employee-form__container"}>
+            <Label name={"phone"}>Phone</Label>
+            <Input
+              name={"phone"}
+              type={"text"}
+              placeholder={"Phone"}
+              ref={register({
+                required: true,
+                pattern: pattern.phoneNumber,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.phone)}
+            />
+            <ValidationError hasError={Boolean(errors.phone)}>
+              Invalid phone number.
+            </ValidationError>
+
+            <Label name={"addressStreet"}>Street</Label>
+            <Input
+              name={"addressStreet"}
+              type={"text"}
+              placeholder={"Address Street"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.addressStreet)}
+            />
+            <ValidationError hasError={Boolean(errors.addressStreet)}>
+              Min length is 3.
+            </ValidationError>
+            <Label name={"addressCity"}>City</Label>
+            <Input
+              name={"addressCity"}
+              type={"text"}
+              placeholder={"Address City"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.addressCity)}
+            />
+            <ValidationError hasError={Boolean(errors.addressCity)}>
+              Min length is 3.
+            </ValidationError>
+            <Label name={"addressZip"}>Zip</Label>
+            <Input
+              name={"addressZip"}
+              type={"text"}
+              placeholder={"Address Zip"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.addressZip)}
+            />
+            <ValidationError hasError={Boolean(errors.addressZip)}>
+              Min length is 3.
+            </ValidationError>
+            <Label name={"addressCountry"}>Country</Label>
+            <Input
+              name={"addressCountry"}
+              type={"text"}
+              placeholder={"Address Country"}
+              ref={register({
+                required: true,
+                minLength: 3,
+              })}
+              fullWidth
+              isInvalid={Boolean(errors.addressCountry)}
+            />
+            <ValidationError hasError={Boolean(errors.addressCountry)}>
+              Min length is 3.
+            </ValidationError>
+          </div>
+        </div>
       </ModalBody>
       <ModalBottom>
         <Button onClick={onCloseModal}>Cancel</Button>
         <Button
+          type={"submit"}
           color={"primary"}
           onClick={handleSubmit(onSubmit)}
           disabled={!formState.isDirty}
@@ -264,7 +287,7 @@ const CUEmployeeForm: React.FC<CUEmployeeFormProps> = (props) => {
           {editEmployee ? "Update" : "Add Employee"}
         </Button>
       </ModalBottom>
-    </Aux>
+    </form>
   );
 };
 

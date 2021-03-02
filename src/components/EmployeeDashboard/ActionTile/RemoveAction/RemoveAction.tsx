@@ -7,9 +7,7 @@ import * as action from "../../../../store";
 import axios from "../../../../shared/config/axios";
 
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import Button from "../../../UI/Button/Button";
+import Button from "../../../UI/Inputs/Button/Button";
 import RemoveForm from "./RemoveForm/RemoveForm";
 import Loading from "../../../UI/Loading/Loading";
 
@@ -17,6 +15,7 @@ import "./RemoveAction.scss";
 import { FixMeLater } from "../../../../shared/types/common/FixMeLater";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import Item from "../../../../shared/types/item/Item";
+import { TileContent, TileBottom } from "../../../UI/DataDisplay/Tile";
 
 interface RemoveActionProps {
   storageId: string;
@@ -24,7 +23,6 @@ interface RemoveActionProps {
   onClose: () => void;
   itemsList: Item[];
   itemsListLoading: boolean;
-  actionSRLoading: boolean;
 }
 
 const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
@@ -34,7 +32,6 @@ const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
     onClose,
     itemsList,
     itemsListLoading,
-    actionSRLoading,
   } = props;
   const [removeItems, setRemoveItems] = useState<FixMeLater[]>([]);
 
@@ -56,34 +53,30 @@ const RemoveAction: React.FC<RemoveActionProps> = React.memo((props) => {
   return (
     <Aux>
       <TileContent>
-        {!actionSRLoading ? (
-          <div className={"remove-action"}>
-            <div className={"remove-action__container"}>
-              {itemsListLoading ? (
-                <Loading />
-              ) : (
-                <RemoveForm addItem={addToRemoveItems} items={itemsList} />
-              )}
-            </div>
-            <div className={"remove-action__container"}>
-              Items :
-              <br />
-              {removeItems.map((i, index) => (
-                <Aux>
-                  <span key={index}>
-                    {`* ${
-                      _.find(itemsList, (o) => i.productId === o.productId)
-                        ?.productName
-                    } X${i.amount}`}
-                  </span>
-                  <br />
-                </Aux>
-              ))}
-            </div>
+        <div className={"remove-action"}>
+          <div className={"remove-action__container"}>
+            {itemsListLoading ? (
+              <Loading />
+            ) : (
+              <RemoveForm addItem={addToRemoveItems} items={itemsList} />
+            )}
           </div>
-        ) : (
-          <Loading />
-        )}
+          <div className={"remove-action__container"}>
+            Items :
+            <br />
+            {removeItems.map((i, index) => (
+              <Aux>
+                <span key={index}>
+                  {`* ${
+                    _.find(itemsList, (o) => i.productId === o.productId)
+                      ?.productName
+                  } X${i.amount}`}
+                </span>
+                <br />
+              </Aux>
+            ))}
+          </div>
+        </div>
       </TileContent>
       <TileBottom
         left={<Button onClick={onClose}>close</Button>}
@@ -105,7 +98,6 @@ const mapStateToProps = (state: StoreState) => {
   return {
     itemsList: state.itemStore.itemList,
     itemsListLoading: state.itemStore.itemListLoading,
-    actionSRLoading: state.actionStore.actionSRLoading,
   };
 };
 

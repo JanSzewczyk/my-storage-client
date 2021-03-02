@@ -1,0 +1,65 @@
+@import "../../../../assets/variables/variables.scss";
+
+.select-label {
+  font-family: $font;
+  font-size: $fontMD;
+  width: calc(100% - 4px);
+  color: $textColor;
+  padding: 4px 0 0 4px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.select {
+  margin: 8px 8px 8px 0;
+  color: $textColor;
+  display: inline-block;
+  width: calc(100% - 8px);
+  font-size: $fontMD;
+  font-family: $font;
+  font-weight: 300;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid $greyColor;
+  padding: 8px;
+  outline: 0;
+
+  &::placeholder {
+    color: rgba(242, 242, 242, 0.6);
+  }
+
+  &:hover:not([disabled]):not([readonly]) {
+    border-color: $greyLightColor;
+  }
+
+  &:focus:not([disabled]):not([readonly]) {
+    outline: 0;
+    border-color: $blueColor;
+  }
+
+  &:active {
+    outline: 0;
+    border-color: $blueColor;
+  }
+
+  &:invalid {
+    border: 1px solid $redColor;
+  }
+
+  option {
+    background: $grey1Color;
+    padding: 4px;
+  }
+}
+
+.select--invalid {
+  border: 1px solid $redColor;
+}
+
+.select-error {
+  font-family: $font;
+  font-size: $fontSM;
+  margin-bottom: 4px;
+  color: $redColor;
+}

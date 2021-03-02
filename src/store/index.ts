@@ -8,7 +8,9 @@ export const logout = (): any => (dispatch: StoreDispatch) => {
 };
 
 export {
-  getStorageActionsList,
+  initActionStore,
+  getStorageActionList,
+  getEmployeeActionList,
   removeAction,
   storeAction,
 } from "./action/action.action";
@@ -16,21 +18,28 @@ export {
 export { auth, authCheck, authLogout } from "./auth/auth.action";
 
 export {
-  employeeStoreClear,
+  initEmployeeStore,
   getEmployeesList,
   getStorageEmployeesList,
   getEmployee,
   setEmployee,
 } from "./employee/employee.action";
 
-export { getStorageItemViewList, getStorageItemList } from "./item/item.action";
+export {
+  initItemStore,
+  getStorageItemViewList,
+  getStorageItemList,
+} from "./item/item.action";
 
 export { getProductsList } from "./product/product.action";
 
-export { getStorageStatistics } from "./statistic/statistic.action";
+export {
+  initStatisticStore,
+  getStorageStatistics,
+} from "./statistic/statistic.action";
 
 export {
-  clearStorageStore,
+  initStorageStore,
   setStorage,
   getStorageList,
   getStorage,

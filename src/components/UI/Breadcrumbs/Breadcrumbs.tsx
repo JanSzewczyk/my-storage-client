@@ -7,13 +7,6 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 
 import "./Breadcrumbs.scss";
 
-// TODO Add type
-type BreadcrumbsItemChildrenType =
-  | BreadcrumbsItemType[]
-  | BreadcrumbsItemType
-  | null
-  | undefined;
-
 interface BreadcrumbsProps extends PropsWithChildren<any> {}
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ children }) => {

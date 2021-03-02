@@ -1,6 +1,6 @@
 export default interface StorageEditType {
   name: string;
-  surface: string;
+  surface: number;
   addressStreet: string;
   addressCity: string;
   addressZip: string;

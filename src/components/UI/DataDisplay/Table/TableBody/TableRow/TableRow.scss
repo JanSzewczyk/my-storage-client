@@ -1,0 +1,21 @@
+@import "../../../../../../assets/variables/variables.scss";
+
+.table-row {
+  &:hover {
+    background: #4e4e4e;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #333333;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid #4e4e4e;
+  }
+
+  &__selected {
+    td {
+      background-color: rgba($blueColor, 0.4);
+    }
+  }
+}

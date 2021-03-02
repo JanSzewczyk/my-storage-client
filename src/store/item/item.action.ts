@@ -2,6 +2,7 @@ import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import { createSearchQuery } from "../../shared/utils/utility";
 import {
+  InitItemStoreAction,
   ItemListLoadFailureAction,
   ItemListLoadStartAction,
   ItemListLoadSuccessAction,
@@ -16,6 +17,12 @@ import StoreDispatch from "../../shared/types/store/StoreDispatch";
 import Item from "../../shared/types/item/Item";
 import ItemView from "../../shared/types/item/ItemView";
 import { Query } from "../../hooks/useQuery";
+
+export const initItemStore = (): InitItemStoreAction => {
+  return {
+    type: actionTypes.INIT_ITEM_STORE,
+  };
+};
 
 export const itemViewListLoadStart = (): ItemViewListLoadStartAction => {
   return {

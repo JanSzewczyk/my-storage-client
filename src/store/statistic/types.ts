@@ -1,9 +1,13 @@
 import StorageStatistic from "../../shared/types/statistic/StorageStatistic";
 import * as actionTypes from "../actionTypes";
 
-export interface StatisticState {
+export interface StatisticStoreState {
   storageStatistics: StorageStatistic[];
   storageStatisticsLoading: boolean;
+}
+
+export interface InitStatisticStoreAction {
+  type: typeof actionTypes.INIT_STATISTIC_STORE;
 }
 
 export interface StatisticStorageLoadStartAction {
@@ -20,6 +24,7 @@ export interface StatisticStorageLoadFailureAction {
 }
 
 export type StatisticActionTypes =
+  | InitStatisticStoreAction
   | StatisticStorageLoadStartAction
   | StatisticStorageLoadSuccessAction
   | StatisticStorageLoadFailureAction;

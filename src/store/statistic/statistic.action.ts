@@ -2,6 +2,7 @@ import axios from "../../shared/config/axios";
 import * as actionTypes from "../actionTypes";
 import StoreDispatch from "../../shared/types/store/StoreDispatch";
 import {
+  InitStatisticStoreAction,
   StatisticStorageLoadFailureAction,
   StatisticStorageLoadStartAction,
   StatisticStorageLoadSuccessAction,
@@ -9,6 +10,10 @@ import {
 import StorageStatisticDto from "../../shared/types/statistic/StorageStatisticDto";
 import { AxiosResponse } from "axios";
 import { mapStorageStatisticDtoToStorageStatistic } from "../../shared/data-utils/statisticUtils";
+
+export const initStatisticStore = (): InitStatisticStoreAction => {
+  return { type: actionTypes.INIT_STATISTIC_STORE };
+};
 
 export const statisticStorageLoadStart = (): StatisticStorageLoadStartAction => {
   return {
@@ -21,7 +26,7 @@ export const statisticStorageLoadSuccess = (
 ): StatisticStorageLoadSuccessAction => {
   return {
     type: actionTypes.STATISTIC_STORAGE_LOAD_SUCCESS,
-    statistics: statisticsData.map(mapStorageStatisticDtoToStorageStatistic)
+    statistics: statisticsData.map(mapStorageStatisticDtoToStorageStatistic),
   };
 };
 

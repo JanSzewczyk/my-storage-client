@@ -1,0 +1,89 @@
+@import "../../../../assets/variables/variables.scss";
+
+.button {
+  min-width: 60px;
+  padding: 8px 16px;
+  border-radius: 3px;
+  outline: 0;
+  font-size: $fontSM;
+  font-family: $font;
+  color: $textColor;
+  background-color: transparent;
+  border: 1px solid $textColor;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 16px;
+    width: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+
+  &:hover:not(:disabled) {
+    color: $darkColor;
+    text-decoration: none;
+    background-color: $textColor;
+    border: 1px solid $textColor;
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled) {
+    color: $darkColor;
+    background-color: $whiteDarkColor;
+    border: 1px solid $whiteDarkColor;
+    transition: 0.3s;
+  }
+
+  &--primary {
+    color: $textColor;
+    background-color: $blueColor;
+    border: 1px solid $blueColor;
+
+    &:hover:not(:disabled) {
+      color: $textColor;
+      background-color: $blueLightColor;
+      border: 1px solid $blueLightColor;
+    }
+
+    &:active:not(:disabled) {
+      color: $textColor;
+      background-color: $blueDarkColor;
+      border: 1px solid $blueDarkColor;
+      transition: 0.3s;
+    }
+  }
+
+  &--warning {
+    color: $textColor;
+    background-color: $redColor;
+    border: 1px solid $redColor;
+
+    &:hover:not(:disabled) {
+      color: $textColor;
+      background-color: $redLightColor;
+      border: 1px solid $redLightColor;
+    }
+
+    &:active:not(:disabled) {
+      color: $textColor;
+      background-color: $redDarkColor;
+      border: 1px solid $redDarkColor;
+      transition: none;
+    }
+  }
+
+  & ~ & {
+    margin-left: 8px;
+  }
+}

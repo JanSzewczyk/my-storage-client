@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
 
 import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
-
-import CloseIcon from "@material-ui/icons/Close";
+import { CloseIcon } from "../../DataDisplay/Icons";
 
 import "./ModalWrapper.scss";
 

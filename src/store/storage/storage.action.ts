@@ -5,7 +5,7 @@ import {
   mapStorageViewDtoToStorageView,
 } from "../../shared/data-utils/storageUtils";
 import {
-  ClearStorageStoreAction,
+  InitStorageStoreAction,
   SetStorageAction,
   StorageLoadFailureAction,
   StorageLoadStartAction,
@@ -24,9 +24,9 @@ import { createSearchQuery } from "../../shared/utils/utility";
 import PagedModel from "../../shared/types/apiResponse/PagedModel";
 import PageInfo from "../../shared/types/common/PageInfo";
 
-export const clearStorageStore = (): ClearStorageStoreAction => {
+export const initStorageStore = (): InitStorageStoreAction => {
   return {
-    type: actionTypes.STORAGE_STORE_CLEAR,
+    type: actionTypes.INIT_STORAGE_STORE,
   };
 };
 
@@ -65,7 +65,7 @@ export const getStorageList = (queryData: SearchQuery): any => (
     .then((res: AxiosResponse<PagedModel<StorageViewDto[]>>) => {
       dispatch(storageViewListLoadSuccess(res.data.content, res.data.page));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(storageViewListLoadFailure());
     });
 };

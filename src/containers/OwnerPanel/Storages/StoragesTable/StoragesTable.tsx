@@ -1,28 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
-
 import { connect } from "react-redux";
-import * as action from "../../../../store";
 
+import * as action from "../../../../store";
 import PageInfo from "../../../../shared/types/common/PageInfo";
 import { StorageView } from "../../../../shared/types/storage";
 import { StoreDispatch, StoreState } from "../../../../shared/types/store";
 import useQuery, { SearchQuery } from "../../../../hooks/useQuery";
-
-import Table, { TableConfig } from "../../../../components/UI/Table";
-import Pagination from "../../../../components/UI/Pagination";
-import Tile, {
-  TileBottom,
-  TileContent,
-  TileTop,
-} from "../../../../components/UI/Tile";
-import Search from "../../../../components/UI/Search";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
-// import Tooltip from "../../../../components/UI/Tooltip";
+
+import Search from "../../../../components/UI/Inputs/Search";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import CreateStorageModal from "./CreateStorageModal/CreateStorageModal";
-import IconButton from "../../../../components/UI/IconButton";
+import CreateStorageModal from "./CreateStorage/CreateStorage";
+import IconButton from "../../../../components/UI/Inputs/IconButton";
+import { PlusIcon } from "../../../../components/UI/DataDisplay/Icons";
+import Pagination from "../../../../components/UI/DataDisplay/Pagination";
+import Table, {
+  TableConfig,
+} from "../../../../components/UI/DataDisplay/Table";
+import Tile, {
+  TileTop,
+  TileContent,
+  TileBottom,
+} from "../../../../components/UI/DataDisplay/Tile";
+import Tooltip from "../../../../components/UI/DataDisplay/Tooltip";
+
+import "./StoragesTable.scss";
 
 interface StoragesTableProps {
   onGetStorageList: (query: SearchQuery) => void;
@@ -36,6 +39,11 @@ const config: TableConfig<StorageView> = {
     {
       field: "shortId",
       name: "ID",
+      sorted: true,
+    },
+    {
+      field: "name",
+      name: "Name",
       sorted: true,
     },
     {
@@ -83,12 +91,7 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     storageViewListLoading,
   } = props;
 
-  const [showCreateStorageModal, setShowCreateStorageModal] = useState<boolean>(
-    false
-  );
-
   const history = useHistory();
-
   const {
     query,
     onSortChanged,
@@ -101,88 +104,66 @@ const StoragesTable: React.FC<StoragesTableProps> = React.memo((props) => {
     search: "",
   });
 
+  const [showCreateStorageModal, setShowCreateStorageModal] = useState<boolean>(
+    false
+  );
+
   useEffect(() => {
     onGetStorageList(query);
   }, [onGetStorageList, query]);
 
-  const redirectToStorage = useCallback(
-    (storage: StorageView) => {
-      history.push(`storages/${storage.id}`);
-    },
-    [history]
-  );
-
-  const search = useMemo(
-    () => (
-      <Search onSearchChanged={onSearchChanged} searchString={query.search} />
-    ),
-    [onSearchChanged, query.search]
-  );
-
-  const table = useMemo(
-    () => (
-      <Table<StorageView>
-        config={config}
-        data={storageViewList}
-        sort={query.sort}
-        onSortChanged={onSortChanged}
-        onRowClick={redirectToStorage}
-        loading={storageViewListLoading}
-      />
-    ),
-    [
-      onSortChanged,
-      query.sort,
-      redirectToStorage,
-      storageViewList,
-      storageViewListLoading,
-    ]
-  );
-
-  const pagination = useMemo(
-    () => <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />,
-    [onPageChanged, pageInfo]
-  );
-
-  const createStorageModal = useMemo(
-    () => (
-      <CreateStorageModal
-        onCloseModal={() => setShowCreateStorageModal(false)}
-      />
-    ),
-    []
-  );
+  const redirectToStorage = (storage: StorageView): void => {
+    history.push(`storages/${storage.id}`);
+  };
 
   return (
     <Aux>
-      {showCreateStorageModal && createStorageModal}
+      {showCreateStorageModal && (
+        <CreateStorageModal
+          onCloseModal={() => setShowCreateStorageModal(false)}
+        />
+      )}
       <Tile
         header={{
           title: "Your Storages",
         }}
       >
         <TileTop
-          left={search}
+          left={
+            <Search
+              onSearchChanged={onSearchChanged}
+              searchString={query.search}
+            />
+          }
           right={
-            // TODO FIX TOOLTIP 
-            // <Tooltip
-            //   text={"Add New Storage"}
-            //   position={"top-end"}
-            //   color={"blue"}
-            // >
-            <IconButton
-              color={"warning"}
-              onClick={() => setShowCreateStorageModal(true)}
+            <Tooltip
+              text={"Add New Storage"}
+              position={"top-end"}
+              color={"blue"}
             >
-              <FaPlus />
-            </IconButton>
-            // </Tooltip>
+              <IconButton onClick={() => setShowCreateStorageModal(true)}>
+                <PlusIcon />
+              </IconButton>
+            </Tooltip>
           }
         />
         <TileContent>
-          <div className={"storage-employees"}>{table}</div>
+          <div className={"storages-table"}>
+            <Table<StorageView>
+              config={config}
+              data={storageViewList}
+              sort={query.sort}
+              onSortChanged={onSortChanged}
+              onRowClick={redirectToStorage}
+              loading={storageViewListLoading}
+            />
+          </div>
         </TileContent>
-        <TileBottom right={pagination} />
+        <TileBottom
+          right={
+            <Pagination pageInfo={pageInfo} onPageChanged={onPageChanged} />
+          }
+        />
       </Tile>
     </Aux>
   );

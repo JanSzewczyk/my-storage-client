@@ -1,13 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
 import _ from "lodash";
 
 import Loading from "../../../UI/Loading/Loading";
-import { DATE_PATTERN } from "../../../../shared/utils/dateUtils";
 import { formatMoney } from "../../../../shared/utils/currencyUtils";
 import { setTimeUnitDate } from "../../../../shared/utils/chartUtils";
 import StorageStatistic from "../../../../shared/types/statistic/StorageStatistic";
+import {
+  dateToApiDateString,
+  dateToDateString,
+} from "../../../../shared/utils/dateUtils";
 
 import "./StorageStatisticChart.scss";
 
@@ -16,15 +18,16 @@ interface StorageStatisticChartProps {
   statistics: StorageStatistic[];
 }
 
-const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
-  const { loading, statistics } = props;
-
+const StorageStatisticChart: React.FC<StorageStatisticChartProps> = ({
+  loading,
+  statistics,
+}) => {
   let content = <Loading />;
   if (!loading) {
     const currency = _.uniq(_.map(statistics, (s) => s.currency))[0];
 
     let data = {
-      labels: statistics.map((stat) => stat.date),
+      labels: statistics.map((stat) => dateToApiDateString(stat.date)),
       datasets: [
         {
           label: "Store",
@@ -77,7 +80,6 @@ const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
             type: "time",
             time: {
               unit: setTimeUnitDate(statistics),
-              tooltipFormat: DATE_PATTERN,
             },
           },
         ],
@@ -104,6 +106,8 @@ const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
       },
       tooltips: {
         callbacks: {
+          title: (tooltipItem: any[]) =>
+            dateToDateString(new Date(tooltipItem[0].label)),
           label: (tooltipItem: any, object: any) =>
             `${object.datasets[tooltipItem.datasetIndex].label}: ${formatMoney(
               tooltipItem.value,
@@ -117,11 +121,6 @@ const StorageStatisticChart: React.FC<StorageStatisticChartProps> = (props) => {
   }
 
   return <div className={"storage-statistic-chart"}>{content}</div>;
-};
-
-StorageStatisticChart.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  statistics: PropTypes.array.isRequired,
 };
 
 export default StorageStatisticChart;

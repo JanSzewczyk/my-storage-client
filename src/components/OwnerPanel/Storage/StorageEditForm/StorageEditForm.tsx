@@ -1,15 +1,16 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import DataView from "../../../UI/DataView/DataView";
-import TileContent from "../../../UI/Tile/TileContent/TileContent";
-import TileBottom from "../../../UI/Tile/TileBottom/TileBottom";
-import Button from "../../../UI/Button/Button";
-import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import Input from "../../../UI/Input/Input";
 import { dateToDateTimeString } from "../../../../shared/utils/dateUtils";
 import { CUStorage, Storage } from "../../../../shared/types/storage";
+
+import DataView from "../../../UI/DataDisplay/DataView/DataView";
+import Button from "../../../UI/Inputs/Button/Button";
+import Aux from "../../../../hoc/Auxiliary/Auxiliary";
+import Input from "../../../UI/Inputs/Input/Input";
 import StorageEditFormType from "./StorageEditFormType";
+import { TileContent, TileBottom } from "../../../UI/DataDisplay/Tile";
+import Label from "../../../UI/Inputs/Label";
 
 interface StorageEditFormProps {
   defaultStorage: Storage;
@@ -18,15 +19,21 @@ interface StorageEditFormProps {
   onRemoveStorage: (storageId: string) => void;
 }
 
-const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
-  const { defaultStorage, onCloseEdit, onRemoveStorage, onEditStorage } = props;
-
-  const { register, errors, handleSubmit, formState } = useForm<
-    StorageEditFormType
-  >({
+const StorageEditForm: React.FC<StorageEditFormProps> = ({
+  defaultStorage,
+  onCloseEdit,
+  onRemoveStorage,
+  onEditStorage,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState,
+  } = useForm<StorageEditFormType>({
     defaultValues: {
       name: defaultStorage.name,
-      surface: defaultStorage.surface.toString(),
+      surface: defaultStorage.surface,
       addressStreet: defaultStorage.addressStreet,
       addressCity: defaultStorage.addressCity,
       addressZip: defaultStorage.addressZip,
@@ -35,10 +42,10 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
     mode: "onChange",
   });
 
-  const onSubmit = (formData: StorageEditFormType) => {
+  const onSubmit = (formData: StorageEditFormType): void => {
     const data: CUStorage = {
       ...formData,
-      surface: Number(formData.surface),
+      surface: formData.surface,
     };
 
     onEditStorage(defaultStorage.id, data);
@@ -48,86 +55,80 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
     <Aux>
       <TileContent>
         <form>
+          <DataView label={"Storage ID:"} data={defaultStorage.shortId} />
+
+          <Label name={"name"}>Name</Label>
           <Input
-            inputType={"edit"}
-            label={"Name: "}
-            refInput={register({
+            name={"name"}
+            type={"text"}
+            placeholder={"Storage Name"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Storage Name",
-              type: "text",
-              name: "name",
-            }}
-            hasError={Boolean(errors.name)}
+            fullWidth
+            isInvalid={Boolean(errors.name)}
           />
 
+          <Label name={"surface"}>Surface</Label>
           <Input
-            inputType={"edit"}
-            label={"Surface: "}
-            refInput={register({
+            name={"surface"}
+            type={"number"}
+            placeholder={"Surface"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Surface",
-              type: "number",
-              name: "surface",
-            }}
-            hasError={Boolean(errors.surface)}
+            fullWidth
+            isInvalid={Boolean(errors.surface)}
           />
 
+          <Label name={"addressStreet"}>Name</Label>
           <Input
-            inputType={"edit"}
-            label={"Street: "}
-            refInput={register({
+            name={"addressStreet"}
+            type={"text"}
+            placeholder={"Address Street"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Address Street",
-              type: "text",
-              name: "addressStreet",
-            }}
-            hasError={Boolean(errors.addressStreet)}
+            fullWidth
+            isInvalid={Boolean(errors.addressStreet)}
           />
+
+          <Label name={"addressCity"}>City</Label>
           <Input
-            inputType={"edit"}
-            label={"City: "}
-            refInput={register({
+            name={"addressCity"}
+            type={"text"}
+            placeholder={"Address City"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Address City",
-              type: "text",
-              name: "addressCity",
-            }}
-            hasError={Boolean(errors.addressCity)}
+            fullWidth
+            isInvalid={Boolean(errors.addressCity)}
           />
+
+          <Label name={"addressZip"}>Zip</Label>
           <Input
-            inputType={"edit"}
-            label={"Zip: "}
-            refInput={register({
+            name={"addressZip"}
+            type={"text"}
+            placeholder={"Address Zip"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Address Zip",
-              type: "text",
-              name: "addressZip",
-            }}
-            hasError={Boolean(errors.addressZip)}
+            fullWidth
+            isInvalid={Boolean(errors.addressZip)}
           />
+
+          <Label name={"addressCountry"}>Country</Label>
           <Input
-            inputType={"edit"}
-            label={"Country: "}
-            refInput={register({
+            name={"addressCountry"}
+            type={"text"}
+            placeholder={"Address Country"}
+            ref={register({
               required: true,
             })}
-            config={{
-              placeholder: "Address Country",
-              type: "text",
-              name: "addressCountry",
-            }}
-            hasError={Boolean(errors.addressCountry)}
+            fullWidth
+            isInvalid={Boolean(errors.addressCountry)}
           />
+
           <DataView
             label={"Created At:"}
             data={dateToDateTimeString(defaultStorage.createdAt)}
@@ -160,6 +161,6 @@ const StorageEditForm: React.FC<StorageEditFormProps> = React.memo((props) => {
       />
     </Aux>
   );
-});
+};
 
 export default StorageEditForm;
