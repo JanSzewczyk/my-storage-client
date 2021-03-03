@@ -1,0 +1,13 @@
+.link-to {
+  color: #33a3ff;
+  cursor: pointer;
+  text-decoration: none;
+
+  &__not-link {
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
