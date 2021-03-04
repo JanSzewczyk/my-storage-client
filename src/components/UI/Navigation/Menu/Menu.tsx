@@ -59,6 +59,7 @@ const Menu = ({
   useLayoutEffect(() => {
     coordinates && window.addEventListener("scroll", handleScroll, true);
     coordinates && window.addEventListener("resize", handleScroll);
+
     return () => {
       coordinates && window.removeEventListener("scroll", handleScroll, true);
       coordinates && window.removeEventListener("resize", handleScroll);
