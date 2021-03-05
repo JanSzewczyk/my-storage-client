@@ -13,54 +13,52 @@ interface StorageInforamtionsProps {
   onAction: (actionType: "STORE" | "REMOVE") => void;
 }
 
-const StorageInforamtions: React.FC<StorageInforamtionsProps> = React.memo(
-  (props) => {
-    const { storage, onAction } = props;
+const StorageInforamtions: React.FC<StorageInforamtionsProps> = (props) => {
+  const { storage, onAction } = props;
 
-    return (
-      <Tile
-        header={{
-          title: "Storage",
-          subtitle: "Storage informations",
-        }}
-        tileSize={{
-          sm: "sm-12",
-          md: "md-6",
-          lg: "lg-4",
-          xl: "xl-3",
-        }}
-      >
-        <TileContent>
-          <DataView label={"Name:"} data={storage.name} />
-          <DataView label={"Surface:"} data={storage.surface} />
-          <DataView label={"Street:"} data={storage.addressStreet} />
-          <DataView label={"City:"} data={storage.addressCity} />
-          <DataView label={"Zip:"} data={storage.addressZip} />
-          <DataView label={"Country:"} data={storage.addressCountry} />
-          <DataView
-            label={"Created At:"}
-            data={dateToDateTimeString(storage.createdAt)}
-          />
-          <DataView
-            label={"Updated At:"}
-            data={dateToDateTimeString(storage.updatedAt)}
-          />
-        </TileContent>
-        <TileBottom
-          right={
-            <Aux>
-              <Button color={"primary"} onClick={() => onAction("STORE")}>
-                STORE
-              </Button>
-              <Button color={"warning"} onClick={() => onAction("REMOVE")}>
-                REMOVE
-              </Button>
-            </Aux>
-          }
+  return (
+    <Tile
+      header={{
+        title: "Storage",
+        subtitle: "Storage informations",
+      }}
+      tileSize={{
+        sm: "sm-12",
+        md: "md-6",
+        lg: "lg-4",
+        xl: "xl-3",
+      }}
+    >
+      <TileContent>
+        <DataView label={"Name:"} data={storage.name} />
+        <DataView label={"Surface:"} data={storage.surface} />
+        <DataView label={"Street:"} data={storage.addressStreet} />
+        <DataView label={"City:"} data={storage.addressCity} />
+        <DataView label={"Zip:"} data={storage.addressZip} />
+        <DataView label={"Country:"} data={storage.addressCountry} />
+        <DataView
+          label={"Created At:"}
+          data={dateToDateTimeString(storage.createdAt)}
         />
-      </Tile>
-    );
-  }
-);
+        <DataView
+          label={"Updated At:"}
+          data={dateToDateTimeString(storage.updatedAt)}
+        />
+      </TileContent>
+      <TileBottom
+        right={
+          <Aux>
+            <Button color={"primary"} onClick={() => onAction("STORE")}>
+              STORE
+            </Button>
+            <Button color={"warning"} onClick={() => onAction("REMOVE")}>
+              REMOVE
+            </Button>
+          </Aux>
+        }
+      />
+    </Tile>
+  );
+};
 
 export default StorageInforamtions;

@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import { EllipsisVIcon } from "../../UI/DataDisplay/Icons";
 import IconButton from "../../UI/Inputs/IconButton";
-import Menu from "../../UI/Navigation/Menu";
-import MenuItem from "../../UI/Navigation/MenuItem";
+import Dropdown from "../../UI/Navigation/Dropdown";
+import { MenuItem } from "../../UI/Navigation/Menu";
 
 interface EmployeeDropdownOptionProps {
   onEditEmployee: () => void;
@@ -40,7 +40,7 @@ const EmployeeDropdownOption = ({
       >
         <EllipsisVIcon />
       </IconButton>
-      <Menu
+      <Dropdown
         id="storage-dropdown"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -52,7 +52,7 @@ const EmployeeDropdownOption = ({
         <MenuItem onClick={onRemoveEmployee} disabled={!activeRemoveEmployee}>
           Remove
         </MenuItem>
-      </Menu>
+      </Dropdown>
     </Aux>
   );
 };
