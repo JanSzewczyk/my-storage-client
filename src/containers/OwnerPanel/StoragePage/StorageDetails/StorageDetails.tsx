@@ -64,8 +64,9 @@ const StorageDetails: React.FC<StorageDetailsProps> = (props) => {
 
   const storageDropdownOption = (
     <StorageDropdownOption
+      onShowDetails={() => setEdit(false)}
       onEditStorage={() => setEdit(true)}
-      activeEditStorage={!edit}
+      activeEditStorage={edit}
       onRemoveStorage={() => storage && removeStorage(storage.id)}
       activeRemoveStorage={!!storage}
     />

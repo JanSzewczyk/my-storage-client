@@ -1,24 +1,26 @@
-@import "../../../../assets/variables/variables.scss";
-
 .menu {
   position: absolute;
-  list-style: none;
-  margin: 0;
-  // z-index: $menuZIndex;
-  z-index: 1;
+  display: none;
+  z-index: 60;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  background: #1f1f1f;
+  border: solid 1px #4e4e4e;
+  text-align: left;
+  width: 100%;
 
-  min-width: 64px;
-  background-color: $grey1Color;
-  border: 1px solid $greyColor;
-  border-radius: 4px;
-  padding: 8px;
-  overflow: hidden;
-  transition: height 500ms ease;
-  display: flex;
-  flex-direction: column;
+  hr {
+    margin: 4px 0;
+    border-style: none;
+    border-top: 1px solid #353535;
+    border-bottom: 0;
+  }
 
-  cursor: default;
-
-  margin: 8px;
-  width: auto;
+  &--visible {
+    display: block;
+  }
+}
+.right {
+  right: 0;
+  margin-right: 0;
 }

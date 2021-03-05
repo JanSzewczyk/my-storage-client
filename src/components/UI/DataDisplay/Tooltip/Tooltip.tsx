@@ -106,14 +106,11 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
   }, [onMouseLeaveHandler, onMouseOverHandler]);
 
-  const handleScroll = useCallback(
-    (event: any) => {
-      if (null !== childrenRef.current && null !== messageRef.current) {
-        setTooltip(childrenRef.current.getBoundingClientRect());
-      }
-    },
-    [setTooltip]
-  );
+  const handleScroll = useCallback(() => {
+    if (null !== childrenRef.current && null !== messageRef.current) {
+      setTooltip(childrenRef.current.getBoundingClientRect());
+    }
+  }, [setTooltip]);
 
   useLayoutEffect(() => {
     coordinates && window.addEventListener("scroll", handleScroll, true);
