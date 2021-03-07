@@ -1,10 +1,12 @@
+@import "./assets/variables/variables";
+
 body {
   margin: 0;
-  font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
-  color: #f2f2f2;
+  color: $textColor;
+  font-family: $font;
 }
 
 code {
@@ -22,4 +24,20 @@ code {
 }
 ::-webkit-scrollbar-thumb {
   background-color: #4e4e4e;
+}
+
+p {
+  margin-top: 0;
+  line-height: 1.5em;
+  color: #f2f2f2;
+}
+
+ol,
+ul {
+  margin-top: 0;
+  color: #f2f2f2;
+}
+ol li,
+ul li {
+  padding: 0 0 8px;
 }
