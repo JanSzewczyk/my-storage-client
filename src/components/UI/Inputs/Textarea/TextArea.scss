@@ -1,0 +1,79 @@
+@import "../../../../assets/variables/variables";
+
+.textarea {
+  color: $textColor;
+  display: inline-block;
+  width: 160px;
+  font-size: $fontSM;
+  font-family: $font;
+  font-weight: 300;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid #4e4e4e;
+  padding: 6px;
+  -webkit-appearance: none;
+  outline: 0;
+
+  resize: none;
+
+  &:active {
+    outline: 0;
+    border-color: #0082f0;
+  }
+
+  &:focus {
+    outline: #0082f0 solid 2px;
+    outline-offset: 1px;
+  }
+
+  &:hover:not([disabled]):not([readonly]) {
+    border-color: #767676;
+  }
+
+  &:focus:not([disabled]):not([readonly]) {
+    outline: 0;
+    border-color: #0082f0;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: #2d2d2d;
+    color: rgba(242, 242, 242, 0.6);
+  }
+
+  &:-moz-read-only,
+  &[readonly] {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  &:read-only,
+  &[readonly] {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  &:-moz-read-only:hover,
+  &[readonly]:hover,
+  &:-moz-read-only:active,
+  &[readonly]:active {
+    border-color: transparent;
+  }
+
+  &:read-only:hover,
+  &[readonly]:hover,
+  &:read-only:active,
+  &[readonly]:active {
+    border-color: transparent;
+  }
+
+  &::placeholder,
+  &::-webkit-input-placeholder,
+  &::-ms-input-placeholder {
+    color: rgba(242, 242, 242, 0.6);
+  }
+
+  &--fullwidth {
+    width: calc(100% - 14px);
+    margin-right: 0;
+  }
+}
