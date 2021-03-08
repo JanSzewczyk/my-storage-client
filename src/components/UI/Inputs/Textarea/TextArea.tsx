@@ -1,6 +1,13 @@
-import React, { ChangeEventHandler, CSSProperties, forwardRef } from "react";
+import React, {
+  ChangeEventHandler,
+  CSSProperties,
+  forwardRef,
+  useRef,
+  KeyboardEvent,
+} from "react";
 
 import "./TextArea.scss";
+import useMergedRef from "../../../../hooks/useMergedRef";
 
 type RefType = HTMLTextAreaElement;
 
@@ -50,19 +57,28 @@ const TextArea = forwardRef<RefType, TextAreaProps>(
 
     if (!id) id = name;
 
-    const eventOnKeyDown = (e: any): void => {
-      if (e.key === "Tab" && !e.shiftKey) {
-        // e.preventDefault();
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const multiRef = useMergedRef(ref, textareaRef);
 
-        console.log(e.currentTarget.value);
+    const eventOnKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>): void => {
+      if (e.key === "Tab" && !e.shiftKey) {
+        e.preventDefault();
+
+        const value = textareaRef.current!.value;
+        const selectionStart = textareaRef.current!.selectionStart;
+        const selectionEnd = textareaRef.current!.selectionEnd;
+
+        textareaRef.current!.value =
+          value.substring(0, selectionStart) +
+          "\t" +
+          value.substring(selectionEnd);
+        console.log(value, selectionStart, selectionEnd);
       }
     };
 
-    console.log(ref);
-
     return (
       <textarea
-        ref={ref}
+        ref={multiRef}
         id={id}
         name={name}
         placeholder={placeholder}
