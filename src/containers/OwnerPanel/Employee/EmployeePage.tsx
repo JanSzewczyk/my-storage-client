@@ -16,6 +16,7 @@ import AppBar from "../../../components/UI/Layout/AppBar";
 import EmployeeStorageDetails from "./EmployeeStorageDetails/EmployeeStorageDetails";
 import AppContent from "../../../components/UI/Layout/AppContent";
 import EmployeeDetails from "./EmployeeDetails/EmployeeDetails";
+import Row from "../../../components/UI/Layout/Row";
 
 interface MatchProps {
   employeeId: string;
@@ -92,9 +93,11 @@ const EmployeePage: React.FC<EmployeePageProps> = (props) => {
       <AppBar left={breadcrumbs} />
       {(employee || employeeLoading) && (
         <AppContent>
-          {employeeDetails}
-          {employeeStorageDetails}
-          {employeeActions}
+          <Row>
+            {employeeDetails}
+            {employeeStorageDetails}
+            {employeeActions}
+          </Row>
         </AppContent>
       )}
     </Aux>

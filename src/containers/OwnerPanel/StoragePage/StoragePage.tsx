@@ -18,6 +18,7 @@ import Aux from "../../../hoc/Auxiliary/Auxiliary";
 import AppBar from "../../../components/UI/Layout/AppBar";
 import AppContent from "../../../components/UI/Layout/AppContent";
 import StorageStatistics from "./StorageStatistics/StorageStatistics";
+import Row from "../../../components/UI/Layout/Row";
 
 interface MatchProps {
   storageId: string;
@@ -101,11 +102,13 @@ const StoragePage: React.FC<StorageProps> = (props) => {
       {storageLoading ||
         (storage && (
           <AppContent>
-            {storageDetails}
-            {storageEmployees}
-            {storageItems}
-            {storageActions}
-            {storageStatistics}
+            <Row>
+              {storageDetails}
+              {storageEmployees}
+              {storageItems}
+              {storageActions}
+              {storageStatistics}
+            </Row>
           </AppContent>
         ))}
     </Aux>
