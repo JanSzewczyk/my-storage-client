@@ -38,8 +38,8 @@ const EmployeeStorageDetails: React.FC<EmployeeStorageDetailsProps> = (
     <Tile
       tileSize={{
         sm: "sm-12",
-        md: "md-6",
-        lg: "lg-4",
+        md: "md-12",
+        lg: "lg-6",
         xl: "xl-3",
       }}
       header={{
