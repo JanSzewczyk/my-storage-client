@@ -35,7 +35,7 @@ import Search from "../../../../components/UI/Inputs/Search/Search";
 import "./EmployeeTable.scss";
 
 interface EmployeeTableProps {
-  onGetEmployeesList: (query: SearchQuery) => void;
+  getEmployeesList: (query: SearchQuery) => void;
   employeeList: EmployeeView[];
   employeeListLoading: boolean;
   pageInfo: PageInfo | null;
@@ -83,7 +83,7 @@ const config: TableConfig<EmployeeView> = {
 
 const EmployeeTable: React.FC<EmployeeTableProps> = (props) => {
   const {
-    onGetEmployeesList,
+    getEmployeesList,
     employeeList,
     employeeListLoading,
     pageInfo,
@@ -106,8 +106,8 @@ const EmployeeTable: React.FC<EmployeeTableProps> = (props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
-    onGetEmployeesList(query);
-  }, [onGetEmployeesList, query]);
+    getEmployeesList(query);
+  }, [getEmployeesList, query]);
 
   const redirectToEmployee = (employee: EmployeeView): void => {
     history.push(`/employees/${employee.id}`);
@@ -186,7 +186,7 @@ const mapStateToProps = (state: StoreState) => {
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onGetEmployeesList: (query: SearchQuery) =>
+    getEmployeesList: (query: SearchQuery) =>
       dispatch(action.getEmployeesList(query)),
   };
 };
