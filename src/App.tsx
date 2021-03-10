@@ -32,7 +32,6 @@ const App: React.FC<AppProps> = (props) => {
     onAuthCheck();
   }, [onAuthCheck]);
 
-
   return !authenticated ? (
     <Switch>
       <Route path={"/test"} component={Dashboard} />
