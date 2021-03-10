@@ -19,7 +19,7 @@ const TableBody = <TTable,>({
   onRowClick,
   selectable,
   selected,
-  onSelectCellClick,
+  onSelectCellClick
 }: TableBodyProps<TTable>) => {
   return (
     <tbody className="table-body">

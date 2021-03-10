@@ -1,8 +1,9 @@
-import React from "react";
-import PropsWithChildren from "../../shared/types/props/PropsWithChildren";
+import React, { PropsWithChildren } from "react";
 
-interface AuxProps extends PropsWithChildren<any> {}
+interface AuxProps {
+  children?: any;
+}
 
-const Aux: React.FC<AuxProps> = (props) => props.children;
+const Aux: React.FC<AuxProps> = ({ children }) => children;
 
 export default Aux;
