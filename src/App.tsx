@@ -71,13 +71,13 @@ const mapStateToProps = (state: StoreState) => {
       state.authStore.accessToken !== null &&
       state.userStore.user !== null &&
       state.userStore.role !== null,
-    userRole: state.userStore.role,
+    userRole: state.userStore.role
   };
 };
 
 const mapDispatchToProps = (dispatch: StoreDispatch) => {
   return {
-    onAuthCheck: () => dispatch(action.authCheck()),
+    onAuthCheck: () => dispatch(action.authCheck())
   };
 };
 
