@@ -23,7 +23,7 @@ describe("item reducer", () => {
           itemList: [],
           itemListLoading: true,
         },
-        { type: actionTypes.ITEM_INIT }
+        { type: actionTypes.INIT_ITEM_STORE }
       )
     ).toEqual(initialState);
   });

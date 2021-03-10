@@ -9,13 +9,12 @@ import React, {
 import { createPortal } from "react-dom";
 
 import { TooltipColor, TooltipPosition } from "./types";
-import {
-  getApplicationHeight,
-  getApplicationWidth,
-} from "../../../../shared/utils/graphicUtils";
+
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
-import TooltipMessage from "./TooltipMessage/TooltipMessage";
 import PropsWithChildren from "../../../../shared/types/props/PropsWithChildren";
+import useWindowSize from "../../../../hooks/useWindowSize";
+
+import TooltipMessage from "./TooltipMessage/TooltipMessage";
 
 interface TooltipProps extends PropsWithChildren {
   text: ReactNode;
@@ -33,6 +32,8 @@ const Tooltip: React.FC<TooltipProps> = ({
   color = "white",
   style,
 }) => {
+  const windowSize = useWindowSize();
+
   const [coordinates, setCoordinates] = useState<any>(null);
 
   const messageRef = useRef<HTMLDivElement>(null);
@@ -40,8 +41,8 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const setTooltip = useCallback(
     (chp: DOMRect) => {
-      const maxWidth: number = getApplicationWidth();
-      const maxHeight: number = getApplicationHeight();
+      const maxWidth: number = windowSize.width;
+      const maxHeight: number = windowSize.height;
 
       if (position === "top")
         setCoordinates({
@@ -85,7 +86,7 @@ const Tooltip: React.FC<TooltipProps> = ({
           maxWidth: chp.left - 32,
         });
     },
-    [position]
+    [position, windowSize.height, windowSize.width]
   );
 
   const onMouseOverHandler = useCallback(() => {
@@ -105,19 +106,17 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
   }, [onMouseLeaveHandler, onMouseOverHandler]);
 
-  const handleScroll = useCallback(
-    (event: any) => {
-      if (null !== childrenRef.current && null !== messageRef.current) {
-        setTooltip(childrenRef.current.getBoundingClientRect());
-      }
-    },
-    [setTooltip]
-  );
+  const handleScroll = useCallback(() => {
+    if (null !== childrenRef.current && null !== messageRef.current) {
+      setTooltip(childrenRef.current.getBoundingClientRect());
+    }
+  }, [setTooltip]);
 
   useLayoutEffect(() => {
     coordinates && window.addEventListener("scroll", handleScroll, true);
+
     return () =>
-      coordinates && window.removeEventListener("scroll", handleScroll);
+      coordinates && window.removeEventListener("scroll", handleScroll, true);
   }, [coordinates, handleScroll]);
 
   const setPosition = (): CSSProperties => {

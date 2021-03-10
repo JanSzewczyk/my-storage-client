@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import Aux from "../../../../hoc/Auxiliary/Auxiliary";
 import { EllipsisVIcon } from "../../../UI/DataDisplay/Icons";
 import IconButton from "../../../UI/Inputs/IconButton";
-import Menu from "../../../UI/Navigation/Menu";
-import MenuItem from "../../../UI/Navigation/MenuItem";
+import Dropdown from "../../../UI/Navigation/Dropdown";
+import { MenuItem } from "../../../UI/Navigation/Menu";
 
 interface StorageDropdownOptionProps {
+  onShowDetails: () => void;
   onEditStorage: () => void;
   activeEditStorage: boolean;
   onRemoveStorage: () => void;
@@ -14,6 +15,7 @@ interface StorageDropdownOptionProps {
 }
 
 const StorageDropdownOption = ({
+  onShowDetails,
   onEditStorage,
   activeEditStorage,
   onRemoveStorage,
@@ -40,7 +42,7 @@ const StorageDropdownOption = ({
       >
         <EllipsisVIcon />
       </IconButton>
-      <Menu
+      <Dropdown
         id="storage-dropdown"
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -48,13 +50,23 @@ const StorageDropdownOption = ({
       >
         <MenuItem
           onClick={() => {
+            onShowDetails();
+            setAnchorEl(null);
+          }}
+          selected={!activeEditStorage}
+        >
+          Details
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             onEditStorage();
             setAnchorEl(null);
           }}
-          disabled={!activeEditStorage}
+          selected={activeEditStorage}
         >
           Edit
         </MenuItem>
+        <hr />
         <MenuItem
           onClick={() => {
             onRemoveStorage();
@@ -64,7 +76,7 @@ const StorageDropdownOption = ({
         >
           Remove
         </MenuItem>
-      </Menu>
+      </Dropdown>
     </Aux>
   );
 };

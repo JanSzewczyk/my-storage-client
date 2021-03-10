@@ -34,7 +34,7 @@ const Table = <TTable,>({
   onRowClick,
   loading = false,
   tableLayout = "auto",
-  fontSize = 16,
+  fontSize,
   className,
   style,
   selectable = false,

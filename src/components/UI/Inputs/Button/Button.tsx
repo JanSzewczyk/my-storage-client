@@ -10,8 +10,11 @@ interface ButtonProps extends PropsWithChildren<ReactNode> {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   color?: ButtonColor;
+  auto?: boolean;
+  big?: boolean;
   className?: string;
   style?: CSSProperties;
+  withIcon?: ReactNode;
 }
 
 type RefType = HTMLButtonElement;
@@ -26,12 +29,17 @@ const Button = React.forwardRef<RefType, ButtonProps>(
       color = "default",
       className,
       style,
+      auto,
+      big,
+      withIcon,
     },
     ref
   ) => {
     let buttonClasses: string[] = ["button"];
-    color && buttonClasses.push(`button--${color}`);
-    className && buttonClasses.push(className);
+    if (color) buttonClasses.push(`button--${color}`);
+    if (className) buttonClasses.push(className);
+    if (auto) buttonClasses.push(`button--auto`);
+    if (big) buttonClasses.push(`button--big`);
 
     return (
       <button
@@ -42,6 +50,7 @@ const Button = React.forwardRef<RefType, ButtonProps>(
         ref={ref}
         style={style}
       >
+        {withIcon && <div className={"button__icon"}>{withIcon}</div>}
         {children}
       </button>
     );
