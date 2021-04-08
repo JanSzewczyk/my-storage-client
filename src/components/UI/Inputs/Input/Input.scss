@@ -58,7 +58,7 @@
     width: 100%;
 
     input {
-      width: calc(100% - 12px) !important ;
+      width: 100% !important ;
     }
   }
 
@@ -68,7 +68,7 @@
     border: solid 1px #4e4e4e;
     border-right: none;
     padding: 6px;
-    margin-right: 0px;
+    margin-right: 0;
     font-size: 12px;
   }
 
